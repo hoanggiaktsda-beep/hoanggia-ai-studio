@@ -395,7 +395,7 @@ function renderIntel(){
  $("miBase").textContent=S.inputs.mat||"AI phân tích reference";$("miPalette").textContent=S.inputs.palette||"AI cân bằng";$("miSurface").textContent=S.inputs.surfaces||"Theo reference";
  const p=d==="Nội thất"?["Khổ lớn, mạch gọn","Phản xạ vừa đủ theo nguồn sáng"]:d==="Kiến trúc"?["Module theo quy mô công trình","Kiểm soát phản xạ mặt đứng"]:["Module theo quy mô cảnh quan","Kiểm soát phản xạ mặt nước / kính"];
  $("miRough").textContent=p[0]+" · roughness chân thực";$("miReflect").textContent=p[1]+" · vân / cạnh đúng scale";
- const lens=S.camera?.lens||S.inputs.lens||"35mm";$("csLens").textContent=lens;$("camLensOut").textContent=lens;$("camStyleOut").textContent=S.inputs.cameraStyle||"Phối cảnh tự nhiên";if($("cameraPrompt"))renderCameraIntel();
+ const lens=S.camera?.lens||S.inputs.lens||"35mm";$("csLens").textContent=lens;$("camLensOut")&&($("camLensOut").textContent=lens);$("camStyleOut")&&($("camStyleOut").textContent=S.inputs.cameraStyle||"Phối cảnh tự nhiên");if($("cameraPrompt"))renderCameraIntel();
  const story=d==="Quy hoạch"?"Đọc toàn khu, trục chính và quan hệ cảnh quan":d==="Kiến trúc"?"Tôn hình khối, mặt đứng và tỷ lệ công trình":"Đọc công năng, hierarchy furniture và vật liệu";
  $("csStory").textContent=story;$("csShot").textContent=lens==="28mm"?"Spatial wide":lens==="50mm"?"Detail / focused":"Balanced hero";$("csReason").textContent=d==="Nội thất"?"Tầm mắt tự nhiên, vertical control, tránh méo":"Giữ tỷ lệ hình học, kiểm soát đường đứng và chiều sâu";
 }
