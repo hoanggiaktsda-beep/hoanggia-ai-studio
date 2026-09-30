@@ -356,17 +356,7 @@ option{background:#0d0f10;color:#f2f2f2}
 <label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Vật liệu · phong cách · hình thái</small></span><img id="refPreview"></label>
 </div>
 </div>
-<div class="card interior-only" id="furnitureRefCard">
-<h2><span class="num">02B</span>ĐỒ RỜI · REFERENCE</h2>
-<p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
-<label class="drop furniture-drop" id="furnitureRefDrop">
-<input id="furnitureRefs" type="file" accept="image/*" multiple>
-<span class="droptext">ẢNH ĐỒ RỜI / FURNITURE REFERENCE<br><small>Sofa · bàn trà · armchair · bàn ăn · ghế · đèn · tủ · decor · nhiều sản phẩm</small></span>
-<div class="furniture-previews" id="furniturePreviews"></div>
-</label>
-<div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
-<div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
-</div>
+
 <div class="card">
 <h2><span class="num">02A</span>MÔ TẢ <small style="font-size:8px;color:#666">Không bắt buộc</small></h2>
 <textarea id="brief" placeholder="Mô tả thêm nếu cần · ví dụ: giữ sofa, thay đá, tăng ánh sáng... (không bắt buộc)"></textarea>
@@ -383,7 +373,18 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="engine"><div class="engine-head"><strong id="engineTitle">03 · AI SUY LUẬN</strong><span id="engineHint">Design Brain → Prompt Compiler · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
 </div>
 
-<details class="expert-controls"><summary><span class="expert-icon">⚙</span><b>TÙY CHỈNH CHUYÊN SÂU</b><small>Camera · vật liệu · đồ rời · bảo toàn · phiên bản</small></summary><div class="expert-body"><details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
+<details class="expert-controls"><summary><span class="expert-icon">⚙</span><b>TÙY CHỈNH CHUYÊN SÂU</b><small>Camera · vật liệu · đồ rời · bảo toàn · phiên bản</small></summary><div class="expert-body">
+<div class="card interior-only" id="furnitureRefCard">
+<h2><span class="num">02B</span>ĐỒ RỜI · REFERENCE</h2>
+<p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
+<label class="drop furniture-drop" id="furnitureRefDrop">
+<input id="furnitureRefs" type="file" accept="image/*" multiple>
+<span class="droptext">ẢNH ĐỒ RỜI / FURNITURE REFERENCE<br><small>Sofa · bàn trà · armchair · bàn ăn · ghế · đèn · tủ · decor · nhiều sản phẩm</small></span>
+<div class="furniture-previews" id="furniturePreviews"></div>
+</label>
+<div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
+<div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
+</div><details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
 <div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
 <div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
 <div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
