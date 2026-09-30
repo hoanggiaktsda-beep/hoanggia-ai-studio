@@ -103,6 +103,16 @@ select option:disabled{
 .think-arrow{color:#555b61;align-self:center;font-size:10px}
 .engine-output{margin-top:10px;padding:9px;border-top:1px solid #292d31;color:#858a91;font-size:9px;line-height:1.55}
 .engine-output b{color:#f4f1ea}
+</style><style id="hg-reasoning-css">
+.reasoning-panel{margin-top:12px;border:1px solid #292d31;background:#0d0f11;border-radius:12px;padding:13px}
+.reasoning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.reason-card{background:#111315;border:1px solid #292d31;border-radius:8px;padding:10px}
+.reason-card small{display:block;color:#858a91;font-size:8px;letter-spacing:.08em;margin-bottom:5px}
+.reason-card strong{font-size:11px;color:#f4f1ea}
+.reason-card p{margin:5px 0 0;color:#a7adb3;font-size:9px;line-height:1.45}
+.reason-status{font-size:9px;color:#d7a65b}
+@media(max-width:900px){.reasoning-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.reasoning-grid{grid-template-columns:1fr}}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -360,5 +370,44 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  const block=domainLogic(domain);
  if(!base.includes('DOMAIN THINKING:')) p.textContent=base+'\n\n[ BỘ MÁY TƯ DUY '+domain.toUpperCase()+' ]\n'+block;
 });
+})();
+</script><script id="hg-reasoning-engine">
+(function(){
+ const $=id=>document.getElementById(id);
+ const val=id=>{const e=$(id);return e?e.value.trim():''};
+ const txt=id=>{const e=$(id);return e?e.textContent.trim():''};
+ const nums=s=>(s||'').match(/\d+(?:[.,]\d+)?/g)?.map(Number)||[];
+ function infer(){
+  const domain=txt('mDomain')||'Kiến trúc',room=val('room'),style=val('style'),mat=val('mat'),light=val('light'),camera=val('camera'),lens=val('lens'),dim=val('dimensions'),ceiling=val('ceiling');
+  const ns=nums(dim),area=ns.length>=2?ns[0]*ns[1]:0,h=nums(ceiling)[0]||0;
+  let f=room||'Chưa chọn',st=dim||'Cần kích thước',et='Theo lĩnh vực',frt='Theo tỷ lệ không gian',mt=mat||'AI phân tích',lt=light||'AI phân tích',ct=camera||'AI suy luận',ft='',sp='',con='';
+  if(domain==='Nội thất'){
+   if(room.includes('Phòng khách')){ft='Tiếp khách · trò chuyện · thư giãn';et='Lối chính khoảng 900–1200mm khi khả thi';frt='Sofa + bàn trà là trục chính; ưu tiên khoảng thở quanh bàn';}
+   else if(room.includes('Bếp')){ft='Chuẩn bị · nấu · lưu trữ · giao tiếp';et='Ưu tiên tam giác thao tác và khoảng mở cánh';frt='Bếp/tủ theo vùng thao tác, tránh xung đột cửa';}
+   else if(room.includes('Phòng ngủ')){ft='Ngủ · nghỉ · lưu trữ';et='Lối hai bên giường và khoảng cuối giường';frt='Giường là focal point, tủ và đèn phụ trợ';}
+   else{ft='Công năng chính của không gian';et='Kiểm tra lối đi, vùng thao tác và khoảng tiếp cận';frt='Furniture theo hierarchy công năng';}
+   sp=area?(area>=30?'Rộng: tăng khoảng thở và hierarchy.':area>=18?'Trung bình: ưu tiên tỷ lệ gọn và giao thông rõ.':'Compact: giảm mật độ furniture, tăng cảm giác thoáng.'):'Cần kích thước để suy luận tỷ lệ.';
+   mt=mat?'Lấy '+mat+' làm bề mặt chính; tạo 1–2 lớp vật liệu phụ để tránh phẳng.':'Nền → vật liệu chính → điểm nhấn.';
+   lt=light?'Tổ chức '+light+' theo lớp nền, chức năng, nhấn và trang trí.':'Daylight + ambient + accent.';
+   ct=lens?(lens+' · '+(camera||'góc tự nhiên')+'; giữ đường đứng và tỷ lệ.'):'Ưu tiên 28–35mm cho phối cảnh nội thất tự nhiên.';
+   con=(style||'Phong cách chưa chọn')+' + '+(room||'không gian')+' → công năng → công thái học → furniture → vật liệu → ánh sáng → camera.';
+  }else if(domain==='Quy hoạch'){
+   ft=room||'Phân khu chức năng';et='Đọc giao thông, tiếp cận và bán kính phục vụ';frt='Khối tích và cảnh quan theo cấu trúc toàn khu';sp=area?'Quy mô '+area.toLocaleString('vi-VN')+' m²: cân đối mật độ, khoảng mở và không gian xanh.':'Cần quy mô để suy luận mật độ.';mt=mat||'Vật liệu theo phân cấp cảnh quan';lt=light||'Daylight / Golden hour';ct=camera||'Góc nhìn chim bay + tổng thể';con=(style||'Quy hoạch')+' → mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn.';
+  }else{
+   ft=room||'Công năng công trình';et='Tiếp cận, lưu thông và quan hệ đặc/rỗng';frt='Khối tích + mặt đứng + không gian sử dụng';sp=area?'Quy mô '+area.toLocaleString('vi-VN')+' m².':'Cần kích thước để suy luận tỷ lệ.';mt=mat||'Vật liệu theo ngôn ngữ kiến trúc';lt=light||'Daylight';ct=camera||'Phối cảnh kiến trúc tự nhiên';con=(style||'Kiến trúc')+' → tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn.';
+  }
+  $('reasonFunction').textContent=f;$('reasonFunctionText').textContent=ft;
+  $('reasonSpace').textContent=dim||'Chưa có kích thước';$('reasonSpaceText').textContent=sp+(h?' Trần '+h+'mm.':'');
+  $('reasonErgo').textContent=domain==='Nội thất'?'Đã suy luận':'Theo lĩnh vực';$('reasonErgoText').textContent=et;
+  $('reasonFurniture').textContent=frt;$('reasonFurnitureText').textContent='Tỷ lệ, hierarchy và khoảng thở.';
+  $('reasonMaterial').textContent=mt;$('reasonMaterialText').textContent=mat?'Được liên kết với phong cách và ánh sáng.':'Chọn vật liệu để suy luận sâu hơn.';
+  $('reasonLight').textContent=lt;$('reasonLightText').textContent='Phân lớp ánh sáng và phản ứng bề mặt.';
+  $('reasonCamera').textContent=ct;$('reasonCameraText').textContent='Tự động liên hệ với không gian và hierarchy.';
+  $('reasonConclusion').textContent='Sẵn sàng';$('reasonConclusionText').textContent=con;$('reasonStatus').textContent='Đã cập nhật theo lựa chọn hiện tại';
+  window.HG_REASONING={domain,room,style,mat,light,camera,lens,dim,ceiling,analysis:{ft,sp,et,frt,mt,lt,ct,con}};
+ }
+ document.addEventListener('change',e=>{if(['room','style','light','mat','camera','lens','dimensions','ceiling','focus'].includes(e.target.id))setTimeout(infer,30)});
+ document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(infer,80)});
+ window.addEventListener('load',()=>setTimeout(infer,200));
 })();
 </script></body></html>
