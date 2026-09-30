@@ -1000,7 +1000,7 @@ applyDomain('Kiến trúc');
  function enrichPrompt(){
   const s=state(),p=s.prompt?.master;if(!p)return;
   const g=s.guardrails||{},b=s.designBrief||{},f=(s.feasibility||[]).filter(x=>!x.ok).map(x=>x.k+': '+x.t);
-  const guard=(g.mode||'LOCK')+' · '+(Object.entries(g).filter(([k,v])=>['architecture','camera','furniture','proportion','ceiling','openings'].includes(k)&&v).map(([k])=>({architecture:'kiến trúc',camera:'camera',furniture:'furniture',proportion:'scale',ceiling:'trần',openings:'cửa/cửa sổ'}[k])).join(', ')||'không khóa thêm');
+  const locks=Object.entries(g).filter(([k,v])=>['architecture','camera','furniture','proportion','ceiling','openings'].includes(k)&&v).map(([k])=>({architecture:'kiến trúc',camera:'camera',furniture:'furniture',proportion:'scale',ceiling:'trần',openings:'cửa/cửa sổ'}[k])).join(', ')||'không khóa thêm'; const guard=(g.mode||'LOCK')==='FREE'?'FREE · AI được phép đề xuất lại trong phạm vi lĩnh vực':(g.mode||'LOCK')==='EDIT'?'EDIT · chỉ can thiệp phần được yêu cầu · khóa: '+locks:'LOCK · giữ nguyên: '+locks;
   const lines=['Ý đồ: '+(b.intent||'AI suy luận từ đề bài')+' · Ưu tiên: '+(b.priority||'theo lĩnh vực'), 'Can thiệp: '+guard];
   if(f.length)lines.push('Cần kiểm tra thêm: '+f.join(' · '));
   const clean=p.split('\n').filter(x=>!x.startsWith('Ý đồ: ')&&!x.startsWith('Can thiệp: ')&&!x.startsWith('Cần kiểm tra thêm: '));
