@@ -381,12 +381,6 @@ $("musicToggle").onclick=()=>{const open=!$("musicDock").classList.contains("exp
 $("musicDock").classList.toggle("expanded",localStorage.getItem("HG_AI_MUSIC_EXPANDED")==="1");
 loadYouTubeAPI();
 
-setMusicTrack(0,true)});
-
-renderMusicTracks();
-$("musicToggle").onclick=()=>{const open=!$("musicDock").classList.contains("expanded");$("musicDock").classList.toggle("expanded",open);$("musicToggle").setAttribute("aria-label",open?"Thu gọn trình phát":"Mở trình phát");localStorage.setItem("HG_AI_MUSIC_EXPANDED",open?"1":"0");updateMusicUI()};
-$("musicDock").classList.toggle("expanded",localStorage.getItem("HG_AI_MUSIC_EXPANDED")==="1");
-loadYouTubeAPI();
 boot();
 })();
 </script>
