@@ -196,7 +196,14 @@ textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{paddin
 .hg-compiler-actions{margin-top:5px}.hg-compiler-actions button{padding:5px 8px}
 @media(max-width:1000px){.app{grid-template-columns:1fr}.side{width:auto;padding:12px}.main{padding:15px}.layout{grid-template-columns:1fr}}
 @media(max-width:600px){h1{font-size:27px}}
-</style></head>
+<style id="hg-prompt-actions-css">
+.hg-quick-prompt{margin:-5px 0 9px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
+.hg-quick-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}
+.hg-quick-head strong{font-size:9px;letter-spacing:.07em;color:#f4f1ea}.hg-quick-head span{font-size:8px;color:#d7a65b}
+.hg-quick-prompt input{width:100%;background:#090a0b;color:#f4f1ea;border:1px solid #292d31;border-radius:7px;padding:8px;font-size:9px;outline:0}
+.hg-quick-prompt input:focus{border-color:#656a70}
+.hg-quick-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.hg-quick-actions .btn{font-size:9px;padding:6px 8px}
+</style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
 <div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
@@ -268,6 +275,15 @@ textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{paddin
 </div>
 <div><div class="card"><h2>05 — Định hướng nghệ thuật bằng AI</h2><div class="metrics"><div class="metric"><small>Domain</small><b id="mDomain">Kiến trúc</b></div><div class="metric"><small>Phong cách</small><b id="mPhong cách">Luxury hiện đại</b></div><div class="metric"><small>Hierarchy</small><b>Kiến trúc → furniture → material</b></div><div class="metric"><small>Vật liệu</small><b>Ảnh tham chiếu-driven / tactile</b></div><div class="metric"><small>Ánh sáng</small><b id="mLight">Daylight mềm tự nhiên</b></div><div class="metric"><small>Góc máy</small><b id="mCam">Góc 3/4 · 24mm</b></div></div></div>
 <div class="card"><h2>06 — Prompt tổng thể</h2><div class="prompt" id="prompt">Chọn ảnh + nhập yêu cầu, sau đó bấm “AI tạo Prompt tổng thể”.</div></div>
+<div class="hg-quick-prompt" id="hgQuickPrompt">
+  <div class="hg-quick-head"><strong>SỬA PROMPT</strong><span id="hgQuickStatus">Có thể chỉnh sửa trực tiếp</span></div>
+  <input id="hgPromptEdit" type="text" placeholder="Ví dụ: thay marble trắng bằng travertine / Ánh sáng: hoàng hôn / Camera: 35mm">
+  <div class="hg-quick-actions">
+    <button class="btn primary" id="hgApplyEdit">Áp dụng sửa</button>
+    <button class="btn" id="hgCopyPrompt">Sao chép</button>
+    <button class="btn" id="hgClearPrompt">Xoá Prompt</button>
+  </div>
+</div>
 <div class="card"><h2>07 — Kết quả dựng hình</h2><div class="result" id="result">RENDER CANVAS<br><br>Giao diện đã sẵn sàng để kết nối hệ thống tạo ảnh ở giai đoạn tiếp theo.</div></div></div></div></section>
 
 <section id="edit" class="panel"><div class="layout"><div><div class="card"><h2>✎ Chỉnh sửa AI — Sửa có kiểm soát</h2><textarea id="editBrief" placeholder="Nhập phần cần đổi: ví dụ “đổi sofa sang da nâu, giữ nguyên model, kích thước và vị trí”."></textarea><div class="actions"><button class="btn primary" id="editBtn">✦ Tạo Prompt chỉnh sửa</button></div></div><div class="card"><h2>Danh sách khóa bảo toàn</h2><div class="checks"><label class="check"><input type="checkbox" checked>Giữ nguyên model</label><label class="check"><input type="checkbox" checked>Không đổi camera</label><label class="check"><input type="checkbox" checked>Không đổi kiến trúc</label><label class="check"><input type="checkbox" checked>Không thêm decor</label></div></div></div><div class="card"><h2>Prompt chỉnh sửa</h2><div class="prompt" id="editPrompt">Chưa có edit prompt.</div></div></div></section>
@@ -809,5 +825,119 @@ applyDomain('Kiến trúc');
  }
  boot();
  window.HG_COMPILE_BRAIN=compile;
+})();
+</script><script id="hg-compact-prompt-controller">
+(function(){
+ const $=s=>document.querySelector(s), byId=id=>document.getElementById(id);
+ const v=id=>String(byId(id)?.value||'').trim();
+ const state=()=>window.HG_DESIGN_STATE||{inputs:{},decisions:{}};
+ const chain=d=>d==='Kiến trúc'?'tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn':d==='Quy hoạch'?'mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn':'công năng → công thái học → furniture → vật liệu → ánh sáng → camera';
+
+ function build(){
+  const s=state(),i=s.inputs||{},d=s.decisions||{},dom=s.domain||'Kiến trúc';
+  const room=i.room||'không gian theo ảnh tham chiếu';
+  const idea=i.brief||'Phân tích hiện trạng trước khi thiết kế.';
+  const material=i.mat||'AI phân tích từ ảnh tham chiếu';
+  const light=d.lighting||i.light||'AI tổ chức theo ngữ cảnh';
+  const camera=d.camera||i.cameraStyle||i.lens||'AI chọn';
+  const preserve=d.preserve||i.existing||'giữ nguyên những gì không được yêu cầu thay đổi';
+  if(dom==='Kiến trúc') return [
+   'AI DESIGN ASSISTANT — KIẾN TRÚC',
+   'Thiết kế '+room+' theo ý tưởng: '+idea+'.',
+   'Ưu tiên: '+chain(dom)+'.',
+   'Kích thước: '+(i.spaceSize||'theo ảnh tham chiếu')+' · Trần: '+(i.ceilingHeight||'theo hiện trạng')+'.',
+   'Phong cách: '+(i.style||'AI suy luận')+' · Vật liệu: '+material+' · Ánh sáng: '+light+' · Camera: '+camera+'.',
+   'Giữ nguyên kiến trúc, tỷ lệ, cao độ, cửa/cửa sổ và phối cảnh; '+preserve+'.',
+   'Photorealistic architectural visualization, vật liệu đúng scale, ánh sáng và bóng đổ chân thực.'
+  ].join('\n');
+  if(dom==='Quy hoạch') return [
+   'AI DESIGN ASSISTANT — QUY HOẠCH',
+   'Phát triển '+room+' theo ý tưởng: '+idea+'.',
+   'Ưu tiên: '+chain(dom)+'.',
+   'Quy mô: '+(i.spaceSize||'theo ảnh tham chiếu')+' · Phân khu: '+(i.focus||'AI tổ chức')+'.',
+   'Giao thông: '+(i.circulation||d.circulation||'AI tổ chức')+' · Cảnh quan: '+(i.surfaces||'AI tổ chức')+'.',
+   'Khối tích: '+(i.existing||'AI tổ chức')+' · Ánh sáng: '+light+' · Góc nhìn: '+camera+'.',
+   'Tôn trọng ranh giới, địa hình, tỷ lệ và các yếu tố hiện hữu.',
+   'Photorealistic planning visualization, đúng tỷ lệ, cảnh quan và ánh sáng chân thực.'
+  ].join('\n');
+  return [
+   'AI DESIGN ASSISTANT — NỘI THẤT',
+   'Thiết kế '+room+' theo ý tưởng: '+idea+'.',
+   'Ưu tiên: '+chain(dom)+'.',
+   'Kích thước: '+(i.spaceSize||'theo ảnh tham chiếu')+' · Trần: '+(i.ceilingHeight||'theo hiện trạng')+'.',
+   'Phong cách: '+(i.style||'AI suy luận')+' · Furniture: '+(d.furniture||i.furnitureLens||'AI chọn')+'.',
+   'Vật liệu: '+material+' · Ánh sáng: '+light+' · Camera: '+camera+'.',
+   'Giữ nguyên kiến trúc, tỷ lệ không gian và các thành phần không được yêu cầu thay đổi.',
+   'Không tự thêm decor hoặc furniture ngoài yêu cầu. Photorealistic, tỷ lệ, vật liệu, tiếp xúc và ánh sáng chân thực.'
+  ].join('\n');
+ }
+
+ function compile(){
+  const s=state();s.prompt=s.prompt||{};
+  s.prompt.master=build();s.prompt.ready=true;s.prompt.version='3.0';
+  s.prompt.negative='Không méo hình học; không sai tỷ lệ; không furniture bay; không vật liệu nhựa; không ánh sáng cháy; không decor ngẫu nhiên; không thay đổi kiến trúc ngoài yêu cầu.';
+  s.prompt.logic=chain(s.domain||'Nội thất');window.HG_DESIGN_STATE=s;
+  byId('prompt').textContent=s.prompt.master;
+  if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Prompt đã sẵn sàng';
+  return s.prompt.master;
+ }
+
+ function applyEdit(){
+  const input=byId('hgPromptEdit'),edit=String(input?.value||'').trim();
+  if(!edit)return;
+  const s=state();let p=s.prompt?.master||compile(),changed=false;
+  const fm=edit.match(/^(ý tưởng|phong cách|kích thước|trần|chiều cao trần|furniture|vật liệu|ánh sáng|camera|giao thông|cảnh quan|khối tích)\s*:\s*(.+)$/i);
+  const labels={'ý tưởng':'Ý tưởng','phong cách':'Phong cách','kích thước':'Kích thước','trần':'Trần','chiều cao trần':'Trần','furniture':'Furniture','vật liệu':'Vật liệu','ánh sáng':'Ánh sáng','camera':'Camera','giao thông':'Giao thông','cảnh quan':'Cảnh quan','khối tích':'Khối tích'};
+  if(fm){
+   const label=labels[fm[1].toLowerCase()];
+   const re=new RegExp('^'+label.replace(/[.*+?^{}()|[\]\\]/g,'\\</body></html>')+'\\s*:\\s*.*,'mi');
+   if(re.test(p)){p=p.replace(re,label+': '+fm[2].trim());changed=true}
+  }
+  if(!changed){
+   let m=edit.match(/^thay\s+(.+?)\s+(?:bằng|thành)\s+(.+)$/i);
+   if(!m)m=edit.match(/^(.+?)\s*(?:->|→)\s*(.+)$/);
+   if(m){
+    const oldText=m[1].trim(),newText=m[2].trim();
+    if(oldText&&p.toLowerCase().includes(oldText.toLowerCase())){
+     p=p.replace(new RegExp(oldText.replace(/[.*+?^{}()|[\]\\]/g,'\\</body></html>'),'ig'),newText);changed=true;
+    }
+   }
+  }
+  if(!changed)p+='\nChỉnh sửa: '+edit+'.';
+  s.prompt=s.prompt||{};s.prompt.master=p;s.prompt.lastEdit=edit;s.prompt.ready=true;window.HG_DESIGN_STATE=s;
+  byId('prompt').textContent=p;
+  if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent=changed?'Đã thay thế trong Prompt':'Đã thêm chỉnh sửa vào Prompt';
+  if(input)input.value='';
+ }
+
+ async function copyPrompt(){
+  const p=String(byId('prompt')?.textContent||'').trim();
+  if(!p){if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Chưa có Prompt';return}
+  try{await navigator.clipboard.writeText(p);if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Đã sao chép Prompt'}
+  catch(e){if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Không thể sao chép tự động'}
+ }
+ function clearPrompt(){
+  const s=state();s.prompt={master:'',negative:'',logic:'',ready:false};window.HG_DESIGN_STATE=s;
+  if(byId('prompt'))byId('prompt').textContent='Chưa có Prompt.';
+  if(byId('hgPromptEdit'))byId('hgPromptEdit').value='';
+  if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Prompt đã xoá';
+ }
+
+ window.HG_COMPILE_PROMPT=compile;
+ window.HG_APPLY_PROMPT_EDIT=applyEdit;
+ window.HG_CLEAR_PROMPT=clearPrompt;
+
+ byId('magic').onclick=()=>{window.HG_SYNC_DESIGN_STATE?.('magic');setTimeout(()=>{compile();toast('Đã tạo Prompt tổng thể')},100)};
+ byId('copy').onclick=copyPrompt;
+ byId('hgApplyEdit').onclick=applyEdit;
+ byId('hgCopyPrompt').onclick=copyPrompt;
+ byId('hgClearPrompt').onclick=clearPrompt;
+ byId('hgPromptEdit').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();applyEdit()}});
+ ['change','input'].forEach(evt=>document.addEventListener(evt,e=>{
+  if(['brief','room','focus','spaceSize','ceilingHeight','circulation','existing','style','light','mat','furnitureLens','palette','surfaces','joinery','finishLevel','cameraStyle','lens','ratio'].includes(e.target?.id)){
+   clearTimeout(window.__hgCompactPromptTimer);window.__hgCompactPromptTimer=setTimeout(()=>{if(window.HG_DESIGN_STATE?.prompt?.ready)compile()},180);
+  }
+ }));
+ window.addEventListener('load',()=>setTimeout(compile,1800));
 })();
 </script></body></html>
