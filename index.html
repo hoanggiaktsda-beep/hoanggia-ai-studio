@@ -322,6 +322,11 @@ option{background:#0d0f10;color:#f2f2f2}
 .workflow-spine{grid-column:1/-1;display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr 28px 1fr;align-items:center;margin:0 0 8px;padding:6px 4px;color:#505457}.workflow-spine .spine-node{display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 7px;border:1px solid #1c1f21;border-radius:7px;background:#0a0b0b;font-size:8px;letter-spacing:.08em}.workflow-spine .spine-node b{font-size:8px;color:#777}.workflow-spine .spine-node.active{color:#bdbdbd;border-color:#2c3033}.workflow-spine i{height:1px;background:#25282a}.stage-label{margin:-1px 0 8px;font-size:7px;letter-spacing:.12em;color:#62676a}.expert-kicker{display:flex;align-items:center;gap:8px;padding:0 12px 7px;color:#5c6063}.expert-kicker span{font-size:7px;letter-spacing:.12em;color:#8c7754}.expert-kicker small{font-size:7px}.expert-controls{overflow:hidden}.expert-controls>summary{min-height:40px}.expert-body{display:grid;grid-template-columns:1fr;gap:5px}.expert-body>.advanced-workflow{background:#0a0b0b;border-color:#181b1d}.expert-body>.advanced-workflow>summary{padding:9px 10px;font-size:8px}.expert-body>.advanced-workflow[open]{border-color:#292d30}.expert-body>.advanced-workflow .advanced-body{padding:8px}.expert-body>.advanced-workflow:first-child{margin-top:0}.expert-controls summary::after{content:'⌄';margin-left:4px;color:#555}.expert-controls[open]>summary::after{content:'⌃'}.step-images{position:relative}.step-images .drop{background:#0a0b0b}.step-images .drop:first-child{box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}.ai-cta-note{position:relative}.ai-cta-note:before{content:'';position:absolute;left:16px;top:-12px;height:11px;width:1px;background:#4a4030}.step-final-prompt{position:relative}.step-final-prompt:before{content:'';position:absolute;left:16px;top:-15px;height:14px;width:1px;background:#4a4030}
 @media(min-width:1101px){.expert-body{grid-template-columns:1fr 1fr}.expert-body>.advanced-workflow{margin:0}.expert-body>.advanced-workflow:first-child{grid-column:1/-1}.workflow-spine{max-width:900px}.stage-label{margin-bottom:6px}}
 @media(max-width:760px){.workflow-spine{grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr;gap:0}.workflow-spine .spine-node{font-size:7px;padding:5px 2px}.workflow-spine .spine-node span{display:none}.workflow-spine .spine-node b{font-size:7px}.expert-kicker{padding-left:10px}.expert-body{gap:4px}.stage-label{font-size:7px}.ai-cta-note:before,.step-final-prompt:before{left:12px}}
+
+/* HOANGGIA AI · image workspace */
+.image-workspace-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:-1px 0 10px}.image-workspace-head h3{margin:0;font-size:11px;letter-spacing:.1em}.image-workspace-head p{margin:4px 0 0;color:#656a6d;font-size:8px;line-height:1.45;max-width:620px}.image-workspace-status{font-size:8px;letter-spacing:.06em;color:#8b7755;white-space:nowrap}.step-images .uploadgrid{gap:8px}.step-images .drop{position:relative;overflow:hidden;border-radius:10px;background:#080909;min-height:270px}.step-images .drop:after{content:'';position:absolute;inset:10px;border:1px dashed #25292b;border-radius:7px;pointer-events:none}.step-images .drop.dragover:after{border-color:#8c7650}.step-images .drop.has-file:after{border-color:#34383a}.image-role{position:absolute;z-index:3;top:10px;left:10px;display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid #24282a;border-radius:5px;background:rgba(7,8,7,.86);backdrop-filter:blur(5px)}.image-role b{font-size:7px;letter-spacing:.12em;color:#c2a36e}.image-role small{font-size:7px;color:#85898b}.step-images .droptext{z-index:2}.step-images .drop img{z-index:1}.image-workspace-footer{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;color:#555a5d;font-size:7px;letter-spacing:.03em}.image-workspace-footer span:first-child{color:#85806f}.step-images .drop input{z-index:5}.step-images .drop img[src]{object-fit:contain}.step-images .drop.has-file .droptext{opacity:.65}.step-images .drop.has-file:hover .droptext{opacity:1}
+@media(min-width:1101px){.step-images .uploadgrid{grid-template-columns:minmax(0,1.6fr) minmax(260px,.8fr)}.step-images .drop:first-child{min-height:330px}.step-images .drop:last-child{min-height:330px}.image-workspace-head h3{font-size:12px}}
+@media(max-width:760px){.image-workspace-head{align-items:start;flex-direction:column;gap:5px}.image-workspace-status{align-self:flex-start}.step-images .drop{min-height:210px}.image-workspace-footer{display:grid;grid-template-columns:1fr;gap:4px}.image-role{top:8px;left:8px}}
 </style>
 </head>
 <body>
@@ -359,11 +364,12 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="layout"><div class="workflow-spine"><div class="spine-node active"><b>01</b><span>Ý ĐỒ</span></div><i></i><div class="spine-node active"><b>02</b><span>ẢNH</span></div><i></i><div class="spine-node"><b>03</b><span>AI</span></div><i></i><div class="spine-node"><b>04</b><span>PROMPT</span></div></div>
 <div>
 <div class="card design-intent-card workflow-step step-intent"><div class="stage-label">01 · Ý ĐỒ</div><div class="intent-head"><div><h2><span class="num">01</span>Ý ĐỒ</h2><p class="sub">Chọn cách HOANGGIA AI được phép can thiệp vào thiết kế.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
-<div class="card workflow-step step-images"><div class="stage-label">02 · ẢNH HIỆN TRẠNG → THAM CHIẾU</div>
+<div class="card workflow-step step-images"><div class="stage-label">02 · IMAGE WORKSPACE</div>
+<div class="image-workspace-head"><div><h3>ẢNH THIẾT KẾ</h3><p>Master xác định thiết kế. Reference chỉ bổ sung ngôn ngữ, vật liệu hoặc hình thái.</p></div><span class="image-workspace-status" id="imageWorkspaceStatus">Chưa có ảnh</span></div>
 <h2><span class="num">02</span>ẢNH</h2>
 <div class="uploadgrid">
-<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Kéo thả hoặc chạm để tải</small></span><img id="scenePreview"></label>
-<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Phong cách · vật liệu · hình thái</small></span><img id="refPreview"></label>
+<label class="drop image-master" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="image-role"><b>MASTER</b><small>ẢNH HIỆN TRẠNG</small></span><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Kéo thả hoặc chạm để tải</small></span><img id="scenePreview"></label>
+<label class="drop image-reference" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="image-role"><b>REFERENCE</b><small>ẢNH THAM CHIẾU</small></span><span class="droptext">ẢNH THAM CHIẾU<br><small>Phong cách · vật liệu · hình thái</small></span><img id="refPreview"></label>
 </div>
 </div>
 
@@ -892,6 +898,20 @@ boot();
 if("serviceWorker" in navigator){
   window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
 }
+
+<script>
+(function(){
+ const master=document.getElementById('sceneDrop'), ref=document.getElementById('refDrop'), scene=document.getElementById('scene'), refInput=document.getElementById('ref'), status=document.getElementById('imageWorkspaceStatus');
+ if(!master||!ref||!scene||!refInput)return;
+ function sync(){
+  const hasMaster=!!scene.files?.length, hasRef=!!refInput.files?.length;
+  status.textContent=hasMaster&&hasRef?'MASTER + REFERENCE · sẵn sàng':hasMaster?'MASTER · sẵn sàng':'Chưa có ảnh';
+  master.classList.toggle('has-file',hasMaster); ref.classList.toggle('has-file',hasRef);
+ }
+ function drag(el,input){['dragenter','dragover'].forEach(e=>el.addEventListener(e,ev=>{ev.preventDefault();el.classList.add('dragover')}));['dragleave','drop'].forEach(e=>el.addEventListener(e,ev=>{ev.preventDefault();el.classList.remove('dragover')}));el.addEventListener('drop',ev=>{const f=ev.dataTransfer?.files?.[0];if(!f||!f.type.startsWith('image/'))return;try{const dt=new DataTransfer();dt.items.add(f);input.files=dt.files;input.dispatchEvent(new Event('change',{bubbles:true}));sync()}catch(e){}});input.addEventListener('change',sync)}
+ drag(master,scene);drag(ref,refInput);scene.addEventListener('change',sync);refInput.addEventListener('change',sync);sync();
+})();
+</script>
 </script>
 </body>
 </html>
