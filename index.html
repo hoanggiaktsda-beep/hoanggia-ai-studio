@@ -58,6 +58,8 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 .view-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
 .view-chip{border:1px solid #292d30;background:#111314;border-radius:7px;padding:8px;cursor:pointer}
 .view-chip.on{border-color:#80653c;box-shadow:inset 0 0 0 1px #3b3122}
+.upload-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:92px;border:1px dashed #41464a;border-radius:8px;background:#0a0c0d;cursor:pointer;text-align:center;padding:12px}
+.upload-zone span{font-size:10px;color:#e6e1d8}.upload-zone small{font-size:8px;color:#73797e;line-height:1.4}.mv-preview{margin-top:8px;display:grid;grid-template-columns:1fr;gap:6px}.mv-preview img{width:100%;max-height:220px;object-fit:cover;border-radius:6px;border:1px solid #292d30}.mv-file{font-size:8px;color:#aaa;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .view-chip small{display:block;color:#73797e;font-size:7px}
 .view-chip b{display:block;font-size:9px;margin-top:3px}
 .camera-prompt{margin-top:9px;border:1px solid #292d30;border-radius:8px;background:#090a0b;padding:10px;font-size:10px;line-height:1.55;color:#e8e4dc}
@@ -246,19 +248,34 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 </div>
 </div>
 <div class="card">
-<h2><span class="num">04</span>MULTI-VIEW SYNC · MỘT ẢNH → MỘT BỘ GÓC MÁY</h2>
-<p class="sub">Giữ cùng một không gian, vật liệu, tỷ lệ, thời điểm ánh sáng và logic camera; chỉ thay đổi vị trí nhìn có chủ đích.</p>
-<div class="view-list" id="syncViews">
-<div class="view-chip on" data-view="hero"><small>VIEW 01</small><b>Hero · 3/4</b></div>
-<div class="view-chip" data-view="wide"><small>VIEW 02</small><b>Wide · spatial</b></div>
-<div class="view-chip" data-view="detail"><small>VIEW 03</small><b>Detail · material</b></div>
-<div class="view-chip" data-view="reverse"><small>VIEW 04</small><b>Reverse · đối diện</b></div>
-<div class="view-chip" data-view="low"><small>VIEW 05</small><b>Low · dramatic</b></div>
-<div class="view-chip" data-view="high"><small>VIEW 06</small><b>High · elevated</b></div>
+<h2><span class="num">04</span>MULTI-VIEW SYNC · MASTER REFERENCE</h2>
+<p class="sub"><b>1 ảnh Master</b> quyết định không gian, ánh sáng, vật liệu và nội thất. Các ảnh góc nhìn tải thêm chỉ dùng để xác định <b>camera / viewpoint / hình học nhìn thấy</b>. Không lấy style, màu hay furniture từ ảnh phụ.</p>
+<div class="camera-intel">
+<div class="camera-control">
+<h3>MASTER REFERENCE · ẢNH GỐC</h3>
+<label class="upload-zone" for="mvMaster"><input id="mvMaster" type="file" accept="image/png,image/jpeg,image/webp" hidden><span>＋ Tải 1 ảnh tham chiếu chính</span><small id="mvMasterStatus">Chưa có ảnh Master</small></label>
+<div id="mvMasterPreview" class="mv-preview"></div>
 </div>
-<div class="camera-actions"><button class="btn primary" id="syncMultiView">✦ Đồng bộ bộ view</button><button class="btn" id="creativeView">＋ Sáng tạo góc view mới</button></div>
-<div class="camera-note" id="viewStatus">Chưa tạo bộ view. Khi đồng bộ, HOANGGIA AI khóa các thuộc tính nền và chỉ thay đổi viewpoint.</div>
+<div class="camera-control">
+<h3>CONSISTENCY LOCK · KHÓA NHỮNG GÌ?</h3>
+<div class="camera-metrics">
+<div class="camera-metric"><small>KHÔNG GIAN</small><b>LOCK · geometry</b></div>
+<div class="camera-metric"><small>ÁNH SÁNG</small><b>LOCK · direction / mood</b></div>
+<div class="camera-metric"><small>VẬT LIỆU</small><b>LOCK · color / texture / scale</b></div>
+<div class="camera-metric"><small>NỘI THẤT</small><b>LOCK · identity / placement</b></div>
 </div>
+</div>
+</div>
+<div class="camera-control" style="margin-top:10px">
+<h3>VIEW REFERENCES · ẢNH GÓC NHÌN KHÁC</h3>
+<label class="upload-zone" for="mvViews"><input id="mvViews" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden><span>＋ Tải nhiều ảnh góc nhìn khác</span><small>Ảnh 02, 03, 04… dùng để học viewpoint và phần không gian bị khuất.</small></label>
+<div id="mvViewList" class="view-list"></div>
+</div>
+<div class="camera-actions"><button class="btn primary" id="syncMultiView">✦ Đồng bộ từ Master</button><button class="btn" id="creativeView">＋ Sáng tạo góc view mới</button></div>
+<div class="camera-note" id="viewStatus">Chưa đồng bộ. Hệ thống sẽ tạo một <b>Consistency Contract</b>: Master là nguồn sự thật duy nhất cho thiết kế; ảnh phụ chỉ cung cấp góc nhìn.</div>
+<div class="camera-prompt" id="mvContract">MULTI-VIEW CONSISTENCY CONTRACT · Chưa có Master Reference.</div>
+</div>
+</section>
 </section>
 <section class="panel" id="panel-tools"><div class="card"><h2>CÔNG CỤ</h2><div class="actions"><button class="btn" data-jump="render">Prompt Compiler</button><button class="btn" id="exportState">Xuất Design State</button><button class="btn" id="resetState">Reset workspace</button></div><p class="sub" style="margin-top:10px">Design State được lưu cục bộ trên trình duyệt để có thể tiếp tục làm việc.</p></div></section>
 
@@ -304,7 +321,7 @@ const profiles={
  chain:["mật độ","giao thông","phân khu","cảnh quan","khối tích","góc nhìn"]
 }};
 let S=JSON.parse(localStorage.getItem("HG_AI_STATE")||"null")||{domain:"Kiến trúc",inputs:{},furnitureRefs:[],guardrails:{architecture:true,camera:true,furniture:true,proportion:true,ceiling:false,openings:false,mode:"LOCK"},versions:{current:"V01",items:{}},prompt:{master:"",ready:false}};
-S.furnitureRefs=Array.isArray(S.furnitureRefs)?S.furnitureRefs:[];S.camera=S.camera||{shot:"Hero perspective",lens:"35mm",aperture:"f/5.6",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn không gian rõ",quality:"Photoreal · high detail · 4K+",viewMode:"hero",creativeViews:[]};
+S.furnitureRefs=Array.isArray(S.furnitureRefs)?S.furnitureRefs:[];S.camera=S.camera||{shot:"Hero perspective",lens:"35mm",aperture:"f/5.6",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn không gian rõ",quality:"Photoreal · high detail · 4K+",viewMode:"hero",creativeViews:[],multiView:false,mvMaster:null,mvViews:[],consistencyContract:null};
 let furnitureRefUrls=[];
 const ids=["brief","room","focus","style","light","mat","ratio","spaceSize","ceilingHeight","circulation","existing","furnitureLens","cameraStyle","lens","palette","surfaces","finishLevel"];
 function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",1800)}
@@ -388,8 +405,10 @@ function renderCameraIntel(){const c=S.camera||cameraProfile();["camShot","camLe
 function readCameraUI(){S.camera=S.camera||cameraProfile();const map={camShot:"shot",camLensAI:"lens",camAperture:"aperture",camHeight:"height",camPitch:"pitch",camPerspective:"perspective",camRatio:"ratio",camDOF:"dof",camQuality:"quality"};Object.entries(map).forEach(([id,key])=>{if($(id))S.camera[key]=$(id).value});syncInputs();S.inputs.lens=S.camera.lens;S.inputs.cameraStyle=S.camera.shot;renderCameraIntel();renderIntel();renderState();save()}
 function suggestCamera(){S.camera=Object.assign(S.camera||{},cameraProfile());if(S.domain==="Nội thất"){S.camera.shot="Balanced interior";S.camera.lens="35mm";S.camera.aperture="f/5.6"}else if(S.domain==="Kiến trúc"){S.camera.shot="Two-point elevation";S.camera.lens="35mm";S.camera.aperture="f/8"}else{S.camera.shot="Wide spatial";S.camera.lens="28mm";S.camera.aperture="f/8"}renderCameraIntel();save();toast("Camera Brain đã đề xuất cấu hình")}
 function useCamera(){readCameraUI();if(S.prompt.ready)compile();toast("Đã đồng bộ Camera vào Prompt")}
-function multiViewPrompt(){const c=S.camera||cameraProfile();const views={hero:"hero 3/4",wide:"wide spatial",detail:"material detail",reverse:"reverse view from the opposite side",low:"low-angle controlled view",high:"elevated view"};const v=views[S.camera.viewMode]||views.hero;return "MULTI-VIEW SYNC: derive "+v+" from the same reference scene; preserve identical architecture, geometry, furniture identity, materials, scale, lighting direction, time of day and visual language; keep lens behavior and perspective physically consistent; change viewpoint only, no redesign, no invented openings or objects."}
-function syncMultiView(){S.camera=S.camera||cameraProfile();S.camera.multiView=true;S.camera.viewSet=["hero","wide","detail","reverse","low","high"];$("viewStatus").textContent="✓ Đã khóa bộ 6 view · cùng không gian, khác viewpoint có kiểm soát.";renderCameraIntel();if(S.prompt.ready)compile();save();toast("Đã đồng bộ 6 view")}
+function multiViewPrompt(){const c=S.camera||cameraProfile();const views={hero:"hero 3/4",wide:"wide spatial",detail:"material detail",reverse:"reverse view from the opposite side",low:"low-angle controlled view",high:"elevated view"};const v=views[S.camera.viewMode]||views.hero;const hasMaster=!!S.camera.mvMaster;const count=(S.camera.mvViews||[]).length;return hasMaster?"MULTI-VIEW SYNC · MASTER REFERENCE: use the Master Reference as the single source of truth for the space. "+count+" additional view references define camera position and visible geometry only. LOCK EXACTLY: architecture and spatial geometry, room proportions, openings, ceiling, floor, furniture identity and placement, material family, material color, texture, grain, scale, roughness, reflection behavior, lighting direction, light quality, color temperature, exposure, time of day and overall visual language. For target view "+v+", infer only the new camera viewpoint and reveal occluded surfaces from the Master design logic. Do not transfer style, furniture, materials, colors or lighting from secondary view references. No redesign, no invented objects, no geometry drift, no material drift, no lighting drift, no identity drift; maintain cross-view continuity and physically plausible perspective.":"MULTI-VIEW SYNC: no Master Reference loaded.";}
+function renderMultiViewRefs(){if($("mvMasterStatus"))$("mvMasterStatus").textContent=S.camera?.mvMaster?"✓ "+S.camera.mvMaster.name:"Chưa có ảnh Master";if($("mvMasterPreview"))$("mvMasterPreview").innerHTML=S.camera?.mvMaster?.url?"<img src='"+S.camera.mvMaster.url+"' alt='Master Reference'>":"";if($("mvViewList"))$("mvViewList").innerHTML=(S.camera?.mvViews||[]).map((v,i)=>"<div class='view-chip'><small>VIEW "+String(i+2).padStart(2,"0")+"</small><b>"+v.name+"</b></div>").join("");}
+function syncMultiView(){S.camera=S.camera||cameraProfile();if(!S.camera.mvMaster){$("viewStatus").textContent="⚠ Hãy tải 1 ảnh Master Reference trước.";toast("Cần ảnh Master Reference");return}S.camera.multiView=true;S.camera.viewSet=["master",...(S.camera.mvViews||[]).map((_,i)=>"view-"+(i+2))];S.camera.consistencyContract="MASTER_LOCK: space + lighting + materials + furniture";$("viewStatus").textContent="✓ Đã khóa Master · "+(S.camera.mvViews||[]).length+" view phụ · không cho phép drift không gian / ánh sáng / vật liệu / nội thất.";$("mvContract").textContent=multiViewPrompt();if(S.prompt.ready)compile();save();toast("Đã tạo Consistency Contract")}
+
 function creativeView(){S.camera=S.camera||cameraProfile();const options=["diagonal corner reveal","compressed axial view","foreground framing view","asymmetrical editorial view","low eye-level furniture-led view"];const next=options[S.camera.creativeViews?.length%options.length||0];S.camera.creativeViews=S.camera.creativeViews||[];S.camera.creativeViews.push(next);S.camera.viewMode="creative";$("viewStatus").textContent="✦ Creative View: "+next+" · giữ nguyên hình học và vật liệu nền.";renderCameraIntel();if(S.prompt.ready)compile();save();toast("Đã tạo góc view sáng tạo")}
 function compile(){
  syncInputs();const i=S.inputs,d=S.domain;let p="";
@@ -433,7 +452,7 @@ function boot(){
  $("saveVersion").onclick=()=>versionSave($("versionName").value);
  $("versions").addEventListener("click",e=>{const b=e.target.closest("[data-version]");if(b)versionSwitch(b.dataset.version)});
  $("exportState").onclick=()=>{const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hoanggia-ai-design-state.json";a.click();URL.revokeObjectURL(a.href)};
- $("resetState").onclick=()=>{if(confirm("Xoá Design State và Prompt hiện tại?")){localStorage.removeItem("HG_AI_STATE");location.reload()}}; $("cameraSuggest")?.addEventListener("click",suggestCamera);$("cameraUse")?.addEventListener("click",useCamera);$("syncMultiView")?.addEventListener("click",syncMultiView);$("creativeView")?.addEventListener("click",creativeView);document.querySelectorAll("#syncViews .view-chip").forEach(b=>b.addEventListener("click",()=>{S.camera=S.camera||cameraProfile();S.camera.viewMode=b.dataset.view;b.parentElement.querySelectorAll(".view-chip").forEach(x=>x.classList.toggle("on",x===b));renderCameraIntel();save()}));renderCameraIntel();
+ $("resetState").onclick=()=>{if(confirm("Xoá Design State và Prompt hiện tại?")){localStorage.removeItem("HG_AI_STATE");location.reload()}}; $("mvMaster")?.addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;S.camera.mvMaster={name:f.name,url:URL.createObjectURL(f)};renderMultiViewRefs();save()});$("mvViews")?.addEventListener("change",e=>{const files=[...e.target.files];S.camera.mvViews=files.map(f=>({name:f.name,url:URL.createObjectURL(f)}));renderMultiViewRefs();save()});$("cameraSuggest")?.addEventListener("click",suggestCamera);$("cameraUse")?.addEventListener("click",useCamera);$("syncMultiView")?.addEventListener("click",syncMultiView);$("creativeView")?.addEventListener("click",creativeView);document.querySelectorAll("#syncViews .view-chip").forEach(b=>b.addEventListener("click",()=>{S.camera=S.camera||cameraProfile();S.camera.viewMode=b.dataset.view;b.parentElement.querySelectorAll(".view-chip").forEach(x=>x.classList.toggle("on",x===b));renderCameraIntel();save()}));renderCameraIntel();
  ["scene","ref"].forEach(id=>$(id).addEventListener("change",e=>{const f=e.target.files[0],drop=$(id+"Drop"),img=$(id+"Preview");if(!f)return;img.src=URL.createObjectURL(f);drop.classList.add("hasimg")}));$("furnitureRefs").addEventListener("change",e=>{furnitureRefUrls.forEach(u=>URL.revokeObjectURL(u));const files=[...e.target.files];furnitureRefUrls=files.map(f=>URL.createObjectURL(f));S.furnitureRefs=files.map((f,i)=>normalizeFurnitureRef({name:f.name},i));renderFurnitureRefs();save();if(S.prompt.ready)compile()});
  tabs();setDomain(S.domain||"Kiến trúc");renderFurnitureRefs();suggestMusicMood();document.querySelectorAll("[data-guard]").forEach(x=>x.checked=S.guardrails[x.dataset.guard]!==false);document.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("on",x.dataset.mode===(S.guardrails.mode||"LOCK")));renderVersions();
  if(!S.versions.items.V01){S.versions.items.V01={label:"V01",createdAt:new Date().toISOString(),state:snapshot()};S.versions.current="V01";save()}
