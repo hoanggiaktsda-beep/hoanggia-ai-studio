@@ -386,10 +386,9 @@ S.versions.items=S.versions.items&&typeof S.versions.items==="object"?S.versions
 S.prompt={...DEFAULT_STATE.prompt,...(S.prompt||{})};
 const DEFAULT_CAMERA={shot:"Hero perspective",lens:"35mm",aperture:"f/5.6",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn không gian rõ",quality:"Photoreal · high detail · 4K+",viewMode:"hero",creativeViews:[],multiView:false,mvMaster:null,mvViews:[],consistencyContract:null};
 S.camera={...DEFAULT_CAMERA,...(S.camera||{})};
-if(S.camera.mvMaster?.url?.startsWith("blob:"))S.camera.mvMaster=null;
-if(Array.isArray(S.camera.mvViews))S.camera.mvViews=S.camera.mvViews.filter(v=>v&&v.name).map(v=>({...v,url:null}));
-else S.camera.mvViews=[];
-if(!S.camera.mvMaster)S.camera.multiView=false;
+if(!S.camera.mvMaster?.url?.startsWith("blob:"))S.camera.mvMaster=null;
+S.camera.mvViews=[];
+S.camera.multiView=false;
 let furnitureRefUrls=[];
 const ids=["brief","room","focus","style","light","mat","ratio","spaceSize","ceilingHeight","circulation","existing","furnitureLens","cameraStyle","lens","palette","surfaces","finishLevel"];
 function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",1800)}
