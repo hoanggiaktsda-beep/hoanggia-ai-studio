@@ -274,6 +274,13 @@ option{background:#0d0f10;color:#f2f2f2}
   .upload-zone{min-height:112px}
 }
 
+/* Mobile hierarchy: keep primary AI choices in a single readable column */
+@media (max-width:760px){
+  .uploadgrid{grid-template-columns:1fr}
+  .intent-grid{grid-template-columns:1fr}
+  .camera-hierarchy{grid-template-columns:1fr}
+}
+
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
