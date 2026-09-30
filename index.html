@@ -795,4 +795,90 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  $('hgCopyBtn')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('hgCompiledPrompt').value);$('hgCompilerStatus').textContent='Đã copy Prompt'}catch(e){$('hgCompilerStatus').textContent='Không thể copy tự động'}});
  window.addEventListener('load',()=>setTimeout(compile,1500));
 })();
+</script><script id="hg-brain-v2">
+(function(){
+ const $=id=>document.getElementById(id);
+ const get=()=>window.HG_DESIGN_STATE||{inputs:{},decisions:{}};
+ const domainEngine={
+  'Kiến trúc':{
+   chain:'tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn',
+   rules:['Kiểm tra tỷ lệ khối tích và nhịp điệu mặt đứng.','Kiểm tra công năng, tiếp cận và trục nhìn.','Kiểm soát đặc/rỗng, hình khối và ngôn ngữ kiến trúc.','Chọn vật liệu theo quy mô, orientação ánh sáng và chi tiết liên kết.','Tổ chức ánh sáng theo thời gian và vật liệu.','Chọn góc nhìn tôn trọng phối cảnh kiến trúc.']
+  },
+  'Nội thất':{
+   chain:'công năng → công thái học → furniture → vật liệu → ánh sáng → camera',
+   rules:['Xác định hoạt động chính và hierarchy công năng.','Kiểm tra kích thước người dùng, vùng thao tác và lưu thông.','Cân bằng furniture theo tỷ lệ, khoảng thở và điểm nhấn.','Phân cấp vật liệu theo nền, chủ đạo và accent; kiểm tra roughness, vân và phản xạ.','Tổ chức daylight → ambient → accent → decorative.','Camera phục vụ hierarchy không gian, vật liệu và furniture.']
+  },
+  'Quy hoạch':{
+   chain:'mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn',
+   rules:['Kiểm tra mật độ ý tưởng, khoảng mở và quan hệ khối tích.','Xác định trục chính, tiếp cận và phân cấp giao thông.','Phân khu theo chức năng và bán kính tiếp cận.','Tổ chức mạng xanh, mặt nước và không gian công cộng.','Điều chỉnh khối tích theo địa hình, trục nhìn và điểm nhấn.','Chọn góc nhìn tổng thể, bird-eye hoặc eye-level phù hợp.']
+  }
+ };
+ function confidence(){
+  const s=get(),i=s.inputs||{}, keys=['room','style','dimensions','ceiling','mat','light','camera','lens'];
+  const filled=keys.filter(k=>String(i[k]||'').trim()).length;
+  return Math.round(filled/keys.length*100);
+ }
+ function normalize(){
+  const s=get(),i=s.inputs||{};
+  s.meta=s.meta||{};
+  s.meta.completeness=confidence();
+  s.meta.domain=domainEngine[s.domain]?.chain||'';
+  s.meta.priority=s.domain==='Quy hoạch'?['giao thông','phân khu','cảnh quan','khối tích']:s.domain==='Kiến trúc'?['tỷ lệ','công năng','hình khối','mặt đứng']:['công năng','công thái học','furniture','vật liệu'];
+  s.reasoning=s.reasoning||{};
+  s.reasoning.chain=s.meta.domain;
+  s.reasoning.rules=domainEngine[s.domain]?.rules||[];
+  window.HG_DESIGN_STATE=s;
+  return s;
+ }
+ function compile(){
+  const s=normalize(),i=s.inputs||{},d=s.decisions||{},r=s.reasoning||{};
+  const domain=s.domain||'Nội thất';
+  const context=[
+   'HOANGGIA AI — MASTER PROMPT',
+   '',
+   'VAI TRÒ: AI DESIGN ASSISTANT cho kiến trúc sư; hỗ trợ sáng tạo, không tự ý thay thế quyết định thiết kế.',
+   'LĨNH VỰC: '+domain,
+   'KHÔNG GIAN: '+(i.room||'theo ảnh'),
+   'Ý TƯỞNG: '+(i.brief||'Phân tích ảnh và yêu cầu trước khi thiết kế.'),
+   '',
+   'DESIGN REASONING: '+r.chain,
+   (r.rules||[]).map((x,n)=>(n+1)+'. '+x).join('\n'),
+   '',
+   'QUYẾT ĐỊNH ĐÃ XÁC NHẬN:',
+   'Tỷ lệ / công năng: '+(d.furniture||'suy luận từ hiện trạng'),
+   'Lưu thông: '+(d.circulation||'suy luận theo công năng'),
+   'Vật liệu: '+(d.material||i.mat||'phân tích từ ảnh'),
+   'Ánh sáng: '+(d.lighting||i.light||'suy luận theo ngữ cảnh'),
+   'Camera: '+(d.camera||i.camera||i.lens||'suy luận theo hierarchy'),
+   'Bảo toàn: '+(d.preserve||'giữ nguyên những gì không được yêu cầu thay đổi'),
+   '',
+   'RÀNG BUỘC:',
+   'Giữ đúng tỷ lệ, phối cảnh, kích thước và quan hệ vật lý của không gian.',
+   'Không tự ý đổi kiến trúc, cửa, cửa sổ, cao độ trần hoặc camera nếu không có yêu cầu.',
+   'Không thêm decor hoặc furniture ngẫu nhiên.',
+   'Vật liệu phải có scale, vân, roughness, reflection và tiếp xúc thực tế.',
+   'Hình ảnh cuối: photorealistic architectural/interior visualization, natural perspective, realistic shadows, physically plausible lighting.'
+  ].join('\n');
+  s.prompt=s.prompt||{};
+  s.prompt.master=context;s.prompt.negative='Không méo hình học; không sai tỷ lệ; không furniture bay; không vật liệu nhựa; không phản xạ quá mức; không ánh sáng cháy; không decor ngẫu nhiên; không thay đổi kiến trúc ngoài yêu cầu; không duplicated objects; không CGI/cartoon look.';
+  s.prompt.logic=r.chain;
+  s.prompt.ready=true;
+  s.prompt.version='2.0';
+  window.HG_DESIGN_STATE=s;
+  if($('hgCompiledPrompt')) $('hgCompiledPrompt').value=context;
+  if($('hgCompilerStatus')) $('hgCompilerStatus').textContent='Đã đồng bộ bộ não · '+s.meta.completeness+'% dữ liệu';
+ }
+ function boot(){
+  ['change','input'].forEach(evt=>document.addEventListener(evt,e=>{
+   if(e.target?.id && ['brief','dimensions','ceiling','style','light','mat','camera','lens','room','focus'].includes(e.target.id)){
+    clearTimeout(window.__hgBrainTimer);window.__hgBrainTimer=setTimeout(compile,80);
+   }
+  }));
+  window.addEventListener('hg:design-state',()=>setTimeout(compile,50));
+  window.addEventListener('hg:design-decision',()=>setTimeout(compile,50));
+  window.addEventListener('load',()=>setTimeout(compile,1700));
+ }
+ boot();
+ window.HG_COMPILE_BRAIN=compile;
+})();
 </script></body></html>
