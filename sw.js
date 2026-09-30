@@ -8,5 +8,5 @@ self.addEventListener("fetch",e=>{
   if(!e.request.url.startsWith(self.location.origin)) return;
   e.respondWith(fetch(e.request).then(r=>{
     const copy=r.clone(); caches.open(CACHE).then(c=>c.put(e.request,copy)); return r;
-  }).catch(()=>caches.match(e.request).then(r=>r||caches.match("./index.html"))));
+  }).catch(()=>caches.match(e.request).then(r=>r||(e.request.mode==="navigate"?caches.match("./index.html"):Response.error()))));
 });
