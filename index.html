@@ -6,6 +6,12 @@
 <meta name="theme-color" content="#070807">
 <title>HOANGGIA AI — AI Design Studio</title>
 <link rel="icon" type="image/svg+xml" href="./brand-mark.svg">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-180.svg">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HOANGGIA AI">
 <style>
 :root{--bg:#080909;--panel:#101213;--panel2:#151718;--line:#292d30;--text:#f3f0e8;--muted:#858b90;--gold:#d7a65b;--gold2:#efc77d;--danger:#a95b5b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -646,6 +652,11 @@ const musicExpanded=localStorage.getItem("HG_AI_MUSIC_EXPANDED")==="1";$("musicD
 
 boot();
 })();
+</script>
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
 </script>
 </body>
 </html>
