@@ -146,6 +146,13 @@ select option:disabled{
 .hg-rc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
 .hg-rc-head strong{font-size:9px;color:#f4f1ea}.hg-rc-state{font-size:8px;color:#d7a65b}
 .hg-rc-list{display:flex;gap:5px;flex-wrap:wrap}.hg-rc-item{font-size:8px;padding:4px 7px;border-radius:999px;border:1px solid #292d31;color:#a7adb3}.hg-rc-item.open{border-color:#d7a65b;color:#f0c77d}.hg-rc-item.ask{border-color:#6f5b3c;color:#d7a65b}.hg-rc-item.hide{opacity:.5}
+</style><style id="hg-design-state-css">
+.hg-statebar{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:6px;margin:8px 0 12px}
+.hg-statecell{padding:7px 8px;border:1px solid #292d31;border-radius:7px;background:#0d0f11}
+.hg-statecell small{display:block;font-size:7px;color:#858a91;margin-bottom:3px}
+.hg-statecell b{font-size:9px;color:#f4f1ea;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.hg-state-live{color:#d7a65b!important}
+@media(max-width:900px){.hg-statebar{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.hg-statebar{grid-template-columns:1fr 1fr}}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -623,5 +630,42 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(apply,150)});
  window.addEventListener('load',()=>setTimeout(apply,900));
  new MutationObserver(()=>setTimeout(apply,100)).observe(document.body,{childList:true,subtree:true});
+})();
+</script><script id="hg-design-state-core">
+(function(){
+ const IDS=['domain','room','focus','dimensions','ceiling','circulation','existing','style','light','mat','furniture','brand','palette','surfaces','joinery','finish','camera','lens','aspect'];
+ const $=id=>document.getElementById(id);
+ const read=id=>{const e=$(id);return e?e.value.trim():''};
+ const domain=()=>document.querySelector('.domain.active,.domain.selected,[data-domain].active,[data-domain].selected')?.textContent.trim()||'Nội thất';
+ const defaults={version:'1.0',updatedAt:null,domain:'Nội thất',inputs:{},reasoning:{},decisions:{},prompt:{master:'',magic:'',ready:false},camera:{},material:{},ui:{}};
+ window.HG_DESIGN_STATE=window.HG_DESIGN_STATE||structuredClone(defaults);
+ function sync(reason){
+  const s=window.HG_DESIGN_STATE;
+  s.version='1.0';s.updatedAt=new Date().toISOString();s.domain=domain();
+  IDS.forEach(id=>{const e=$(id);if(e)s.inputs[id]=e.value.trim()});
+  s.reasoning=window.HG_REASONING_CONTEXT||window.HG_REASONING||{};
+  s.camera={type:s.inputs.camera||'',lens:s.inputs.lens||'',aspect:s.inputs.aspect||''};
+  s.material={base:s.inputs.mat||'',palette:s.inputs.palette||'',surfaces:s.inputs.surfaces||'',joinery:s.inputs.joinery||'',finish:s.inputs.finish||''};
+  s.decisions=s.decisions||{};
+  s.ui={activeDomain:s.domain,room:s.inputs.room||'',lastChange:reason||'init'};
+  window.dispatchEvent(new CustomEvent('hg:design-state',{detail:s}));
+  renderBar();
+ }
+ function renderBar(){
+  let bar=document.getElementById('hg-design-statebar');
+  const target=document.getElementById('domainEngine')||document.getElementById('designReasoning');if(!target)return;
+  if(!bar){bar=document.createElement('div');bar.id='hg-design-statebar';bar.className='hg-statebar';target.parentNode.insertBefore(bar,target)}
+  const s=window.HG_DESIGN_STATE;
+  const cells=[['TRẠNG THÁI','Đang đồng bộ'],['LĨNH VỰC',s.domain],['KHÔNG GIAN',s.inputs.room||'Chưa chọn'],['VẬT LIỆU',s.inputs.mat||'AI phân tích'],['CAMERA',s.inputs.camera||'AI suy luận']];
+  bar.innerHTML=cells.map((x,i)=>'<div class="hg-statecell"><small>'+x[0]+'</small><b class="'+(i===0?'hg-state-live':'')+'">'+x[1]+'</b></div>').join('');
+ }
+ function boot(){
+  IDS.forEach(id=>{const e=$(id);if(e)e.addEventListener('change',()=>setTimeout(()=>sync(id),20))});
+  document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(()=>sync('domain'),120)});
+  window.addEventListener('load',()=>setTimeout(()=>sync('init'),1100));
+  new MutationObserver(()=>setTimeout(()=>{if(window.HG_REASONING_CONTEXT)sync('reasoning')},120)).observe(document.body,{childList:true,subtree:true});
+ }
+ boot();
+ window.HG_SYNC_DESIGN_STATE=sync;
 })();
 </script></body></html>
