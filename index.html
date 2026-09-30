@@ -92,6 +92,27 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}.app{min-height:
 const $=id=>document.getElementById(id);
 const S={domain:"Kiến trúc",intent:"GIỮ NGUYÊN",master:null,reference:null,prompt:"",state:null,versions:[],project:{name:"Untitled Project",scene:"Scene 01 · Master Workspace"}};
 const KEY="HG_STUDIO_V2";
+const HG_BRAIN={
+ analyze(input={}){
+  const domain=input.domain||"Nội thất",brief=(input.brief||"").trim(),camera=input.camera||"Hero · 35mm · eye level",light=input.light||"Ánh sáng ban ngày tự nhiên, mềm";
+  const t=brief.toLowerCase();
+  const space=domain==="Quy hoạch"?"Bối cảnh quy hoạch theo MASTER":domain==="Kiến trúc"?"Công trình và bối cảnh theo MASTER":t.includes("phòng ngủ")?"Phòng ngủ · không gian riêng tư":t.includes("phòng ăn")?"Phòng ăn · không gian kết nối":t.includes("bếp")?"Bếp · không gian chức năng":t.includes("phòng tắm")||t.includes("wc")?"Phòng tắm · không gian vật liệu":t.includes("văn phòng")?"Văn phòng · không gian làm việc":t.includes("showroom")?"Showroom · không gian trưng bày":"Không gian nội thất theo MASTER";
+  return {domain,intent:input.intent||"GIỮ NGUYÊN",space,function:brief||"Suy luận từ bằng chứng hình ảnh và mô tả người dùng",ergonomics:domain==="Nội thất"?"Kiểm tra khoảng đi, tỷ lệ furniture, tầm nhìn, điểm sử dụng và nhân trắc học.":"Tỷ lệ người–công trình, tiếp cận và sử dụng hợp lý.",proportion:"Giữ tỷ lệ hình học theo MASTER; không tự ý phóng đại hoặc thu nhỏ.",circulation:"Bảo toàn logic lưu thông nhìn thấy; không chặn lối đi, không tạo vật cản phi lý.",materials:"Vật liệu chân thực, texture đúng scale, roughness, phản xạ, cạnh và junction hợp lý.",lighting:light,furniture:"Giữ nguyên form, silhouette, tỷ lệ, vị trí và đặc tính nhận diện của furniture trừ khi brief yêu cầu thay đổi.",camera,style:"Modern Luxury / Minimal Luxury theo dữ liệu MASTER và brief; ưu tiên vật liệu và ánh sáng tinh tế.",constraints:"Giữ tường, cửa/ô mở, trần, sàn, tỷ lệ, camera và các yếu tố không được yêu cầu thay đổi.",recommendations:"Ưu tiên hierarchy rõ, tỷ lệ chính xác, cấu tạo hợp lý, vật liệu khả thi thi công và hình ảnh có chiều sâu."};
+ },
+ prompt(x,input={}){
+  return ["HOANGGIA AI — DESIGN INTELLIGENCE CORE","DOMAIN: "+x.domain+" · INTENT: "+x.intent,"DESIGN STATE: "+(input.version||"CURRENT"),"SOURCE OF TRUTH: MASTER image. REFERENCE only informs requested style/material/form.","DESIGN REASONING: "+(reasoning[x.domain]||reasoning["Nội thất"]),"BRIEF: "+(input.brief||"Phát triển theo Trạng thái Thiết kế hiện tại"),"SPACE / FUNCTION: "+x.space+" · "+x.function,"ERGONOMICS: "+x.ergonomics,"PROPORTION / CIRCULATION: "+x.proportion+" · "+x.circulation,"FURNITURE: "+x.furniture,"MATERIAL: "+x.materials,"LIGHTING: "+x.lighting,"STYLE / ART DIRECTION: "+x.style,"CAMERA: "+x.camera,"PRESERVATION LOCKS: "+x.constraints,"FEASIBILITY: "+x.recommendations,"OUTPUT: photorealistic, physically plausible, professional architectural/interior visualization, natural perspective, refined composition, high material fidelity, realistic scale and construction logic.","PLATFORM: "+(input.platform||"Generic"),"NEGATIVE: geometry drift, distorted proportions, bent verticals, furniture substitution, furniture redesign without instruction, material mutation, duplicate objects, floating objects, fake reflections, plastic materials, excessive HDR, oversaturation, oversharpening, artificial glow, unrealistic shadows, clutter, text, logo, watermark."].join("\n");
+ },
+ decision(state,q){
+  const x=structuredClone(state||this.analyze({})),l=(q||"").toLowerCase(); x.change_reason=q||"Cập nhật trạng thái thiết kế";
+  if(l.includes("travertine"))x.materials="Travertine sáng, vân tự nhiên, cạnh và junction tinh tế; giữ đúng scale.";
+  if(l.includes("warm")||l.includes("dusk")||l.includes("ấm"))x.lighting="Warm cinematic dusk, layered ambient + accent lighting, physically plausible.";
+  if(l.includes("50mm"))x.camera="Editorial · 50mm · eye level";
+  if(l.includes("35mm"))x.camera="Hero · 35mm · eye level";
+  if(l.includes("24mm"))x.camera="Spatial · 24mm · wide, kiểm soát biến dạng";
+  if(l.includes("sofa"))x.furniture="Giữ nguyên sofa, silhouette, tỷ lệ, chất liệu và vị trí; chỉ đổi phần được yêu cầu.";
+  x.constraints+=" CHANGE ONLY: "+q; return x;
+ }
+};
 const reasoning={Kiến trúc:"Tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → camera",Nội thất:"Công năng → nhân trắc → lưu thông → furniture → vật liệu → ánh sáng → camera",Quy hoạch:"Bối cảnh → phân khu → mật độ → lưu thông → cảnh quan → skyline → camera"};
 function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",2200)}
 function save(){localStorage.setItem(KEY,JSON.stringify({domain:S.domain,intent:S.intent,prompt:S.prompt,state:S.state,versions:S.versions,project:S.project,brief:$("brief").value}))}
