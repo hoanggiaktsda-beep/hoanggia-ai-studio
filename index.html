@@ -187,7 +187,7 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 </div>
 <section class="music-dock" id="musicDock" aria-label="HOANGGIA AI Ambient Music">
 <div class="music-bar"><span class="music-icon">🎵</span><div class="music-title" id="musicTitle">Relaxing Saxophone · Instrumental</div><input class="music-mini-volume" id="musicMiniVolume" type="range" min="0" max="100" value="38" aria-label="Âm lượng"><span class="music-state" id="musicState">Sẵn sàng</span><button class="music-expand" id="musicToggle" aria-label="Mở trình phát">＋</button></div>
-<div class="music-panel"><div class="music-player"><div id="ytMusicPlayer"></div></div><div class="music-info"><div><div class="music-kicker">HOANGGIA AI · AMBIENT MUSIC</div><div class="music-sub" id="musicSource">Nguồn phát: YouTube / YouTube Music · không lời</div></div><div><div class="music-controls"><button class="music-btn primary" id="musicPlay">▶ Phát</button><button class="music-btn" id="musicPrev">‹</button><button class="music-btn" id="musicNext">›</button><button class="music-btn" id="musicMute">🔊</button></div><div class="music-volume"><span>Âm lượng</span><input id="musicVolume" type="range" min="0" max="100" value="38"><b id="musicVolumeValue">38%</b></div><div class="music-presets"><button class="music-preset on" data-music="sax">Saxophone</button><button class="music-preset" data-music="piano">Piano</button><button class="music-preset" data-music="guitar">Guitar</button></div><a class="music-open" id="musicOpen" href="https://music.youtube.com/watch?v=1qX-0pjxQHI" target="_blank" rel="noopener noreferrer">Mở bản đang phát trên YouTube Music ↗</a></div></div></div></section>
+<div class="music-panel"><div class="music-player"><div id="ytMusicPlayer"></div></div><div class="music-info"><div><div class="music-kicker">HOANGGIA AI · AMBIENT MUSIC</div><div class="music-sub" id="musicSource">Nguồn phát: YouTube / YouTube Music · không lời</div></div><div><div class="music-controls"><button class="music-btn primary" id="musicPlay">▶ Phát</button><button class="music-btn" id="musicPrev">‹</button><button class="music-btn" id="musicNext">›</button><button class="music-btn" id="musicMute">🔊</button></div><div class="music-volume"><span>Âm lượng</span><input id="musicVolume" type="range" min="0" max="100" value="38"><b id="musicVolumeValue">38%</b></div><div class="music-presets"><button class="music-preset on" data-music-category="ambient">Ambient</button><button class="music-preset" data-music-category="vietnam">🇻🇳 Nhạc Việt</button></div><div class="music-presets" id="musicTracksList"></div><a class="music-open" id="musicOpen" href="https://music.youtube.com/watch?v=1qX-0pjxQHI" target="_blank" rel="noopener noreferrer">Mở bản đang phát trên YouTube Music ↗</a></div></div></div></section>
 <div class="toast" id="toast"></div>
 <script>
 (function(){
@@ -293,17 +293,28 @@ function boot(){
 }
 
 // HOANGGIA AI Music Player — YouTube IFrame API
-const musicTracks=[
- {key:"sax",title:"Relaxing Saxophone · Instrumental",id:"1qX-0pjxQHI",url:"https://music.youtube.com/watch?v=1qX-0pjxQHI"},
- {key:"piano",title:"Relaxing Piano · Finn",id:"lz-fbky6V3s",url:"https://music.youtube.com/watch?v=lz-fbky6V3s"},
- {key:"guitar",title:"Relaxing Acoustic Guitar · Instrumental",id:"yGt_N_0vLWI",url:"https://music.youtube.com/watch?v=yGt_N_0vLWI"}
-];
+const musicCategories={
+ ambient:[
+  {key:"sax",title:"Relaxing Saxophone · Instrumental",id:"1qX-0pjxQHI",url:"https://music.youtube.com/watch?v=1qX-0pjxQHI"},
+  {key:"piano",title:"Relaxing Piano · Finn",id:"lz-fbky6V3s",url:"https://music.youtube.com/watch?v=lz-fbky6V3s"},
+  {key:"guitar",title:"Relaxing Acoustic Guitar · Instrumental",id:"yGt_N_0vLWI",url:"https://music.youtube.com/watch?v=yGt_N_0vLWI"}
+ ],
+ vietnam:[
+  {key:"lav",title:"LAVIEM · Quang Hùng MasterD, Pháp Kiều, CoolKid, CAPTAIN BOY, DANNY CHUNG",id:"",url:"https://music.youtube.com/results?search_query=LAVIEM+Quang+Hung+MasterD"},
+  {key:"timem",title:"Tìm Em · Hngle & Bảo Anh",id:"",url:"https://music.youtube.com/results?search_query=Tìm+Em+Hngle+Bảo+Anh"},
+  {key:"chochut",title:"chờ chút... · CONGB",id:"",url:"https://music.youtube.com/results?search_query=chờ+chút+CONGB"},
+  {key:"saubong",title:"SAU HÌNH BÓNG ẤY · Dương Domic, CAPTAIN BOY, Jaysonlei, CODY NAM VÕ ft. LYHAN",id:"",url:"https://music.youtube.com/results?search_query=SAU+HÌNH+BÓNG+ẤY+Dương+Domic"},
+  {key:"thegioi",title:"THẾ GIỚI CỦA ANH · Dương Domic",id:"",url:"https://music.youtube.com/results?search_query=THẾ+GIỚI+CỦA+ANH+Dương+Domic"},
+  {key:"nguoimlang",title:"Người Im Lặng Gặp Người Hay Nói · HIEUTHUHAI",id:"",url:"https://music.youtube.com/results?search_query=Người+Im+Lặng+Gặp+Người+Hay+Nói+HIEUTHUHAI"}
+]};
+let musicCategory="ambient";
+let musicTracks=musicCategories[musicCategory];
 let musicPlayer=null,musicIndex=0,musicReady=false,musicPlaying=false,musicMuted=false;
 function loadYouTubeAPI(){const tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";document.head.appendChild(tag)}
 window.onYouTubeIframeAPIReady=function(){musicPlayer=new YT.Player("ytMusicPlayer",{width:"200",height:"200",videoId:musicTracks[0].id,playerVars:{playsinline:1,controls:1,rel:0,origin:location.origin},events:{onReady:onMusicReady,onStateChange:onMusicState}})};
 function onMusicReady(e){musicReady=true;e.target.setVolume(Number($("musicVolume").value));updateMusicUI()}
 function onMusicState(e){musicPlaying=e.data===YT.PlayerState.PLAYING;updateMusicUI();if(e.data===YT.PlayerState.ENDED)nextMusic()}
-function setMusicTrack(index,autoplay=true){musicIndex=(index+musicTracks.length)%musicTracks.length;const t=musicTracks[musicIndex];$("musicTitle").textContent=t.title;$("musicOpen").href=t.url;document.querySelectorAll("[data-music]").forEach(b=>b.classList.toggle("on",b.dataset.music===t.key));if(musicReady){musicPlayer.loadVideoById(t.id);if(!autoplay)musicPlayer.pauseVideo()}}
+function setMusicTrack(index,autoplay=true){musicTracks=musicCategories[musicCategory];musicIndex=(index+musicTracks.length)%musicTracks.length;const t=musicTracks[musicIndex];$("musicTitle").textContent=t.title;$("musicOpen").href=t.url;document.querySelectorAll("[data-music]").forEach(b=>b.classList.toggle("on",b.dataset.music===t.key));if(musicReady){musicPlayer.loadVideoById(t.id);if(!autoplay)musicPlayer.pauseVideo()}}
 function nextMusic(){setMusicTrack(musicIndex+1,true)} function prevMusic(){setMusicTrack(musicIndex-1,true)}
 function updateMusicUI(){const v=Number($("musicVolume").value);$("musicVolumeValue").textContent=v+"%";$("musicMiniVolume").value=v;$("musicMute").textContent=musicMuted?"🔇":"🔊";$("musicPlay").textContent=musicPlaying?"❚❚ Tạm dừng":"▶ Phát";$("musicState").textContent=musicPlaying?"Đang phát":"Sẵn sàng";$("musicToggle").textContent=$("musicDock").classList.contains("expanded")?"−":"＋"}
 $("musicPlay").onclick=()=>{if(!musicReady)return;if(musicPlaying)musicPlayer.pauseVideo();else musicPlayer.playVideo()};
@@ -311,7 +322,10 @@ $("musicPrev").onclick=prevMusic;$("musicNext").onclick=nextMusic;
 $("musicMute").onclick=()=>{if(!musicReady)return;if(musicMuted){musicPlayer.unMute();musicMuted=false}else{musicPlayer.mute();musicMuted=true}updateMusicUI()};
 function setMusicVolume(v){v=Number(v);$("musicVolume").value=v;$("musicMiniVolume").value=v;if(musicReady)musicPlayer.setVolume(v);if(v>0&&musicMuted){musicPlayer.unMute();musicMuted=false}updateMusicUI()}
 $("musicVolume").oninput=e=>setMusicVolume(e.target.value);$("musicMiniVolume").oninput=e=>setMusicVolume(e.target.value);
-document.querySelectorAll("[data-music]").forEach(b=>b.onclick=()=>setMusicTrack(musicTracks.findIndex(t=>t.key===b.dataset.music),true));
+function renderMusicTracks(){musicTracks=musicCategories[musicCategory];$("musicTracksList").innerHTML=musicTracks.map((t,i)=>`<button class="music-preset ${i===musicIndex?"on":""}" data-track-index="${i}">${t.title}</button>`).join("");document.querySelectorAll("[data-track-index]").forEach(b=>b.onclick=()=>setMusicTrack(Number(b.dataset.trackIndex),true));document.querySelectorAll("[data-music-category]").forEach(b=>b.classList.toggle("on",b.dataset.musicCategory===musicCategory))}
+document.querySelectorAll("[data-music-category]").forEach(b=>b.onclick=()=>{musicCategory=b.dataset.musicCategory;musicIndex=0;renderMusicTracks();setMusicTrack(0,true)});
+
+renderMusicTracks();
 $("musicToggle").onclick=()=>{const open=!$("musicDock").classList.contains("expanded");$("musicDock").classList.toggle("expanded",open);$("musicToggle").setAttribute("aria-label",open?"Thu gọn trình phát":"Mở trình phát");localStorage.setItem("HG_AI_MUSIC_EXPANDED",open?"1":"0");updateMusicUI()};
 $("musicDock").classList.toggle("expanded",localStorage.getItem("HG_AI_MUSIC_EXPANDED")==="1");
 loadYouTubeAPI();
