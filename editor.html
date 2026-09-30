@@ -3,11 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HOANGGIA AI Studio</title>
+<meta name="theme-color" content="#f6f6f3">
+<title>HOANGGIA AI — Studio</title>
 <style>
-html,body{margin:0;width:100%;height:100%;background:#fff;color:#111;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{display:grid;place-items:center}
+:root{--bg:#f5f5f2;--ink:#101010;--muted:#747474;--line:#deded8;--panel:#fff;--accent:#b78a4a;--soft:#efeee9}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:grid;grid-template-rows:72px 1fr 46px}
+.header{display:flex;align-items:center;padding:0 28px;border-bottom:1px solid var(--line);background:#fff}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.04em}.mark{width:28px;height:28px;border:1.5px solid var(--ink);display:grid;place-items:center;font-size:11px}.brand small{display:block;font-size:8px;letter-spacing:.18em;color:var(--muted);font-weight:500;margin-top:3px}
+.nav{margin-left:55px;display:flex;gap:26px;font-size:11px}.nav span:first-child{font-weight:700}.grow{flex:1}.header button{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:10px 16px;border-radius:3px;font-size:10px;font-weight:700}
+.workspace{display:grid;grid-template-columns:300px minmax(0,1fr) 320px;min-height:0}
+.side{background:#fff;padding:24px;border-right:1px solid var(--line);overflow:auto}.right{border-left:1px solid var(--line);border-right:0}
+.eyebrow{font-size:9px;letter-spacing:.2em;color:var(--muted);font-weight:700;margin-bottom:16px}.section{padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)}.section:last-child{border:0}
+h2{font-size:18px;letter-spacing:-.04em;margin:0 0 7px}.desc{font-size:11px;color:var(--muted);line-height:1.6;margin:0}
+.field{margin-top:14px}.field label{display:block;font-size:9px;letter-spacing:.1em;font-weight:700;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#fafaf8;padding:11px;border-radius:3px;outline:0;font-size:11px}.field textarea{min-height:88px;resize:vertical}
+.upload{border:1px dashed #bbb;background:#fafaf8;min-height:118px;display:grid;place-items:center;text-align:center;padding:15px}.upload strong{font-size:11px}.upload span{display:block;font-size:9px;color:var(--muted);margin-top:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{border:1px solid var(--line);background:#fff;padding:7px 9px;border-radius:2px;font-size:9px}.tag.active{border-color:var(--ink);background:var(--ink);color:#fff}
+.main{display:flex;flex-direction:column;min-width:0;background:var(--bg)}.stagebar{height:52px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 20px;gap:7px;background:#fff}.stagebar button{border:1px solid transparent;background:transparent;padding:8px 10px;font-size:9px;color:#666}.stagebar button.active{border-color:var(--line);background:var(--soft);color:#111}
+.canvas{flex:1;min-height:500px;display:grid;place-items:center;padding:28px}.empty{width:min(900px,100%);aspect-ratio:16/10;border:1px dashed #c8c8c2;background:#f9f9f6;display:grid;place-items:center;text-align:center}.empty strong{display:block;font-family:Georgia,serif;font-weight:400;font-size:30px;letter-spacing:-.04em}.empty p{font-size:10px;color:var(--muted);margin:9px 0 18px}.empty button{background:var(--ink);color:#fff;border:0;padding:12px 18px;font-size:9px;font-weight:700}
+.footer{border-top:1px solid var(--line);background:#fff;display:flex;align-items:center;padding:0 20px;font-size:9px;color:var(--muted)}.footer .grow{flex:1}
+.primary{background:var(--ink)!important;color:#fff!important;border-color:var(--ink)!important}
+.preview{display:none;margin-top:10px;width:100%;max-height:150px;object-fit:contain;border:1px solid var(--line)}
+.small{font-size:8px;color:var(--muted);line-height:1.5}
+@media(max-width:1050px){.workspace{grid-template-columns:250px 1fr}.right{display:none}}
+@media(max-width:700px){.app{grid-template-rows:60px 1fr 42px}.header{padding:0 15px}.nav{display:none}.workspace{display:block}.side{border:0;border-bottom:1px solid var(--line)}.canvas{min-height:55vh;padding:15px}.empty strong{font-size:22px}}
 </style>
 </head>
-<body></body>
+<body>
+<div class="app">
+<header class="header">
+<div class="brand"><div class="mark">HG</div><div>HOANGGIA AI<small>INTERIOR INTELLIGENCE STUDIO</small></div></div>
+<div class="nav"><span>STUDIO</span><span>PROJECTS</span><span>LIBRARY</span></div>
+<div class="grow"></div><button id="newBtn">NEW PROJECT</button>
+</header>
+<div class="workspace">
+<aside class="side">
+<div class="section"><div class="eyebrow">01 / SOURCE</div><h2>Không gian gốc</h2><p class="desc">Bắt đầu bằng hình ảnh không gian cần thiết kế hoặc chỉnh sửa.</p><div class="field"><div class="upload" id="sourceDrop"><div><strong>THẢ ẢNH VÀO ĐÂY</strong><span>hoặc chọn ảnh từ thiết bị</span><button id="sourceBtn" style="margin-top:12px">CHỌN ẢNH</button></div></div><input id="source" type="file" accept="image/*" hidden><img id="sourcePreview" class="preview"></div></div>
+<div class="section"><div class="eyebrow">02 / DIRECTION</div><div class="field"><label>LOẠI KHÔNG GIAN</label><select id="space"><option>Phòng khách</option><option>Phòng ngủ</option><option>Phòng ăn</option><option>Bếp</option><option>Phòng làm việc</option><option>Showroom</option><option>Sảnh / Lounge</option></select></div><div class="field"><label>PHONG CÁCH</label><select id="style"><option>Modern Luxury</option><option>Minimal Luxury</option><option>Contemporary</option><option>Neo-classic Contemporary</option><option>Japandi</option><option>Minimalist</option></select></div><div class="field"><label>ÁNH SÁNG</label><select id="light"><option>Ánh sáng tự nhiên trung tính</option><option>Ánh sáng chiều ấm</option><option>Ánh sáng ban mai</option><option>Ánh sáng hoàng hôn</option><option>Ánh sáng đêm sang trọng</option></select></div></div>
+<div class="section"><div class="eyebrow">03 / INTENT</div><div class="tags" id="intents"><button class="tag active">Thay nội thất</button><button class="tag">Đổi vật liệu</button><button class="tag">Đổi màu</button><button class="tag">Thêm mới</button><button class="tag">Xóa</button><button class="tag">Toàn bộ không gian</button></div><div class="field"><label>MÔ TẢ Ý TƯỞNG</label><textarea id="idea" placeholder="Mô tả chính xác điều bạn muốn HOANGGIA AI thực hiện..."></textarea></div></div>
+</aside>
+<main class="main">
+<div class="stagebar"><button class="active">CANVAS</button><button>BEFORE / AFTER</button><button>FIT</button><button>100%</button><div class="grow"></div><span class="small" id="state">READY · Chưa có ảnh</span></div>
+<div class="canvas"><div class="empty" id="canvasEmpty"><div><strong>HOANGGIA AI</strong><p>AI interior design workspace — xây dựng lại không gian từ hình ảnh gốc.</p><button id="canvasUpload">+ ĐƯA ẢNH VÀO STUDIO</button></div></div></div>
+</main>
+<aside class="side right">
+<div class="section"><div class="eyebrow">04 / TARGET</div><h2>Đối tượng</h2><div class="field"><label>ĐỐI TƯỢNG CẦN XỬ LÝ</label><select id="target"><option>Sofa</option><option>Armchair</option><option>Bàn trà</option><option>Kệ / tủ</option><option>Đèn</option><option>Thảm</option><option>Bàn ăn</option><option>Ghế ăn</option><option>Giường</option><option>Toàn bộ nội thất</option><option>Tường / sàn / trần</option></select></div><div class="field"><label>MODEL / MẪU THAY THẾ</label><input id="model" placeholder="Ví dụ: sofa 3 chỗ da nâu, tay gỗ..."></div></div>
+<div class="section"><div class="eyebrow">05 / REFERENCE</div><div class="upload" id="refDrop"><div><strong>ẢNH THAM CHIẾU</strong><span>Mẫu nội thất / vật liệu / phong cách</span><button id="refBtn" style="margin-top:12px">CHỌN ẢNH</button></div></div><input id="ref" type="file" accept="image/*" hidden><img id="refPreview" class="preview"></div>
+<div class="section"><div class="eyebrow">06 / PRESERVE</div><div class="tags" id="preserve"><button class="tag active">Kiến trúc</button><button class="tag active">Tường</button><button class="tag active">Trần</button><button class="tag active">Cửa / ô cửa</button><button class="tag active">Góc máy</button><button class="tag active">Bố cục</button><button class="tag active">Tỷ lệ</button><button class="tag active">Nội thất khác</button></div></div>
+<div class="section"><div class="eyebrow">07 / REALISM</div><div class="field"><label>ĐỘ CHÂN THỰC</label><select id="realism"><option>Photorealistic — High End</option><option>Architectural Photography</option><option>Editorial Interior</option></select></div><p class="small">Ưu tiên hình học chính xác, vật liệu thật, ánh sáng vật lý hợp lý và tỷ lệ nội thất thực tế.</p></div>
+</aside>
+</div>
+<footer class="footer"><span>HOANGGIA AI · INTERIOR INTELLIGENCE STUDIO</span><div class="grow"></div><span id="footState">Workspace ready</span></footer>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const source=$('#source'),ref=$('#ref'),sourcePreview=$('#sourcePreview'),refPreview=$('#refPreview'),canvasEmpty=$('#canvasEmpty'),state=$('#state'),footState=$('#footState');
+function read(file,img,label){if(!file)return;const r=new FileReader();r.onload=()=>{img.src=r.result;img.style.display='block';state.textContent='READY · '+label;footState.textContent=label+' loaded'};r.readAsDataURL(file)}
+$('#sourceBtn').onclick=()=>source.click();$('#canvasUpload').onclick=()=>source.click();source.onchange=e=>read(e.target.files[0],sourcePreview,'Source image');$('#refBtn').onclick=()=>ref.click();ref.onchange=e=>read(e.target.files[0],refPreview,'Reference image');
+$$('.tag').forEach(x=>x.onclick=()=>x.classList.toggle('active'));
+['sourceDrop','refDrop'].forEach(id=>{const d=$('#'+id);d.ondragover=e=>{e.preventDefault();d.style.borderColor='#111'};d.ondragleave=()=>d.style.borderColor='';d.ondrop=e=>{e.preventDefault();d.style.borderColor='';const f=e.dataTransfer.files[0];if(id==='sourceDrop'){source.files=e.dataTransfer.files;read(f,sourcePreview,'Source image')}else{ref.files=e.dataTransfer.files;read(f,refPreview,'Reference image')}}});
+$('#newBtn').onclick=()=>{location.reload()};
+</script>
+</body>
 </html>
