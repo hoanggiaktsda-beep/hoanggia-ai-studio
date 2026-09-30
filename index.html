@@ -107,7 +107,7 @@ const HG_BRAIN={
   x.constraints+=" CHANGE ONLY: "+q; return x;
  }
 };
-const reasoning={Kiến trúc:"Tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → camera",Nội thất:"Công năng → nhân trắc → lưu thông → furniture → vật liệu → ánh sáng → camera",Quy hoạch:"Bối cảnh → phân khu → mật độ → lưu thông → cảnh quan → skyline → camera"};
+const reasoning={"Kiến trúc":"Tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → camera","Nội thất":"Công năng → nhân trắc → lưu thông → furniture → vật liệu → ánh sáng → camera","Quy hoạch":"Bối cảnh → phân khu → mật độ → lưu thông → cảnh quan → skyline → camera"};
 function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",2200)}
 function save(){localStorage.setItem(KEY,JSON.stringify({domain:S.domain,intent:S.intent,prompt:S.prompt,state:S.state,versions:S.versions,project:S.project,brief:$("brief").value,masterData:S.masterData||null,referenceData:S.referenceData||null}))}
 function sync(){ $("mDomain").textContent=S.domain;$("mIntent").textContent=S.intent;$("reasoning").textContent=reasoning[S.domain];$("projectName").textContent=S.project.name;$("sceneName").textContent=S.project.scene;$("versionBadge").textContent=S.state?.version_label||"V01";$("stateTag").textContent=S.state?.version_label||"V01";$("mRef").textContent=S.reference?"ATTACHED":"OPTIONAL";renderVersions();renderScenes();$("renderPrompt").value=S.prompt||""}
