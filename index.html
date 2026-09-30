@@ -317,6 +317,11 @@ option{background:#0d0f10;color:#f2f2f2}
 #panel-render .layout{align-items:start}#panel-render .workflow-step{scroll-margin-top:70px}.step-intent .intent-head{align-items:center}.step-images{padding-bottom:12px}.step-images .uploadgrid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);min-height:240px}.step-images .drop{min-height:240px}.step-images .drop:first-child{border-color:#3a3d40}.step-brief textarea{min-height:74px}.ai-cta-note{display:flex;align-items:center;gap:10px;margin:12px 0 6px;padding:10px 12px;border:1px solid #24272a;border-radius:9px;background:#0b0c0d}.ai-cta-note>span{font-size:9px;color:#9b8256}.ai-cta-note b{display:block;font-size:9px;letter-spacing:.1em}.ai-cta-note small{display:block;color:#666b6e;font-size:8px;margin-top:3px}.step-final-prompt{border-color:#35383b;box-shadow:0 0 0 1px rgba(255,255,255,.015),0 12px 30px rgba(0,0,0,.18)}.final-prompt-wrap{border:1px solid #26292c;border-radius:9px;background:#090a0a;padding:8px}.final-prompt-label{font-size:8px;letter-spacing:.12em;color:#7d7f80;margin:0 0 7px}.step-final-prompt .prompt{min-height:190px;max-height:48svh;font-size:11px;line-height:1.65;background:transparent;border:0;padding:4px}.step-final-prompt .prompt-actions{margin-top:8px}.step-final-prompt .prompt-actions .btn{min-height:38px}.step-final-prompt .prompt-actions input{min-height:38px}.step-final-prompt h2{margin-bottom:10px}.step-final-prompt .status{margin-top:6px}
 @media(min-width:1101px){#panel-render .layout>div:first-child{max-width:900px}.step-images .uploadgrid{grid-template-columns:minmax(0,1.5fr) minmax(260px,.8fr)}.step-final-prompt .prompt{min-height:230px}.step-final-prompt{position:relative}.step-final-prompt h2{display:flex;align-items:center;justify-content:space-between}}
 @media(max-width:760px){.step-images .uploadgrid{grid-template-columns:1fr;min-height:0}.step-images .drop{min-height:190px}.step-final-prompt .prompt{min-height:170px;max-height:none}.ai-cta-note{margin-top:8px}.step-final-prompt{margin-top:4px}.step-final-prompt .prompt-actions{display:grid;grid-template-columns:1fr 1fr}.step-final-prompt .prompt-actions input{grid-column:1/-1}.step-final-prompt .prompt-actions #applyEdit{grid-column:1}.step-final-prompt .prompt-actions #copyPrompt{grid-column:2}.step-final-prompt .prompt-actions #clearPrompt{grid-column:1/-1}}
+
+/* HOANGGIA AI · advanced controls + visual spine */
+.workflow-spine{grid-column:1/-1;display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr 28px 1fr;align-items:center;margin:0 0 8px;padding:6px 4px;color:#505457}.workflow-spine .spine-node{display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 7px;border:1px solid #1c1f21;border-radius:7px;background:#0a0b0b;font-size:8px;letter-spacing:.08em}.workflow-spine .spine-node b{font-size:8px;color:#777}.workflow-spine .spine-node.active{color:#bdbdbd;border-color:#2c3033}.workflow-spine i{height:1px;background:#25282a}.stage-label{margin:-1px 0 8px;font-size:7px;letter-spacing:.12em;color:#62676a}.expert-kicker{display:flex;align-items:center;gap:8px;padding:0 12px 7px;color:#5c6063}.expert-kicker span{font-size:7px;letter-spacing:.12em;color:#8c7754}.expert-kicker small{font-size:7px}.expert-controls{overflow:hidden}.expert-controls>summary{min-height:40px}.expert-body{display:grid;grid-template-columns:1fr;gap:5px}.expert-body>.advanced-workflow{background:#0a0b0b;border-color:#181b1d}.expert-body>.advanced-workflow>summary{padding:9px 10px;font-size:8px}.expert-body>.advanced-workflow[open]{border-color:#292d30}.expert-body>.advanced-workflow .advanced-body{padding:8px}.expert-body>.advanced-workflow:first-child{margin-top:0}.expert-controls summary::after{content:'⌄';margin-left:4px;color:#555}.expert-controls[open]>summary::after{content:'⌃'}.step-images{position:relative}.step-images .drop{background:#0a0b0b}.step-images .drop:first-child{box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}.ai-cta-note{position:relative}.ai-cta-note:before{content:'';position:absolute;left:16px;top:-12px;height:11px;width:1px;background:#4a4030}.step-final-prompt{position:relative}.step-final-prompt:before{content:'';position:absolute;left:16px;top:-15px;height:14px;width:1px;background:#4a4030}
+@media(min-width:1101px){.expert-body{grid-template-columns:1fr 1fr}.expert-body>.advanced-workflow{margin:0}.expert-body>.advanced-workflow:first-child{grid-column:1/-1}.workflow-spine{max-width:900px}.stage-label{margin-bottom:6px}}
+@media(max-width:760px){.workflow-spine{grid-template-columns:1fr 12px 1fr 12px 1fr 12px 1fr;gap:0}.workflow-spine .spine-node{font-size:7px;padding:5px 2px}.workflow-spine .spine-node span{display:none}.workflow-spine .spine-node b{font-size:7px}.expert-kicker{padding-left:10px}.expert-body{gap:4px}.stage-label{font-size:7px}.ai-cta-note:before,.step-final-prompt:before{left:12px}}
 </style>
 </head>
 <body>
@@ -351,10 +356,10 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="workflow-strip" aria-label="Quy trình HOANGGIA AI"><span class="workflow-step active"><b>01</b> Ý ĐỒ</span><i>→</i><span class="workflow-step active"><b>02</b> ẢNH</span><i>→</i><span class="workflow-step"><b>03</b> AI SUY LUẬN</span><i>→</i><span class="workflow-step"><b>04</b> PROMPT CUỐI</span><strong id="workflowStatus">Chọn ý đồ → thêm ảnh → AI suy luận</strong></div>
 
 <section class="panel on" id="panel-render">
-<div class="layout"><div class="workflow-guide"><span class="on"><b>01</b> Ý ĐỒ</span><i>→</i><span><b>02</b> ẢNH</span><i>→</i><span><b>03</b> AI SUY LUẬN</span><i>→</i><span><b>04</b> PROMPT CUỐI</span></div>
+<div class="layout"><div class="workflow-spine"><div class="spine-node active"><b>01</b><span>Ý ĐỒ</span></div><i></i><div class="spine-node active"><b>02</b><span>ẢNH</span></div><i></i><div class="spine-node"><b>03</b><span>AI</span></div><i></i><div class="spine-node"><b>04</b><span>PROMPT</span></div></div>
 <div>
-<div class="card design-intent-card workflow-step step-intent"><div class="intent-head"><div><h2><span class="num">01</span>Ý ĐỒ</h2><p class="sub">Chọn cách HOANGGIA AI được phép can thiệp vào thiết kế.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
-<div class="card workflow-step step-images">
+<div class="card design-intent-card workflow-step step-intent"><div class="stage-label">01 · Ý ĐỒ</div><div class="intent-head"><div><h2><span class="num">01</span>Ý ĐỒ</h2><p class="sub">Chọn cách HOANGGIA AI được phép can thiệp vào thiết kế.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
+<div class="card workflow-step step-images"><div class="stage-label">02 · ẢNH HIỆN TRẠNG → THAM CHIẾU</div>
 <h2><span class="num">02</span>ẢNH</h2>
 <div class="uploadgrid">
 <label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Kéo thả hoặc chạm để tải</small></span><img id="scenePreview"></label>
@@ -362,7 +367,7 @@ option{background:#0d0f10;color:#f2f2f2}
 </div>
 </div>
 
-<div class="card workflow-step step-brief">
+<div class="card workflow-step step-brief"><div class="stage-label">02A · MÔ TẢ TÙY CHỌN</div>
 <h2><span class="num">02A</span>MÔ TẢ <small style="font-size:8px;color:#666">Không bắt buộc</small></h2>
 <textarea id="brief" placeholder="Mô tả thêm nếu cần · ví dụ: giữ sofa, thay đá, tăng ánh sáng... (không bắt buộc)"></textarea>
 <details class="intent-advanced-fields"><summary>＋ TÙY CHỈNH CHUYÊN SÂU <small>Không bắt buộc · AI tự suy luận nếu bỏ trống</small></summary><div class="fields">
@@ -379,7 +384,7 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="engine"><div class="engine-head"><strong id="engineTitle">03 · AI SUY LUẬN</strong><span id="engineHint">Design Brain → Prompt Compiler · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
 </div>
 
-<details class="expert-controls"><summary><span class="expert-icon">⚙</span><b>TÙY CHỈNH CHUYÊN SÂU</b><small>Camera · vật liệu · đồ rời · bảo toàn · phiên bản</small></summary><div class="expert-body">
+<details class="expert-controls"><div class="expert-kicker"><span>ADVANCED</span><small>Chỉ mở khi cần can thiệp thủ công</small></div><summary><span class="expert-icon">⚙</span><b>TÙY CHỈNH CHUYÊN SÂU</b><small>Camera · vật liệu · đồ rời · bảo toàn · phiên bản</small></summary><div class="expert-body">
 <div class="card interior-only" id="furnitureRefCard">
 <h2><span class="num">02B</span>ĐỒ RỜI · REFERENCE</h2>
 <p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
@@ -390,7 +395,7 @@ option{background:#0d0f10;color:#f2f2f2}
 </label>
 <div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
 <div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
-</div><details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
+</div><details class="advanced-workflow"><summary><span class="num">03</span>01 · DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
 <div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
 <div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
 <div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
@@ -403,7 +408,7 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
 </div>
 </div></div></details>
-<details class="advanced-workflow"><summary><span class="num">04</span>MATERIAL INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid5">
+<details class="advanced-workflow"><summary><span class="num">04</span>02 · MATERIAL INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid5">
 <div class="intel-cell"><small>BASE</small><b id="miBase">AI phân tích reference</b></div>
 <div class="intel-cell"><small>PALETTE</small><b id="miPalette">AI cân bằng</b></div>
 <div class="intel-cell"><small>SURFACE</small><b id="miSurface">Theo reference</b></div>
@@ -418,7 +423,7 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="story"><small>LENS</small><b id="csLens">35mm</b></div>
 </div>
 </div></div></details>
-<details class="advanced-workflow"><summary><span class="num">06</span>BẢO TOÀN & QUYỀN CAN THIỆP AI<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="guard">
+<details class="advanced-workflow"><summary><span class="num">06</span>04 · BẢO TOÀN AI<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="guard">
 <label><input type="checkbox" data-guard="architecture" checked>Kiến trúc</label>
 <label><input type="checkbox" data-guard="camera" checked>Camera</label>
 <label><input type="checkbox" data-guard="furniture" checked>Furniture</label>
@@ -429,7 +434,7 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="mode"><button data-mode="LOCK" class="on">LOCK<small>Giữ nguyên</small></button><button data-mode="EDIT">EDIT<small>Chỉ sửa phần yêu cầu</small></button><button data-mode="FREE">FREE<small>Cho phép đề xuất</small></button></div>
 </div></div></details>
 </div></details>
-<div class="card workflow-step step-final-prompt">
+<div class="card workflow-step step-final-prompt"><div class="stage-label">04 · KẾT QUẢ</div>
 <h2><span class="num">04</span>PROMPT CUỐI</h2>
 <div class="final-prompt-wrap"><div class="final-prompt-label">OUTPUT · PROMPT CUỐI</div><div class="prompt" id="prompt">Chưa có Prompt.</div></div>
 <div class="prompt-actions">
@@ -439,7 +444,7 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="status" id="promptStatus"></div>
 </div>
 
-<details class="advanced-workflow"><summary><span class="num">08</span>DESIGN VERSION<small>Lịch sử và phiên bản</small></summary><div class="advanced-body"><h2><span class="num">08</span>DESIGN VERSION</h2>
+<details class="advanced-workflow"><summary><span class="num">08</span>05 · DESIGN VERSION<small>Lịch sử và phiên bản</small></summary><div class="advanced-body"><h2><span class="num">08</span>05 · DESIGN VERSION</h2>
 <div class="versions" id="versions"></div>
 <div class="actions"><input id="versionName" type="text" placeholder="Tên phiên bản · V02"><button class="btn" id="saveVersion">Lưu phiên bản</button></div>
 <div class="compare" id="versionCompare">V01 · phiên bản hiện tại</div>
