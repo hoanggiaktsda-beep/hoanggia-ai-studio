@@ -308,10 +308,6 @@ option{background:#0d0f10;color:#f2f2f2}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
-
-/* UX · Dựng hình 4 bước */
-.workflow-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0;padding:11px 12px;border:1px solid #403724;border-radius:10px;background:linear-gradient(90deg,#11100e,#0d0f10)}.workflow-cta-copy{display:flex;flex-direction:column;gap:3px;min-width:0}.workflow-cta-copy b{font-size:9px;color:#c6a86f;letter-spacing:.08em}.workflow-cta-copy span{font-size:9px;color:#777f83}.advanced-all{margin-top:10px}.advanced-all>summary{font-size:10px}.advanced-all .advanced-body{display:grid;gap:8px}.advanced-all .advanced-body>.card{margin:0}.advanced-all .advanced-body>.advanced-workflow{margin:0}
-@media(min-width:761px){.panel#panel-render .layout{grid-template-columns:minmax(0,1fr) 300px}.panel#panel-render .layout>div:first-child{max-width:980px}}@media(max-width:760px){.workflow-cta{display:block;padding:10px}.workflow-cta .btn{width:100%;margin-top:8px}.workflow-cta-copy span{line-height:1.4}.advanced-all{margin-top:8px}.advanced-all .advanced-body{gap:7px}.advanced-all .advanced-body>.card{padding:10px}.advanced-all .advanced-body>.advanced-workflow{margin:0}.panel#panel-render .engine{margin-top:7px}.panel#panel-render .prompt{min-height:160px}.panel#panel-render .layout{display:block}}@media(max-width:480px){.workflow-cta{padding:9px}.workflow-cta-copy b{font-size:8px}.workflow-cta-copy span{font-size:8px}.panel#panel-render .prompt{min-height:145px}.advanced-all>summary{padding:10px}}
 </style>
 </head>
 <body>
@@ -342,266 +338,12 @@ option{background:#0d0f10;color:#f2f2f2}
 </header>
 
 <div class="tabs">
-<button class="tab on" data-tab="render">Dựng hình</button><button class="tab" data-tab="edit">02 · Chỉnh sửa</button><button class="tab" data-tab="camera">03 · Góc máy</button><button class="tab" data-tab="tools">04 · Công cụ</button>
-<div class="workflow-strip" aria-label="Quy trình HOANGGIA AI"><span class="workflow-step active"><b>01</b> Ý ĐỒ</span><i>→</i><span class="workflow-step"><b>02</b> ẢNH</span><i>→</i><span class="workflow-step"><b>03</b> AI SUY LUẬN</span><i>→</i><span class="workflow-step"><b>04</b> PROMPT CUỐI</span><strong id="workflowStatus">Chọn ý đồ → thêm ảnh → AI suy luận</strong></div>
+<button class="tab on" data-tab="render">01 · Dựng hình</button><button class="tab" data-tab="edit">02 · Chỉnh sửa</button><button class="tab" data-tab="camera">03 · Góc máy</button><button class="tab" data-tab="tools">04 · Công cụ</button>
+<div class="workflow-strip" aria-label="Quy trình HOANGGIA AI"><span class="workflow-step active"><b>01</b> Ý ĐỒ</span><i>→</i><span class="workflow-step active"><b>02</b> ẢNH</span><i>→</i><span class="workflow-step"><b>03</b> AI SUY LUẬN</span><i>→</i><span class="workflow-step"><b>04</b> PROMPT CUỐI</span><strong id="workflowStatus">Chọn ý đồ + ảnh → AI suy luận</strong></div>
 
 <section class="panel on" id="panel-render">
 <div class="layout">
 <div>
-<div>
-<div class="card design-intent-card"><div class="intent-head"><div><h2><span class="num">01</span>Ý ĐỒ</h2><p class="sub">Chọn cách HOANGGIA AI được phép can thiệp vào thiết kế.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
-<div class="card">
-<h2><span class="num">02</span>ẢNH & THAM CHIẾU</h2>
-<div class="uploadgrid">
-<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Click để tải ảnh</small></span><img id="scenePreview"></label>
-<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Vật liệu · phong cách · hình thái</small></span><img id="refPreview"></label>
-</div>
-</div>
-<div class="card interior-only" id="furnitureRefCard">
-<h2><span class="num">01B</span>ĐỀ XUẤT HÌNH ẢNH · NỘI THẤT ĐỒ RỜI</h2>
-<p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
-<label class="drop furniture-drop" id="furnitureRefDrop">
-<input id="furnitureRefs" type="file" accept="image/*" multiple>
-<span class="droptext">ẢNH ĐỒ RỜI / FURNITURE REFERENCE<br><small>Sofa · bàn trà · armchair · bàn ăn · ghế · đèn · tủ · decor · nhiều sản phẩm</small></span>
-<div class="furniture-previews" id="furniturePreviews"></div>
-</label>
-<div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
-<div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
-</div>
-<div class="card">
-<h2><span class="num">03</span>Ý ĐỒ BỔ SUNG <small style="font-size:8px;color:#666">Không bắt buộc</small></h2>
-<textarea id="brief" placeholder="Mô tả thêm nếu cần · ví dụ: giữ sofa, thay đá, tăng ánh sáng... (không bắt buộc)"></textarea>
-<details class="intent-advanced-fields"><summary>＋ TÙY CHỈNH CHUYÊN SÂU <small>Không bắt buộc · AI tự suy luận nếu bỏ trống</small></summary><div class="fields">
-<div class="field"><label>Không gian</label><select id="room"></select></div>
-<div class="field"><label>Trọng tâm</label><select id="focus"></select></div>
-<div class="field"><label>Phong cách</label><select id="style"></select></div>
-<div class="field"><label>Ánh sáng</label><select id="light"></select></div>
-<div class="field"><label>Vật liệu</label><select id="mat"></select></div>
-<div class="field"><label>Tỷ lệ ảnh</label><select id="ratio"><option>4:3</option><option selected>16:9</option><option>3:2</option><option>1:1</option><option>9:16</option></select></div>
-</div></details>
-
-<div class="actions"><button class="btn primary" id="magic">✦ AI suy luận & tạo Prompt</button><button class="btn" id="copy">Sao chép Prompt</button></div>
-<div class="engine"><div class="engine-head"><strong id="engineTitle">BỘ MÁY TƯ DUY · KIẾN TRÚC</strong><span id="engineHint">Một bộ não suy luận · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
-</div>
-
-<details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
-<div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
-<div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
-<div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
-<div class="field"><label>Hiện trạng / bảo toàn</label><input id="existing" type="text" placeholder="Giữ nguyên nếu không yêu cầu"></div>
-<div class="field"><label>Furniture</label><input id="furnitureLens" type="text" placeholder="Bespoke / high-end / theo reference"></div>
-<div class="field"><label>Camera</label><select id="cameraStyle"><option>Phối cảnh tự nhiên</option><option>Editorial</option><option>Hero perspective</option><option>Bird's-eye</option><option>Eye-level</option></select></div>
-<div class="field"><label>Lens</label><select id="lens"><option>28mm</option><option selected>35mm</option><option>50mm</option><option>85mm</option></select></div>
-<div class="field"><label>Bảng màu</label><input id="palette" type="text" placeholder="AI cân bằng theo reference"></div>
-<div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
-<div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
-</div>
-</div></div>
-<div>
-<div class="card design-intent-card"><div class="intent-head"><div><h2><span class="num">01</span>DESIGN INTENT</h2><p class="sub">Chọn <b>ý đồ</b>, còn HOANGGIA AI tự suy luận phần kỹ thuật.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
-<div class="card">
-<h2><span class="num">02</span>ẢNH</h2>
-<div class="uploadgrid">
-<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Click để tải ảnh</small></span><img id="scenePreview"></label>
-<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Vật liệu · phong cách · hình thái</small></span><img id="refPreview"></label>
-</div>
-</div>
-<div class="card interior-only" id="furnitureRefCard">
-<h2><span class="num">01B</span>ĐỀ XUẤT HÌNH ẢNH · NỘI THẤT ĐỒ RỜI</h2>
-<p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
-<label class="drop furniture-drop" id="furnitureRefDrop">
-<input id="furnitureRefs" type="file" accept="image/*" multiple>
-<span class="droptext">ẢNH ĐỒ RỜI / FURNITURE REFERENCE<br><small>Sofa · bàn trà · armchair · bàn ăn · ghế · đèn · tủ · decor · nhiều sản phẩm</small></span>
-<div class="furniture-previews" id="furniturePreviews"></div>
-</label>
-<div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
-<div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
-</div>
-<div class="card">
-<h2><span class="num">03</span>Ý ĐỒ BỔ SUNG <small style="font-size:8px;color:#666">Không bắt buộc</small></h2>
-<textarea id="brief" placeholder="Mô tả thêm nếu cần · ví dụ: giữ sofa, thay đá, tăng ánh sáng... (không bắt buộc)"></textarea>
-<details class="intent-advanced-fields"><summary>＋ TÙY CHỈNH CHUYÊN SÂU <small>Không bắt buộc · AI tự suy luận nếu bỏ trống</small></summary><div class="fields">
-<div class="field"><label>Không gian</label><select id="room"></select></div>
-<div class="field"><label>Trọng tâm</label><select id="focus"></select></div>
-<div class="field"><label>Phong cách</label><select id="style"></select></div>
-<div class="field"><label>Ánh sáng</label><select id="light"></select></div>
-<div class="field"><label>Vật liệu</label><select id="mat"></select></div>
-<div class="field"><label>Tỷ lệ ảnh</label><select id="ratio"><option>4:3</option><option selected>16:9</option><option>3:2</option><option>1:1</option><option>9:16</option></select></div>
-</div></details>
-
-<div class="actions"><button class="btn primary" id="magic">✦ AI suy luận & tạo Prompt</button><button class="btn" id="copy">Sao chép Prompt</button></div>
-<div class="engine"><div class="engine-head"><strong id="engineTitle">BỘ MÁY TƯ DUY · KIẾN TRÚC</strong><span id="engineHint">Một bộ não suy luận · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
-</div>
-
-<details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
-<div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
-<div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
-<div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
-<div class="field"><label>Hiện trạng / bảo toàn</label><input id="existing" type="text" placeholder="Giữ nguyên nếu không yêu cầu"></div>
-<div class="field"><label>Furniture</label><input id="furnitureLens" type="text" placeholder="Bespoke / high-end / theo reference"></div>
-<div class="field"><label>Camera</label><select id="cameraStyle"><option>Phối cảnh tự nhiên</option><option>Editorial</option><option>Hero perspective</option><option>Bird's-eye</option><option>Eye-level</option></select></div>
-<div class="field"><label>Lens</label><select id="lens"><option>28mm</option><option selected>35mm</option><option>50mm</option><option>85mm</option></select></div>
-<div class="field"><label>Bảng màu</label><input id="palette" type="text" placeholder="AI cân bằng theo reference"></div>
-<div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
-<div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
-</div>
-</div></div>
-<div>
-<div class="card design-intent-card"><div class="intent-head"><div><h2><span class="num">01</span>DESIGN INTENT</h2><p class="sub">Chọn <b>ý đồ</b>, còn HOANGGIA AI tự suy luận phần kỹ thuật.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
-<div class="card">
-<h2><span class="num">02</span>ẢNH & THAM CHIẾU</h2>
-<div class="uploadgrid">
-<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Click để tải ảnh</small></span><img id="scenePreview"></label>
-<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Vật liệu · phong cách · hình thái</small></span><img id="refPreview"></label>
-</div>
-</div>
-<div class="card interior-only" id="furnitureRefCard">
-<h2><span class="num">01B</span>ĐỀ XUẤT HÌNH ẢNH · NỘI THẤT ĐỒ RỜI</h2>
-<p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
-<label class="drop furniture-drop" id="furnitureRefDrop">
-<input id="furnitureRefs" type="file" accept="image/*" multiple>
-<span class="droptext">ẢNH ĐỒ RỜI / FURNITURE REFERENCE<br><small>Sofa · bàn trà · armchair · bàn ăn · ghế · đèn · tủ · decor · nhiều sản phẩm</small></span>
-<div class="furniture-previews" id="furniturePreviews"></div>
-</label>
-<div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
-<div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
-</div>
-<div class="card">
-<h2><span class="num">03</span>MÔ TẢ <small style="font-size:8px;color:#666">Không bắt buộc</small></h2>
-<textarea id="brief" placeholder="Mô tả thêm nếu cần · ví dụ: giữ sofa, thay đá, tăng ánh sáng... (không bắt buộc)"></textarea>
-<details class="intent-advanced-fields"><summary>＋ TÙY CHỈNH CHUYÊN SÂU <small>Không bắt buộc · AI tự suy luận nếu bỏ trống</small></summary><div class="fields">
-<div class="field"><label>Không gian</label><select id="room"></select></div>
-<div class="field"><label>Trọng tâm</label><select id="focus"></select></div>
-<div class="field"><label>Phong cách</label><select id="style"></select></div>
-<div class="field"><label>Ánh sáng</label><select id="light"></select></div>
-<div class="field"><label>Vật liệu</label><select id="mat"></select></div>
-<div class="field"><label>Tỷ lệ ảnh</label><select id="ratio"><option>4:3</option><option selected>16:9</option><option>3:2</option><option>1:1</option><option>9:16</option></select></div>
-</div></details>
-
-<div class="engine"><div class="engine-head"><strong id="engineTitle">BỘ MÁY TƯ DUY · KIẾN TRÚC</strong><span id="engineHint">Một bộ não suy luận · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
-</div>
-
-<details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
-<div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
-<div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
-<div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
-<div class="field"><label>Hiện trạng / bảo toàn</label><input id="existing" type="text" placeholder="Giữ nguyên nếu không yêu cầu"></div>
-<div class="field"><label>Furniture</label><input id="furnitureLens" type="text" placeholder="Bespoke / high-end / theo reference"></div>
-<div class="field"><label>Camera</label><select id="cameraStyle"><option>Phối cảnh tự nhiên</option><option>Editorial</option><option>Hero perspective</option><option>Bird's-eye</option><option>Eye-level</option></select></div>
-<div class="field"><label>Lens</label><select id="lens"><option>28mm</option><option selected>35mm</option><option>50mm</option><option>85mm</option></select></div>
-<div class="field"><label>Bảng màu</label><input id="palette" type="text" placeholder="AI cân bằng theo reference"></div>
-<div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
-<div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
-</div>
-</div></div>
-<div class="workflow-cta"><div class="workflow-cta-copy"><b>03 · AI SUY LUẬN</b><span>Design Brain → Prompt Compiler · một Prompt cuối.</span></div><button class="btn primary" id="magic">✦ AI SUY LUẬN & TẠO PROMPT</button></div>
-<div>
-<div class="card design-intent-card"><div class="intent-head"><div><h2><span class="num">01</span>DESIGN INTENT</h2><p class="sub">Chọn <b>ý đồ</b>, còn HOANGGIA AI tự suy luận phần kỹ thuật.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
-<div class="card">
-<h2><span class="num">02</span>ẢNH & THAM CHIẾU</h2>
-<div class="uploadgrid">
-<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Click để tải ảnh</small></span><img id="scenePreview"></label>
-<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Vật liệu · phong cách · hình thái</small></span><img id="refPreview"></label>
-</div>
-</div>
-<div class="card interior-only" id="furnitureRefCard">
-<h2><span class="num">01B</span>ĐỀ XUẤT HÌNH ẢNH · NỘI THẤT ĐỒ RỜI</h2>
-<p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
-<label class="drop furniture-drop" id="furnitureRefDrop">
-<input id="furnitureRefs" type="file" accept="image/*" multiple>
-<span class="droptext">ẢNH ĐỒ RỜI / FURNITURE REFERENCE<br><small>Sofa · bàn trà · armchair · bàn ăn · ghế · đèn · tủ · decor · nhiều sản phẩm</small></span>
-<div class="furniture-previews" id="furniturePreviews"></div>
-</label>
-<div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
-<div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
-</div>
-<div class="card">
-<h2><span class="num">03</span>Ý ĐỒ BỔ SUNG <small style="font-size:8px;color:#666">Không bắt buộc</small></h2>
-<textarea id="brief" placeholder="Mô tả thêm nếu cần · ví dụ: giữ sofa, thay đá, tăng ánh sáng... (không bắt buộc)"></textarea>
-<details class="intent-advanced-fields"><summary>＋ TÙY CHỈNH CHUYÊN SÂU <small>Không bắt buộc · AI tự suy luận nếu bỏ trống</small></summary><div class="fields">
-<div class="field"><label>Không gian</label><select id="room"></select></div>
-<div class="field"><label>Trọng tâm</label><select id="focus"></select></div>
-<div class="field"><label>Phong cách</label><select id="style"></select></div>
-<div class="field"><label>Ánh sáng</label><select id="light"></select></div>
-<div class="field"><label>Vật liệu</label><select id="mat"></select></div>
-<div class="field"><label>Tỷ lệ ảnh</label><select id="ratio"><option>4:3</option><option selected>16:9</option><option>3:2</option><option>1:1</option><option>9:16</option></select></div>
-</div></details>
-
-<div class="actions"><button class="btn primary" id="magic">✦ AI suy luận & tạo Prompt</button><button class="btn" id="copy">Sao chép Prompt</button></div>
-<div class="engine"><div class="engine-head"><strong id="engineTitle">AI SUY LUẬN</strong><span id="engineHint">Design Brain → Prompt Compiler</span></div><div class="flow" id="flow"></div></div>
-</div>
-
-<details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
-<div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
-<div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
-<div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
-<div class="field"><label>Hiện trạng / bảo toàn</label><input id="existing" type="text" placeholder="Giữ nguyên nếu không yêu cầu"></div>
-<div class="field"><label>Furniture</label><input id="furnitureLens" type="text" placeholder="Bespoke / high-end / theo reference"></div>
-<div class="field"><label>Camera</label><select id="cameraStyle"><option>Phối cảnh tự nhiên</option><option>Editorial</option><option>Hero perspective</option><option>Bird's-eye</option><option>Eye-level</option></select></div>
-<div class="field"><label>Lens</label><select id="lens"><option>28mm</option><option selected>35mm</option><option>50mm</option><option>85mm</option></select></div>
-<div class="field"><label>Bảng màu</label><input id="palette" type="text" placeholder="AI cân bằng theo reference"></div>
-<div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
-<div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
-</div>
-</div></div>
-<div class="card">
-<h2><span class="num">04</span>PROMPT CUỐI</h2>
-<div class="prompt" id="prompt">Chưa có Prompt.</div>
-<div class="prompt-actions">
-<input id="promptEdit" type="text" placeholder="Sửa nhanh: thay marble bằng travertine · Camera: 50mm">
-<button class="btn" id="applyEdit">Áp dụng sửa</button><button class="btn" id="copyPrompt">Sao chép</button><button class="btn" id="clearPrompt">Xoá</button>
-</div>
-<div class="status" id="promptStatus"></div>
-</div>
-<details class="advanced-workflow advanced-all"><summary><span class="num">⚙</span>TÙY CHỈNH CHUYÊN SÂU<small>Chỉ mở khi cần · AI tự suy luận nếu bỏ trống</small></summary><div class="advanced-body"><div>
-<div class="card design-intent-card"><div class="intent-head"><div><h2><span class="num">01</span>DESIGN INTENT</h2><p class="sub">Chọn <b>ý đồ</b>, còn HOANGGIA AI tự suy luận phần kỹ thuật.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
-<div class="card">
-<h2><span class="num">02</span>ẢNH & THAM CHIẾU</h2>
-<div class="uploadgrid">
-<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Click để tải ảnh</small></span><img id="scenePreview"></label>
-<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Vật liệu · phong cách · hình thái</small></span><img id="refPreview"></label>
-</div>
-</div>
-<div class="card interior-only" id="furnitureRefCard">
-<h2><span class="num">02A</span>ĐỒ RỜI · REFERENCE INTELLIGENCE</h2>
-<p class="sub">Thêm một hoặc nhiều ảnh đồ rời muốn đưa vào không gian. HOANGGIA AI sẽ tổng hợp chúng vào Prompt nội thất. Có thể bỏ trống.</p>
-<label class="drop furniture-drop" id="furnitureRefDrop">
-<input id="furnitureRefs" type="file" accept="image/*" multiple>
-<span class="droptext">ẢNH ĐỒ RỜI / FURNITURE REFERENCE<br><small>Sofa · bàn trà · armchair · bàn ăn · ghế · đèn · tủ · decor · nhiều sản phẩm</small></span>
-<div class="furniture-previews" id="furniturePreviews"></div>
-</label>
-<div class="furniture-hint">Mỗi ảnh là một sản phẩm tham chiếu riêng. Hãy xác định <b>đó là món gì</b>, <b>đặt ở đâu</b>, <b>làm gì với nó trong ảnh hiện trạng</b> và <b>có thay vật liệu/màu hay giữ nguyên</b>. Các chỉ dẫn này sẽ được tổng hợp vào Prompt nội thất.</div><div class="actions furniture-ai-actions"><button class="btn primary" id="analyzeFurniture">✦ Phân tích đồ rời bằng AI</button><span class="status" id="furnitureAIStatus">Vision Engine · chưa phân tích</span></div><div class="furniture-ai-schema"><small>AI sẽ đọc: loại sản phẩm · form · tỷ lệ · vật liệu · màu · chân · tay vịn / tựa · đường nét · ngôn ngữ thiết kế · đặc điểm nhận diện.</small></div>
-<div class="status" id="furnitureRefStatus">Chưa chọn ảnh đồ rời · Prompt vẫn hoạt động bình thường.</div>
-</div>
-<div class="card">
-<h2><span class="num">03</span>Ý ĐỒ BỔ SUNG <small style="font-size:8px;color:#666">Không bắt buộc</small></h2>
-<textarea id="brief" placeholder="Mô tả thêm nếu cần · ví dụ: giữ sofa, thay đá, tăng ánh sáng... (không bắt buộc)"></textarea>
-<details class="intent-advanced-fields"><summary>＋ TÙY CHỈNH CHUYÊN SÂU <small>Không bắt buộc · AI tự suy luận nếu bỏ trống</small></summary><div class="fields">
-<div class="field"><label>Không gian</label><select id="room"></select></div>
-<div class="field"><label>Trọng tâm</label><select id="focus"></select></div>
-<div class="field"><label>Phong cách</label><select id="style"></select></div>
-<div class="field"><label>Ánh sáng</label><select id="light"></select></div>
-<div class="field"><label>Vật liệu</label><select id="mat"></select></div>
-<div class="field"><label>Tỷ lệ ảnh</label><select id="ratio"><option>4:3</option><option selected>16:9</option><option>3:2</option><option>1:1</option><option>9:16</option></select></div>
-</div></details>
-
-<div class="actions"><button class="btn primary" id="magic">✦ AI suy luận & tạo Prompt</button><button class="btn" id="copy">Sao chép Prompt</button></div>
-<div class="engine"><div class="engine-head"><strong id="engineTitle">BỘ MÁY TƯ DUY · KIẾN TRÚC</strong><span id="engineHint">Một bộ não suy luận · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
-</div>
-
-<details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
-<div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
-<div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
-<div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
-<div class="field"><label>Hiện trạng / bảo toàn</label><input id="existing" type="text" placeholder="Giữ nguyên nếu không yêu cầu"></div>
-<div class="field"><label>Furniture</label><input id="furnitureLens" type="text" placeholder="Bespoke / high-end / theo reference"></div>
-<div class="field"><label>Camera</label><select id="cameraStyle"><option>Phối cảnh tự nhiên</option><option>Editorial</option><option>Hero perspective</option><option>Bird's-eye</option><option>Eye-level</option></select></div>
-<div class="field"><label>Lens</label><select id="lens"><option>28mm</option><option selected>35mm</option><option>50mm</option><option>85mm</option></select></div>
-<div class="field"><label>Bảng màu</label><input id="palette" type="text" placeholder="AI cân bằng theo reference"></div>
-<div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
-<div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
-</div>
-</div></div><div>
 <div class="card design-intent-card"><div class="intent-head"><div><h2><span class="num">01</span>DESIGN INTENT</h2><p class="sub">Chọn <b>ý đồ</b>, còn HOANGGIA AI tự suy luận phần kỹ thuật.</p></div><span class="intent-ai">AI DIRECTOR · READY</span></div><div class="intent-grid"><button class="intent-option" data-intent="preserve"><span>01</span><b>GIỮ NGUYÊN</b><small>Bảo toàn hiện trạng</small></button><button class="intent-option on" data-intent="refine"><span>02</span><b>NÂNG CẤP</b><small>Tinh chỉnh có kiểm soát</small></button><button class="intent-option" data-intent="develop"><span>03</span><b>PHÁT TRIỂN</b><small>AI đề xuất sâu hơn</small></button><button class="intent-option" data-intent="art"><span>04</span><b>ART DIRECTION</b><small>Cảm xúc · cinematic</small></button></div><div class="intent-summary"><span id="intentSummary">NÂNG CẤP CÓ KIỂM SOÁT</span><span>→</span><b id="intentInference">Công năng · vật liệu · ánh sáng · camera</b></div></div>
 <div class="card">
 <h2><span class="num">02</span>ẢNH & THAM CHIẾU</h2>
@@ -649,20 +391,23 @@ option{background:#0d0f10;color:#f2f2f2}
 <div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
 <div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
 </div>
-</div></div><details class="advanced-workflow"><summary><span class="num">04</span>MATERIAL INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid5">
+</div></div></details>
+<details class="advanced-workflow"><summary><span class="num">04</span>MATERIAL INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid5">
 <div class="intel-cell"><small>BASE</small><b id="miBase">AI phân tích reference</b></div>
 <div class="intel-cell"><small>PALETTE</small><b id="miPalette">AI cân bằng</b></div>
 <div class="intel-cell"><small>SURFACE</small><b id="miSurface">Theo reference</b></div>
 <div class="intel-cell"><small>ROUGHNESS / SCALE</small><b id="miRough">—</b></div>
 <div class="intel-cell"><small>REFLECTION / DETAIL</small><b id="miReflect">—</b></div>
 </div>
-</div></div></details><details class="advanced-workflow"><summary><span class="num">05</span>CAMERA STORYTELLING<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid4">
+</div></div></details>
+<details class="advanced-workflow"><summary><span class="num">05</span>CAMERA STORYTELLING<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid4">
 <div class="story"><small>WHAT</small><b id="csStory">—</b></div>
 <div class="story"><small>SHOT</small><b id="csShot">—</b></div>
 <div class="story"><small>WHY</small><b id="csReason">—</b></div>
 <div class="story"><small>LENS</small><b id="csLens">35mm</b></div>
 </div>
-</div></div></details><details class="advanced-workflow"><summary><span class="num">06</span>BẢO TOÀN & QUYỀN CAN THIỆP AI<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="guard">
+</div></div></details>
+<details class="advanced-workflow"><summary><span class="num">06</span>BẢO TOÀN & QUYỀN CAN THIỆP AI<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="guard">
 <label><input type="checkbox" data-guard="architecture" checked>Kiến trúc</label>
 <label><input type="checkbox" data-guard="camera" checked>Camera</label>
 <label><input type="checkbox" data-guard="furniture" checked>Furniture</label>
@@ -671,23 +416,26 @@ option{background:#0d0f10;color:#f2f2f2}
 <label><input type="checkbox" data-guard="openings">Cửa / cửa sổ</label>
 </div>
 <div class="mode"><button data-mode="LOCK" class="on">LOCK<small>Giữ nguyên</small></button><button data-mode="EDIT">EDIT<small>Chỉ sửa phần yêu cầu</small></button><button data-mode="FREE">FREE<small>Cho phép đề xuất</small></button></div>
-</div></div></details><details class="advanced-workflow"><summary><span class="num">08</span>DESIGN VERSION<small>Lịch sử và phiên bản</small></summary><div class="advanced-body"><h2><span class="num">08</span>DESIGN VERSION</h2>
+</div></div></details>
+<div class="card">
+<h2><span class="num">07</span>MASTER PROMPT</h2>
+<div class="prompt" id="prompt">Chưa có Prompt.</div>
+<div class="prompt-actions">
+<input id="promptEdit" type="text" placeholder="Sửa nhanh: thay marble bằng travertine · Camera: 50mm">
+<button class="btn" id="applyEdit">Áp dụng sửa</button><button class="btn" id="copyPrompt">Sao chép</button><button class="btn" id="clearPrompt">Xoá</button>
+</div>
+<div class="status" id="promptStatus"></div>
+</div>
+
+<details class="advanced-workflow"><summary><span class="num">08</span>DESIGN VERSION<small>Lịch sử và phiên bản</small></summary><div class="advanced-body"><h2><span class="num">08</span>DESIGN VERSION</h2>
 <div class="versions" id="versions"></div>
 <div class="actions"><input id="versionName" type="text" placeholder="Tên phiên bản · V02"><button class="btn" id="saveVersion">Lưu phiên bản</button></div>
 <div class="compare" id="versionCompare">V01 · phiên bản hiện tại</div>
-</div></div></details></div></details>
-
+</div></div></details>
 </div>
-
 
 <aside>
 <div class="card"><h2>DESIGN STATE</h2><div class="metrics"><div class="metric"><small>LĨNH VỰC</small><b id="mDomain">Kiến trúc</b></div><div class="metric"><small>KHÔNG GIAN</small><b id="mRoom">Nhà ở</b></div><div class="metric"><small>VẬT LIỆU</small><b id="mMat">AI phân tích</b></div><div class="metric"><small>CAMERA</small><b id="mCamera">35mm</b></div></div></div>
-<div class="card"><h2>DESIGN BRAIN</h2><p class="sub">Suy luận nội bộ, không đẩy reasoning dài vào Prompt cuối.</p><div id="brainSummary" class="compare">Đang đồng bộ Design State…</div></div>
-<div class="card"><h2>ARCHITECTURAL FEASIBILITY</h2><div id="feasibility" class="compare">Chưa đủ dữ liệu để kiểm tra.</div></div>
-<div class="card"><h2>RENDER OUTPUT</h2><div class="result">Khu vực dành cho ảnh render.<br>HOANGGIA AI hiện tập trung vào Design Brain + Prompt Compiler.</div></div>
-</aside>
-</div>
-</section</div><div class="metric"><small>KHÔNG GIAN</small><b id="mRoom">Nhà ở</b></div><div class="metric"><small>VẬT LIỆU</small><b id="mMat">AI phân tích</b></div><div class="metric"><small>CAMERA</small><b id="mCamera">35mm</b></div></div></div>
 <div class="card"><h2>DESIGN BRAIN</h2><p class="sub">Suy luận nội bộ, không đẩy reasoning dài vào Prompt cuối.</p><div id="brainSummary" class="compare">Đang đồng bộ Design State…</div></div>
 <div class="card"><h2>ARCHITECTURAL FEASIBILITY</h2><div id="feasibility" class="compare">Chưa đủ dữ liệu để kiểm tra.</div></div>
 <div class="card"><h2>RENDER OUTPUT</h2><div class="result">Khu vực dành cho ảnh render.<br>HOANGGIA AI hiện tập trung vào Design Brain + Prompt Compiler.</div></div>
