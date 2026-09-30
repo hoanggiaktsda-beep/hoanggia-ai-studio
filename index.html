@@ -153,6 +153,17 @@ select option:disabled{
 .hg-statecell b{font-size:9px;color:#f4f1ea;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
 .hg-state-live{color:#d7a65b!important}
 @media(max-width:900px){.hg-statebar{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.hg-statebar{grid-template-columns:1fr 1fr}}
+</style><style id="hg-decision-css">
+.hg-decision{margin:8px 0 12px;padding:12px;border:1px solid #292d31;border-radius:10px;background:#0d0f11}
+.hg-decision-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.hg-decision-head strong{font-size:10px}.hg-decision-head span{font-size:8px;color:#d7a65b}
+.hg-decision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.hg-decision-card{border:1px solid #292d31;border-radius:8px;padding:9px;background:#111315}
+.hg-decision-card label{display:block;font-size:7px;color:#858a91;letter-spacing:.07em;margin-bottom:5px}
+.hg-decision-card select,.hg-decision-card input{width:100%;box-sizing:border-box;background:#0a0b0c;color:#f4f1ea;border:1px solid #292d31;border-radius:6px;padding:6px;font-size:9px}
+.hg-decision-card p{font-size:8px;color:#858a91;line-height:1.4;margin:5px 0 0}
+.hg-decision-card em{font-style:normal;color:#d7a65b}
+@media(max-width:650px){.hg-decision-grid{grid-template-columns:1fr}}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -667,5 +678,31 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  }
  boot();
  window.HG_SYNC_DESIGN_STATE=sync;
+})();
+</script><script id="hg-decision-engine">
+(function(){
+ const $=id=>document.getElementById(id);
+ const v=id=>$(id)?.value||'';
+ function update(){
+  const s=window.HG_DESIGN_STATE||{},i=s.inputs||{},room=i.room||'',dim=i.dimensions||'',style=i.style||'',mat=i.mat||'',light=i.light||'',lens=i.lens||'';
+  const nums=(dim.match(/\d+(?:[.,]\d+)?/g)||[]).map(Number),area=nums.length>1?nums[0]*nums[1]:0;
+  const d=s.domain||'Nội thất';
+  let f=area>=30?'Cân bằng · ưu tiên khoảng thở':area&&area<18?'Gọn · ưu tiên khoảng thở':'Tự động theo không gian';
+  let fc=area>=30?'Không gian đủ rộng để tạo sofa/bàn có hierarchy và khoảng thở.':area&&area<18?'Giảm mật độ đồ để tránh nặng không gian.':'Chưa đủ kích thước để quyết định chính xác.';
+  let cir=room==='Phòng khách'?'Ưu tiên rộng':'Tự động theo công năng';
+  let cn=room==='Phòng khách'?'Mục tiêu khoảng chính 900–1200mm khi khả thi.':'Kiểm soát lối đi, vùng thao tác và xung đột cửa.';
+  let mh=mat?'AI tự phân cấp':'AI tự phân cấp',mn=mat?'Vật liệu chính + vật liệu phụ + điểm nhấn theo độ tương phản.':'Cần vật liệu để tạo hierarchy cụ thể.';
+  let li=light?'AI tự tổ chức':'AI tự tổ chức',ln=light?'Daylight → ambient → accent → decorative.':'Có thể để AI suy luận theo phong cách và không gian.';
+  let ca=lens?(lens.includes('28')?'28mm · rộng tự nhiên':lens.includes('50')?'50mm · tập trung vật thể':'35mm · cân bằng'):(area&&area<18?'28mm · rộng tự nhiên':area>=30?'35mm · cân bằng':'AI tự chọn');
+  let can= lens?'Tôn trọng tiêu cự đã chọn.':'Suy ra từ diện tích, khoảng lùi và hierarchy.';
+  const set=(id,x,n)=>{$(id).value=x;$(id+'Note').innerHTML=n};
+  set('decFurniture',f,fc);set('decCirculation',cir,cn);set('decMaterial',mh,mn);set('decLight',li,ln);set('decCamera',ca,can);
+  const out={furniture:f,circulation:cir,material:mh,lighting:li,camera:ca,preserve:v('decPreserve')};
+  window.HG_DESIGN_STATE.decisions=out;window.dispatchEvent(new CustomEvent('hg:design-decision',{detail:out}));
+  $('hgDecisionStatus').textContent='Đã suy luận · có thể chỉnh sửa';
+ }
+ ['decFurniture','decCirculation','decMaterial','decLight','decCamera','decPreserve'].forEach(id=>document.addEventListener('change',e=>{if(e.target.id===id){if(window.HG_DESIGN_STATE)window.HG_DESIGN_STATE.decisions[id.replace('dec','').toLowerCase()]=e.target.value;window.dispatchEvent(new CustomEvent('hg:design-decision',{detail:window.HG_DESIGN_STATE.decisions}))}}));
+ window.addEventListener('hg:design-state',()=>setTimeout(update,30));
+ window.addEventListener('load',()=>setTimeout(update,1300));
 })();
 </script></body></html>
