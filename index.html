@@ -178,6 +178,66 @@ option{background:#0d0f10;color:#f2f2f2}
   .music-dock{left:6px;right:6px;bottom:calc(6px + var(--safe-bottom));width:auto}
 }
 
+/* Mobile density refinement · compact without sacrificing touch */
+@media (max-width:760px){
+  .main{padding:8px 8px calc(104px + var(--safe-bottom))}
+  .top{display:block}
+  h1{font-size:clamp(23px,7vw,28px);margin:5px 0}
+  .intro{font-size:11px;line-height:1.4}
+  .tabs{margin:10px -2px 9px;padding:0 2px}
+  .tab{padding:7px 9px}
+  .card{padding:10px;margin-bottom:7px;border-radius:9px}
+  .card h2{font-size:12px;margin-bottom:7px}
+  .sub{font-size:10px;line-height:1.35;margin:-2px 0 6px}
+  .fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-top:6px}
+  .field{padding:7px;border-radius:7px}
+  .field label{font-size:8px;margin-bottom:3px;line-height:1.2}
+  .field select,.field input,.field textarea{font-size:10px}
+  .uploadgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .upload-zone{min-height:82px;padding:8px;gap:4px}
+  .upload-zone span{font-size:9px}.upload-zone small{font-size:7px}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .grid5{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .grid5 .intel-cell:last-child{grid-column:1/-1}
+  .guard{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .guard label{padding:7px}
+  .intent-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .intent-option{padding:8px}
+  .intent-option b{font-size:9px;margin:3px 0}.intent-option small{font-size:7px;line-height:1.25}
+  .intent-summary{margin-top:6px;padding:6px;font-size:7px}
+  .advanced-workflow{margin:6px 0}.advanced-workflow summary{padding:8px 9px;font-size:8px}.advanced-body{padding:0 8px 8px}
+  .camera-intel{gap:6px}
+  .camera-hierarchy{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .camera-step{padding:7px}.camera-step span,.camera-step label{font-size:7px}.camera-step select{font-size:9px}
+  .camera-derived{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-top:6px}
+  .camera-derived>div{padding:6px}.camera-derived small{font-size:6px}.camera-derived b{font-size:9px}
+  .camera-control{padding:8px}.camera-grid{gap:5px}.camera-grid select,.camera-grid input{min-height:32px}
+  .camera-metrics{gap:5px}.camera-metric{padding:6px}
+  .camera-actions{margin-top:6px;gap:5px}
+  .camera-family-tabs{gap:4px;margin:6px 0}.camera-family{padding:7px 5px}
+  .camera-story-grid{gap:6px}.camera-story-panel{padding:8px}
+  .camera-story-head{margin-bottom:6px}.camera-subfolders{gap:4px;margin:6px 0}
+  .camera-subfolder{padding:7px}.camera-story-fields{gap:5px}
+  .camera-story-field{padding:6px}.camera-story-field select{min-height:32px}
+  .camera-director-grid{gap:5px}.camera-director-grid>div{padding:6px}
+  .view-list{gap:5px;margin-top:6px}.view-chip{padding:6px}
+  .prompt{min-height:125px;max-height:38svh}
+  .workflow-strip{margin:-1px 0 7px;padding:6px 8px}
+  .music-dock{left:5px;right:5px;bottom:calc(5px + var(--safe-bottom))}
+}
+@media (max-width:420px){
+  .main{padding-left:6px;padding-right:6px}
+  .card{padding:8px;margin-bottom:6px}
+  .fields,.grid4,.grid5,.guard,.intent-grid{gap:4px}
+  .field{padding:6px}
+  .field label{font-size:7px}
+  .field select,.field input,.field textarea{font-size:9px}
+  .uploadgrid{gap:4px}.upload-zone{min-height:72px}
+  .camera-hierarchy{gap:4px}.camera-derived{gap:4px}
+  .camera-step{padding:6px}.camera-step select{font-size:8px}
+  .camera-subfolders{gap:3px}.camera-subfolder{padding:6px}
+}
+
 /* Very small phones: prioritize one-hand use and eliminate horizontal pressure */
 @media (max-width:420px){
   .main{padding-left:8px;padding-right:8px}
