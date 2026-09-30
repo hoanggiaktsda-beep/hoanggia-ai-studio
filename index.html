@@ -50,7 +50,42 @@ textarea,select,input[type=text]{width:100%;background:#0c0e10;color:#eee;border
 </style><style id="hg-furniture-css">
 .fr-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:10px}.fr-box{border:1px solid #292d31;background:#0b0d0f;border-radius:10px;padding:12px}.fr-box h3{margin:0 0 9px;font-size:10px}.fr-upload{height:150px;border:1px dashed #3b4046;border-radius:9px;display:flex;align-items:center;justify-content:center;text-align:center;color:#6f757b;position:relative;overflow:hidden}.fr-upload input{display:none}.fr-upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none;background:#08090a}.fr-upload.has img{display:block}.fr-upload.has .fr-copy{display:none}.fr-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.fr-controls label{font-size:9px;color:#70767c}.fr-controls select{margin-top:4px}.fr-locks{display:grid;gap:6px;margin-top:8px}.fr-locks label{padding:7px;border:1px solid #292d31;border-radius:7px;color:#aaa;font-size:9px}.fr-locks input{accent-color:var(--gold);margin-right:6px}.fr-output{white-space:pre-wrap;font:10px/1.65 ui-monospace,monospace;color:#a7abb0;min-height:180px}.fr-badge{display:inline-block;border:1px solid #5a472c;color:#d7a65b;border-radius:99px;padding:4px 7px;font-size:8px;margin-bottom:8px}
 @media(max-width:800px){.fr-grid{grid-template-columns:1fr}}
-</style></head>
+<style id="hg-dark-select-css">
+/* Đồng bộ toàn bộ ô lựa chọn về giao diện nền đen / chữ trắng */
+select,
+select option,
+select optgroup{
+  background-color:#0c0e10 !important;
+  color:#f4f1ea !important;
+  color-scheme:dark;
+}
+select{
+  border-color:#292d31 !important;
+}
+select:hover{
+  border-color:#454b52 !important;
+}
+select:focus{
+  background-color:#0c0e10 !important;
+  color:#fff !important;
+  border-color:#656a70 !important;
+  box-shadow:0 0 0 1px #656a70;
+  outline:none;
+}
+select option:checked,
+select option:hover{
+  background-color:#17191c !important;
+  color:#fff !important;
+}
+select option:disabled{
+  background-color:#0c0e10 !important;
+  color:#666 !important;
+}
+.field select{
+  color:#f4f1ea !important;
+  background-color:#0c0e10 !important;
+}
+</style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
 <div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
