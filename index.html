@@ -154,9 +154,7 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 <div class="engine"><div class="engine-head"><strong id="engineTitle">BỘ MÁY TƯ DUY · KIẾN TRÚC</strong><span id="engineHint">Một bộ não suy luận · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
 </div>
 
-<div class="card">
-<h2><span class="num">03</span>DESIGN INTELLIGENCE</h2>
-<div class="fields">
+<details class="advanced-workflow"><summary><span class="num">03</span>DESIGN INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="fields">
 <div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
 <div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
 <div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
@@ -168,32 +166,23 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 <div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
 <div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
 </div>
-</div>
-
-<div class="card">
-<h2><span class="num">04</span>MATERIAL INTELLIGENCE</h2>
-<div class="grid5">
+</div></div></details>
+<details class="advanced-workflow"><summary><span class="num">04</span>MATERIAL INTELLIGENCE<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid5">
 <div class="intel-cell"><small>BASE</small><b id="miBase">AI phân tích reference</b></div>
 <div class="intel-cell"><small>PALETTE</small><b id="miPalette">AI cân bằng</b></div>
 <div class="intel-cell"><small>SURFACE</small><b id="miSurface">Theo reference</b></div>
 <div class="intel-cell"><small>ROUGHNESS / SCALE</small><b id="miRough">—</b></div>
 <div class="intel-cell"><small>REFLECTION / DETAIL</small><b id="miReflect">—</b></div>
 </div>
-</div>
-
-<div class="card">
-<h2><span class="num">05</span>CAMERA STORYTELLING</h2>
-<div class="grid4">
+</div></div></details>
+<details class="advanced-workflow"><summary><span class="num">05</span>CAMERA STORYTELLING<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="grid4">
 <div class="story"><small>WHAT</small><b id="csStory">—</b></div>
 <div class="story"><small>SHOT</small><b id="csShot">—</b></div>
 <div class="story"><small>WHY</small><b id="csReason">—</b></div>
 <div class="story"><small>LENS</small><b id="csLens">35mm</b></div>
 </div>
-</div>
-
-<div class="card">
-<h2><span class="num">06</span>BẢO TOÀN & QUYỀN CAN THIỆP AI</h2>
-<div class="guard">
+</div></div></details>
+<details class="advanced-workflow"><summary><span class="num">06</span>BẢO TOÀN & QUYỀN CAN THIỆP AI<small>Thông số chuyên sâu · AI đã tự suy luận</small></summary><div class="advanced-body"><div class="guard">
 <label><input type="checkbox" data-guard="architecture" checked>Kiến trúc</label>
 <label><input type="checkbox" data-guard="camera" checked>Camera</label>
 <label><input type="checkbox" data-guard="furniture" checked>Furniture</label>
@@ -202,8 +191,7 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 <label><input type="checkbox" data-guard="openings">Cửa / cửa sổ</label>
 </div>
 <div class="mode"><button data-mode="LOCK" class="on">LOCK<small>Giữ nguyên</small></button><button data-mode="EDIT">EDIT<small>Chỉ sửa phần yêu cầu</small></button><button data-mode="FREE">FREE<small>Cho phép đề xuất</small></button></div>
-</div>
-
+</div></div></details>
 <div class="card">
 <h2><span class="num">07</span>MASTER PROMPT</h2>
 <div class="prompt" id="prompt">Chưa có Prompt.</div>
@@ -214,12 +202,11 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 <div class="status" id="promptStatus"></div>
 </div>
 
-<div class="card">
-<h2><span class="num">08</span>DESIGN VERSION</h2>
+<details class="advanced-workflow"><summary><span class="num">08</span>DESIGN VERSION<small>Lịch sử và phiên bản</small></summary><div class="advanced-body"><h2><span class="num">08</span>DESIGN VERSION</h2>
 <div class="versions" id="versions"></div>
 <div class="actions"><input id="versionName" type="text" placeholder="Tên phiên bản · V02"><button class="btn" id="saveVersion">Lưu phiên bản</button></div>
 <div class="compare" id="versionCompare">V01 · phiên bản hiện tại</div>
-</div>
+</div></div></details>
 </div>
 
 <aside>
