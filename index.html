@@ -374,12 +374,26 @@ const profiles={
  mats:["AI phân tích từ ảnh","Đá tự nhiên","Sintered stone","Bê tông","Gạch","Gỗ ngoài trời","Kính","Kim loại","Cây bản địa","Mặt nước","Paving cảnh quan"],
  chain:["mật độ","giao thông","phân khu","cảnh quan","khối tích","góc nhìn"]
 }};
-let S=JSON.parse(localStorage.getItem("HG_AI_STATE")||"null")||{domain:"Kiến trúc",inputs:{},furnitureRefs:[],guardrails:{architecture:true,camera:true,furniture:true,proportion:true,ceiling:false,openings:false,mode:"LOCK"},versions:{current:"V01",items:{}},prompt:{master:"",ready:false}};
-S.furnitureRefs=Array.isArray(S.furnitureRefs)?S.furnitureRefs:[];S.camera=S.camera||{shot:"Hero perspective",lens:"35mm",aperture:"f/5.6",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn không gian rõ",quality:"Photoreal · high detail · 4K+",viewMode:"hero",creativeViews:[],multiView:false,mvMaster:null,mvViews:[],consistencyContract:null};
+const DEFAULT_STATE={domain:"Kiến trúc",inputs:{},furnitureRefs:[],guardrails:{architecture:true,camera:true,furniture:true,proportion:true,ceiling:false,openings:false,mode:"LOCK"},versions:{current:"V01",items:{}},prompt:{master:"",ready:false}};
+function loadState(){try{const raw=localStorage.getItem("HG_AI_STATE");return raw?JSON.parse(raw):null}catch(e){return null}}
+let S=loadState()||JSON.parse(JSON.stringify(DEFAULT_STATE));
+if(!["Kiến trúc","Nội thất","Quy hoạch"].includes(S.domain))S.domain="Kiến trúc";
+S.inputs=S.inputs&&typeof S.inputs==="object"?S.inputs:{};
+S.furnitureRefs=Array.isArray(S.furnitureRefs)?S.furnitureRefs:[];
+S.guardrails={...DEFAULT_STATE.guardrails,...(S.guardrails||{})};
+S.versions=S.versions&&typeof S.versions==="object"?S.versions:{current:"V01",items:{}};
+S.versions.items=S.versions.items&&typeof S.versions.items==="object"?S.versions.items:{};
+S.prompt={...DEFAULT_STATE.prompt,...(S.prompt||{})};
+const DEFAULT_CAMERA={shot:"Hero perspective",lens:"35mm",aperture:"f/5.6",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn không gian rõ",quality:"Photoreal · high detail · 4K+",viewMode:"hero",creativeViews:[],multiView:false,mvMaster:null,mvViews:[],consistencyContract:null};
+S.camera={...DEFAULT_CAMERA,...(S.camera||{})};
+if(S.camera.mvMaster?.url?.startsWith("blob:"))S.camera.mvMaster=null;
+if(Array.isArray(S.camera.mvViews))S.camera.mvViews=S.camera.mvViews.filter(v=>v&&v.name).map(v=>({...v,url:null}));
+else S.camera.mvViews=[];
+if(!S.camera.mvMaster)S.camera.multiView=false;
 let furnitureRefUrls=[];
 const ids=["brief","room","focus","style","light","mat","ratio","spaceSize","ceilingHeight","circulation","existing","furnitureLens","cameraStyle","lens","palette","surfaces","finishLevel"];
 function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",1800)}
-function save(){localStorage.setItem("HG_AI_STATE",JSON.stringify(S))}
+function save(){try{const persisted=JSON.parse(JSON.stringify(S));if(persisted.camera){if(persisted.camera.mvMaster)persisted.camera.mvMaster.url=null;if(Array.isArray(persisted.camera.mvViews))persisted.camera.mvViews=persisted.camera.mvViews.map(v=>({...v,url:null}))}localStorage.setItem("HG_AI_STATE",JSON.stringify(persisted))}catch(e){console.warn("HOANGGIA AI: không thể lưu Design State",e)}}
 function syncInputs(){S.inputs=S.inputs||{};ids.forEach(id=>{if($(id))S.inputs[id]=$(id).value.trim()});S.domain=document.querySelector("[data-domain].on")?.dataset.domain||S.domain}
 function opts(el,arr,keep){const old=el.value;el.innerHTML=arr.map(x=>"<option>"+x+"</option>").join("");if(keep&&arr.includes(old))el.value=old}
 function renderProfile(){
