@@ -1,1181 +1,286 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HOANGGIA AI — Không gian Trí tuệ Kiến trúc & Nội thất</title><link rel="icon" type="image/svg+xml" href="./brand-mark.svg"><meta name="theme-color" content="#070807">
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070807">
+<title>HOANGGIA AI — AI Design Studio</title>
+<link rel="icon" type="image/svg+xml" href="./brand-mark.svg">
 <style>
-:root{--bg:#0a0b0c;--panel:#111315;--panel2:#17191c;--line:#292d31;--text:#f4f1ea;--muted:#858a91;--gold:#d7a65b;--gold2:#f0c77d;--danger:#a95b5b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:13px Inter,system-ui,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
-.app{display:grid;grid-template-columns:225px 1fr;min-height:100vh}.brand-logo{display:block;width:184px;height:auto;margin:0 0 8px;border:1px solid #22262a;border-radius:7px}.brand-mini{width:30px;height:30px;display:block;border-radius:5px;flex:0 0 auto}.top-brand{display:flex;align-items:center;gap:12px;margin-bottom:10px}.top-brand .ey{margin:0}.side{position:sticky;top:0;height:100vh;padding:22px 14px;border-right:1px solid var(--line);background:#0d0f10}.brand{font-weight:900;letter-spacing:.25em;font-size:17px}.tag{font-size:9px;color:#62666b;letter-spacing:.12em;margin:5px 0 28px}
-.nav button,.domain button{width:100%;padding:10px 11px;margin:4px 0;border:1px solid transparent;border-radius:9px;background:transparent;color:#92969c;text-align:left}.nav button:hover,.domain button:hover,.nav .on,.domain .on{background:#17191b;border-color:var(--line);color:#fff}.nav .on,.domain .on{box-shadow:inset 2px 0 var(--gold)}.sectionlabel{font-size:9px;letter-spacing:.18em;color:#5e6267;margin:26px 8px 8px}
-.main{width:100%;max-width:1500px;margin:auto;padding:24px 28px 60px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.ey{font-size:9px;letter-spacing:.2em;color:var(--gold)}h1{font:500 39px Georgia,serif;margin:7px 0}.intro{max-width:760px;color:var(--muted);line-height:1.6;margin:0}.badge{border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:#aaa;font-size:10px}
-.tabs{display:flex;gap:7px;border-bottom:1px solid var(--line);margin:25px 0 16px;overflow:auto}.tab{white-space:nowrap;padding:10px 13px;border:0;background:transparent;color:#777;border-bottom:2px solid transparent}.tab.on{color:#fff;border-color:var(--gold)}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:14px}.card h2{font-size:12px;margin:0 0 12px}.num{color:var(--gold);font-size:10px;margin-right:7px}.uploadgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.drop{min-height:135px;border:1px dashed #3b4046;border-radius:11px;display:flex;align-items:center;justify-content:center;text-align:center;color:#747a81;padding:14px;position:relative;overflow:hidden}.drop:hover{border-color:#777}.drop input{display:none}.preview{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.drop.hasimg .preview{display:block}.drop.hasimg .droptext{display:none}.drop.hasimg:after{content:'Đổi ảnh';position:absolute;right:7px;bottom:7px;padding:4px 7px;border-radius:6px;background:#000b;color:#fff;font-size:10px}
-textarea,select,input[type=text]{width:100%;background:#0c0e10;color:#eee;border:1px solid var(--line);border-radius:9px;padding:10px;outline:0}textarea{min-height:105px;resize:vertical}textarea:focus,select:focus,input:focus{border-color:#656a70}.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:9px}.field{padding:8px;border:1px solid var(--line);border-radius:9px;background:#0e1012}.field label{display:block;font-size:9px;color:#686d73;text-transform:uppercase;margin-bottom:5px}.field select{padding:0;border:0;background:transparent}
-.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.btn{border:1px solid var(--line);background:#17191b;color:#ddd;padding:9px 12px;border-radius:9px}.primary{background:linear-gradient(135deg,#a87832,#e7bd73);color:#15110b;border:0;font-weight:700}.btn:hover{filter:brightness(1.12)}
-.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.check{padding:9px;border:1px solid var(--line);border-radius:8px;color:#a0a4a9}.check input{accent-color:var(--gold);margin-right:7px}
-.camera{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.advanced-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.advanced-grid label{display:block;margin-bottom:4px;font-size:10px}.advanced-grid input,.advanced-grid select{width:100%}.status{color:var(--muted);font-size:11px;line-height:1.5;margin:0 0 10px}@media(max-width:760px){.advanced-grid{grid-template-columns:1fr}}.cam{padding:9px;border:1px solid var(--line);background:#101214;color:#999;border-radius:8px}.cam.on{color:#fff;border-color:var(--gold);background:#19150f}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px}.metric{padding:9px;border:1px solid var(--line);border-radius:9px}.metric small{display:block;color:#62676d;font-size:9px}.metric b{display:block;margin-top:4px;font-size:11px}
-.prompt{white-space:pre-wrap;background:#090a0b;border:1px solid var(--line);border-radius:10px;padding:12px;min-height:300px;max-height:520px;overflow:auto;font:11px/1.65 ui-monospace,monospace}.result{min-height:245px;border:1px dashed #363a3e;border-radius:11px;display:flex;align-items:center;justify-content:center;text-align:center;color:#5f646b;background:radial-gradient(circle at center,#141619,#0c0e10 65%)}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tool{padding:11px;border:1px solid var(--line);border-radius:9px;background:#101214;color:#bbb;text-align:left}.tool strong{display:block;color:#eee;font-size:11px}.tool span{display:block;color:#686d73;font-size:9px;margin-top:4px}
-.panel{display:none}.panel.on{display:block}.hidden{display:none}.status{font-size:10px;color:#72777d}.toast{position:fixed;right:18px;bottom:18px;background:#202327;border:1px solid #444;padding:10px 13px;border-radius:9px;display:none;z-index:10}
-@media(max-width:1000px){.app{grid-template-columns:1fr}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}.layout{grid-template-columns:1fr}.nav,.domain{display:flex;gap:5px;overflow:auto}.nav button,.domain button{white-space:nowrap;width:auto}.main{padding:20px}}
-@media(max-width:600px){.main{padding:15px}.top{display:block}.badge{display:inline-block;margin-top:12px}.uploadgrid,.fields,.checks{grid-template-columns:1fr}.camera{grid-template-columns:1fr 1fr}h1{font-size:32px}}
-@media(max-width:760px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px}.brand-logo{width:160px}.nav,.domain{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.domain{grid-template-columns:repeat(3,1fr)}.nav button,.domain button{margin:0}.domain-engine{display:none}}<style id="creator-footer-sync">
-.creatorFooter{margin-top:70px;padding:34px 0 8px;border-top:1px solid #252923;text-align:left;display:flex;justify-content:space-between;gap:30px;align-items:end;position:relative}
-.creatorFooter:before{content:"";width:44px;height:44px;display:block;position:absolute;left:0;top:26px;background:url("./brand-mark.svg") center/cover no-repeat;border:1px solid #55472f;opacity:.9}
-.creatorFooter>div:first-child{padding-left:58px}
-.creatorFooter h2{margin:0 0 7px;color:#eeeae0;font:800 24px/1 system-ui,sans-serif;letter-spacing:.08em}
-.creatorFooter p{margin:0;color:#8b928b;font-size:11px;line-height:1.7}
-.creatorFooter .creatorRole{color:#cdb47d;letter-spacing:.06em}
-.creatorLinks{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
-.creatorLinks a{color:#c9b17b;text-decoration:none;border:1px solid #403a2d;padding:9px 12px;border-radius:2px;font-size:10px;letter-spacing:.04em}
-.creatorLinks a:hover{border-color:#75603b;color:#e2c98f}
-@media(max-width:760px){.creatorFooter{margin-top:38px;padding-top:24px;display:block}.creatorFooter:before{position:relative;left:auto;top:auto;margin-bottom:-48px}.creatorFooter>div:first-child{padding-left:58px}.creatorFooter h2{font-size:20px}.creatorLinks{justify-content:flex-start;margin-top:14px}.creatorLinks a{min-height:42px;display:flex;align-items:center}}
-</style></style><style id="hg-upgrade-css">
-.hgx{border:1px solid #292d31;background:#0d0f10;margin-bottom:14px}
-.hgx-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 15px;border-bottom:1px solid #24282c}
-.hgx-head b{font-size:12px;letter-spacing:.04em}.hgx-head span{font-size:10px;color:#72777d}
-.hgx-body{padding:14px}.ref-roles{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
-.ref-role{position:relative;min-height:112px;border:1px dashed #363b40;background:#0a0c0e;border-radius:8px;overflow:hidden;padding:9px;text-align:left;color:#888}
-.ref-role input{display:none}.ref-role strong{display:block;color:#c8b17e;font-size:10px}.ref-role small{display:block;margin-top:4px;line-height:1.45;color:#656b72}
-.ref-role img{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ref-role.has img{display:block}.ref-role.has .ref-copy{display:none}
-.ref-role .lock{position:absolute;right:6px;top:6px;display:none;z-index:2;background:#090a0b;color:#ddd;border:1px solid #555;padding:3px 5px;font-size:9px}.ref-role.has .lock{display:block}
-.material-board{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.mat-chip{border:1px solid #2b3035;background:#101214;padding:10px;border-radius:7px}.mat-chip b{display:block;font-size:10px;color:#eee}.mat-chip span{display:block;color:#6f757b;font-size:9px;margin-top:4px;line-height:1.4}
-.workflow-state{display:grid;grid-template-columns:1fr 1fr;gap:7px}.state-box{border:1px solid #292d31;padding:10px;background:#0b0d0f}.state-box small{display:block;color:#676d73;font-size:9px}.state-box b{display:block;margin-top:4px;font-size:11px}
-@media(max-width:900px){.ref-roles,.material-board{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.ref-roles,.material-board,.workflow-state{grid-template-columns:1fr}}
-</style><style id="hg-canvas-css">
-.canvas-shell{background:#0b0d0f;border:1px solid #292d31;border-radius:12px;overflow:hidden}
-.canvas-toolbar{display:flex;align-items:center;gap:7px;padding:9px;border-bottom:1px solid #25292d;flex-wrap:wrap}
-.canvas-toolbar .mini{border:1px solid #30353a;background:#121416;color:#aaa;padding:6px 9px;border-radius:7px;font-size:10px}
-.canvas-toolbar .mini.on{border-color:var(--gold);color:#fff}
-.canvas-stage{position:relative;min-height:390px;background:#08090a;display:flex;align-items:center;justify-content:center;padding:20px}
-.canvas-empty{text-align:center;color:#62686e;border:1px dashed #363b40;border-radius:10px;width:100%;min-height:330px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
-.canvas-empty b{color:#aaa}.canvas-img{max-width:100%;max-height:500px;display:none;border-radius:6px;box-shadow:0 18px 50px #000}
-.canvas-stage.hasimg .canvas-img{display:block}.canvas-stage.hasimg .canvas-empty{display:none}
-.canvas-marker{position:absolute;display:none;width:22px;height:22px;border-radius:50%;border:1px solid #fff;background:var(--gold);color:#111;text-align:center;font-size:9px;line-height:20px;font-weight:800;box-shadow:0 0 0 4px #0008}
-.canvas-stage.hasimg .canvas-marker{display:block}
-.canvas-marker.m1{left:28%;top:43%}.canvas-marker.m2{left:54%;top:57%}.canvas-marker.m3{left:68%;top:34%}.canvas-marker.m4{left:43%;top:28%}
-.canvas-side{display:grid;grid-template-columns:1fr 260px;gap:9px;margin-top:9px}.canvas-inspector{border:1px solid #292d31;background:#0e1012;border-radius:10px;padding:10px}
-.canvas-inspector h3{font-size:10px;margin:0 0 9px}.target-list{display:grid;gap:6px}.target{border:1px solid #292d31;background:#101214;padding:8px;border-radius:7px;text-align:left;color:#aaa;font-size:10px}.target.on{border-color:var(--gold);color:#fff}
-.canvas-log{font:10px/1.6 ui-monospace,monospace;color:#737980;white-space:pre-wrap}
-@media(max-width:900px){.canvas-side{grid-template-columns:1fr}}
-</style><style id="hg-furniture-css">
-.fr-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:10px}.fr-box{border:1px solid #292d31;background:#0b0d0f;border-radius:10px;padding:12px}.fr-box h3{margin:0 0 9px;font-size:10px}.fr-upload{height:150px;border:1px dashed #3b4046;border-radius:9px;display:flex;align-items:center;justify-content:center;text-align:center;color:#6f757b;position:relative;overflow:hidden}.fr-upload input{display:none}.fr-upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none;background:#08090a}.fr-upload.has img{display:block}.fr-upload.has .fr-copy{display:none}.fr-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.fr-controls label{font-size:9px;color:#70767c}.fr-controls select{margin-top:4px}.fr-locks{display:grid;gap:6px;margin-top:8px}.fr-locks label{padding:7px;border:1px solid #292d31;border-radius:7px;color:#aaa;font-size:9px}.fr-locks input{accent-color:var(--gold);margin-right:6px}.fr-output{white-space:pre-wrap;font:10px/1.65 ui-monospace,monospace;color:#a7abb0;min-height:180px}.fr-badge{display:inline-block;border:1px solid #5a472c;color:#d7a65b;border-radius:99px;padding:4px 7px;font-size:8px;margin-bottom:8px}
-@media(max-width:800px){.fr-grid{grid-template-columns:1fr}}
-<style id="hg-dark-select-css">
-/* Đồng bộ toàn bộ ô lựa chọn về giao diện nền đen / chữ trắng */
-select,
-select option,
-select optgroup{
-  background-color:#0c0e10 !important;
-  color:#f4f1ea !important;
-  color-scheme:dark;
-}
-select{
-  border-color:#292d31 !important;
-}
-select:hover{
-  border-color:#454b52 !important;
-}
-select:focus{
-  background-color:#0c0e10 !important;
-  color:#fff !important;
-  border-color:#656a70 !important;
-  box-shadow:0 0 0 1px #656a70;
-  outline:none;
-}
-select option:checked,
-select option:hover{
-  background-color:#17191c !important;
-  color:#fff !important;
-}
-select option:disabled{
-  background-color:#0c0e10 !important;
-  color:#666 !important;
-}
-.field select{
-  color:#f4f1ea !important;
-  background-color:#0c0e10 !important;
-}
-</style><style id="hg-domain-css">
-.domain button{position:relative}
-.domain button.on{color:#fff}
-.domain button .domain-count{float:right;color:#666;font-size:9px}
-.domain-context{margin:8px 0 0;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#111315;color:#777;font-size:9px;line-height:1.45}
-.domain-context b{display:block;color:#d7a65b;font-size:10px;margin-bottom:3px}
-.domain-hidden{display:none!important}
-</style><style id="hg-domain-engine-css">
-.domain-engine{margin-top:10px;border:1px solid #292d31;background:#0d0f11;border-radius:12px;padding:12px}
-.domain-engine-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}
-.domain-engine-head strong{font-size:11px;letter-spacing:.08em}
-.domain-engine-head span{font-size:9px;color:#858a91}
-.thinking-flow{display:flex;flex-wrap:wrap;gap:6px}
-.think-node{padding:7px 9px;border:1px solid #292d31;background:#111315;border-radius:7px;font-size:9px;color:#b8bdc3}
-.think-node.active{border-color:#d7a65b;color:#f0c77d;background:#171411}
-.think-arrow{color:#555b61;align-self:center;font-size:10px}
-.engine-output{margin-top:10px;padding:9px;border-top:1px solid #292d31;color:#858a91;font-size:9px;line-height:1.55}
-.engine-output b{color:#f4f1ea}
-</style><style id="hg-reasoning-css">
-.reasoning-panel{margin-top:12px;border:1px solid #292d31;background:#0d0f11;border-radius:12px;padding:13px}
-.reasoning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
-.reason-card{background:#111315;border:1px solid #292d31;border-radius:8px;padding:10px}
-.reason-card small{display:block;color:#858a91;font-size:8px;letter-spacing:.08em;margin-bottom:5px}
-.reason-card strong{font-size:11px;color:#f4f1ea}
-.reason-card p{margin:5px 0 0;color:#a7adb3;font-size:9px;line-height:1.45}
-.reason-status{font-size:9px;color:#d7a65b}
-@media(max-width:900px){.reasoning-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.reasoning-grid{grid-template-columns:1fr}}
-</style><style id="hg-compact-workflow">
-.workflow-section{margin-bottom:10px}
-.workflow-section>.section-head,.workflow-section>.card-head{cursor:pointer;user-select:none;min-height:38px;padding:9px 12px}
-.workflow-section>.section-head:after,.workflow-section>.card-head:after{content:'⌄';float:right;color:#858a91;transition:.2s}
-.workflow-section.is-collapsed>.section-head:after,.workflow-section.is-collapsed>.card-head:after{transform:rotate(-90deg)}
-.workflow-section.is-collapsed>.section-body,.workflow-section.is-collapsed>.section-content,.workflow-section.is-collapsed>.grid,.workflow-section.is-collapsed>.content,.workflow-section.is-collapsed>.section-inner{display:none!important}
-.workflow-section .section-head h2,.workflow-section .card-head h2{font-size:12px;margin:0}
-.workflow-section .section-head p{font-size:9px;margin:2px 0 0;color:#858a91}
-.hg-compact-summary{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.hg-compact-summary span{font-size:8px;padding:4px 7px;border:1px solid #292d31;border-radius:999px;color:#a7adb3;background:#111315}
-.hg-compact-toggle{font-size:8px;color:#d7a65b;margin-left:8px}
-</style><style id="hg-accordion2-css">
-.hg-subaccordion{border:1px solid #292d31;border-radius:9px;background:#0d0f11;margin:7px 0;overflow:hidden}
-.hg-subhead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;cursor:pointer;min-height:34px}
-.hg-subhead strong{font-size:10px;color:#f4f1ea}
-.hg-subhead span{font-size:8px;color:#858a91}
-.hg-subhead:after{content:'⌄';color:#d7a65b;font-size:11px;transition:.2s}
-.hg-subaccordion.is-closed .hg-subhead:after{transform:rotate(-90deg)}
-.hg-subbody{padding:0 10px 10px}
-.hg-subaccordion.is-closed .hg-subbody{display:none}
-.hg-subsummary{display:flex;gap:5px;flex-wrap:wrap;margin:4px 10px 8px}
-.hg-subsummary i{font-style:normal;font-size:7px;color:#858a91;border:1px solid #292d31;border-radius:999px;padding:3px 6px}
-</style><style id="hg-contextual-css">
-.hg-contextual{display:flex;align-items:center;gap:7px;margin:8px 0 10px;padding:7px 9px;border:1px solid #292d31;border-radius:8px;background:#111315}
-.hg-contextual b{font-size:8px;color:#d7a65b;letter-spacing:.06em}
-.hg-contextual span{font-size:8px;color:#a7adb3}
-.hg-priority{border-color:#5b4a2f!important;box-shadow:inset 2px 0 0 #d7a65b}
-.hg-secondary{opacity:.72}
-</style><style id="hg-reasoning-control-css">
-.hg-reasoning-control{margin:8px 0 10px;padding:10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
-.hg-rc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-.hg-rc-head strong{font-size:9px;color:#f4f1ea}.hg-rc-state{font-size:8px;color:#d7a65b}
-.hg-rc-list{display:flex;gap:5px;flex-wrap:wrap}.hg-rc-item{font-size:8px;padding:4px 7px;border-radius:999px;border:1px solid #292d31;color:#a7adb3}.hg-rc-item.open{border-color:#d7a65b;color:#f0c77d}.hg-rc-item.ask{border-color:#6f5b3c;color:#d7a65b}.hg-rc-item.hide{opacity:.5}
-</style><style id="hg-design-state-css">
-.hg-statebar{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:6px;margin:8px 0 12px}
-.hg-statecell{padding:7px 8px;border:1px solid #292d31;border-radius:7px;background:#0d0f11}
-.hg-statecell small{display:block;font-size:7px;color:#858a91;margin-bottom:3px}
-.hg-statecell b{font-size:9px;color:#f4f1ea;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
-.hg-state-live{color:#d7a65b!important}
-@media(max-width:900px){.hg-statebar{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.hg-statebar{grid-template-columns:1fr 1fr}}
-</style><style id="hg-decision-css">
-.hg-decision{margin:8px 0 12px;padding:12px;border:1px solid #292d31;border-radius:10px;background:#0d0f11}
-.hg-decision-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.hg-decision-head strong{font-size:10px}.hg-decision-head span{font-size:8px;color:#d7a65b}
-.hg-decision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
-.hg-decision-card{border:1px solid #292d31;border-radius:8px;padding:9px;background:#111315}
-.hg-decision-card label{display:block;font-size:7px;color:#858a91;letter-spacing:.07em;margin-bottom:5px}
-.hg-decision-card select,.hg-decision-card input{width:100%;box-sizing:border-box;background:#0a0b0c;color:#f4f1ea;border:1px solid #292d31;border-radius:6px;padding:6px;font-size:9px}
-.hg-decision-card p{font-size:8px;color:#858a91;line-height:1.4;margin:5px 0 0}
-.hg-decision-card em{font-style:normal;color:#d7a65b}
-@media(max-width:650px){.hg-decision-grid{grid-template-columns:1fr}}
-</style><style id="hg-prompt-compiler-css">
-.hg-compiler{margin:8px 0 12px;padding:12px;border:1px solid #292d31;border-radius:10px;background:#0d0f11}
-.hg-compiler-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.hg-compiler-head strong{font-size:10px}.hg-compiler-head span{font-size:8px;color:#d7a65b}
-.hg-prompt-tabs{display:flex;gap:5px;margin-bottom:7px}.hg-prompt-tabs button{border:1px solid #292d31;background:#111315;color:#a7adb3;border-radius:6px;padding:5px 8px;font-size:8px}.hg-prompt-tabs button.active{color:#f0c77d;border-color:#d7a65b}
-.hg-prompt-output{min-height:180px;width:100%;box-sizing:border-box;background:#090a0b;color:#ddd;border:1px solid #292d31;border-radius:7px;padding:10px;font-size:9px;line-height:1.55;resize:vertical}
-.hg-compiler-actions{display:flex;gap:6px;margin-top:7px}.hg-compiler-actions button{font-size:8px;padding:6px 9px;border-radius:6px;border:1px solid #292d31;background:#17191c;color:#f4f1ea}
-</style></style><style id="hg-compact-v2">
-/* HOANGGIA AI — Compact workspace */
-.side{width:200px;padding:16px 11px}.app{grid-template-columns:200px 1fr}
-.brand{font-size:15px}.tag{margin-bottom:18px}.sectionlabel{margin:17px 6px 6px}
-.nav button,.domain button{padding:7px 9px;margin:2px 0;font-size:11px}
-.main{padding:18px 22px 42px;max-width:1400px}
-.top{gap:12px}h1{font-size:31px;margin:4px 0}.intro{font-size:11px;line-height:1.45;max-width:680px}
-.tabs{margin:17px 0 11px}.tab{padding:7px 10px;font-size:11px}
-.layout{grid-template-columns:minmax(0,1fr) 315px;gap:11px}
-.card,.hgx{padding:11px;border-radius:10px;margin-bottom:9px}.card h2{font-size:11px;margin-bottom:8px}
-.uploadgrid{gap:7px}.drop{min-height:105px;padding:10px}
-.fields{gap:6px;margin-top:6px}.field{padding:6px}.field label{font-size:8px;margin-bottom:3px}.field select{font-size:11px}
-textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{padding:7px 9px;font-size:10px}
-.metrics,.tools,.checks{gap:5px}.metric,.tool,.check{padding:7px}
-.prompt{min-height:220px;max-height:400px;padding:9px;font-size:10px}
-.result{min-height:190px}
-.hgx-head{padding:10px 11px}.hgx-body{padding:10px}
-.ref-roles,.material-board{gap:5px}.ref-role{min-height:82px;padding:7px}.mat-chip{padding:7px}
-.workflow-state{gap:5px}.state-box{padding:7px}
-.canvas-stage{min-height:300px;padding:12px}.canvas-empty{min-height:250px}
-.canvas-side{gap:6px}.canvas-inspector{padding:8px}
-.fr-grid{gap:7px}.fr-box{padding:9px}.fr-upload{height:120px}
-.hg-compiler{padding:9px;margin:6px 0 9px}.hg-prompt-output{min-height:145px;padding:8px}
-.hg-compiler-actions{margin-top:5px}.hg-compiler-actions button{padding:5px 8px}
-@media(max-width:1000px){.app{grid-template-columns:1fr}.side{width:auto;padding:12px}.main{padding:15px}.layout{grid-template-columns:1fr}}
-@media(max-width:600px){h1{font-size:27px}}
-<style id="hg-prompt-actions-css">
-.hg-quick-prompt{margin:-5px 0 9px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
-.hg-quick-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}
-.hg-quick-head strong{font-size:9px;letter-spacing:.07em;color:#f4f1ea}.hg-quick-head span{font-size:8px;color:#d7a65b}
-.hg-quick-prompt input{width:100%;background:#090a0b;color:#f4f1ea;border:1px solid #292d31;border-radius:7px;padding:8px;font-size:9px;outline:0}
-.hg-quick-prompt input:focus{border-color:#656a70}
-.hg-quick-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.hg-quick-actions .btn{font-size:9px;padding:6px 8px}
-</style></style><style id="hg-architect-upgrade-css">
-.hg-brief-intel{margin-top:8px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
-.hg-bi-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-.hg-bi-head strong{font-size:9px;letter-spacing:.07em}.hg-bi-head span{font-size:8px;color:#d7a65b}
-.hg-bi-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.hg-bi-cell{padding:7px 8px;border:1px solid #292d31;border-radius:7px;background:#111315}
-.hg-bi-cell small{display:block;color:#686e74;font-size:7px;margin-bottom:3px}.hg-bi-cell b{font-size:9px;color:#f4f1ea;font-weight:600}
-.hg-feasibility{margin-top:8px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
-.hg-feas-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-.hg-feas-head strong{font-size:9px}.hg-feas-head span{font-size:8px;color:#d7a65b}
-.hg-feas-list{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.hg-feas-item{padding:7px;border:1px solid #292d31;border-radius:7px;background:#111315}
-.hg-feas-item b{display:block;font-size:8px}.hg-feas-item span{display:block;font-size:7px;color:#858a91;margin-top:3px;line-height:1.35}
-.hg-feas-item.ok{border-color:#3c4b40}.hg-feas-item.warn{border-color:#5b4a2f}
-.hg-lock-mode{margin-top:8px;padding:9px 10px;border-top:1px solid #292d31}
-.hg-lock-mode-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.hg-lock-mode-head strong{font-size:9px}.hg-lock-mode-head span{font-size:8px;color:#858a91}
-.hg-lock-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.hg-lock-mode button{border:1px solid #292d31;background:#111315;color:#9da2a8;border-radius:7px;padding:7px 5px;font-size:8px}
-.hg-lock-mode button.active{border-color:#d7a65b;color:#f0c77d;background:#171411}
-.hg-lock-note{margin-top:6px;font-size:7px;color:#858a91;line-height:1.4}
-@media(max-width:650px){.hg-bi-grid,.hg-feas-list,.hg-lock-modes{grid-template-columns:1fr 1fr}}
-</style><style id="hg-material-camera-version-css">
-.hg-pro-layer{margin-top:8px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
-.hg-pro-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.hg-pro-head strong{font-size:9px;letter-spacing:.06em}.hg-pro-head span{font-size:8px;color:#d7a65b}
-.hg-material-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.hg-material-cell{padding:7px;border:1px solid #292d31;border-radius:7px;background:#111315}.hg-material-cell small{display:block;font-size:7px;color:#686e74;margin-bottom:3px}.hg-material-cell b{font-size:8px;line-height:1.35}
-.hg-camera-story{display:grid;grid-template-columns:1.1fr 1fr;gap:6px}.hg-camera-story .story{padding:7px;border:1px solid #292d31;border-radius:7px;background:#111315}.hg-camera-story small{display:block;color:#686e74;font-size:7px;margin-bottom:3px}.hg-camera-story b{font-size:8px;line-height:1.4}
-.hg-version-bar{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.hg-version-list{display:flex;gap:5px;flex-wrap:wrap}.hg-version-list button{border:1px solid #292d31;background:#111315;color:#a7adb3;border-radius:6px;padding:5px 8px;font-size:8px}.hg-version-list button.active{border-color:#d7a65b;color:#f0c77d}.hg-version-save{margin-left:auto;display:flex;gap:5px}.hg-version-save input{width:125px;background:#090a0b;color:#f4f1ea;border:1px solid #292d31;border-radius:6px;padding:6px;font-size:8px}.hg-version-save button{font-size:8px;padding:6px 8px}
-.hg-version-diff{margin-top:6px;padding:7px;border-top:1px solid #292d31;font-size:7px;color:#858a91;line-height:1.45}
-@media(max-width:700px){.hg-material-grid{grid-template-columns:repeat(2,1fr)}.hg-camera-story{grid-template-columns:1fr}.hg-version-save{margin-left:0;width:100%}.hg-version-save input{flex:1}}
-</style></head>
-<body><div class="app">
-<aside class="side"><img class="brand-logo" src="./brand.svg" alt="HOANGGIA AI"><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
-<div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
-<div class="sectionlabel">LĨNH VỰC</div><div class="domain"><button class="on" data-domain="Kiến trúc">⌂ Kiến trúc</button><button data-domain="Nội thất">▣ Nội thất</button><button data-domain="Quy hoạch">◫ Quy hoạch</button></div>
-<div id="domainContext" class="domain-context"><b>KIẾN TRÚC</b>Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh</div><div class="domain-engine" id="domainEngine">
-<div class="domain-engine-head"><strong>BỘ MÁY TƯ DUY · <span id="engineDomain">KIẾN TRÚC</span></strong><span id="engineLogic">Tỷ lệ → công năng → hình khối → vật liệu → ánh sáng → góc nhìn</span></div>
-<div class="thinking-flow" id="thinkingFlow"></div>
-<div class="engine-output" id="engineOutput"><b>Nguyên tắc:</b> AI không chỉ chọn phong cách; hệ thống sẽ suy luận theo đúng logic của lĩnh vực trước khi tạo Master Prompt.</div>
-</div><div class="sectionlabel">HOANGGIA AI</div><div class="status">Prompt Engine · Định hướng nghệ thuật<br>Kiến trúc / Nội thất / Visualization</div></aside>
-<main class="main"><div class="top"><div><div class="top-brand"><img class="brand-mini" src="./brand-mark.svg" alt="HOANGGIA AI"><div class="ey">BỘ MÁY TẠO PROMPT · HOANGGIA AI</div></div><h1>AI đồng hành. Kiến tạo ý tưởng.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — phát triển theo logic workflow của các AI studio chuyên kiến trúc, nhưng giữ tư duy thiết kế riêng của HOANGGIA AI.</p></div><div class="badge" id="domainBadge">KIẾN TRÚC</div></div>
-<div class="tabs"><button class="tab on" data-tab="render">Dựng hình</button><button class="tab" data-tab="edit">Chỉnh sửa</button><button class="tab" data-tab="camera">Góc máy</button><button class="tab" data-tab="tools">Công cụ</button></div>
-
-<section id="render" class="panel on"><div class="layout"><div>
-<div class="card"><h2><span class="num">01</span>Ảnh đầu vào & tham chiếu</h2><div class="uploadgrid">
-<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><div class="droptext">▧<br><b>Ảnh hiện trạng / không gian</b><br><small>Tải ảnh hiện trạng hoặc dùng ảnh kết quả</small></div><img class="preview"></label>
-<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><div class="droptext">◌<br><b>Ảnh tham chiếu</b><br><small>Vật liệu · ánh sáng · phong cách</small></div><img class="preview"></label>
-</div></div>
-<div class="hgx">
-<div class="hgx-head"><div><b>04A — BÀN LÀM VIỆC THAM CHIẾU</b><br><span>Phân vai ảnh trước khi tạo Prompt: hiện trạng · phong cách · vật liệu · nội thất · ánh sáng.</span></div><button class="btn" id="clearRefs">Làm sạch</button></div>
-<div class="hgx-body"><div class="ref-roles">
-<label class="ref-role" data-role="Hiện trạng"><input type="file" accept="image/*"><span class="ref-copy"><strong>01 · HIỆN TRẠNG</strong><small>Ảnh không gian cần giữ hình học và tỷ lệ.</small></span><img><button type="button" class="lock">🔒 Khóa</button></label>
-<label class="ref-role" data-role="Phong cách"><input type="file" accept="image/*"><span class="ref-copy"><strong>02 · PHONG CÁCH</strong><small>Ngôn ngữ thiết kế, bố cục và không khí.</small></span><img><button type="button" class="lock">🔒 Khóa</button></label>
-<label class="ref-role" data-role="Vật liệu"><input type="file" accept="image/*"><span class="ref-copy"><strong>03 · VẬT LIỆU</strong><small>Màu, vân, độ nhám, phản xạ và chi tiết bề mặt.</small></span><img><button type="button" class="lock">🔒 Khóa</button></label>
-<label class="ref-role" data-role="Nội thất"><input type="file" accept="image/*"><span class="ref-copy"><strong>04 · NỘI THẤT</strong><small>Giữ mẫu ghế, sofa, bàn hoặc sản phẩm tham chiếu.</small></span><img><button type="button" class="lock">🔒 Khóa</button></label>
-<label class="ref-role" data-role="Ánh sáng"><input type="file" accept="image/*"><span class="ref-copy"><strong>05 · ÁNH SÁNG</strong><small>Hướng sáng, độ mềm bóng, nhiệt độ màu và phơi sáng.</small></span><img><button type="button" class="lock">🔒 Khóa</button></label>
-</div></div></div>
-<div class="hgx">
-<div class="hgx-head"><div><b>04B — BẢNG VẬT LIỆU</b><br><span>Biến lựa chọn vật liệu thành mô tả có thể dùng trực tiếp trong Prompt.</span></div><button class="btn" id="materialBuild">Phân tích vật liệu</button></div>
-<div class="hgx-body"><div class="material-board" id="materialBoard">
-<div class="mat-chip"><b>Đá</b><span id="matStone">Chưa xác định</span></div><div class="mat-chip"><b>Gỗ</b><span id="matWood">Chưa xác định</span></div><div class="mat-chip"><b>Da / vải</b><span id="matTextile">Chưa xác định</span></div><div class="mat-chip"><b>Kim loại</b><span id="matMetal">Chưa xác định</span></div><div class="mat-chip"><b>Bề mặt</b><span id="matSurface">Chưa xác định</span></div>
-</div></div></div>
-<div class="hgx">
-<div class="hgx-head"><div><b>04C — TRẠNG THÁI THIẾT KẾ</b><br><span>Kiểm soát nhanh trước khi tạo Prompt tổng thể.</span></div></div>
-<div class="hgx-body"><div class="workflow-state"><div class="state-box"><small>ẢNH THAM CHIẾU</small><b id="refState">0 / 5 vai trò</b></div><div class="state-box"><small>KHÓA BẢO TOÀN</small><b id="lockState">3 khóa đang bật</b></div><div class="state-box"><small>NGÔN NGỮ THIẾT KẾ</small><b id="styleState">Modern Luxury</b></div><div class="state-box"><small>ĐỘ HOÀN THIỆN</small><b id="finishState">Cao cấp</b></div></div></div></div><div class="hgx">
-<div class="hgx-head"><div><b>04D — INTERIOR CANVAS · BẢNG VẼ NỘI THẤT</b><br><span>Đưa ảnh không gian vào canvas, chọn đối tượng cần can thiệp và tạo chỉ dẫn chỉnh sửa có kiểm soát.</span></div><span>PHASE 01 · CANVAS</span></div>
-<div class="hgx-body"><div class="canvas-shell">
-<div class="canvas-toolbar"><label class="mini">＋ Tải ảnh vào Canvas<input id="canvasFile" type="file" accept="image/*" hidden></label><button class="mini on" data-mode="select">Chọn đối tượng</button><button class="mini" data-mode="material">Vật liệu</button><button class="mini" data-mode="light">Ánh sáng</button><button class="mini" data-mode="preserve">Bảo toàn</button><button class="mini" id="clearCanvas">Xóa Canvas</button></div>
-<div class="canvas-stage" id="canvasStage"><div class="canvas-empty"><b>INTERIOR CANVAS</b><span>Tải ảnh phòng / phối cảnh để bắt đầu đánh dấu khu vực.</span><small>Không thay đổi ảnh gốc · chỉ tạo lớp chỉ dẫn cho AI.</small></div><img id="canvasImg" class="canvas-img"><span class="canvas-marker m1">01</span><span class="canvas-marker m2">02</span><span class="canvas-marker m3">03</span><span class="canvas-marker m4">04</span></div>
+:root{--bg:#080909;--panel:#101213;--panel2:#151718;--line:#292d30;--text:#f3f0e8;--muted:#858b90;--gold:#d7a65b;--gold2:#efc77d;--danger:#a95b5b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:13px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+.app{min-height:100vh;display:grid;grid-template-columns:220px 1fr}.side{position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid var(--line);background:#0c0e0e}
+.brand-logo{display:block;width:180px;border:1px solid #222629;border-radius:7px;margin-bottom:8px}.tag{font-size:9px;color:#666b70;letter-spacing:.14em;margin:6px 0 26px}
+.sectionlabel{font-size:8px;color:#60656a;letter-spacing:.18em;margin:20px 8px 7px}.nav button,.domain button{display:block;width:100%;border:1px solid transparent;background:transparent;color:#8d9297;text-align:left;border-radius:8px;padding:9px 10px;margin:3px 0}.nav button:hover,.domain button:hover,.nav .on,.domain .on{background:#17191b;border-color:var(--line);color:#fff}.domain .on{box-shadow:inset 2px 0 var(--gold)}
+.side-status{margin-top:22px;padding:10px;border:1px solid var(--line);border-radius:9px;background:#101213;font-size:9px;color:var(--muted);line-height:1.6}.side-status b{color:var(--gold);display:block;margin-bottom:2px}
+.main{width:100%;max-width:1500px;margin:auto;padding:24px 28px 60px}.top{display:flex;justify-content:space-between;gap:20px}.ey{font-size:9px;letter-spacing:.2em;color:var(--gold)}h1{font:500 38px/1.1 Georgia,serif;margin:8px 0}.intro{max-width:820px;color:var(--muted);line-height:1.6;margin:0}.badge{border:1px solid var(--line);height:max-content;padding:7px 10px;border-radius:99px;color:#aaa;font-size:9px}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:24px 0 15px;overflow:auto}.tab{white-space:nowrap;border:0;border-bottom:2px solid transparent;background:transparent;color:#777;padding:9px 12px}.tab.on{color:#fff;border-color:var(--gold)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}.card h2{font-size:11px;margin:0 0 10px}.num{color:var(--gold);font-size:9px;margin-right:6px}.sub{font-size:9px;color:var(--muted);line-height:1.5;margin:-4px 0 9px}
+.uploadgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.drop{min-height:115px;border:1px dashed #3a3f43;border-radius:9px;display:flex;align-items:center;justify-content:center;text-align:center;color:#73797e;padding:12px;position:relative;overflow:hidden}.drop input{display:none}.drop img{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.drop.hasimg img{display:block}.drop.hasimg .droptext{display:none}.drop.hasimg:after{content:"Đổi ảnh";position:absolute;right:6px;bottom:6px;background:#000b;color:#fff;padding:4px 6px;border-radius:5px;font-size:9px}
+textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;border:1px solid var(--line);border-radius:8px;padding:9px;outline:0}textarea{min-height:88px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:#62686e;box-shadow:0 0 0 1px #62686e}select,select option,select optgroup{background:#0b0d0e!important;color:#fff!important;color-scheme:dark}.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:8px}.field{border:1px solid var(--line);background:#0d0f10;border-radius:8px;padding:8px}.field label{display:block;color:#696f75;font-size:8px;text-transform:uppercase;margin-bottom:4px}.field select{border:0;padding:0;background:#0d0f10!important}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.btn{border:1px solid var(--line);background:#17191b;color:#ddd;padding:8px 11px;border-radius:8px}.btn:hover{filter:brightness(1.12)}.primary{border:0;background:linear-gradient(135deg,#a87832,#e8bf76);color:#15110b;font-weight:750}
+.engine{border:1px solid var(--line);border-radius:9px;background:#0d0f10;padding:10px;margin-top:9px}.engine-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px}.engine-head strong{font-size:9px}.engine-head span{font-size:8px;color:var(--muted)}.flow{display:flex;flex-wrap:wrap;gap:5px}.node{font-size:8px;padding:6px 7px;border:1px solid var(--line);border-radius:6px;color:#aeb3b7}.node.active{border-color:var(--gold);color:var(--gold2);background:#17130e}.arrow{color:#555;font-size:9px;align-self:center}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.intel-cell{border:1px solid var(--line);border-radius:7px;background:#0d0f10;padding:8px}.intel-cell small{display:block;font-size:7px;color:#6d7378;margin-bottom:4px}.intel-cell b{display:block;font-size:9px;line-height:1.35;color:#ddd}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.story{border:1px solid var(--line);background:#0d0f10;border-radius:7px;padding:8px}.story small{display:block;font-size:7px;color:#6d7378;margin-bottom:4px}.story b{font-size:9px;line-height:1.35}
+.guard{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.guard label{padding:8px;border:1px solid var(--line);border-radius:7px;color:#aaa;font-size:8px}.guard input{accent-color:var(--gold);margin-right:5px}.mode{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px}.mode button{border:1px solid var(--line);background:#111315;color:#888;border-radius:7px;padding:7px;font-size:8px}.mode button.on{border-color:var(--gold);color:#fff;background:#18140f}.mode small{display:block;color:inherit;margin-top:2px}
+.prompt{white-space:pre-wrap;background:#080a0b;border:1px solid var(--line);border-radius:9px;padding:12px;min-height:175px;max-height:390px;overflow:auto;font:10px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace}.prompt-actions{display:grid;grid-template-columns:1fr auto auto auto;gap:6px;margin-top:7px}.prompt-actions input{min-width:0}.status{font-size:8px;color:var(--muted);margin-top:6px;min-height:13px}
+.versions{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.version{border:1px solid var(--line);background:#111315;color:#999;border-radius:6px;padding:6px 8px;font-size:8px}.version.on{border-color:var(--gold);color:#fff}.compare{border-top:1px solid var(--line);padding-top:8px;color:#9ba0a5;font-size:9px;line-height:1.5}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px}.metric{border:1px solid var(--line);border-radius:7px;padding:8px}.metric small{display:block;color:#686e73;font-size:7px}.metric b{display:block;margin-top:3px;font-size:10px}
+.result{min-height:210px;border:1px dashed #373c40;border-radius:9px;display:flex;align-items:center;justify-content:center;text-align:center;color:#60666b;padding:20px}
+.creatorFooter{margin-top:60px;padding:28px 0 5px;border-top:1px solid #252923;display:flex;justify-content:space-between;gap:20px;align-items:end;position:relative}.creatorFooter:before{content:"";width:42px;height:42px;position:absolute;left:0;top:22px;background:url("./brand-mark.svg") center/cover no-repeat;border:1px solid #55472f}.creatorFooter>div:first-child{padding-left:55px}.creatorFooter h2{margin:0 0 6px;font-size:21px;letter-spacing:.08em}.creatorFooter p{margin:2px 0;color:#858b90;font-size:9px}.creatorFooter .role{color:#d1b777}.creatorLinks{display:flex;gap:6px;flex-wrap:wrap}.creatorLinks a{color:#c9b17b;text-decoration:none;border:1px solid #403a2d;padding:8px 10px;border-radius:5px;font-size:8px}
+.toast{position:fixed;right:16px;bottom:16px;background:#1b1e20;border:1px solid #4b5054;padding:9px 12px;border-radius:8px;display:none;font-size:10px;z-index:20}
+@media(max-width:1000px){.app{grid-template-columns:1fr}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:13px}.nav,.domain{display:flex;gap:4px;overflow:auto}.nav button,.domain button{white-space:nowrap;width:auto}.layout{grid-template-columns:1fr}.main{padding:20px}}
+@media(max-width:760px){.top{display:block}h1{font-size:31px}.badge{display:inline-block;margin-top:10px}.uploadgrid,.fields{grid-template-columns:1fr}.grid5{grid-template-columns:repeat(2,1fr)}.grid4{grid-template-columns:1fr 1fr}.guard,.mode{grid-template-columns:1fr}.prompt-actions{grid-template-columns:1fr 1fr}.prompt-actions input{grid-column:1/-1}.creatorFooter{display:block;margin-top:38px}.creatorLinks{margin-top:14px}}
+@media(max-width:480px){.grid5,.grid4,.metrics{grid-template-columns:1fr}.main{padding:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+<img class="brand-logo" src="./brand.svg" alt="HOANGGIA AI">
+<div class="tag">AI DESIGN STUDIO · ARCHITECT × AI</div>
+<div class="sectionlabel">WORKSPACE</div>
+<div class="nav">
+<button class="on" data-tab="render">Dựng hình</button>
+<button data-tab="edit">Chỉnh sửa</button>
+<button data-tab="camera">Góc máy</button>
+<button data-tab="tools">Công cụ</button>
 </div>
-<div class="canvas-side"><div class="canvas-inspector"><h3>ĐỐI TƯỢNG CẦN XỬ LÝ</h3><div class="target-list"><button class="target on" data-target="Sofa">01 · Sofa</button><button class="target" data-target="Bàn trà">02 · Bàn trà</button><button class="target" data-target="Mảng tường">03 · Mảng tường</button><button class="target" data-target="Hệ tủ / kệ">04 · Hệ tủ / kệ</button><button class="target" data-target="Đèn / ánh sáng">05 · Đèn / ánh sáng</button></div></div>
-<div class="canvas-inspector"><h3>CHỈ DẪN CANVAS</h3><div class="canvas-log" id="canvasLog">Chưa có vùng được chọn.</div><div class="actions"><button class="btn primary" id="canvasPrompt">✦ Tạo chỉ dẫn AI</button></div></div></div>
-<div class="hgx">
-<div class="hgx-head"><div><b>04E — THAY THẾ NỘI THẤT · FURNITURE REPLACEMENT</b><br><span>Thay một sản phẩm theo ảnh tham chiếu mà không phá vỡ kiến trúc, tỷ lệ, vị trí hoặc góc máy.</span></div><span>PHASE 02 · FURNITURE</span></div>
-<div class="hgx-body"><div class="fr-grid">
-<div class="fr-box"><span class="fr-badge">SẢN PHẨM CẦN THAY</span><div class="fr-upload" id="frTarget"><input id="frTargetFile" type="file" accept="image/*"><div class="fr-copy">＋<br><b>Tải ảnh sản phẩm hiện trạng</b><br><small>Ví dụ: sofa, armchair, bàn trà, đèn, tủ</small></div><img></div>
-<div class="fr-controls"><label>Loại sản phẩm<select id="frType"><option>Sofa</option><option>Armchair</option><option>Bàn trà</option><option>Bàn ăn</option><option>Ghế ăn</option><option>Đèn</option><option>Tủ / kệ</option><option>Giường</option><option>Thảm</option></select></label><label>Mức thay đổi<select id="frChange"><option>Giữ nguyên model, chỉ thay vật liệu</option><option>Thay model theo ảnh tham chiếu</option><option>Thay model + vật liệu theo ảnh tham chiếu</option></select></label></div></div>
-<div class="fr-box"><span class="fr-badge">ẢNH THAM CHIẾU</span><div class="fr-upload" id="frRef"><input id="frRefFile" type="file" accept="image/*"><div class="fr-copy">＋<br><b>Tải ảnh sản phẩm tham chiếu</b><br><small>AI đọc hình học, vật liệu, tỷ lệ và ngôn ngữ thiết kế</small></div><img></div>
-<div class="fr-locks"><label><input type="checkbox" checked>Khóa vị trí và kích thước</label><label><input type="checkbox" checked>Khóa camera và phối cảnh</label><label><input type="checkbox" checked>Khóa kiến trúc và nền</label><label><input type="checkbox" checked>Giữ bóng đổ và tiếp xúc vật lý</label></div></div></div>
-<div class="actions"><button class="btn primary" id="frPrompt">✦ Tạo Prompt thay thế nội thất</button><button class="btn" id="frReset">Làm mới</button></div>
-<div class="fr-box" style="margin-top:9px"><h3>PROMPT THAY THẾ</h3><div class="fr-output" id="frOutput">Chưa tạo Prompt.</div></div>
-</div></div></div></div><div class="card"><h2><span class="num">02</span>Ý tưởng / yêu cầu thiết kế <span style="color:var(--gold)">*</span></h2><textarea id="brief" placeholder="Ví dụ: Luxury hiện đại, giữ nguyên kiến trúc và sofa hiện trạng, thay TV wall bằng travertine, ánh sáng chiều ấm..."></textarea>
-<div class="fields"><div class="field"><label>Phong cách</label><select id="style"><optgroup label="Cao cấp"><option>Luxury hiện đại</option><option>Luxury tối giản</option><option>Luxury tinh tế</option><option>Luxury đương đại</option><option>Tân cổ điển đương đại</option><option>Art Deco</option></optgroup><optgroup label="Đương đại"><option>Đương đại</option><option>Đương đại hiện đại</option><option>Hiện đại hữu cơ</option><option>Tối giản mềm</option></optgroup><optgroup label="Tối giản"><option>Tối giản</option><option>Japandi</option><option>Wabi-Sabi</option><option>Bắc Âu</option></optgroup><optgroup label="Cổ điển"><option>Tân cổ điển</option><option>Cổ điển châu Âu</option><option>Đương đại Pháp</option><option>Cổ điển Ý</option></optgroup><optgroup label="Nghệ thuật"><option>Chủ nghĩa Brutalism</option><option>Bauhaus</option><option>Hiện đại giữa thế kỷ</option><option>Memphis</option><option>Chiết trung</option></optgroup><optgroup label="Thiên nhiên & Kiến trúc"><option>Sinh thái</option><option>Hiện đại nhiệt đới</option><option>Địa Trung Hải</option><option>Kiến trúc hữu cơ</option><option>Kiến trúc hiện đại</option><option>Kiến trúc nghỉ dưỡng</option></optgroup><optgroup label="Thương mại"><option>Bán lẻ cao cấp</option><option>Boutique thời trang</option><option>Phòng trưng bày</option><option>Lưu trú & dịch vụ</option><option>Văn phòng điều hành</option></optgroup></select></div>
-<div class="field"><label>Ánh sáng kiến trúc · nội thất</label><select id="light"><optgroup label="Tự nhiên"><option>Ánh sáng ban mai</option><option>Ánh sáng giữa trưa</option><option>Nắng chiều ấm</option><option>Giờ vàng</option><option>Giờ xanh</option><option>Ánh sáng tán xạ trời nhiều mây</option><option>Nắng tương phản mạnh</option></optgroup><optgroup label="Nội thất"><option>Ánh sáng nền ấm</option><option>Đèn hắt khe trần</option><option>Đèn tuyến tính</option><option>Đèn âm trần</option><option>Đèn rửa tường</option><option>Đèn nhấn</option><option>Đèn trang trí</option><option>Ánh sáng gián tiếp</option></optgroup><optgroup label="Nhiếp ảnh"><option>Ánh sáng mềm kiểu tạp chí</option><option>Ánh sáng điện ảnh định hướng</option><option>Tương phản cao</option><option>Tương phản thấp</option><option>Không khí phòng trưng bày</option><option>Cao cấp commercial</option><option>Ngoại thất chạng vạng</option></optgroup></select></div>
-<div class="field"><label>Vật liệu · Vật liệu Intelligence</label><select id="mat"><optgroup label="Đá"><option>AI phân tích reference</option><option>Tự nhiên stone</option><option>Đá cẩm thạch</option><option>Đá travertine</option><option>Đá limestone</option><option>Đá granite</option><option>Đá onyx</option><option>Đá quartzite</option><option>Đá nung kết</option></optgroup><optgroup label="Gỗ"><option>Gỗ óc chó</option><option>Gỗ sồi</option><option>Gỗ teak</option><option>Gỗ tần bì</option><option>Gỗ sồi hun khói</option><option>Veneer gỗ</option><option>Gỗ soi rãnh</option></optgroup><optgroup label="Da & Vải"><option>Da nguyên tấm</option><option>Da nubuck</option><option>Da suede</option><option>Da aniline</option><option>Da semi-aniline</option><option>Da bò</option><option>Vải linen</option><option>Vải bouclé</option><option>Vải nhung</option><option>Vải len</option><option>Vải chenille</option></optgroup><optgroup label="Kim loại"><option>Đồng thau xước</option><option>Đồng thau bóng</option><option>Đồng</option><option>Thép đen hóa</option><option>Thép không gỉ</option><option>Titanium</option></optgroup></select></div>
-<div class="field"><label>Tỉ lệ</label><select id="ratio"><option>4:3</option><option>16:9</option><option>3:2</option><option>1:1</option><option>9:16</option></select></div></div>
-<div class="actions"><button class="btn primary" id="magic">✦ AI tạo Prompt tổng thể</button><button class="btn" id="copy">Sao chép Prompt</button><button class="btn" id="magic25">✧ Tạo 25 góc máy</button></div></div>
-<div class="card" id="design-intelligence"><h2><span class="num">03</span>Trí tuệ thiết kế</h2><p class="status">Lớp suy luận: công năng → tỷ lệ → công thái học → vật liệu → ánh sáng → camera → khả thi thi công.</p><div class="fields">
-<div class="field"><label>Loại không gian</label><select id="room"><option>Phòng khách</option><option>Phòng ngủ chính</option><option>Phòng ăn</option><option>Bếp</option><option>Phòng làm việc</option><option>Phòng thay đồ</option><option>Phòng tắm</option><option>Sảnh / hành lang</option><option>Showroom</option><option>Nhà hàng / khách sạn</option><option>Biệt thự</option><option>Căn hộ</option><option>Nhà phố</option><option>Không gian ngoài trời</option></select></div>
-<div class="field"><label>Trọng tâm thiết kế</label><select id="focus"><option>Kiến trúc + nội thất cân bằng</option><option>Công năng + công thái học</option><option>Vật liệu-driven Cao cấp</option><option>Nội thất rời-driven Nội thất</option><option>Ánh sáng-driven Atmosphere</option><option>Chỉnh sửaorial Định hướng nghệ thuật</option><option>Thiết kế để thi công thực tế</option></select></div>
-<div class="field"><label>Kích thước không gian</label><input id="spaceSize" placeholder="6500 × 4800 mm"></div><div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" placeholder="3100 mm"></div>
-<div class="field"><label>Giao thông</label><input id="circulation" placeholder="Lối chính ≥ 900 mm, không chắn cửa"></div><div class="field"><label>Hiện trạng cần giữ</label><input id="existing" placeholder="Sofa, sàn, trần, cửa sổ hiện hữu"></div>
-<div class="field"><label>Trường phái đồ nội thất</label><select id="furnitureLens"><option>Tổng hợp cao cấp</option><option>Italian Đương đại</option><option>Italian Luxury tối giản</option><option>Đương đại Pháp</option><option>Nhật Bản</option><option>Bắc Âu</option><option>Thiết kế sưu tầm</option><option>Thiết kế riêng / may đo</option><option>Contract / Lưu trú & dịch vụ</option></select></div>
-<div class="field"><label>Thương hiệu tham chiếu</label><select id="brand"><option>Không khóa thương hiệu — tạo ngôn ngữ riêng</option><option>Poliform</option><option>Minotti</option><option>Molteni&C</option><option>B&B Italia</option><option>Poltrona Frau</option><option>Flexform</option><option>Giorgetti</option><option>Rimadesio</option><option>Cassina</option><option>Baxter</option><option>Vitra</option><option>GUBI</option><option>Fritz Hansen</option><option>Paola Lenti</option></select></div></div>
-<div class="advanced-grid"><div><label>Bảng màu</label><input id="palette" placeholder="warm ivory / walnut / cognac / champagne"></div><div><label>Sàn / tường / trần</label><input id="surfaces" placeholder="travertine / veneer / warm white plaster"></div><div><label>Chi tiết thi công / chi tiết thi công</label><input id="joinery" placeholder="shadow gap 10mm, mép đá 45°, khe âm"></div><div><label>Độ hoàn thiện</label><select id="finishLevel"><option>Cao cấp — vật liệu tuyển chọn</option><option>Ultra Cao cấp — bespoke / thủ công</option><option>Cao cấp — cân bằng chi phí và chất lượng</option><option>Ý tưởng — ưu tiên ngôn ngữ thiết kế</option></select></div></div></div><div class="card"><h2><span class="num">03</span>Đạo diễn góc máy</h2><div class="camera">
-<button class="cam on" data-c="Góc 3/4 hero shot">Góc 3/4</button><button class="cam" data-c="Chính diện architectural shot">Chính diện</button><button class="cam" data-c="Chéo perspective">Chéo</button><button class="cam" data-c="Cận cảnh / material close-up">Cận cảnh</button><button class="cam" data-c="Góc thấp kiến trúc view">Góc thấp</button><button class="cam" data-c="Tầm mắt tự nhiên interior view">Tầm mắt</button></div>
-<div class="fields"><div class="field"><label>Lens</label><select id="lens"><option>24mm</option><option>28mm</option><option>35mm</option><option>50mm</option></select></div><div class="field"><label>Góc máy</label><select id="cameraStyle"><option>Phối cảnh kiến trúc tự nhiên</option><option>Kiểm soát đường đứng</option><option>Nhiếp ảnh nội thất phong cách tạp chí</option></select></div></div></div>
-<div class="card"><h2><span class="num">04</span>Bảo toàn / Bộ khóa thiết kế</h2><div class="checks">
-<label class="check"><input type="checkbox" checked data-lock="architecture">Khóa kiến trúc</label><label class="check"><input type="checkbox" checked data-lock="camera">Khóa camera</label><label class="check"><input type="checkbox" checked data-lock="furniture">Giữ furniture model</label><label class="check"><input type="checkbox" checked data-lock="proportion">Giữ tỷ lệ / scale</label><label class="check"><input type="checkbox" data-lock="ceiling">Khóa trần</label><label class="check"><input type="checkbox" data-lock="openings">Khóa cửa / cửa sổ</label></div></div>
+<div class="sectionlabel">LĨNH VỰC</div>
+<div class="domain">
+<button class="on" data-domain="Kiến trúc">Kiến trúc</button>
+<button data-domain="Nội thất">Nội thất</button>
+<button data-domain="Quy hoạch">Quy hoạch</button>
 </div>
-<div><div class="card"><h2>05 — Định hướng nghệ thuật bằng AI</h2><div class="metrics"><div class="metric"><small>Domain</small><b id="mDomain">Kiến trúc</b></div><div class="metric"><small>Phong cách</small><b id="mPhong cách">Luxury hiện đại</b></div><div class="metric"><small>Hierarchy</small><b>Kiến trúc → furniture → material</b></div><div class="metric"><small>Vật liệu</small><b>Ảnh tham chiếu-driven / tactile</b></div><div class="metric"><small>Ánh sáng</small><b id="mLight">Daylight mềm tự nhiên</b></div><div class="metric"><small>Góc máy</small><b id="mCam">Góc 3/4 · 24mm</b></div></div></div>
-<div class="card"><h2>06 — Prompt tổng thể</h2><div class="prompt" id="prompt">Chọn ảnh + nhập yêu cầu, sau đó bấm “AI tạo Prompt tổng thể”.</div></div>
-<div class="hg-quick-prompt" id="hgQuickPrompt">
-  <div class="hg-quick-head"><strong>SỬA PROMPT</strong><span id="hgQuickStatus">Có thể chỉnh sửa trực tiếp</span></div>
-  <input id="hgPromptEdit" type="text" placeholder="Ví dụ: thay marble trắng bằng travertine / Ánh sáng: hoàng hôn / Camera: 35mm">
-  <div class="hg-quick-actions">
-    <button class="btn primary" id="hgApplyEdit">Áp dụng sửa</button>
-    <button class="btn" id="hgCopyPrompt">Sao chép</button>
-    <button class="btn" id="hgClearPrompt">Xoá Prompt</button>
-  </div>
+<div class="side-status"><b id="sideDomain">KIẾN TRÚC</b><span id="sideStatus">Design State · đang đồng bộ</span></div>
+</aside>
+
+<main class="main">
+<header class="top">
+<div><div class="ey">HOANGGIA AI · BỘ MÁY TẠO PROMPT</div><h1>AI đồng hành. Kiến tạo ý tưởng.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — suy luận theo tư duy kiến trúc, nhưng để kiến trúc sư giữ quyết định cuối cùng.</p></div>
+<div class="badge">DESIGN STATE · <span id="stateBadge">READY</span></div>
+</header>
+
+<div class="tabs">
+<button class="tab on" data-tab="render">01 · Dựng hình</button><button class="tab" data-tab="edit">02 · Chỉnh sửa</button><button class="tab" data-tab="camera">03 · Góc máy</button><button class="tab" data-tab="tools">04 · Công cụ</button>
 </div>
-<div class="card"><h2>07 — Kết quả dựng hình</h2><div class="result" id="result">RENDER CANVAS<br><br>Giao diện đã sẵn sàng để kết nối hệ thống tạo ảnh ở giai đoạn tiếp theo.</div></div></div></div></section>
 
-<section id="edit" class="panel"><div class="layout"><div><div class="card"><h2>✎ Chỉnh sửa AI — Sửa có kiểm soát</h2><textarea id="editBrief" placeholder="Nhập phần cần đổi: ví dụ “đổi sofa sang da nâu, giữ nguyên model, kích thước và vị trí”."></textarea><div class="actions"><button class="btn primary" id="editBtn">✦ Tạo Prompt chỉnh sửa</button></div></div><div class="card"><h2>Danh sách khóa bảo toàn</h2><div class="checks"><label class="check"><input type="checkbox" checked>Giữ nguyên model</label><label class="check"><input type="checkbox" checked>Không đổi camera</label><label class="check"><input type="checkbox" checked>Không đổi kiến trúc</label><label class="check"><input type="checkbox" checked>Không thêm decor</label></div></div></div><div class="card"><h2>Prompt chỉnh sửa</h2><div class="prompt" id="editPrompt">Chưa có edit prompt.</div></div></div></section>
+<section class="panel on" id="panel-render">
+<div class="layout">
+<div>
+<div class="card">
+<h2><span class="num">01</span>ẢNH ĐẦU VÀO & THAM CHIẾU</h2>
+<div class="uploadgrid">
+<label class="drop" id="sceneDrop"><input id="scene" type="file" accept="image/*"><span class="droptext">ẢNH HIỆN TRẠNG<br><small>Click để tải ảnh</small></span><img id="scenePreview"></label>
+<label class="drop" id="refDrop"><input id="ref" type="file" accept="image/*"><span class="droptext">ẢNH THAM CHIẾU<br><small>Vật liệu · phong cách · hình thái</small></span><img id="refPreview"></label>
+</div>
+</div>
 
-<section id="camera" class="panel"><div class="card"><h2>⌁ Magic Góc máy — tạo 25 góc nghệ thuật</h2><p class="status">Chọn domain và bấm tạo. Các góc được xây theo hierarchy: hero → contextual → detail → material → atmosphere.</p><button class="btn primary" id="camera25">✦ Tạo 25 Góc máy Prompts</button><div class="prompt" id="cameraOut" style="margin-top:10px;min-height:420px">Chưa có danh sách.</div></div></section>
+<div class="card">
+<h2><span class="num">02</span>Ý TƯỞNG / YÊU CẦU THIẾT KẾ</h2>
+<textarea id="brief" placeholder="Mô tả điều Ốc muốn thay đổi, giữ lại hoặc phát triển..."></textarea>
+<div class="fields">
+<div class="field"><label>Không gian</label><select id="room"></select></div>
+<div class="field"><label>Trọng tâm</label><select id="focus"></select></div>
+<div class="field"><label>Phong cách</label><select id="style"></select></div>
+<div class="field"><label>Ánh sáng</label><select id="light"></select></div>
+<div class="field"><label>Vật liệu</label><select id="mat"></select></div>
+<div class="field"><label>Tỷ lệ ảnh</label><select id="ratio"><option>4:3</option><option selected>16:9</option><option>3:2</option><option>1:1</option><option>9:16</option></select></div>
+</div>
+<div class="actions"><button class="btn primary" id="magic">AI tạo Prompt tổng thể</button><button class="btn" id="copy">Sao chép Prompt</button></div>
+<div class="engine"><div class="engine-head"><strong id="engineTitle">BỘ MÁY TƯ DUY · KIẾN TRÚC</strong><span id="engineHint">Một bộ não suy luận · một Prompt cuối</span></div><div class="flow" id="flow"></div></div>
+</div>
 
-<section id="tools" class="panel"><div class="card"><h2>▦ Công cụ</h2><div class="tools"><button class="tool" id="quickAnalyze"><strong>🔍 Phân tích Ảnh tham chiếu</strong><span>Vật liệu · ánh sáng · bối cảnh</span></button><button class="tool" id="sync"><strong>↔ Đồng bộ View</strong><span>Giữ vật liệu & ánh sáng qua nhiều camera</span></button><button class="tool" id="creative"><strong>✧ Sáng tạo View</strong><span>Gợi ý 9 góc cận cảnh</span></button><button class="tool" id="clear"><strong>⌫ Làm mới Không gian làm việc</strong><span>Xóa dữ liệu tạm trên trình duyệt</span></button></div><div class="prompt" id="toolOut" style="margin-top:10px">Chọn một tiện ích.</div></div></section>
-</div><div class="toast" id="toast"></div>
+<div class="card">
+<h2><span class="num">03</span>DESIGN INTELLIGENCE</h2>
+<div class="fields">
+<div class="field"><label>Kích thước</label><input id="spaceSize" type="text" placeholder="Theo ảnh tham chiếu"></div>
+<div class="field"><label>Chiều cao trần</label><input id="ceilingHeight" type="text" placeholder="Theo hiện trạng"></div>
+<div class="field"><label>Lưu thông</label><input id="circulation" type="text" placeholder="AI suy luận theo công năng"></div>
+<div class="field"><label>Hiện trạng / bảo toàn</label><input id="existing" type="text" placeholder="Giữ nguyên nếu không yêu cầu"></div>
+<div class="field"><label>Furniture</label><input id="furnitureLens" type="text" placeholder="Bespoke / high-end / theo reference"></div>
+<div class="field"><label>Camera</label><select id="cameraStyle"><option>Phối cảnh tự nhiên</option><option>Editorial</option><option>Hero perspective</option><option>Bird's-eye</option><option>Eye-level</option></select></div>
+<div class="field"><label>Lens</label><select id="lens"><option>28mm</option><option selected>35mm</option><option>50mm</option><option>85mm</option></select></div>
+<div class="field"><label>Bảng màu</label><input id="palette" type="text" placeholder="AI cân bằng theo reference"></div>
+<div class="field"><label>Bề mặt</label><input id="surfaces" type="text" placeholder="Scale · texture · roughness"></div>
+<div class="field"><label>Hoàn thiện</label><select id="finishLevel"><option>Cao cấp</option><option>Thi công thực tế</option><option>Editorial</option><option>Natural</option></select></div>
+</div>
+</div>
+
+<div class="card">
+<h2><span class="num">04</span>MATERIAL INTELLIGENCE</h2>
+<div class="grid5">
+<div class="intel-cell"><small>BASE</small><b id="miBase">AI phân tích reference</b></div>
+<div class="intel-cell"><small>PALETTE</small><b id="miPalette">AI cân bằng</b></div>
+<div class="intel-cell"><small>SURFACE</small><b id="miSurface">Theo reference</b></div>
+<div class="intel-cell"><small>ROUGHNESS / SCALE</small><b id="miRough">—</b></div>
+<div class="intel-cell"><small>REFLECTION / DETAIL</small><b id="miReflect">—</b></div>
+</div>
+</div>
+
+<div class="card">
+<h2><span class="num">05</span>CAMERA STORYTELLING</h2>
+<div class="grid4">
+<div class="story"><small>WHAT</small><b id="csStory">—</b></div>
+<div class="story"><small>SHOT</small><b id="csShot">—</b></div>
+<div class="story"><small>WHY</small><b id="csReason">—</b></div>
+<div class="story"><small>LENS</small><b id="csLens">35mm</b></div>
+</div>
+</div>
+
+<div class="card">
+<h2><span class="num">06</span>BẢO TOÀN & QUYỀN CAN THIỆP AI</h2>
+<div class="guard">
+<label><input type="checkbox" data-guard="architecture" checked>Kiến trúc</label>
+<label><input type="checkbox" data-guard="camera" checked>Camera</label>
+<label><input type="checkbox" data-guard="furniture" checked>Furniture</label>
+<label><input type="checkbox" data-guard="proportion" checked>Tỷ lệ / scale</label>
+<label><input type="checkbox" data-guard="ceiling">Trần</label>
+<label><input type="checkbox" data-guard="openings">Cửa / cửa sổ</label>
+</div>
+<div class="mode"><button data-mode="LOCK" class="on">LOCK<small>Giữ nguyên</small></button><button data-mode="EDIT">EDIT<small>Chỉ sửa phần yêu cầu</small></button><button data-mode="FREE">FREE<small>Cho phép đề xuất</small></button></div>
+</div>
+
+<div class="card">
+<h2><span class="num">07</span>MASTER PROMPT</h2>
+<div class="prompt" id="prompt">Chưa có Prompt.</div>
+<div class="prompt-actions">
+<input id="promptEdit" type="text" placeholder="Sửa nhanh: thay marble bằng travertine · Camera: 50mm">
+<button class="btn" id="applyEdit">Áp dụng sửa</button><button class="btn" id="copyPrompt">Sao chép</button><button class="btn" id="clearPrompt">Xoá</button>
+</div>
+<div class="status" id="promptStatus"></div>
+</div>
+
+<div class="card">
+<h2><span class="num">08</span>DESIGN VERSION</h2>
+<div class="versions" id="versions"></div>
+<div class="actions"><input id="versionName" type="text" placeholder="Tên phiên bản · V02"><button class="btn" id="saveVersion">Lưu phiên bản</button></div>
+<div class="compare" id="versionCompare">V01 · phiên bản hiện tại</div>
+</div>
+</div>
+
+<aside>
+<div class="card"><h2>DESIGN STATE</h2><div class="metrics"><div class="metric"><small>LĨNH VỰC</small><b id="mDomain">Kiến trúc</b></div><div class="metric"><small>KHÔNG GIAN</small><b id="mRoom">Nhà ở</b></div><div class="metric"><small>VẬT LIỆU</small><b id="mMat">AI phân tích</b></div><div class="metric"><small>CAMERA</small><b id="mCamera">35mm</b></div></div></div>
+<div class="card"><h2>DESIGN BRAIN</h2><p class="sub">Suy luận nội bộ, không đẩy reasoning dài vào Prompt cuối.</p><div id="brainSummary" class="compare">Đang đồng bộ Design State…</div></div>
+<div class="card"><h2>ARCHITECTURAL FEASIBILITY</h2><div id="feasibility" class="compare">Chưa đủ dữ liệu để kiểm tra.</div></div>
+<div class="card"><h2>RENDER OUTPUT</h2><div class="result">Khu vực dành cho ảnh render.<br>HOANGGIA AI hiện tập trung vào Design Brain + Prompt Compiler.</div></div>
+</aside>
+</div>
+</section>
+
+<section class="panel" id="panel-edit"><div class="card"><h2>CHỈNH SỬA CÓ KIỂM SOÁT</h2><p class="sub">Dùng Prompt cuối ở tab Dựng hình. HOANGGIA AI giữ nguyên kiến trúc, camera và các vùng đã khóa; chỉ thay đổi phần được yêu cầu.</p><button class="btn primary" data-jump="render">Quay về Prompt Compiler</button></div></section>
+<section class="panel" id="panel-camera"><div class="card"><h2>CAMERA DIRECTOR</h2><div class="grid4"><div class="story"><small>STYLE</small><b id="camStyleOut">Phối cảnh tự nhiên</b></div><div class="story"><small>LENS</small><b id="camLensOut">35mm</b></div><div class="story"><small>SHOT</small><b id="camShotOut">Balanced hero</b></div><div class="story"><small>RULE</small><b>Không méo · giữ tỷ lệ</b></div></div></div></section>
+<section class="panel" id="panel-tools"><div class="card"><h2>CÔNG CỤ</h2><div class="actions"><button class="btn" data-jump="render">Prompt Compiler</button><button class="btn" id="exportState">Xuất Design State</button><button class="btn" id="resetState">Reset workspace</button></div><p class="sub" style="margin-top:10px">Design State được lưu cục bộ trên trình duyệt để có thể tiếp tục làm việc.</p></div></section>
+
+<footer class="creatorFooter" aria-label="Giới thiệu Hoàng Gia"><div><h2>HOÀNG GIA</h2><p class="role">Architect · Interior Designer · Founder · Art Direction · AI Design</p><p>☎ 0368.250.848</p></div><div class="creatorLinks"><a href="tel:0368250848">☎ 0368.250.848</a><a href="https://www.facebook.com/share/1Dw7UVryGH/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook cá nhân</a><a href="https://www.tiktok.com/@kts.hoanggia.da?_r=1&_t=ZS-9A94K57E0yg" target="_blank" rel="noopener noreferrer">TikTok cá nhân</a></div></footer>
+</main>
+</div>
+<div class="toast" id="toast"></div>
 <script>
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);let cam='Góc 3/4 hero shot';
-function toast(t){const x=$('#toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
-function activate(tab){$$('.panel').forEach(x=>x.classList.toggle('on',x.id===tab));$$('.tab').forEach(x=>x.classList.toggle('on',x.dataset.tab===tab));$$('.nav button').forEach(x=>x.classList.toggle('on',x.dataset.tab===tab))}
-$$('[data-tab]').forEach(x=>x.onclick=()=>activate(x.dataset.tab));
-$$('.domain button').forEach(x=>x.onclick=()=>{ $$('.domain button').forEach(b=>b.classList.remove('on'));x.classList.add('on');$('#domainBadge').textContent=x.dataset.domain.toUpperCase();$('#mDomain').textContent=x.dataset.domain});
-function preview(input,drop){input.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{drop.querySelector('.preview').src=r.result;drop.classList.add('hasimg')};r.readAsDataURL(f)}}
-preview($('#scene'),$('#sceneDrop'));preview($('#ref'),$('#refDrop'));
-$$('.cam').forEach(b=>b.onclick=()=>{$$('.cam').forEach(x=>x.classList.remove('on'));b.classList.add('on');cam=b.dataset.c;$('#mCam').textContent=cam+' · '+$('#lens').value});
-$('#lens').onchange=()=>$('#mCam').textContent=cam+' · '+$('#lens').value;$('#style').onchange=()=>$('#mPhong cách').textContent=$('#style').value;$('#light').onchange=()=>$('#mLight').textContent=$('#light').value;
-function locks(){return [...$$('[data-lock]')].filter(x=>x.checked).map(x=>x.dataset.lock).join(', ')||'không khóa'}
-function ergonomic(){const r=$('#room')?.value||'';if(r.includes('Bếp'))return 'Kiểm tra công thái học bếp, vùng thao tác liên tục, khoảng mở cánh và lối đi.';if(r.includes('Ăn'))return 'Kiểm tra cao độ bàn ghế, khoảng kéo ghế và lưu thông; đèn thả căn đúng trục bàn.';if(r.includes('ngủ'))return 'Kiểm tra lối đi hai bên giường, cuối giường, tầm với tab và đèn.';if(r.includes('tắm'))return 'Phân vùng khô/ướt, cửa không va thiết bị, vật liệu chống trượt và dễ vệ sinh.';return 'Kiểm tra công thái học, tỷ lệ đồ nội thất và lưu thông; ưu tiên lối chính khoảng 900–1200 mm khi mặt bằng cho phép.'}
-function brandDNA(){const b=($('#brand')?.value||'').toLowerCase();if(b.includes('poliform')||b.includes('minotti')||b.includes('flexform'))return 'modern luxury Ý, modular, tỷ lệ tinh gọn, bespoke, vật liệu cao cấp';if(b.includes('poltrona frau')||b.includes('baxter'))return 'da cao cấp, thủ công, may đo, patina tự nhiên, tactile richness';if(b.includes('rimadesio'))return 'kiến trúc nội thất, kính và kim loại, precision, custom-made';if(b.includes('cassina'))return 'design heritage, vật liệu chọn lọc, thủ công và đổi mới';if(b.includes('vitra')||b.includes('fritz hansen')||b.includes('gubi'))return 'design hiện đại, ergonomic, hình học rõ, vật liệu tự nhiên';return 'không sao chép thương hiệu; xây dựng ngôn ngữ riêng nhất quán với kiến trúc'}
-function makePrompt(){return 'HOANGGIA AI — MASTER PROMPT\n\nLĨNH VỰC\n'+$('#domainBadge').textContent+' visualization.\n\nÝ ĐỒ THIẾT KẾ\n'+($('#brief').value||'Refined high-end spatial design with clear hierarchy, human scale and functional circulation.')+'\n\nTRÍ TUỆ THIẾT KẾ\nKhông gian: '+$('#room').value+'. Trọng tâm: '+$('#focus').value+'. Kích thước: '+($('#spaceSize').value||'infer from reference')+'. Trần: '+($('#ceilingHeight').value||'infer from reference')+'. Giao thông: '+($('#circulation').value||'clear and practical')+'. Hiện trạng: '+($('#existing').value||'preserve locked elements')+'. Công thái học: '+ergonomic()+'\n\nSTYLE\n'+$('#style').value+'\n\nART DIRECTION\nReason as an interior architect, architect and visual art director before rendering. Prioritize function, proportion, circulation, hierarchy, material coherence, lighting logic and believable scale.\n\nTRÍ TUỆ VẬT LIỆU\n'+$('#mat').value+'. Infer color, vein/grain direction, porosity, roughness, reflectivity, micro-texture, thickness, edge profile, joints and seams. Bề mặt: '+($('#surfaces').value||'coherent natural materials')+'. Bảng màu: '+($('#palette').value||'restrained luxury palette')+'. Chi tiết thi công: '+($('#joinery').value||'precise, minimal and buildable')+'. Độ hoàn thiện: '+($('#finishLevel').value||'Cao cấp')+'. Avoid plastic surfaces.\n\nNGÔN NGỮ NỘI THẤT\nPhilosophy: '+$('#furnitureLens').value+'. Thương hiệu tham chiếu: '+$('#brand').value+'. Translate only the design language — '+brandDNA()+'. Do not copy a specific product unless a reference image is supplied.\n\nNGUYÊN LÝ ÁNH SÁNG\n'+$('#light').value+'. Reason from light direction → shadow behavior → material response → exposure. Preserve believable indirect bounce, color temperature, highlight control and architectural hierarchy.\n\nCAMERA\n'+cam+', '+$('#lens').value+', '+$('#camera').value+', aspect ratio '+$('#ratio').value+'. Kiểm soát đường đứng and intentional foreground/midground/background hierarchy.\n\nBẢO TOÀN / KHÓA THIẾT KẾ\nLocked elements: '+locks()+'. Do not redesign, relocate, distort or reinterpret locked elements. Preserve original furniture models whenever requested.\n\nCHÂN THỰC\nHigh-end architectural photography, photorealistic material response, natural color science, subtle depth, realistic scale and restrained post-processing.\n\nLOẠI TRỪ\nwarped architecture, bent verticals, incorrect scale, floating furniture, duplicated objects, melted details, fake reflections, excessive HDR, oversaturation, generic AI decor, unnecessary redesign.'}
-$('#magic').onclick=()=>{window.HG_SYNC_DESIGN_STATE?.('magic');setTimeout(()=>{window.HG_COMPILE_BRAIN?.();const p=window.HG_DESIGN_STATE?.prompt?.master||'';$('#prompt').textContent=p;toast('Đã tạo Prompt tổng thể')},120)};
-$('#copy').onclick=async()=>{const p=window.HG_DESIGN_STATE?.prompt?.master||$('#prompt').textContent||'';try{await navigator.clipboard.writeText(p);toast('Đã copy prompt')}catch(e){toast('Không thể copy tự động')}};
-$('#magic25').onclick=()=>{activate('camera');$('#camera25').click()};
-$('#camera25').onclick=()=>{const a=['Góc 3/4 hero','Chính diện symmetry','Chéo perspective','Góc rộng tổng thể','Tầm mắt tự nhiên','Góc thấp kiến trúc','Góc cao tổng quan','Góc từ lối vào','Góc chủ đạo phòng khách','Góc bếp trong bối cảnh','Bố cục khu ăn uống','Vật liệu wall detail','Cận cảnh sofa','Ánh sáng detail','Chi tiết thi công detail','Đá close-up','Gỗ texture macro','Cụm trang trí','Góc từ cửa sổ vào nội thất','Trục hành lang','Bố cục qua phản chiếu','Tiền cảnh nhiều lớp','Không khí lúc chạng vạng','Chi tiết phong cách tạp chí','Khung hình dấu ấn cuối'];$('#cameraOut').textContent=a.map((x,i)=>(i+1).toString().padStart(2,'0')+' — '+x+' · '+$('#lens').value+' · '+$('#style').value).join('\n');toast('Đã tạo 25 góc camera')};
-$('#editBtn').onclick=()=>{$('#editPrompt').textContent='HOANGGIA AI — CONTROLLED EDIT PROMPT\n\nEDIT REQUEST\n'+($('#editBrief').value||'Make the requested change only.')+'\n\nPRESERVE\nOriginal furniture geometry/model, dimensions, position, architecture, camera, perspective, lighting logic and all unrelated materials.\n\nRULE\nChange only the explicitly requested area. No redesign. No additional objects. No geometry drift. Photorealistic integration with correct scale, contact shadows, reflections and material response.\n\nLOẠI TRỪ\nchanged camera, altered walls, warped furniture, duplicated objects, wrong proportions, invented decor, plastic materials, AI artifacts.';toast('Đã tạo Prompt chỉnh sửa')};
-$('#quickAnalyze').onclick=()=>{$('#toolOut').textContent='HOANGGIA AI — REFERENCE ANALYSIS\n\n01 / ARCHITECTURE\nAnalyze geometry, ceiling height, openings, axes, existing elements, proportion and visual hierarchy. Separate what must be preserved from what may be redesigned.\n\n02 / FUNCTION + ERGONOMICS\nInfer room type, circulation, furniture clearances, access points and human scale. Flag conflicts before styling.\n\n03 / TRÍ TUỆ VẬT LIỆU\nIdentify stone/wood/leather/textile/metal candidates and describe color, grain/vein, porosity, roughness, reflectivity, micro-texture, edge thickness, joints and seams.\n\n04 / NGUYÊN LÝ ÁNH SÁNG\nInfer light direction → shadow softness → color temperature → material response → exposure. Distinguish daylight, ambient, accent and decorative layers.\n\n05 / CAMERA\nRead viewpoint, lens impression, camera height, vertical control, foreground/midground/background hierarchy and depth.\n\n06 / ART DIRECTION\nExtract palette, styling density, focal point and atmosphere without blindly copying objects. Use observations as constraints for the Prompt tổng thể.'};
-$('#sync').onclick=()=>$('#toolOut').textContent='SYNC VIEW PROMPT\n\nKeep the locked reference as the material + lighting master. For each new camera, preserve material palette, roughness, color temperature, exposure logic and atmosphere. Change only composition and camera position.';
-$('#creative').onclick=()=>$('#toolOut').textContent='9 CREATIVE DETAIL VIEWS\n01 Vật liệu hero\n02 Sofa + table interaction\n03 Ánh sáng detail\n04 Chi tiết thi công close-up\n05 Đá / veneer macro\n06 Cụm trang trí\n07 Window atmosphere\n08 Architectural axis\n09 Signature editorial frame';
-$('#clear').onclick=()=>{location.reload()};
-</script><script id="hg-upgrade-js">
 (function(){
- const roles=[...document.querySelectorAll('.ref-role')];
- function update(){document.getElementById('refState').textContent=roles.filter(x=>x.classList.contains('has')).length+' / 5 vai trò';document.getElementById('styleState').textContent=document.getElementById('style')?.value||'Chưa chọn';document.getElementById('finishState').textContent=(document.getElementById('finishLevel')?.value||'').replace('Cao cấp — cân bằng chi phí và chất lượng','Cao cấp')||'Chưa chọn';document.getElementById('lockState').textContent=[...document.querySelectorAll('[data-lock]')].filter(x=>x.checked).length+' khóa đang bật'}
- roles.forEach(role=>{const input=role.querySelector('input'),img=role.querySelector('img'),lock=role.querySelector('.lock');input.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{img.src=rd.result;role.classList.add('has');update()};rd.readAsDataURL(f)});lock.addEventListener('click',e=>{e.preventDefault();lock.textContent=lock.textContent.includes('🔒')?'🔓 Mở khóa':'🔒 Khóa';lock.dataset.locked=lock.textContent.includes('🔒')?'1':'0'})});
- document.getElementById('clearRefs')?.addEventListener('click',()=>{roles.forEach(r=>{r.classList.remove('has');r.querySelector('input').value='';r.querySelector('img').removeAttribute('src');r.querySelector('.lock').textContent='🔒 Khóa'});update()});
- document.getElementById('materialBuild')?.addEventListener('click',()=>{const m=document.getElementById('mat').value;const text=m==='AI phân tích reference'?'Tự suy luận từ ảnh tham chiếu: màu · vân · độ nhám · phản xạ':'Ưu tiên '+m.toLowerCase()+' với màu tự nhiên, vi cấu trúc chân thực, mép và khe nối có tỷ lệ thi công được';document.getElementById('matStone').textContent=text;document.getElementById('matWood').textContent='Hướng vân nhất quán, thớ gỗ rõ nhưng không quá sắc';document.getElementById('matTextile').textContent='Độ mềm, nếp gấp và độ phản sáng đúng vật liệu';document.getElementById('matMetal').textContent='Kiểm soát highlight, xước vi mô và phản xạ môi trường';document.getElementById('matSurface').textContent='Không nhựa hóa, không bóng giả, ưu tiên phản xạ vật lý';toast('Đã phân tích bảng vật liệu')});
- document.getElementById('style')?.addEventListener('change',update);document.getElementById('finishLevel')?.addEventListener('change',update);document.querySelectorAll('[data-lock]').forEach(x=>x.addEventListener('change',update));update();
-})();
-</script><script id="hg-canvas-js">
-(function(){
- const stage=document.getElementById('canvasStage'),img=document.getElementById('canvasImg'),file=document.getElementById('canvasFile'),log=document.getElementById('canvasLog');let target='Sofa',mode='select';
- file?.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{img.src=r.result;stage.classList.add('hasimg');log.textContent='Đã nạp ảnh. Chọn đối tượng và lớp xử lý.'};r.readAsDataURL(f)});
- document.querySelectorAll('.canvas-toolbar .mini[data-mode]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.canvas-toolbar .mini[data-mode]').forEach(x=>x.classList.remove('on'));b.classList.add('on');mode=b.dataset.mode;log.textContent='Lớp đang chọn: '+({select:'Chọn đối tượng',material:'Vật liệu',light:'Ánh sáng',preserve:'Bảo toàn'}[mode]||mode)});
- document.querySelectorAll('.target').forEach(b=>b.onclick=()=>{document.querySelectorAll('.target').forEach(x=>x.classList.remove('on'));b.classList.add('on');target=b.dataset.target;log.textContent='Đối tượng: '+target+'\nLớp xử lý: '+({select:'Chọn đối tượng',material:'Vật liệu',light:'Ánh sáng',preserve:'Bảo toàn'}[mode]||mode)});
- document.getElementById('canvasPrompt')?.addEventListener('click',()=>{const layer={select:'điều chỉnh đối tượng có kiểm soát',material:'thay đổi vật liệu nhưng giữ nguyên hình học và tỷ lệ',light:'điều chỉnh ánh sáng, hướng sáng và phản xạ nhưng không đổi kiến trúc',preserve:'khóa hình học, vị trí, kích thước và camera'}[mode];log.textContent='HOANGGIA AI — CANVAS INSTRUCTION\n\nĐỐI TƯỢNG: '+target+'\nYÊU CẦU: '+layer+'.\n\nNGUYÊN TẮC: giữ nguyên kiến trúc, camera, phối cảnh và các đối tượng không được chọn. Không tự thêm decor. Tỷ lệ và tiếp xúc vật lý phải chân thực.\n\nMỤC TIÊU: '+target+' phải hòa nhập với ánh sáng, vật liệu và bối cảnh hiện hữu.';toast('Đã tạo chỉ dẫn Canvas')});
- document.getElementById('clearCanvas')?.addEventListener('click',()=>{stage.classList.remove('hasimg');img.removeAttribute('src');file.value='';log.textContent='Chưa có vùng được chọn.'});
-})();
-</script><script id="hg-furniture-js">
-(function(){
- function load(id,box){const input=document.getElementById(id),img=box.querySelector('img');input.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{img.src=r.result;box.classList.add('has')};r.readAsDataURL(f)})}
- load('frTargetFile',document.getElementById('frTarget'));load('frRefFile',document.getElementById('frRef'));
- document.getElementById('frPrompt')?.addEventListener('click',()=>{const type=document.getElementById('frType').value,change=document.getElementById('frChange').value;const locks=[...document.querySelectorAll('.fr-locks input')].filter(x=>x.checked).map(x=>x.parentElement.textContent.trim().replace('Khóa ','').replace('Giữ ','')).join('; ');const prompt='Thay đúng '+type+' bằng sản phẩm trong ảnh tham chiếu theo phương án '+change.toLowerCase()+'. Phân tích hình học, tỷ lệ, cấu trúc, vật liệu, đường may / mối nối và ngôn ngữ thiết kế, sau đó đồng bộ sản phẩm mới với mặt sàn, tường, ánh sáng và phối cảnh hiện hữu. Bảo toàn '+locks+'. Không thay đổi kiến trúc, camera, tiêu cự, phối cảnh hoặc các đồ vật ngoài phạm vi yêu cầu; không nhân bản hay làm biến dạng sản phẩm, đồng thời giữ tiếp xúc, bóng đổ và phản xạ tự nhiên. Kết quả photorealistic, tỷ lệ chính xác, vật liệu chân thực và hòa nhập tự nhiên với không gian.';document.getElementById('frOutput').textContent=prompt;toast('Đã tạo Prompt thay thế nội thất')});
- document.getElementById('frReset')?.addEventListener('click',()=>{['frTarget','frRef'].forEach(id=>{const b=document.getElementById(id);b.classList.remove('has');b.querySelector('input').value='';b.querySelector('img').removeAttribute('src')});document.getElementById('frOutput').textContent='Chưa tạo Prompt.'});
-})();
-</script><script id="hg-domain-js">
-(function(){
-const engines={
- 'Kiến trúc':{
-  logic:'Tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn',
-  nodes:['Tỷ lệ & quy mô','Công năng','Hình khối','Mặt đứng','Vật liệu','Ánh sáng','Góc nhìn'],
-  rules:['Kiểm tra tỷ lệ khối tích và nhịp điệu mặt đứng.','Xác định quan hệ công năng, tiếp cận và trục nhìn.','Ưu tiên hình khối, khoảng đặc/rỗng và ngôn ngữ kiến trúc.','Vật liệu phải phản hồi đúng quy mô và điều kiện ánh sáng.','Kiểm soát đường đứng, phối cảnh và điểm nhìn kiến trúc.']
- },
- 'Nội thất':{
-  logic:'Công năng → công thái học → furniture → vật liệu → ánh sáng → camera',
-  nodes:['Công năng','Công thái học','Furniture','Vật liệu','Ánh sáng','Camera'],
-  rules:['Xác định hoạt động chính và thứ tự ưu tiên trong không gian.','Kiểm tra kích thước người dùng, khoảng đi lại và vùng thao tác.','Phân bổ furniture theo tỷ lệ, hierarchy và điểm nhấn.','Phân tích vật liệu theo màu, vân, độ nhám, phản xạ và vi cấu trúc.','Xây dựng lớp sáng: tự nhiên → nền → nhấn → trang trí.','Chọn góc máy phù hợp hierarchy và kiểm soát phối cảnh.']
- },
- 'Quy hoạch':{
-  logic:'Mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn',
-  nodes:['Mật độ','Giao thông','Phân khu','Cảnh quan','Khối tích','Góc nhìn'],
-  rules:['Đánh giá mật độ xây dựng, hệ số sử dụng đất và khoảng mở ở mức ý tưởng.','Xác định trục chính, tiếp cận, phân cấp giao thông và dòng người/xe.','Tổ chức các khu chức năng theo quan hệ sử dụng và bán kính tiếp cận.','Tạo mạng xanh, mặt nước và không gian công cộng liên tục.','Điều chỉnh khối tích theo địa hình, trục nhìn, mật độ và điểm nhấn.','Chọn góc nhìn tổng thể, chim bay và cấp mắt để đọc được cấu trúc toàn khu.']
- }
-};
+"use strict";
+const $=id=>document.getElementById(id);
 const profiles={
- 'Kiến trúc':{
-  desc:'Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh',
-  room:['Nhà ở','Biệt thự','Căn hộ','Nhà phố','Công trình công cộng','Văn phòng','Khách sạn / lưu trú','Nhà hàng','Showroom','Không gian ngoài trời'],
-  focus:['Kiến trúc + nội thất cân bằng','Hình khối + tỷ lệ kiến trúc','Mặt đứng + vật liệu','Công năng + công thái học','Ánh sáng kiến trúc','Thiết kế để thi công thực tế'],
-  style:['Kiến trúc hiện đại','Kiến trúc hữu cơ','Kiến trúc nhiệt đới','Kiến trúc Địa Trung Hải','Kiến trúc nghỉ dưỡng','Tối giản kiến trúc','Brutalism','Bauhaus','Đương đại','Tân cổ điển đương đại'],
-  light:['Ánh sáng ban mai','Ánh sáng giữa trưa','Nắng chiều ấm','Giờ vàng','Giờ xanh','Ánh sáng tán xạ','Nắng tương phản mạnh','Ánh sáng mặt đứng','Ngoại thất chạng vạng'],
-  mat:['AI phân tích ảnh tham chiếu','Đá tự nhiên','Đá travertine','Đá limestone','Đá granite','Đá onyx','Đá quartzite','Đá nung kết','Gỗ tự nhiên','Gạch / bê tông','Kính','Kim loại'],
-  furniture:['Tổng hợp cao cấp','Thiết kế riêng / may đo','Italian Đương đại','Tối giản','Bắc Âu','Nhật Bản','Contract / Lưu trú & dịch vụ'],
-  camera:['Phối cảnh kiến trúc tự nhiên','Kiểm soát đường đứng','Góc hero công trình','Góc mặt đứng','Góc thấp kiến trúc','Nhiếp ảnh kiến trúc'],
-  brief:'Ví dụ: Kiến trúc hiện đại, giữ nguyên khối nhà và cao độ, nhấn vật liệu mặt đứng, ánh sáng chiều ấm...'
- },
- 'Nội thất':{
-  desc:'Công năng · đồ nội thất · vật liệu · ánh sáng · công thái học · art direction',
-  room:['Phòng khách','Phòng ngủ chính','Phòng ăn','Bếp','Phòng làm việc','Phòng thay đồ','Phòng tắm','Sảnh / hành lang','Showroom','Nhà hàng / khách sạn','Biệt thự','Căn hộ','Nhà phố'],
-  focus:['Kiến trúc + nội thất cân bằng','Công năng + công thái học','Vật liệu cao cấp','Nội thất rời','Ánh sáng + không khí','Định hướng nghệ thuật','Thiết kế để thi công thực tế'],
-  style:['Luxury hiện đại','Luxury tối giản','Luxury tinh tế','Luxury đương đại','Tân cổ điển đương đại','Art Deco','Đương đại','Hiện đại hữu cơ','Tối giản','Japandi','Wabi-Sabi','Bắc Âu','Mid-Century Modern','Chiết trung','Bán lẻ cao cấp','Boutique thời trang','Phòng trưng bày','Văn phòng điều hành'],
-  light:['Ánh sáng ban mai','Ánh sáng giữa trưa','Nắng chiều ấm','Giờ vàng','Giờ xanh','Ánh sáng nền ấm','Đèn hắt khe trần','Đèn tuyến tính','Đèn âm trần','Đèn rửa tường','Đèn nhấn','Đèn trang trí','Ánh sáng gián tiếp','Ánh sáng mềm kiểu tạp chí','Ánh sáng điện ảnh định hướng'],
-  mat:['AI phân tích ảnh tham chiếu','Đá cẩm thạch','Đá travertine','Đá limestone','Đá onyx','Đá nung kết','Gỗ óc chó','Gỗ sồi','Gỗ teak','Veneer gỗ','Gỗ soi rãnh','Da nguyên tấm','Da aniline','Da semi-aniline','Da bò','Vải linen','Vải bouclé','Vải nhung','Vải len','Đồng thau xước','Bronze','Thép đen hóa','Thép không gỉ'],
-  furniture:['Tổng hợp cao cấp','Italian Đương đại','Italian Luxury tối giản','Đương đại Pháp','Nhật Bản','Bắc Âu','Thiết kế sưu tầm','Thiết kế riêng / may đo','Contract / Lưu trú & dịch vụ'],
-  camera:['Phối cảnh nội thất tự nhiên','Kiểm soát đường đứng','Nhiếp ảnh nội thất phong cách tạp chí','Góc 3/4 hero','Cận cảnh vật liệu','Cận cảnh nội thất'],
-  brief:'Ví dụ: Luxury hiện đại, giữ nguyên sofa, thay mảng TV bằng travertine, ánh sáng chiều ấm, vật liệu chân thực...'
- },
- 'Quy hoạch':{
-  desc:'Tổng mặt bằng · phân khu · giao thông · cảnh quan · khối tích · góc nhìn trên cao',
-  room:['Khu đô thị','Khu dân cư','Khu nghỉ dưỡng','Khu phức hợp','Khu thương mại','Khu công nghiệp','Khu campus','Công viên / không gian công cộng','Quảng trường','Khu ven biển'],
-  focus:['Tổ chức tổng mặt bằng','Phân khu chức năng','Giao thông + tiếp cận','Cảnh quan + sinh thái','Khối tích + mật độ','Trục cảnh quan + điểm nhấn','Khả thi triển khai'],
-  style:['Quy hoạch hiện đại','Đô thị sinh thái','Đô thị nén','Nghỉ dưỡng nhiệt đới','Địa Trung Hải','Cảnh quan đương đại','Sinh thái','Tối giản','Hữu cơ','Khu phức hợp cao cấp'],
-  light:['Ánh sáng ban mai','Nắng chiều ấm','Giờ vàng','Giờ xanh','Ánh sáng tán xạ','Nắng tương phản mạnh','Ngoại thất chạng vạng','Ánh sáng cảnh quan ban đêm'],
-  mat:['AI phân tích ảnh tham chiếu','Đá tự nhiên','Đá nung kết','Bê tông','Gạch','Gỗ ngoài trời','Kính','Kim loại','Cây xanh bản địa','Mặt nước','Vật liệu lát cảnh quan'],
-  furniture:['Thiết kế cảnh quan','Street furniture','Thiết kế công cộng','Nghỉ dưỡng','Đương đại','Tối giản','Sinh thái'],
-  camera:['Tổng mặt bằng trên cao','Góc nhìn chim bay','Phối cảnh quy hoạch tổng thể','Góc từ trục chính','Góc cảnh quan cấp mắt','Góc hoàng hôn toàn khu'],
-  brief:'Ví dụ: Quy hoạch khu nghỉ dưỡng nhiệt đới, giữ trục giao thông chính, tăng mảng xanh, tổ chức khối tích theo địa hình...'
- }
-};
-function setOptions(id,items,groups){
- const el=document.getElementById(id);if(!el)return;
- const old=el.value;el.innerHTML='';
- (groups?groups:[{label:'Lựa chọn',items}]).forEach(g=>{
-  const og=document.createElement('optgroup');og.label=g.label;
-  g.items.forEach(v=>{const o=document.createElement('option');o.textContent=v;o.value=v;og.appendChild(o)});
-  el.appendChild(og);
- });
- const found=[...el.options].find(o=>o.value===old);if(found)el.value=old;
+"Kiến trúc":{
+ rooms:["Nhà ở","Biệt thự","Căn hộ","Nhà phố","Văn phòng","Khách sạn / lưu trú","Nhà hàng","Showroom","Công trình công cộng","Không gian ngoài trời"],
+ focus:["Hình khối + tỷ lệ kiến trúc","Công năng + tiếp cận","Mặt đứng + vật liệu","Ánh sáng kiến trúc","Kiến trúc + nội thất cân bằng","Thiết kế để thi công thực tế"],
+ styles:["Kiến trúc hiện đại","Kiến trúc hữu cơ","Kiến trúc nhiệt đới","Kiến trúc Địa Trung Hải","Tối giản kiến trúc","Brutalism","Bauhaus","Đương đại","Tân cổ điển đương đại"],
+ lights:["Ánh sáng ban mai","Ánh sáng giữa ngày","Ánh sáng chiều ấm","Golden hour","Blue hour","Ánh sáng khuếch tán","Ánh sáng mặt đứng","Hoàng hôn"],
+ mats:["AI phân tích từ ảnh","Đá tự nhiên","Travertine","Limestone","Marble","Quartzite","Sintered stone","Gỗ tự nhiên","Kính","Kim loại","Bê tông / gạch"],
+ chain:["tỷ lệ","công năng","hình khối","mặt đứng","vật liệu","ánh sáng","góc nhìn"]
+},
+"Nội thất":{
+ rooms:["Phòng khách","Phòng ngủ master","Phòng ăn","Bếp","Phòng làm việc","Dressing","Phòng tắm","Sảnh","Showroom","Hospitality","Villa","Apartment","Townhouse"],
+ focus:["Công năng + công thái học","Furniture + hierarchy","Vật liệu + chi tiết","Ánh sáng + atmosphere","Art direction","Kiến trúc + nội thất cân bằng","Thiết kế để thi công thực tế"],
+ styles:["Luxury Modern","Luxury Minimal","Luxury Refined","Luxury Contemporary","Neo-classical Contemporary","Art Deco","Contemporary","Organic Modern","Minimal","Japandi","Wabi-sabi","Mid-century","Eclectic","Premium Retail","Gallery","Executive Office"],
+ lights:["Ánh sáng ban mai","Ánh sáng giữa ngày","Ánh sáng chiều ấm","Golden hour","Blue hour","Warm ambient","Cove light","Linear light","Accent light","Decorative light","Editorial soft","Cinematic directional"],
+ mats:["AI phân tích từ ảnh","Marble","Travertine","Limestone","Onyx","Sintered stone","Walnut","Oak","Teak","Veneer","Fluted wood","Full-grain leather","Linen","Boucle","Velvet","Brushed brass","Bronze","Blackened steel"],
+ chain:["công năng","công thái học","furniture","vật liệu","ánh sáng","camera"]
+},
+"Quy hoạch":{
+ rooms:["Khu đô thị","Khu dân cư","Khu nghỉ dưỡng","Khu phức hợp","Khu thương mại","Khu công nghiệp","Campus","Công viên","Quảng trường","Khu ven biển"],
+ focus:["Tổng mặt bằng","Mật độ + khối tích","Giao thông + tiếp cận","Phân khu chức năng","Cảnh quan + sinh thái","Trục cảnh quan + điểm nhấn","Khả thi quy hoạch"],
+ styles:["Quy hoạch hiện đại","Đô thị sinh thái","Đô thị nén","Nghỉ dưỡng nhiệt đới","Địa Trung Hải","Cảnh quan đương đại","Sinh thái","Tối giản","Hữu cơ","Khu phức hợp cao cấp"],
+ lights:["Ánh sáng ban mai","Ánh sáng chiều ấm","Golden hour","Blue hour","Khuếch tán","Tương phản mạnh","Hoàng hôn","Landscape night"],
+ mats:["AI phân tích từ ảnh","Đá tự nhiên","Sintered stone","Bê tông","Gạch","Gỗ ngoài trời","Kính","Kim loại","Cây bản địa","Mặt nước","Paving cảnh quan"],
+ chain:["mật độ","giao thông","phân khu","cảnh quan","khối tích","góc nhìn"]
+}};
+let S=JSON.parse(localStorage.getItem("HG_AI_STATE")||"null")||{domain:"Kiến trúc",inputs:{},guardrails:{architecture:true,camera:true,furniture:true,proportion:true,ceiling:false,openings:false,mode:"LOCK"},versions:{current:"V01",items:{}},prompt:{master:"",ready:false}};
+const ids=["brief","room","focus","style","light","mat","ratio","spaceSize","ceilingHeight","circulation","existing","furnitureLens","cameraStyle","lens","palette","surfaces","finishLevel"];
+function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",1800)}
+function save(){localStorage.setItem("HG_AI_STATE",JSON.stringify(S))}
+function syncInputs(){S.inputs=S.inputs||{};ids.forEach(id=>{if($(id))S.inputs[id]=$(id).value.trim()});S.domain=document.querySelector("[data-domain].on")?.dataset.domain||S.domain}
+function opts(el,arr,keep){const old=el.value;el.innerHTML=arr.map(x=>"<option>"+x+"</option>").join("");if(keep&&arr.includes(old))el.value=old}
+function renderProfile(){
+ const p=profiles[S.domain];
+ opts($("room"),p.rooms,true);opts($("focus"),p.focus,true);opts($("style"),p.styles,true);opts($("light"),p.lights,true);opts($("mat"),p.mats,true);
+ if(!S.inputs.room) $("room").value=p.rooms[0];if(!S.inputs.focus)$("focus").value=p.focus[0];if(!S.inputs.style)$("style").value=p.styles[0];if(!S.inputs.light)$("light").value=p.lights[0];if(!S.inputs.mat)$("mat").value=p.mats[0];
+ ids.forEach(id=>{if(S.inputs[id]!==undefined&&$(id)&&id!=="room"&&id!=="focus"&&id!=="style"&&id!=="light"&&id!=="mat")$(id).value=S.inputs[id]});
+ renderFlow();renderIntel();renderState();renderBrain();
 }
-function renderEngine(domain){
- const e=engines[domain];if(!e)return;
- const flow=document.getElementById('thinkingFlow'),out=document.getElementById('engineOutput');
- document.getElementById('engineDomain').textContent=domain.toUpperCase();
- document.getElementById('engineLogic').textContent=e.logic;
- flow.innerHTML=e.nodes.map((n,i)=>'<span class="think-node active">'+String(i+1).padStart(2,'0')+' · '+n+'</span>'+ (i<e.nodes.length-1?'<span class="think-arrow">→</span>':'')).join('');
- out.innerHTML='<b>AI sẽ suy luận:</b> '+e.rules.join(' ');
+function renderFlow(){const c=profiles[S.domain].chain;$("flow").innerHTML=c.map((x,i)=>"<span class='node active'>"+x+"</span>"+(i<c.length-1?"<span class='arrow'>→</span>":"")).join("");$("engineTitle").textContent="BỘ MÁY TƯ DUY · "+S.domain.toUpperCase()}
+function renderIntel(){
+ const d=S.domain;
+ $("miBase").textContent=S.inputs.mat||"AI phân tích reference";$("miPalette").textContent=S.inputs.palette||"AI cân bằng";$("miSurface").textContent=S.inputs.surfaces||"Theo reference";
+ const p=d==="Nội thất"?["Khổ lớn, mạch gọn","Phản xạ vừa đủ theo nguồn sáng"]:d==="Kiến trúc"?["Module theo quy mô công trình","Kiểm soát phản xạ mặt đứng"]:["Module theo quy mô cảnh quan","Kiểm soát phản xạ mặt nước / kính"];
+ $("miRough").textContent=p[0]+" · roughness chân thực";$("miReflect").textContent=p[1]+" · vân / cạnh đúng scale";
+ const lens=S.inputs.lens||"35mm";$("csLens").textContent=lens;$("camLensOut").textContent=lens;$("camStyleOut").textContent=S.inputs.cameraStyle||"Phối cảnh tự nhiên";
+ const story=d==="Quy hoạch"?"Đọc toàn khu, trục chính và quan hệ cảnh quan":d==="Kiến trúc"?"Tôn hình khối, mặt đứng và tỷ lệ công trình":"Đọc công năng, hierarchy furniture và vật liệu";
+ $("csStory").textContent=story;$("csShot").textContent=lens==="28mm"?"Spatial wide":lens==="50mm"?"Detail / focused":"Balanced hero";$("csReason").textContent=d==="Nội thất"?"Tầm mắt tự nhiên, vertical control, tránh méo":"Giữ tỷ lệ hình học, kiểm soát đường đứng và chiều sâu";
 }
-function applyDomain(domain){
- const p=profiles[domain];if(!p)return; renderEngine(domain);
- setOptions('room',p.room);setOptions('focus',p.focus);setOptions('style',p.style);setOptions('light',p.light);setOptions('mat',p.mat);setOptions('furnitureLens',p.furniture);setOptions('camera',p.camera);
- const dc=document.getElementById('domainContext');if(dc)dc.innerHTML='<b>'+domain.toUpperCase()+'</b>'+p.desc;
- const brief=document.getElementById('brief');if(brief)brief.placeholder=p.brief;
- const m=document.getElementById('mDomain');if(m)m.textContent=domain;
- const badge=document.getElementById('domainBadge');if(badge)badge.textContent=domain.toUpperCase();
- document.documentElement.dataset.domain=domain;
- toast('Đã chuyển bộ công cụ sang '+domain);
+function renderState(){ $("mDomain").textContent=S.domain;$("mRoom").textContent=S.inputs.room||profiles[S.domain].rooms[0];$("mMat").textContent=S.inputs.mat||"AI phân tích";$("mCamera").textContent=(S.inputs.cameraStyle||"Tự nhiên")+" · "+(S.inputs.lens||"35mm");$("sideDomain").textContent=S.domain.toUpperCase();$("sideStatus").textContent=S.prompt.ready?"Design State · Prompt sẵn sàng":"Design State · đang đồng bộ";$("stateBadge").textContent=S.prompt.ready?"READY":"SYNC"}
+function renderBrain(){const c=profiles[S.domain].chain.join(" → ");$("brainSummary").textContent="Một bộ não suy luận: "+c+". Design Brain giữ logic nội bộ; Prompt Compiler chỉ xuất Prompt ngắn.";$("feasibility").innerHTML="<b>✓ Công năng</b> "+(S.inputs.room?"đã xác định":"AI suy luận theo ảnh")+"<br><b>✓ Tỷ lệ</b> "+(S.inputs.spaceSize||"theo ảnh tham chiếu")+"<br><b>✓ Camera</b> "+(S.inputs.lens||"35mm")+" · giữ phối cảnh"}
+function materialAndCamera(){syncInputs();renderIntel();renderState();renderBrain();save()}
+function compile(){
+ syncInputs();const i=S.inputs,d=S.domain;let p="";
+ const idea=i.brief||"Phân tích ảnh và yêu cầu trước khi thiết kế.";
+ if(d==="Kiến trúc")p="Nhà ở theo ảnh tham chiếu, giữ nguyên hiện trạng và tỷ lệ kiến trúc. Phát triển thiết kế theo tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn. Phân tích vật liệu từ ảnh, đảm bảo đúng scale, vân, roughness và reflection. "+(i.light||"Ánh sáng ban mai tự nhiên")+". Camera "+(i.cameraStyle||"phối cảnh kiến trúc tự nhiên")+", không méo, giữ nguyên quan hệ không gian. Không thay đổi kiến trúc, cửa, cửa sổ, cao độ, kích thước hoặc camera nếu không được yêu cầu. Không thêm decor/furniture ngẫu nhiên. Photorealistic architectural visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows.";
+ else if(d==="Nội thất")p="Không gian nội thất theo ảnh tham chiếu, giữ nguyên kiến trúc và tỷ lệ hiện trạng. Phát triển thiết kế theo công năng → công thái học → furniture → vật liệu → ánh sáng → camera. Phân tích vật liệu và furniture từ ảnh, đảm bảo đúng tỷ lệ, scale, vân, texture, roughness và reflection. "+(i.light||"Ánh sáng ban mai tự nhiên")+", cân bằng ambient và accent light. Camera "+(i.cameraStyle||"nội thất tự nhiên")+", không méo, giữ nguyên phối cảnh và quan hệ không gian. Không thay đổi tường, trần, sàn, cửa, cửa sổ, kích thước hoặc camera nếu không được yêu cầu. Không thêm hoặc loại bỏ furniture/decor ngoài phạm vi yêu cầu. Photorealistic interior visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows.";
+ else p="Khu quy hoạch theo ảnh tham chiếu, giữ nguyên hiện trạng và quan hệ tổng thể. Phát triển thiết kế theo mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn. Phân tích địa hình, tỷ lệ không gian, mạng giao thông, cây xanh, mặt nước và vật liệu cảnh quan theo đúng scale. "+(i.light||"Ánh sáng ban mai tự nhiên")+", thể hiện rõ khối tích và cảnh quan. Camera "+(i.cameraStyle||"tổng thể hoặc bird’s-eye")+" tự nhiên, giữ đúng tỷ lệ, trục nhìn và quan hệ giữa các khu vực. Không tự ý thay đổi ranh giới, giao thông, khối tích hoặc các thành phần hiện hữu nếu không được yêu cầu. Không thêm công trình hoặc cảnh quan ngẫu nhiên. Photorealistic architectural planning visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows.";
+ S.prompt={master:p,ready:true,version:"COMPACT-1.0",updatedAt:new Date().toISOString()};$("prompt").textContent=p;$("promptStatus").textContent="Prompt đã biên dịch · "+d;renderState();save();toast("Đã tạo Prompt tổng thể");return p
 }
-document.querySelectorAll('.domain button').forEach(b=>{
- const count=document.createElement('span');count.className='domain-count';count.textContent=b.dataset.domain==='Kiến trúc'?'A':b.dataset.domain==='Nội thất'?'I':'Q';b.appendChild(count);
- b.addEventListener('click',()=>applyDomain(b.dataset.domain));
-});
-applyDomain('Kiến trúc');
+function applyEdit(){
+ const input=$("promptEdit"),edit=input.value.trim();if(!edit){return}
+ if(!S.prompt.ready)compile();let p=S.prompt.master,changed=false;
+ const m=edit.match(/^(ý tưởng|phong cách|kích thước|trần|chiều cao trần|furniture|vật liệu|ánh sáng|camera|giao thông|cảnh quan|khối tích)s*:s*(.+)$/i);
+ const labels={"ý tưởng":"Ý tưởng","phong cách":"Phong cách","kích thước":"Kích thước","trần":"Trần","chiều cao trần":"Trần","furniture":"Furniture","vật liệu":"Vật liệu","ánh sáng":"Ánh sáng","camera":"Camera","giao thông":"Giao thông","cảnh quan":"Cảnh quan","khối tích":"Khối tích"};
+ if(m){const label=labels[m[1].toLowerCase()],re=new RegExp("("+label.replace(/[.*+?^{}()|[\]\\]/g,"\\$&")+"[^.]*?)(?=\.|$)","i");if(re.test(p)){p=p.replace(re,label+": "+m[2]);changed=true}}
+ if(!changed){let x=edit.match(/^thays+(.+?)s+(?:bằng|thành)s+(.+)$/i)||edit.match(/^(.+?)s*(?:->|→)s*(.+)$/);if(x&&p.toLowerCase().includes(x[1].toLowerCase())){p=p.replace(new RegExp(x[1].replace(/[.*+?^{}()|[\]\\]/g,"\\$&"),"ig"),x[2]);changed=true}}
+ if(!changed)p+=" Chỉnh sửa: "+edit+".";
+ S.prompt.master=p;S.prompt.updatedAt=new Date().toISOString();$("prompt").textContent=p;$("promptStatus").textContent=changed?"Đã thay thế trong Prompt":"Đã thêm yêu cầu chỉnh sửa";input.value="";save()
+}
+function copyPrompt(){const p=$("prompt").textContent.trim();if(!p||p==="Chưa có Prompt.")return toast("Chưa có Prompt");navigator.clipboard?.writeText(p).then(()=>toast("Đã sao chép Prompt")).catch(()=>toast("Không thể sao chép tự động"))}
+function clearPrompt(){S.prompt={master:"",ready:false};$("prompt").textContent="Chưa có Prompt.";$("promptEdit").value="";$("promptStatus").textContent="Prompt đã xoá";renderState();save();toast("Đã xoá Prompt")}
+function snapshot(){syncInputs();return JSON.parse(JSON.stringify({domain:S.domain,inputs:S.inputs,guardrails:S.guardrails,prompt:S.prompt}))}
+function versionSave(label){
+ label=(label||"").trim().toUpperCase()||("V0"+(Object.keys(S.versions.items).length+1));S.versions.items[label]={label,createdAt:new Date().toISOString(),state:snapshot()};S.versions.current=label;renderVersions();save();$("versionName").value="";toast("Đã lưu "+label)
+}
+function versionSwitch(label){const v=S.versions.items[label];if(!v)return;S.domain=v.state.domain;S.inputs=v.state.inputs||{};S.guardrails=v.state.guardrails||S.guardrails;S.prompt=v.state.prompt||{};S.versions.current=label;renderProfile();$("prompt").textContent=S.prompt.master||"Chưa có Prompt.";renderVersions();save();toast("Đã chuyển "+label)}
+function renderVersions(){const list=Object.values(S.versions.items);$("versions").innerHTML=list.map(v=>"<button class='version "+(v.label===S.versions.current?"on":"")+"' data-version='"+v.label+"'>"+v.label+"</button>").join("")||"<span class='status'>Chưa có phiên bản</span>";const cur=S.versions.items[S.versions.current];$("versionCompare").textContent=cur?"Hiện tại: "+cur.label+" · "+new Date(cur.createdAt).toLocaleString("vi-VN"):"V01 · phiên bản hiện tại"}
+function setDomain(d){S.domain=d;renderProfile();S.prompt.ready=false;renderState();save()}
+function tabs(){
+ document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{const t=b.dataset.tab;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x.dataset.tab===t));document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.tab===t));document.querySelectorAll(".panel").forEach(x=>x.classList.toggle("on",x.id==="panel-"+t))}));
+ document.querySelectorAll("[data-jump]").forEach(b=>b.addEventListener("click",()=>{document.querySelector('[data-tab="'+b.dataset.jump+'"]')?.click()}))
+}
+function boot(){
+ document.querySelectorAll("[data-domain]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("[data-domain]").forEach(x=>x.classList.remove("on"));b.classList.add("on");setDomain(b.dataset.domain)}));
+ ids.forEach(id=>$(id)?.addEventListener("input",()=>{materialAndCamera();if(S.prompt.ready)compile()}));
+ ids.forEach(id=>$(id)?.addEventListener("change",()=>{materialAndCamera();if(S.prompt.ready)compile()}));
+ $("magic").onclick=compile;$("copy").onclick=copyPrompt;$("copyPrompt").onclick=copyPrompt;$("applyEdit").onclick=applyEdit;$("clearPrompt").onclick=clearPrompt;
+ $("promptEdit").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();applyEdit()}});
+ document.querySelectorAll("[data-guard]").forEach(x=>x.addEventListener("change",()=>{S.guardrails[x.dataset.guard]=x.checked;save()}));
+ document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{S.guardrails.mode=b.dataset.mode;document.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("on",x===b));save()}));
+ $("saveVersion").onclick=()=>versionSave($("versionName").value);
+ $("versions").addEventListener("click",e=>{const b=e.target.closest("[data-version]");if(b)versionSwitch(b.dataset.version)});
+ $("exportState").onclick=()=>{const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hoanggia-ai-design-state.json";a.click();URL.revokeObjectURL(a.href)};
+ $("resetState").onclick=()=>{if(confirm("Xoá Design State và Prompt hiện tại?")){localStorage.removeItem("HG_AI_STATE");location.reload()}};
+ ["scene","ref"].forEach(id=>$(id).addEventListener("change",e=>{const f=e.target.files[0],drop=$(id+"Drop"),img=$(id+"Preview");if(!f)return;img.src=URL.createObjectURL(f);drop.classList.add("hasimg")}));
+ tabs();renderProfile();renderVersions();
+ if(!S.versions.items.V01){S.versions.items.V01={label:"V01",createdAt:new Date().toISOString(),state:snapshot()};S.versions.current="V01";save()}
+}
+boot();
 })();
-</script><script id="hg-domain-prompt-engine">
-(function(){ window.HG_DOMAIN_LOGIC = function(domain){
- if(domain==='Quy hoạch') return 'mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn';
- if(domain==='Kiến trúc') return 'tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn';
- return 'công năng → công thái học → furniture → vật liệu → ánh sáng → camera';
-}; })();
-</script><script id="hg-reasoning-engine">
-(function(){
- const $=id=>document.getElementById(id);
- const val=id=>{const e=$(id);return e?e.value.trim():''};
- const txt=id=>{const e=$(id);return e?e.textContent.trim():''};
- const nums=s=>(s||'').match(/\d+(?:[.,]\d+)?/g)?.map(Number)||[];
- function infer(){
-  const domain=txt('mDomain')||'Kiến trúc',room=val('room'),style=val('style'),mat=val('mat'),light=val('light'),camera=val('cameraStyle'),lens=val('lens'),dim=val('spaceSize'),ceiling=val('ceilingHeight');
-  const ns=nums(dim),area=ns.length>=2?ns[0]*ns[1]:0,h=nums(ceiling)[0]||0;
-  let f=room||'Chưa chọn',st=dim||'Cần kích thước',et='Theo lĩnh vực',frt='Theo tỷ lệ không gian',mt=mat||'AI phân tích',lt=light||'AI phân tích',ct=camera||'AI suy luận',ft='',sp='',con='';
-  if(domain==='Nội thất'){
-   if(room.includes('Phòng khách')){ft='Tiếp khách · trò chuyện · thư giãn';et='Lối chính khoảng 900–1200mm khi khả thi';frt='Sofa + bàn trà là trục chính; ưu tiên khoảng thở quanh bàn';}
-   else if(room.includes('Bếp')){ft='Chuẩn bị · nấu · lưu trữ · giao tiếp';et='Ưu tiên tam giác thao tác và khoảng mở cánh';frt='Bếp/tủ theo vùng thao tác, tránh xung đột cửa';}
-   else if(room.includes('Phòng ngủ')){ft='Ngủ · nghỉ · lưu trữ';et='Lối hai bên giường và khoảng cuối giường';frt='Giường là focal point, tủ và đèn phụ trợ';}
-   else{ft='Công năng chính của không gian';et='Kiểm tra lối đi, vùng thao tác và khoảng tiếp cận';frt='Furniture theo hierarchy công năng';}
-   sp=area?(area>=30?'Rộng: tăng khoảng thở và hierarchy.':area>=18?'Trung bình: ưu tiên tỷ lệ gọn và giao thông rõ.':'Compact: giảm mật độ furniture, tăng cảm giác thoáng.'):'Cần kích thước để suy luận tỷ lệ.';
-   mt=mat?'Lấy '+mat+' làm bề mặt chính; tạo 1–2 lớp vật liệu phụ để tránh phẳng.':'Nền → vật liệu chính → điểm nhấn.';
-   lt=light?'Tổ chức '+light+' theo lớp nền, chức năng, nhấn và trang trí.':'Daylight + ambient + accent.';
-   ct=lens?(lens+' · '+(camera||'góc tự nhiên')+'; giữ đường đứng và tỷ lệ.'):'Ưu tiên 28–35mm cho phối cảnh nội thất tự nhiên.';
-   con=(style||'Phong cách chưa chọn')+' + '+(room||'không gian')+' → công năng → công thái học → furniture → vật liệu → ánh sáng → camera.';
-  }else if(domain==='Quy hoạch'){
-   ft=room||'Phân khu chức năng';et='Đọc giao thông, tiếp cận và bán kính phục vụ';frt='Khối tích và cảnh quan theo cấu trúc toàn khu';sp=area?'Quy mô '+area.toLocaleString('vi-VN')+' m²: cân đối mật độ, khoảng mở và không gian xanh.':'Cần quy mô để suy luận mật độ.';mt=mat||'Vật liệu theo phân cấp cảnh quan';lt=light||'Daylight / Golden hour';ct=camera||'Góc nhìn chim bay + tổng thể';con=(style||'Quy hoạch')+' → mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn.';
-  }else{
-   ft=room||'Công năng công trình';et='Tiếp cận, lưu thông và quan hệ đặc/rỗng';frt='Khối tích + mặt đứng + không gian sử dụng';sp=area?'Quy mô '+area.toLocaleString('vi-VN')+' m².':'Cần kích thước để suy luận tỷ lệ.';mt=mat||'Vật liệu theo ngôn ngữ kiến trúc';lt=light||'Daylight';ct=camera||'Phối cảnh kiến trúc tự nhiên';con=(style||'Kiến trúc')+' → tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn.';
-  }
-  $('reasonFunction').textContent=f;$('reasonFunctionText').textContent=ft;
-  $('reasonSpace').textContent=dim||'Chưa có kích thước';$('reasonSpaceText').textContent=sp+(h?' Trần '+h+'mm.':'');
-  $('reasonErgo').textContent=domain==='Nội thất'?'Đã suy luận':'Theo lĩnh vực';$('reasonErgoText').textContent=et;
-  $('reasonFurniture').textContent=frt;$('reasonFurnitureText').textContent='Tỷ lệ, hierarchy và khoảng thở.';
-  $('reasonMaterial').textContent=mt;$('reasonMaterialText').textContent=mat?'Được liên kết với phong cách và ánh sáng.':'Chọn vật liệu để suy luận sâu hơn.';
-  $('reasonLight').textContent=lt;$('reasonLightText').textContent='Phân lớp ánh sáng và phản ứng bề mặt.';
-  $('reasonCamera').textContent=ct;$('reasonCameraText').textContent='Tự động liên hệ với không gian và hierarchy.';
-  $('reasonConclusion').textContent='Sẵn sàng';$('reasonConclusionText').textContent=con;$('reasonStatus').textContent='Đã cập nhật theo lựa chọn hiện tại';
-  window.HG_REASONING={domain,room,style,mat,light,camera,lens,dim,ceiling,analysis:{ft,sp,et,frt,mt,lt,ct,con}};
- }
- document.addEventListener('change',e=>{if(['room','style','light','mat','cameraStyle','lens','spaceSize','ceilingHeight','focus'].includes(e.target.id))setTimeout(infer,30)});
- document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(infer,80)});
- window.addEventListener('load',()=>setTimeout(infer,200));
-})();
-</script><script id="hg-compact-workflow-js">
-(function(){
- const titles=['Ảnh đầu vào & tham chiếu','Ý tưởng / yêu cầu thiết kế','Trí tuệ thiết kế'];
- function norm(s){return (s||'').replace(/\s+/g,' ').trim().toLowerCase()}
- function findSection(title){
-  const all=[...document.querySelectorAll('h1,h2,h3,h4,.section-title,.card-title,.card-head strong,.section-head strong')];
-  const t=norm(title);
-  return all.find(x=>norm(x.textContent)===t||norm(x.textContent).includes(t));
- }
- function compact(){
-  titles.forEach((title,i)=>{
-   const h=findSection(title); if(!h)return;
-   let root=h.closest('.card,.section,.panel,section,.workflow-section')||h.parentElement;
-   if(!root)return;
-   root.classList.add('workflow-section');
-   if(root.dataset.hgCompact)return;
-   root.dataset.hgCompact='1';
-   const head=h.closest('.section-head,.card-head')||h.parentElement;
-   if(head)head.addEventListener('click',e=>{
-    if(e.target.closest('button,input,select,textarea,label,a'))return;
-    root.classList.toggle('is-collapsed');
-    localStorage.setItem('hg-collapse-'+i,root.classList.contains('is-collapsed')?'1':'0');
-   });
-   if(localStorage.getItem('hg-collapse-'+i)==='1')root.classList.add('is-collapsed');
-   if(!root.querySelector('.hg-compact-summary')){
-    const s=document.createElement('div');s.className='hg-compact-summary';
-    const labels=i===0?['Ảnh công trình','Ảnh tham chiếu']:i===1?['Phong cách','Ánh sáng','Vật liệu','Tỷ lệ','Camera']:['Công năng','Công thái học','Furniture','Vật liệu','Ánh sáng','Camera'];
-    labels.forEach(x=>{const p=document.createElement('span');p.textContent=x;s.appendChild(p)});
-    head.appendChild(s);
-   }
-  });
- }
- window.addEventListener('load',()=>setTimeout(compact,250));
- new MutationObserver(()=>compact()).observe(document.body,{childList:true,subtree:true});
-})();
-</script><script id="hg-accordion2-js">
-(function(){
- const groups=[
-  {parent:'Trí tuệ thiết kế',heads:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Trạng thái thiết kế','Interior Canvas','Thay thế nội thất','Furniture Replacement'],defaults:[0]},
-  {parent:'Ảnh đầu vào & tham chiếu',heads:['Ảnh công trình','Ảnh tham chiếu','Nhân vật']},
-  {parent:'Ý tưởng / yêu cầu thiết kế',heads:['Phong cách','Ánh sáng','Vật liệu','Tỷ lệ','Camera Director']}
- ];
- const norm=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
- function find(t){
-  return [...document.querySelectorAll('h1,h2,h3,h4,h5,strong,.section-title,.card-title')].find(e=>norm(e.textContent)===norm(t));
- }
- function wrap(parent,el){
-  let root=el.closest('.card,.section,.panel,section')||el.parentElement;
-  if(!root||root===parent||root.dataset.hgSub)return;
-  root.dataset.hgSub='1';root.classList.add('hg-subaccordion');
-  const head=el.closest('.section-head,.card-head')||el.parentElement;
-  if(!head)return;
-  head.classList.add('hg-subhead');
-  const body=document.createElement('div');body.className='hg-subbody';
-  [...root.children].forEach(ch=>{if(ch!==head)body.appendChild(ch)});
-  root.appendChild(body);
-  head.addEventListener('click',e=>{
-   if(e.target.closest('button,input,select,textarea,label,a'))return;
-   root.classList.toggle('is-closed');
-   localStorage.setItem('hg-sub-'+norm(el.textContent),' '+(root.classList.contains('is-closed')?'1':'0'));
-  });
-  if(localStorage.getItem('hg-sub-'+norm(el.textContent))?.trim()==='1')root.classList.add('is-closed');
- }
- function build(){
-  groups.forEach(g=>{
-   const parentTitle=find(g.parent); if(!parentTitle)return;
-   const parent=parentTitle.closest('.workflow-section,.card,.section,.panel,section')||parentTitle.parentElement;
-   g.heads.forEach((h,i)=>{
-    const el=find(h);if(!el||!parent.contains(el))return;
-    wrap(parent,el);
-   });
-  });
- }
- window.addEventListener('load',()=>setTimeout(build,450));
- new MutationObserver(()=>setTimeout(build,50)).observe(document.body,{childList:true,subtree:true});
-})();
-</script><script id="hg-contextual-ui">
-(function(){
- const $=s=>document.querySelector(s), $=s=>[...document.querySelectorAll(s)];
- const norm=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
- const find=t=>$('h1,h2,h3,h4,h5,strong,.section-title,.card-title').find(e=>norm(e.textContent)===norm(t));
- const field=id=>{const e=document.getElementById(id);return e?e.value.trim():''};
- const configs={
-  'Nội thất':{
-   default:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Interior Canvas','Thay thế nội thất'],
-   room:{
-    'Phòng khách':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
-    'Phòng ngủ':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
-    'Bếp':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
-    'Phòng ăn':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
-    'Showroom':['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Interior Canvas','Thay thế nội thất'],
-    'Phòng tắm':['Design Reasoning Engine','Bảng vật liệu','Interior Canvas']
-   }
-  },
-  'Kiến trúc':{default:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Interior Canvas']},
-  'Quy hoạch':{default:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu']}
- };
- function rootFor(title){
-  const el=find(title);if(!el)return null;
-  return el.closest('.hg-subaccordion')||el.closest('.card,.section,.panel,section');
- }
- function domain(){
-  const e=$('.domain.active,.domain.selected,[data-domain].active,[data-domain].selected');
-  return e?.textContent.trim()||'Nội thất';
- }
- function apply(){
-  const d=domain(),room=field('room'),cfg=configs[d]||configs['Nội thất'];
-  const wanted=(cfg.room&&cfg.room[room])||cfg.default;
-  $('.hg-subaccordion').forEach(x=>{x.classList.remove('hg-priority','hg-secondary')});
-  wanted.forEach(t=>{const r=rootFor(t);if(r){r.classList.add('hg-priority');r.classList.remove('is-closed')}});
-  $('.hg-subaccordion').forEach(r=>{
-   const title=r.querySelector('.hg-subhead strong')?.textContent.trim();
-   if(title&&!wanted.includes(title)){r.classList.add('hg-secondary');r.classList.add('is-closed')}
-  });
-  let host=document.getElementById('hg-contextual');
-  if(!host){
-   const target=document.getElementById('domainEngine')||document.getElementById('designReasoning');
-   if(!target)return;
-   host=document.createElement('div');host.id='hg-contextual';host.className='hg-contextual';
-   host.innerHTML='<b>GIAO DIỆN THÍCH NGHI</b><span></span>';
-   target.parentNode.insertBefore(host,target);
-  }
-  host.querySelector('span').textContent=d+(room?' · '+room:'')+' → đang ưu tiên '+wanted.slice(0,5).join(' · ');
- }
- document.addEventListener('change',e=>{if(e.target.id==='room'||e.target.id==='domain'||e.target.closest('.domain'))setTimeout(apply,100)});
- document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(apply,180)});
- window.addEventListener('load',()=>setTimeout(apply,700));
- new MutationObserver(()=>setTimeout(apply,80)).observe(document.body,{childList:true,subtree:true});
-})();
-</script><script id="hg-reasoning-controller">
-(function(){
- const field=id=>document.getElementById(id)?.value?.trim()||'';
- function publish(){
-  const domain=document.querySelector('[data-domain].on')?.dataset.domain||'Nội thất';
-  const room=field('room'), style=field('style'), mat=field('mat'), light=field('light');
-  window.HG_REASONING_CONTEXT={domain,room,style,mat,light};
- }
- ['change','input'].forEach(evt=>document.addEventListener(evt,e=>{
-  if(['room','style','mat','light','brief','spaceSize','ceilingHeight','focus'].includes(e.target?.id)) publish();
- }));
- document.addEventListener('click',e=>{if(e.target.closest('[data-domain]'))setTimeout(publish,30)});
- window.addEventListener('load',publish);
-})();
-</script><script id="hg-design-state-core">
-(function(){
- const IDS=['brief','room','focus','spaceSize','ceilingHeight','circulation','existing','style','light','mat','furnitureLens','brand','palette','surfaces','joinery','finishLevel','cameraStyle','lens','ratio'];
- const $=id=>document.getElementById(id);
- const read=id=>{const e=$(id);return e?e.value.trim():''};
- const domain=()=>document.querySelector('[data-domain].on')?.dataset.domain||document.querySelector('[data-domain].active')?.dataset.domain||'Nội thất';
- const defaults={version:'1.0',updatedAt:null,domain:'Nội thất',inputs:{},reasoning:{},decisions:{},prompt:{master:'',magic:'',ready:false},camera:{},material:{},ui:{}};
- window.HG_DESIGN_STATE=window.HG_DESIGN_STATE||structuredClone(defaults);
- function sync(reason){
-  const s=window.HG_DESIGN_STATE;
-  s.version='1.0';s.updatedAt=new Date().toISOString();s.domain=domain();
-  IDS.forEach(id=>{const e=$(id);if(e)s.inputs[id]=e.value.trim()});
-  s.reasoning=window.HG_REASONING_CONTEXT||window.HG_REASONING||{};
-  s.camera={type:s.inputs.cameraStyle||'',lens:s.inputs.lens||'',aspect:s.inputs.ratio||''};
-  s.material={base:s.inputs.mat||'',palette:s.inputs.palette||'',surfaces:s.inputs.surfaces||'',joinery:s.inputs.joinery||'',finish:s.inputs.finishLevel||''};
-  s.decisions=s.decisions||{};
-  s.ui={activeDomain:s.domain,room:s.inputs.room||'',lastChange:reason||'init'};
-  window.dispatchEvent(new CustomEvent('hg:design-state',{detail:s}));
-  renderBar();
- }
- function renderBar(){
-  let bar=document.getElementById('hg-design-statebar');
-  const target=document.getElementById('domainEngine')||document.getElementById('designReasoning');if(!target)return;
-  if(!bar){bar=document.createElement('div');bar.id='hg-design-statebar';bar.className='hg-statebar';target.parentNode.insertBefore(bar,target)}
-  const s=window.HG_DESIGN_STATE;
-  const cells=[['TRẠNG THÁI',s.prompt?.ready?'Sẵn sàng':'Đang đồng bộ'],['LĨNH VỰC',s.domain],['KHÔNG GIAN',s.inputs.room||'Chưa chọn'],['VẬT LIỆU',s.inputs.mat||'AI phân tích'],['CAMERA',(s.inputs.cameraStyle||'AI suy luận')+' · '+(s.inputs.lens||'auto')]];
-  bar.innerHTML=cells.map((x,i)=>'<div class="hg-statecell"><small>'+x[0]+'</small><b class="'+(i===0?'hg-state-live':'')+'">'+x[1]+'</b></div>').join('');
- }
- function boot(){
-  IDS.forEach(id=>{const e=$(id);if(e)e.addEventListener('change',()=>setTimeout(()=>sync(id),20))});
-  document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(()=>sync('domain'),120)});
-  window.addEventListener('load',()=>setTimeout(()=>sync('init'),1100));
-  window.addEventListener('hg:reasoning-update',()=>setTimeout(()=>sync('reasoning'),20));
- }
- boot();
- window.HG_SYNC_DESIGN_STATE=sync;
-})();
-</script><script id="hg-decision-engine">
-(function(){
- const $=id=>document.getElementById(id);
- const v=id=>$(id)?.value||'';
- function update(){
-  const s=window.HG_DESIGN_STATE||{},i=s.inputs||{},room=i.room||'',dim=i.dimensions||'',style=i.style||'',mat=i.mat||'',light=i.light||'',lens=i.lens||'';
-  const dim=i.spaceSize||''; const nums=(dim.match(/\d+(?:[.,]\d+)?/g)||[]).map(Number),area=nums.length>1?nums[0]*nums[1]:0;
-  const d=s.domain||'Nội thất';
-  let f=area>=30?'Cân bằng · ưu tiên khoảng thở':area&&area<18?'Gọn · ưu tiên khoảng thở':'Tự động theo không gian';
-  let fc=area>=30?'Không gian đủ rộng để tạo sofa/bàn có hierarchy và khoảng thở.':area&&area<18?'Giảm mật độ đồ để tránh nặng không gian.':'Chưa đủ kích thước để quyết định chính xác.';
-  let cir=room==='Phòng khách'?'Ưu tiên rộng':'Tự động theo công năng';
-  let cn=room==='Phòng khách'?'Mục tiêu khoảng chính 900–1200mm khi khả thi.':'Kiểm soát lối đi, vùng thao tác và xung đột cửa.';
-  let mh=mat?'AI tự phân cấp':'AI tự phân cấp',mn=mat?'Vật liệu chính + vật liệu phụ + điểm nhấn theo độ tương phản.':'Cần vật liệu để tạo hierarchy cụ thể.';
-  let li=light?'AI tự tổ chức':'AI tự tổ chức',ln=light?'Daylight → ambient → accent → decorative.':'Có thể để AI suy luận theo phong cách và không gian.';
-  let ca=lens?(lens.includes('28')?'28mm · rộng tự nhiên':lens.includes('50')?'50mm · tập trung vật thể':'35mm · cân bằng'):(area&&area<18?'28mm · rộng tự nhiên':area>=30?'35mm · cân bằng':'AI tự chọn');
-  let can= lens?'Tôn trọng tiêu cự đã chọn.':'Suy ra từ diện tích, khoảng lùi và hierarchy.';
-  const set=(id,x,n)=>{$(id).value=x;$(id+'Note').innerHTML=n};
-  set('decFurniture',f,fc);set('decCirculation',cir,cn);set('decMaterial',mh,mn);set('decLight',li,ln);set('decCamera',ca,can);
-  const out={furniture:f,circulation:cir,material:mh,lighting:li,camera:ca,preserve:v('decPreserve')};
-  window.HG_DESIGN_STATE.decisions=out;window.dispatchEvent(new CustomEvent('hg:design-decision',{detail:out}));
-  $('hgDecisionStatus').textContent='Đã suy luận · có thể chỉnh sửa';
- }
- ['decFurniture','decCirculation','decMaterial','decLight','decCamera','decPreserve'].forEach(id=>document.addEventListener('change',e=>{if(e.target.id===id){if(window.HG_DESIGN_STATE)window.HG_DESIGN_STATE.decisions[id.replace('dec','').toLowerCase()]=e.target.value;window.dispatchEvent(new CustomEvent('hg:design-decision',{detail:window.HG_DESIGN_STATE.decisions}))}}));
- window.addEventListener('hg:design-state',()=>setTimeout(update,30));
- window.addEventListener('load',()=>setTimeout(update,1300));
-})();
-</script><script id="hg-prompt-compiler-js">
-(function(){
- const $=id=>document.getElementById(id);
- const esc=s=>String(s||'').trim();
- function compile(){
-  const s=window.HG_DESIGN_STATE||{},i=s.inputs||{},d=s.decisions||{},r=s.reasoning||{};
-  const domain=s.domain||'Nội thất',room=i.room||'không gian chưa xác định';
-  const prompt=[
-   'HOANGGIA AI — MASTER DESIGN PROMPT',
-   '',
-   '[01 · DESIGN INTENT]',
-   'Lĩnh vực: '+domain,
-   'Không gian: '+room,
-   'Phong cách: '+(i.style||'tự suy luận từ ngữ cảnh'),
-   'Yêu cầu thiết kế: '+(i.brief||i.description||'giữ nguyên kiến trúc hiện trạng nếu không có chỉ dẫn thay đổi'),
-   '',
-   '[02 · SPACE & FUNCTION]',
-   'Kích thước: '+(i.spaceSize||'theo ảnh tham chiếu'),
-   'Chiều cao trần: '+(i.ceilingHeight||'theo hiện trạng'),
-   'Lưu thông: '+(d.circulation||'AI suy luận theo công năng'),
-   'Công năng: '+(i.focus||room),
-   '',
-   '[03 · DESIGN DECISIONS]',
-   'Furniture: '+(d.furniture||'AI suy luận'),
-   'Hierarchy vật liệu: '+(d.material||i.mat||'AI phân cấp'),
-   'Ánh sáng: '+(d.lighting||i.light||'AI tổ chức'),
-   'Camera: '+(d.camera||i.camera||'AI chọn'),
-   'Bảo toàn: '+(d.preserve||'Bảo toàn kiến trúc và phối cảnh hiện trạng'),
-   '',
-   '[04 · MATERIAL & ATMOSPHERE]',
-   'Vật liệu: '+(i.mat||'phân tích từ ảnh tham chiếu'),
-   'Bảng màu: '+(i.palette||'AI cân bằng'),
-   'Bề mặt: '+(i.surfaces||'chân thực, đúng roughness và phản xạ'),
-   'Hoàn thiện: '+(i.finish||'cao cấp, thi công khả thi'),
-   '',
-   '[05 · REASONING]',
-   esc(r.analysis?.conclusion||r.analysis?.con||'Thiết kế theo chuỗi tư duy của HOANGGIA AI; ưu tiên công năng, tỷ lệ, vật liệu, ánh sáng và camera theo lĩnh vực.'),
-   '',
-   '[06 · RENDER DIRECTIVE]',
-   'Photorealistic architectural/interior visualization, physically plausible materials, realistic scale, contact shadows, natural reflections, controlled highlights, coherent lighting, no arbitrary redesign, no distortion, no duplicated furniture, preserve perspective and architectural proportions.'
-  ].join('\n');
-  const negative='NEGATIVE: distorted architecture, changed room proportions, incorrect scale, floating furniture, duplicated objects, warped verticals, plastic materials, excessive gloss, overexposure, artificial lighting, random decor, low detail, cartoon, CGI look, broken perspective.';
-  const logic='DESIGN LOGIC: '+domain+' → '+(domain==='Nội thất'?'công năng → công thái học → furniture → vật liệu → ánh sáng → camera':domain==='Kiến trúc'?'tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn':'mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn');
-  s.prompt={master:prompt,negative,logic,ready:true};window.HG_DESIGN_STATE=s;
-  render('master');$('hgCompilerStatus').textContent='Đã biên dịch từ Design State';
- }
- function render(tab){
-  const s=window.HG_DESIGN_STATE||{},p=s.prompt||{};
-  $('hgCompiledPrompt').value=tab==='negative'?p.negative||'':tab==='logic'?p.logic||'':p.master||'';
-  document.querySelectorAll('[data-prompt-tab]').forEach(b=>b.classList.toggle('active',b.dataset.promptTab===tab));
- }
- window.addEventListener('hg:design-decision',()=>setTimeout(compile,40));
- window.addEventListener('hg:design-state',()=>setTimeout(compile,60));
- $('hgCompileBtn')?.addEventListener('click',compile);
- document.addEventListener('click',e=>{const b=e.target.closest('[data-prompt-tab]');if(b){if(!window.HG_DESIGN_STATE?.prompt?.ready)compile();render(b.dataset.promptTab)}});
- $('hgCopyBtn')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('hgCompiledPrompt').value);$('hgCompilerStatus').textContent='Đã copy Prompt'}catch(e){$('hgCompilerStatus').textContent='Không thể copy tự động'}});
- window.addEventListener('load',()=>setTimeout(compile,1500));
-})();
-</script><script id="hg-brain-v2">
-(function(){
- const $=id=>document.getElementById(id);
- const get=()=>window.HG_DESIGN_STATE||{inputs:{},decisions:{}};
- const domainEngine={
-  'Kiến trúc':{
-   chain:'tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn',
-   rules:['Kiểm tra tỷ lệ khối tích và nhịp điệu mặt đứng.','Kiểm tra công năng, tiếp cận và trục nhìn.','Kiểm soát đặc/rỗng, hình khối và ngôn ngữ kiến trúc.','Chọn vật liệu theo quy mô, orientação ánh sáng và chi tiết liên kết.','Tổ chức ánh sáng theo thời gian và vật liệu.','Chọn góc nhìn tôn trọng phối cảnh kiến trúc.']
-  },
-  'Nội thất':{
-   chain:'công năng → công thái học → furniture → vật liệu → ánh sáng → camera',
-   rules:['Xác định hoạt động chính và hierarchy công năng.','Kiểm tra kích thước người dùng, vùng thao tác và lưu thông.','Cân bằng furniture theo tỷ lệ, khoảng thở và điểm nhấn.','Phân cấp vật liệu theo nền, chủ đạo và accent; kiểm tra roughness, vân và phản xạ.','Tổ chức daylight → ambient → accent → decorative.','Camera phục vụ hierarchy không gian, vật liệu và furniture.']
-  },
-  'Quy hoạch':{
-   chain:'mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn',
-   rules:['Kiểm tra mật độ ý tưởng, khoảng mở và quan hệ khối tích.','Xác định trục chính, tiếp cận và phân cấp giao thông.','Phân khu theo chức năng và bán kính tiếp cận.','Tổ chức mạng xanh, mặt nước và không gian công cộng.','Điều chỉnh khối tích theo địa hình, trục nhìn và điểm nhấn.','Chọn góc nhìn tổng thể, bird-eye hoặc eye-level phù hợp.']
-  }
- };
- function confidence(){
-  const s=get(),i=s.inputs||{}, keys=['brief','room','style','spaceSize','ceilingHeight','mat','light','cameraStyle','lens'];
-  const filled=keys.filter(k=>String(i[k]||'').trim()).length;
-  return Math.round(filled/keys.length*100);
- }
- function normalize(){
-  const s=get(),i=s.inputs||{};
-  s.meta=s.meta||{};
-  s.meta.completeness=confidence();
-  s.meta.domain=domainEngine[s.domain]?.chain||'';
-  s.meta.priority=s.domain==='Quy hoạch'?['giao thông','phân khu','cảnh quan','khối tích']:s.domain==='Kiến trúc'?['tỷ lệ','công năng','hình khối','mặt đứng']:['công năng','công thái học','furniture','vật liệu'];
-  s.reasoning=s.reasoning||{};
-  s.reasoning.chain=s.meta.domain;
-  s.reasoning.rules=domainEngine[s.domain]?.rules||[];
-  window.HG_DESIGN_STATE=s;
-  return s;
- }
- function compile(){
-  const s=normalize(),i=s.inputs||{},d=s.decisions||{},r=s.reasoning||{};
-  const domain=s.domain||'Nội thất';
-  const context=[
-   'HOANGGIA AI — MASTER PROMPT',
-   '',
-   'VAI TRÒ: AI DESIGN ASSISTANT cho kiến trúc sư; hỗ trợ sáng tạo, không tự ý thay thế quyết định thiết kế.',
-   'LĨNH VỰC: '+domain,
-   'KHÔNG GIAN: '+(i.room||'theo ảnh'),
-   'Ý TƯỞNG: '+(i.brief||'Phân tích ảnh và yêu cầu trước khi thiết kế.'),
-   'KÍCH THƯỚC: '+(i.spaceSize||'theo ảnh tham chiếu'),
-   'CHIỀU CAO TRẦN: '+(i.ceilingHeight||'theo hiện trạng'),
-   '',
-   'DESIGN REASONING: '+r.chain,
-   (r.rules||[]).map((x,n)=>(n+1)+'. '+x).join('\n'),
-   '',
-   'QUYẾT ĐỊNH ĐÃ XÁC NHẬN:',
-   'Tỷ lệ / công năng: '+(d.furniture||'suy luận từ hiện trạng'),
-   'Lưu thông: '+(d.circulation||'suy luận theo công năng'),
-   'Vật liệu: '+(d.material||i.mat||'phân tích từ ảnh'),
-   'Ánh sáng: '+(d.lighting||i.light||'suy luận theo ngữ cảnh'),
-   'Camera: '+(d.camera||i.cameraStyle||i.lens||'suy luận theo hierarchy'),
-   'Bảo toàn: '+(d.preserve||'giữ nguyên những gì không được yêu cầu thay đổi'),
-   '',
-   'RÀNG BUỘC:',
-   'Giữ đúng tỷ lệ, phối cảnh, kích thước và quan hệ vật lý của không gian.',
-   'Không tự ý đổi kiến trúc, cửa, cửa sổ, cao độ trần hoặc camera nếu không có yêu cầu.',
-   'Không thêm decor hoặc furniture ngẫu nhiên.',
-   'Vật liệu phải có scale, vân, roughness, reflection và tiếp xúc thực tế.',
-   'Hình ảnh cuối: photorealistic architectural/interior visualization, natural perspective, realistic shadows, physically plausible lighting.'
-  ].join('\n');
-  s.prompt=s.prompt||{};
-  s.prompt.master=context;s.prompt.negative='Không méo hình học; không sai tỷ lệ; không furniture bay; không vật liệu nhựa; không phản xạ quá mức; không ánh sáng cháy; không decor ngẫu nhiên; không thay đổi kiến trúc ngoài yêu cầu; không duplicated objects; không CGI/cartoon look.';
-  s.prompt.logic=r.chain;
-  s.prompt.ready=true;
-  s.prompt.version='2.0';
-  window.HG_DESIGN_STATE=s;
-  if($('hgCompiledPrompt')) $('hgCompiledPrompt').value=context;
-  if($('prompt')) $('prompt').textContent=context;
-  if($('hgCompilerStatus')) $('hgCompilerStatus').textContent='Đã đồng bộ bộ não · '+s.meta.completeness+'% dữ liệu';
- }
- function boot(){
-  ['change','input'].forEach(evt=>document.addEventListener(evt,e=>{
-   if(e.target?.id && ['brief','spaceSize','ceilingHeight','style','light','mat','cameraStyle','lens','room','focus','circulation','existing','palette','surfaces','joinery','finishLevel','furnitureLens','brand','ratio'].includes(e.target.id)){
-    clearTimeout(window.__hgBrainTimer);window.__hgBrainTimer=setTimeout(compile,80);
-   }
-  }));
-  window.addEventListener('hg:design-state',()=>setTimeout(compile,50));
-  window.addEventListener('hg:design-decision',()=>setTimeout(compile,50));
-  window.addEventListener('load',()=>setTimeout(compile,1700));
- }
- boot();
- window.HG_COMPILE_BRAIN=compile;
-})();
-</script><script id="hg-compact-prompt-controller">
-(function(){
- const $=s=>document.querySelector(s), byId=id=>document.getElementById(id);
- const v=id=>String(byId(id)?.value||'').trim();
- const state=()=>window.HG_DESIGN_STATE||{inputs:{},decisions:{}};
- const chain=d=>d==='Kiến trúc'?'tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn':d==='Quy hoạch'?'mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn':'công năng → công thái học → furniture → vật liệu → ánh sáng → camera';
-
- function build(){
-  const s=state(),i=s.inputs||{},d=s.decisions||{},dom=s.domain||'Kiến trúc';
-  const room=i.room||'không gian theo ảnh tham chiếu';
-  const idea=i.brief||'Phân tích hiện trạng trước khi thiết kế.';
-  const material=i.mat||'AI phân tích từ ảnh tham chiếu';
-  const light=d.lighting||i.light||'AI tổ chức theo ngữ cảnh';
-  const camera=d.camera||i.cameraStyle||i.lens||'AI chọn';
-  const preserve=d.preserve||i.existing||'giữ nguyên những gì không được yêu cầu thay đổi';
-  if(dom==='Kiến trúc') return [
-   'AI DESIGN ASSISTANT — KIẾN TRÚC',
-   'Thiết kế '+room+' theo ý tưởng: '+idea+'.',
-   'Ưu tiên: '+chain(dom)+'.',
-   'Kích thước: '+(i.spaceSize||'theo ảnh tham chiếu')+' · Trần: '+(i.ceilingHeight||'theo hiện trạng')+'.',
-   'Phong cách: '+(i.style||'AI suy luận')+' · Vật liệu: '+material+' · Ánh sáng: '+light+' · Camera: '+camera+'.',
-   'Giữ nguyên kiến trúc, tỷ lệ, cao độ, cửa/cửa sổ và phối cảnh; '+preserve+'.',
-   'Photorealistic architectural visualization, vật liệu đúng scale, ánh sáng và bóng đổ chân thực.'
-  ].join('\n');
-  if(dom==='Quy hoạch') return [
-   'AI DESIGN ASSISTANT — QUY HOẠCH',
-   'Phát triển '+room+' theo ý tưởng: '+idea+'.',
-   'Ưu tiên: '+chain(dom)+'.',
-   'Quy mô: '+(i.spaceSize||'theo ảnh tham chiếu')+' · Phân khu: '+(i.focus||'AI tổ chức')+'.',
-   'Giao thông: '+(i.circulation||d.circulation||'AI tổ chức')+' · Cảnh quan: '+(i.surfaces||'AI tổ chức')+'.',
-   'Khối tích: '+(i.existing||'AI tổ chức')+' · Ánh sáng: '+light+' · Góc nhìn: '+camera+'.',
-   'Tôn trọng ranh giới, địa hình, tỷ lệ và các yếu tố hiện hữu.',
-   'Photorealistic planning visualization, đúng tỷ lệ, cảnh quan và ánh sáng chân thực.'
-  ].join('\n');
-  return [
-   'AI DESIGN ASSISTANT — NỘI THẤT',
-   'Thiết kế '+room+' theo ý tưởng: '+idea+'.',
-   'Ưu tiên: '+chain(dom)+'.',
-   'Kích thước: '+(i.spaceSize||'theo ảnh tham chiếu')+' · Trần: '+(i.ceilingHeight||'theo hiện trạng')+'.',
-   'Phong cách: '+(i.style||'AI suy luận')+' · Furniture: '+(d.furniture||i.furnitureLens||'AI chọn')+'.',
-   'Vật liệu: '+material+' · Ánh sáng: '+light+' · Camera: '+camera+'.',
-   'Giữ nguyên kiến trúc, tỷ lệ không gian và các thành phần không được yêu cầu thay đổi.',
-   'Không tự thêm decor hoặc furniture ngoài yêu cầu. Photorealistic, tỷ lệ, vật liệu, tiếp xúc và ánh sáng chân thực.'
-  ].join('\n');
- }
-
- function compile(){
-  const s=state();s.prompt=s.prompt||{};
-  s.prompt.master=build();s.prompt.ready=true;s.prompt.version='3.0';
-  s.prompt.negative='Không méo hình học; không sai tỷ lệ; không furniture bay; không vật liệu nhựa; không ánh sáng cháy; không decor ngẫu nhiên; không thay đổi kiến trúc ngoài yêu cầu.';
-  s.prompt.logic=chain(s.domain||'Nội thất');window.HG_DESIGN_STATE=s;
-  byId('prompt').textContent=s.prompt.master;
-  if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Prompt đã sẵn sàng';
-  return s.prompt.master;
- }
-
- function applyEdit(){
-  const input=byId('hgPromptEdit'),edit=String(input?.value||'').trim();
-  if(!edit)return;
-  const s=state();let p=s.prompt?.master||compile(),changed=false;
-  const fm=edit.match(/^(ý tưởng|phong cách|kích thước|trần|chiều cao trần|furniture|vật liệu|ánh sáng|camera|giao thông|cảnh quan|khối tích)\s*:\s*(.+)$/i);
-  const labels={'ý tưởng':'Ý tưởng','phong cách':'Phong cách','kích thước':'Kích thước','trần':'Trần','chiều cao trần':'Trần','furniture':'Furniture','vật liệu':'Vật liệu','ánh sáng':'Ánh sáng','camera':'Camera','giao thông':'Giao thông','cảnh quan':'Cảnh quan','khối tích':'Khối tích'};
-  if(fm){
-   const label=labels[fm[1].toLowerCase()];
-   const re=new RegExp('^'+label.replace(/[.*+?^{}()|[\]\\]/g,'\\<script id="hg-architect-intelligence">
-(function(){
- const $=id=>document.getElementById(id);
- const val=id=>String($(id)?.value||'').trim();
- const state=()=>window.HG_DESIGN_STATE||(window.HG_DESIGN_STATE={inputs:{},decisions:{},prompt:{}});
- const domain=()=>document.querySelector('[data-domain].on')?.dataset.domain||'Nội thất';
- function infer(){
-  const s=state(),i=s.inputs||{};
-  const d=s.domain||domain(),room=i.room||'Chưa xác định',brief=i.brief||'';
-  const intent=brief?brief.replace(/\s+/g,' ').slice(0,110):'AI đọc từ ảnh + yêu cầu thiết kế';
-  const program=i.focus||room;
-  const priority=d==='Kiến trúc'?'Tỷ lệ · công năng · hình khối':d==='Quy hoạch'?'Mật độ · giao thông · phân khu':'Công năng · công thái học · furniture';
-  const material=i.mat||'AI phân tích reference';
-  s.designBrief={intent,program,priority,material,confidence:Math.round(([brief,room,i.style,i.spaceSize,i.mat,i.light].filter(Boolean).length/6)*100)};
-  s.feasibility=check(s);
-  s.guardrails=s.guardrails||{architecture:true,camera:true,furniture:true,proportion:true,ceiling:false,openings:false,mode:'LOCK'};
-  window.HG_DESIGN_STATE=s;
-  renderBrief(s);renderFeas(s);renderLocks(s);
- }
- function check(s){
-  const i=s.inputs||{},d=s.domain||domain(),room=i.room||'',dim=i.spaceSize||'';
-  const nums=(dim.match(/\d+(?:[.,]\d+)?/g)||[]).map(Number),area=nums.length>1?nums[0]*nums[1]:0;
-  const out=[];
-  out.push({k:'Công năng',ok:!!room,t:room?'Đã có loại không gian':'Cần xác định không gian'});
-  if(d==='Nội thất'){
-   out.push({k:'Tỷ lệ',ok:!!area,t:area?area.toFixed(1)+' m² · AI kiểm tra mật độ':'Cần kích thước để kiểm tra'});
-   out.push({k:'Lưu thông',ok:!!i.circulation,t:i.circulation?'Đã có chỉ dẫn':'AI kiểm soát theo công năng'});
-  }else if(d==='Kiến trúc'){
-   out.push({k:'Hình khối',ok:!!i.focus,t:i.focus?'Có trọng tâm kiến trúc':'AI suy luận theo đề bài'});
-   out.push({k:'Cao độ',ok:!!i.ceilingHeight,t:i.ceilingHeight?'Đã khóa thông số':'Theo hiện trạng'});
-  }else{
-   out.push({k:'Giao thông',ok:!!i.circulation,t:i.circulation?'Có chỉ dẫn':'AI tổ chức theo phân khu'});
-   out.push({k:'Khối tích',ok:!!i.spaceSize,t:i.spaceSize?'Có quy mô đầu vào':'Cần quy mô / khu đất'});
-  }
-  return out;
- }
- function renderBrief(s){
-  let host=document.getElementById('hgBriefIntel');if(!host)return;
-  const b=s.designBrief||{};
-  host.querySelector('[data-bi="intent"]').textContent=b.intent||'—';
-  host.querySelector('[data-bi="program"]').textContent=b.program||'—';
-  host.querySelector('[data-bi="priority"]').textContent=b.priority||'—';
-  host.querySelector('[data-bi="material"]').textContent=b.material||'—';
-  host.querySelector('[data-bi-status]').textContent='Độ rõ đề bài · '+(b.confidence||0)+'%';
- }
- function renderFeas(s){
-  const host=document.getElementById('hgFeasibility');if(!host)return;
-  host.querySelector('.hg-feas-list').innerHTML=(s.feasibility||[]).map(x=>'<div class="hg-feas-item '+(x.ok?'ok':'warn')+'"><b>'+(x.ok?'✓ ':'⚠ ')+x.k+'</b><span>'+x.t+'</span></div>').join('');
-  host.querySelector('[data-feas-status]').textContent=(s.feasibility||[]).filter(x=>x.ok).length+'/'+(s.feasibility||[]).length+' kiểm tra đạt';
- }
- function renderLocks(s){
-  const g=s.guardrails||{};document.querySelectorAll('[data-hg-guard]').forEach(e=>{e.checked=!!g[e.dataset.hgGuard]});
-  const mode=g.mode||'LOCK';document.querySelectorAll('[data-lock-mode]').forEach(b=>b.classList.toggle('active',b.dataset.lockMode===mode));
- }
- function syncGuards(){
-  const s=state(),g=s.guardrails||{};
-  document.querySelectorAll('[data-hg-guard]').forEach(e=>g[e.dataset.hgGuard]=e.checked);
-  s.guardrails=g;s.decisions=s.decisions||{};
-  s.decisions.preserve=(Object.entries(g).filter(([k,v])=>['architecture','camera','furniture','proportion','ceiling','openings'].includes(k)&&v).map(([k])=>({architecture:'kiến trúc',camera:'camera',furniture:'furniture model',proportion:'tỷ lệ / scale',ceiling:'trần',openings:'cửa / cửa sổ'}[k]))).join(', ')||'Không khóa thêm');
-  window.HG_DESIGN_STATE=s;
-  window.dispatchEvent(new CustomEvent('hg:design-decision',{detail:s.decisions}));
-  infer();
- }
- function mount(){
-  if($('hgBriefIntel')||!$('brief'))return;
-  const bi=document.createElement('div');bi.id='hgBriefIntel';bi.className='hg-brief-intel';
-  bi.innerHTML='<div class="hg-bi-head"><strong>DESIGN BRIEF INTELLIGENCE</strong><span data-bi-status>Đang đọc đề bài</span></div><div class="hg-bi-grid"><div class="hg-bi-cell"><small>Ý ĐỒ THIẾT KẾ</small><b data-bi="intent">—</b></div><div class="hg-bi-cell"><small>CHƯƠNG TRÌNH</small><b data-bi="program">—</b></div><div class="hg-bi-cell"><small>ƯU TIÊN SUY LUẬN</small><b data-bi="priority">—</b></div><div class="hg-bi-cell"><small>VẬT LIỆU NỀN</small><b data-bi="material">—</b></div></div>';
-  $('brief').parentNode.appendChild(bi);
-  const di=document.getElementById('design-intelligence');
-  if(di&&!document.getElementById('hgFeasibility')){
-   const f=document.createElement('div');f.id='hgFeasibility';f.className='hg-feasibility';
-   f.innerHTML='<div class="hg-feas-head"><strong>ARCHITECTURAL FEASIBILITY CHECK</strong><span data-feas-status>Đang kiểm tra</span></div><div class="hg-feas-list"></div>';
-   di.appendChild(f);
-  }
-  const lockCard=[...document.querySelectorAll('.card')].find(x=>x.querySelector('[data-lock="architecture"]'));
-  if(lockCard&&!document.getElementById('hgLockMode')){
-   const m=document.createElement('div');m.id='hgLockMode';m.className='hg-lock-mode';
-   m.innerHTML='<div class="hg-lock-mode-head"><strong>QUYỀN CAN THIỆP AI</strong><span>LOCK · EDIT · FREE</span></div><div class="hg-lock-modes"><button type="button" data-lock-mode="LOCK" class="active">LOCK<br><small>Giữ nguyên</small></button><button type="button" data-lock-mode="EDIT">EDIT<br><small>Chỉ sửa vùng yêu cầu</small></button><button type="button" data-lock-mode="FREE">FREE<br><small>Cho phép sáng tạo</small></button></div><div class="hg-lock-note">LOCK = không tự thay đổi · EDIT = chỉ can thiệp phần được yêu cầu · FREE = AI được phép đề xuất lại trong phạm vi lĩnh vực.</div>';
-   lockCard.querySelector('.checks').after(m);
-   document.querySelectorAll('[data-lock]').forEach(e=>{e.dataset.hgGuard=e.dataset.lock});
-   document.querySelectorAll('[data-hg-guard]').forEach(e=>e.addEventListener('change',syncGuards));
-   m.addEventListener('click',e=>{const b=e.target.closest('[data-lock-mode]');if(!b)return;const s=state();s.guardrails=s.guardrails||{};s.guardrails.mode=b.dataset.lockMode;window.HG_DESIGN_STATE=s;renderLocks(s);syncGuards()});
-  }
-  infer();
- }
- function enrichPrompt(){
-  const s=state(),p=s.prompt?.master;if(!p)return;
-  const g=s.guardrails||{},b=s.designBrief||{},f=(s.feasibility||[]).filter(x=>!x.ok).map(x=>x.k+': '+x.t);
-  const locks=Object.entries(g).filter(([k,v])=>['architecture','camera','furniture','proportion','ceiling','openings'].includes(k)&&v).map(([k])=>({architecture:'kiến trúc',camera:'camera',furniture:'furniture',proportion:'scale',ceiling:'trần',openings:'cửa/cửa sổ'}[k])).join(', ')||'không khóa thêm'; const guard=(g.mode||'LOCK')==='FREE'?'FREE · AI được phép đề xuất lại trong phạm vi lĩnh vực':(g.mode||'LOCK')==='EDIT'?'EDIT · chỉ can thiệp phần được yêu cầu · khóa: '+locks:'LOCK · giữ nguyên: '+locks;
-  const lines=['Ý đồ: '+(b.intent||'AI suy luận từ đề bài')+' · Ưu tiên: '+(b.priority||'theo lĩnh vực'), 'Can thiệp: '+guard];
-  if(f.length)lines.push('Cần kiểm tra thêm: '+f.join(' · '));
-  const clean=p.split('\n').filter(x=>!x.startsWith('Ý đồ: ')&&!x.startsWith('Can thiệp: ')&&!x.startsWith('Cần kiểm tra thêm: '));
-  const idx=Math.max(1,clean.length-1);clean.splice(idx,0,...lines);s.prompt.master=clean.join('\n');s.prompt.lastUpgrade='architect-intelligence-v1';window.HG_DESIGN_STATE=s;
-  if($('prompt'))$('prompt').textContent=s.prompt.master;
- }
- ['input','change'].forEach(evt=>document.addEventListener(evt,e=>{
-  if(['brief','room','focus','spaceSize','ceilingHeight','circulation','existing','style','light','mat','furnitureLens','palette','surfaces','joinery','finishLevel','cameraStyle','lens','ratio'].includes(e.target?.id)){clearTimeout(window.__hgIntelTimer);window.__hgIntelTimer=setTimeout(()=>{infer();enrichPrompt()},240)}
- }));
- window.addEventListener('hg:design-state',()=>setTimeout(()=>{infer();enrichPrompt()},260));
- window.addEventListener('hg:design-decision',()=>setTimeout(()=>{infer();enrichPrompt()},260));
- window.addEventListener('load',()=>setTimeout(mount,600));
- window.addEventListener('load',()=>setTimeout(()=>{mount();infer();enrichPrompt()},1900));
-})();
-</script><script id="hg-material-camera-version">
-(function(){
- const $=id=>document.getElementById(id);
- const get=()=>window.HG_DESIGN_STATE||(window.HG_DESIGN_STATE={inputs:{},decisions:{},prompt:{}});
- const domain=()=>document.querySelector('[data-domain].on')?.dataset.domain||'Nội thất';
- const text=id=>String($(id)?.value||'').trim();
- function material(){
-  const s=get(),i=s.inputs||{},base=text('mat')||'AI phân tích reference',palette=text('palette')||'AI cân bằng',surface=text('surfaces')||'theo reference',finish=text('finishLevel')||'cao cấp';
-  const d=domain();
-  const profile=d==='Nội thất'
-   ?{scale:'Ưu tiên khổ vật liệu lớn, mạch gọn',rough:'Roughness chân thực, tránh bóng nhựa',reflect:'Phản xạ vừa đủ theo nguồn sáng',detail:'Vân / pore / cạnh / mối nối có scale'}
-   :d==='Kiến trúc'
-   ?{scale:'Tỷ lệ module theo quy mô công trình',rough:'Đúng đặc tính ngoài trời',reflect:'Kiểm soát phản xạ mặt đứng',detail:'Mạch, joint và cạnh thể hiện đúng tỷ lệ'}
-   :{scale:'Module theo quy mô cảnh quan',rough:'Bền vững với điều kiện ngoài trời',reflect:'Kiểm soát phản xạ trên mặt nước / kính',detail:'Paving, planting và texture đúng scale'};
-  s.materialIntel={base,palette,surface,finish,...profile};
-  window.HG_DESIGN_STATE=s;
-  ['base','palette','surface','rough','reflect','detail'].forEach(k=>{const e=document.querySelector('[data-mi="'+k+'"]');if(e)e.textContent=s.materialIntel[k]||'—'});
- }
- function camera(){
-  const s=get(),i=s.inputs||{},d=s.decisions||{},room=i.room||'không gian',dom=domain();
-  const lens=i.lens||'35mm',style=i.cameraStyle||'Phối cảnh kiến trúc tự nhiên';
-  let story=dom==='Quy hoạch'?'Đọc toàn khu, trục chính và quan hệ cảnh quan':dom==='Kiến trúc'?'Tôn hình khối, mặt đứng và tỷ lệ công trình':'Đọc công năng, hierarchy furniture và vật liệu';
-  let shot=lens.includes('28')?'Spatial wide':lens.includes('50')?'Detail / focused':'Balanced hero';
-  let reason=dom==='Nội thất'?'camera ở tầm mắt tự nhiên, vertical control, tránh méo phối cảnh':'giữ tỷ lệ hình học, kiểm soát đường đứng và chiều sâu';
-  s.cameraStory={story,shot,reason,lens,style,room};
-  window.HG_DESIGN_STATE=s;
-  ['story','shot','reason','lens'].forEach(k=>{const e=document.querySelector('[data-cs="'+k+'"]');if(e)e.textContent=s.cameraStory[k]||'—'});
- }
- function snapshotLabel(){
-  const s=get(),i=s.inputs||{},d=s.decisions||{};
-  return [s.domain||domain(),i.room||'',i.style||'',i.mat||'',i.light||'',i.lens||'',d.furniture||''].filter(Boolean).join(' · ');
- }
- function version(){
-  const s=get();s.versions=s.versions||{};s.versions.current=s.versions.current||'V01';s.versions.items=s.versions.items||{};
-  if(!s.versions.items[s.versions.current])s.versions.items[s.versions.current]={label:s.versions.current,summary:snapshotLabel(),prompt:s.prompt?.master||'',state:JSON.parse(JSON.stringify({inputs:s.inputs,decisions:s.decisions,material:s.materialIntel,camera:s.cameraStory,guardrails:s.guardrails}))};
-  renderVersions(s);
- }
- function renderVersions(s){
-  const box=document.getElementById('hgVersionList');if(!box)return;
-  box.innerHTML=Object.values(s.versions.items).map(v=>'<button type="button" data-version="'+v.label+'" class="'+(v.label===s.versions.current?'active':'')+'">'+v.label+'</button>').join('');
-  const cur=s.versions.items[s.versions.current];const diff=document.getElementById('hgVersionDiff');if(diff)diff.textContent=cur?'Hiện tại: '+(cur.summary||'Phương án thiết kế'):'Chưa có phiên bản.';
- }
- function saveVersion(label){
-  const s=get();label=(label||'').trim().toUpperCase()||('V0'+(Object.keys(s.versions?.items||{}).length+1));
-  s.versions=s.versions||{current:label,items:{}};s.versions.items=s.versions.items||{};
-  s.versions.items[label]={label,summary:snapshotLabel(),prompt:s.prompt?.master||'',state:JSON.parse(JSON.stringify({inputs:s.inputs,decisions:s.decisions,material:s.materialIntel,camera:s.cameraStory,guardrails:s.guardrails}))};
-  s.versions.current=label;window.HG_DESIGN_STATE=s;renderVersions(s);
-  const inp=$('hgVersionName');if(inp)inp.value='';const st=$('hgVersionStatus');if(st)st.textContent='Đã lưu '+label;
- }
- function switchVersion(label){
-  const s=get(),v=s.versions?.items?.[label];if(!v)return;
-  s.versions.current=label;
-  if(v.state){s.inputs=v.state.inputs||s.inputs;s.decisions=v.state.decisions||s.decisions;s.materialIntel=v.state.material||s.materialIntel;s.cameraStory=v.state.camera||s.cameraStory;s.guardrails=v.state.guardrails||s.guardrails}
-  s.prompt=s.prompt||{};s.prompt.master=v.prompt||s.prompt.master;window.HG_DESIGN_STATE=s;
-  renderVersions(s);material();camera();
-  if($('prompt'))$('prompt').textContent=s.prompt.master||'';
-  if(window.HG_SYNC_DESIGN_STATE)window.HG_SYNC_DESIGN_STATE('version');
-  const st=$('hgVersionStatus');if(st)st.textContent='Đã chuyển '+label;
- }
- function mount(){
-  if(document.getElementById('hgMaterialIntel'))return;
-  const mat=document.querySelector('.hgx:nth-of-type(3) .hgx-body')||document.getElementById('materialBoard')?.parentElement;
-  const mb=document.getElementById('materialBoard')?.closest('.hgx');
-  if(mb){
-   const x=document.createElement('div');x.id='hgMaterialIntel';x.className='hg-pro-layer';
-   x.innerHTML='<div class="hg-pro-head"><strong>MATERIAL INTELLIGENCE</strong><span>Vật liệu → scale · roughness · reflection · detail</span></div><div class="hg-material-grid"><div class="hg-material-cell"><small>BASE</small><b data-mi="base">—</b></div><div class="hg-material-cell"><small>PALETTE</small><b data-mi="palette">—</b></div><div class="hg-material-cell"><small>SURFACE</small><b data-mi="surface">—</b></div><div class="hg-material-cell"><small>ROUGHNESS / SCALE</small><b data-mi="rough">—</b></div><div class="hg-material-cell"><small>REFLECTION / DETAIL</small><b data-mi="reflect">—</b><span data-mi="detail" style="display:block;margin-top:3px;font-size:7px;color:#858a91">—</span></div></div>';
-   mb.appendChild(x);
-  }
-  const cam=document.querySelector('.camera')?.closest('.card');
-  if(cam&&!document.getElementById('hgCameraStory')){
-   const x=document.createElement('div');x.id='hgCameraStory';x.className='hg-pro-layer';
-   x.innerHTML='<div class="hg-pro-head"><strong>CAMERA STORYTELLING</strong><span>What → Where → Why</span></div><div class="hg-camera-story"><div class="story"><small>CÂU CHUYỆN KHUNG HÌNH</small><b data-cs="story">—</b></div><div class="story"><small>KIỂU SHOT</small><b data-cs="shot">—</b></div><div class="story"><small>NGUYÊN TẮC</small><b data-cs="reason">—</b></div><div class="story"><small>LENS</small><b data-cs="lens">—</b></div></div>';
-   cam.appendChild(x);
-  }
-  const promptCard=[...document.querySelectorAll('.card')].find(x=>x.querySelector('#prompt'));
-  if(promptCard&&!document.getElementById('hgVersion')){
-   const x=document.createElement('div');x.id='hgVersion';x.className='hg-pro-layer';
-   x.innerHTML='<div class="hg-pro-head"><strong>DESIGN VERSION</strong><span id="hgVersionStatus">V01 · phương án hiện tại</span></div><div class="hg-version-bar"><div class="hg-version-list" id="hgVersionList"></div><div class="hg-version-save"><input id="hgVersionName" placeholder="Tên phiên bản · V02"><button class="btn" id="hgVersionSave">Lưu phiên bản</button></div></div><div class="hg-version-diff" id="hgVersionDiff">—</div>';
-   promptCard.appendChild(x);
-  }
-  material();camera();version();
- }
- document.addEventListener('input',e=>{if(['mat','palette','surfaces','finishLevel','lens','cameraStyle','brief','room','style','light','spaceSize'].includes(e.target?.id)){clearTimeout(window.__hgMCV);window.__hgMCV=setTimeout(()=>{material();camera();version()},180)}});
- document.addEventListener('change',e=>{if(['mat','palette','surfaces','finishLevel','lens','cameraStyle','room','style','light','spaceSize'].includes(e.target?.id)){material();camera();}});
- document.addEventListener('click',e=>{
-  const b=e.target.closest('[data-version]');if(b)switchVersion(b.dataset.version);
-  if(e.target.closest('#hgVersionSave'))saveVersion($('hgVersionName')?.value);
- });
- window.addEventListener('hg:design-state',()=>setTimeout(()=>{material();camera()},120));
- window.addEventListener('hg:design-decision',()=>setTimeout(()=>{material();camera()},120));
- window.addEventListener('load',()=>setTimeout(mount,750));
- window.addEventListener('load',()=>setTimeout(()=>{mount();material();camera();version()},2000));
-})();
-<footer class="creatorFooter" aria-label="Giới thiệu Hoàng Gia"><div><h2>HOÀNG GIA</h2><p class="creatorRole">Architect · Interior Designer · Founder · Art Direction · AI Design</p><p>☎ 0368.250.848</p></div><div class="creatorLinks"><a href="tel:0368250848">☎ 0368.250.848</a><a href="https://www.facebook.com/share/1Dw7UVryGH/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook cá nhân</a><a href="https://www.tiktok.com/@kts.hoanggia.da?_r=1&_t=ZS-9A94K57E0yg" target="_blank" rel="noopener noreferrer">TikTok cá nhân</a></div></footer></script></body></html>')+'\\s*:\\s*.*,'mi');
-   if(re.test(p)){p=p.replace(re,label+': '+fm[2].trim());changed=true}
-  }
-  if(!changed){
-   let m=edit.match(/^thay\s+(.+?)\s+(?:bằng|thành)\s+(.+)$/i);
-   if(!m)m=edit.match(/^(.+?)\s*(?:->|→)\s*(.+)$/);
-   if(m){
-    const oldText=m[1].trim(),newText=m[2].trim();
-    if(oldText&&p.toLowerCase().includes(oldText.toLowerCase())){
-     p=p.replace(new RegExp(oldText.replace(/[.*+?^{}()|[\]\\]/g,'\\</body></html>'),'ig'),newText);changed=true;
-    }
-   }
-  }
-  if(!changed)p+='\nChỉnh sửa: '+edit+'.';
-  s.prompt=s.prompt||{};s.prompt.master=p;s.prompt.lastEdit=edit;s.prompt.ready=true;window.HG_DESIGN_STATE=s;
-  byId('prompt').textContent=p;
-  if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent=changed?'Đã thay thế trong Prompt':'Đã thêm chỉnh sửa vào Prompt';
-  if(input)input.value='';
- }
-
- async function copyPrompt(){
-  const p=String(byId('prompt')?.textContent||'').trim();
-  if(!p){if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Chưa có Prompt';return}
-  try{await navigator.clipboard.writeText(p);if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Đã sao chép Prompt'}
-  catch(e){if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Không thể sao chép tự động'}
- }
- function clearPrompt(){
-  const s=state();s.prompt={master:'',negative:'',logic:'',ready:false};window.HG_DESIGN_STATE=s;
-  if(byId('prompt'))byId('prompt').textContent='Chưa có Prompt.';
-  if(byId('hgPromptEdit'))byId('hgPromptEdit').value='';
-  if(byId('hgQuickStatus'))byId('hgQuickStatus').textContent='Prompt đã xoá';
- }
-
- window.HG_COMPILE_PROMPT=compile;
- window.HG_APPLY_PROMPT_EDIT=applyEdit;
- window.HG_CLEAR_PROMPT=clearPrompt;
-
- byId('magic').onclick=()=>{window.HG_SYNC_DESIGN_STATE?.('magic');setTimeout(()=>{compile();toast('Đã tạo Prompt tổng thể')},100)};
- byId('copy').onclick=copyPrompt;
- byId('hgApplyEdit').onclick=applyEdit;
- byId('hgCopyPrompt').onclick=copyPrompt;
- byId('hgClearPrompt').onclick=clearPrompt;
- byId('hgPromptEdit').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();applyEdit()}});
- ['change','input'].forEach(evt=>document.addEventListener(evt,e=>{
-  if(['brief','room','focus','spaceSize','ceilingHeight','circulation','existing','style','light','mat','furnitureLens','palette','surfaces','joinery','finishLevel','cameraStyle','lens','ratio'].includes(e.target?.id)){
-   clearTimeout(window.__hgCompactPromptTimer);window.__hgCompactPromptTimer=setTimeout(()=>{if(window.HG_DESIGN_STATE?.prompt?.ready)compile()},180);
-  }
- }));
- window.addEventListener('load',()=>setTimeout(compile,1800));
-})();
-</script></body></html>
+</script>
+</body>
+</html>
