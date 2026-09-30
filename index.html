@@ -815,7 +815,7 @@ function boot(){
  document.querySelectorAll("[data-domain]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("[data-domain]").forEach(x=>x.classList.remove("on"));b.classList.add("on");setDomain(b.dataset.domain)}));
  ids.forEach(id=>$(id)?.addEventListener("input",()=>{materialAndCamera();markDirty()}));
  ids.forEach(id=>$(id)?.addEventListener("change",()=>{materialAndCamera();if(id==="style")suggestMusicMood();markDirty()}));
- document.querySelectorAll("[data-intent]").forEach(b=>b.addEventListener("click",()=>applyDesignIntent(b.dataset.intent)));$("magic").onclick=compile;$("analyzeFurniture").onclick=analyzeFurnitureWithVision;$("copy").onclick=copyPrompt;$("copyPrompt").onclick=copyPrompt;$("applyEdit").onclick=applyEdit;$("clearPrompt").onclick=clearPrompt;
+ document.querySelectorAll("[data-intent]").forEach(b=>b.addEventListener("click",()=>applyDesignIntent(b.dataset.intent)));$("magic").onclick=compile;$("analyzeFurniture").onclick=analyzeFurnitureWithVision;$("analyzeImages").onclick=analyzeImagesWithVision;$("copy").onclick=copyPrompt;$("copyPrompt").onclick=copyPrompt;$("applyEdit").onclick=applyEdit;$("clearPrompt").onclick=clearPrompt;
  $("promptEdit").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();applyEdit()}});
  document.querySelectorAll("[data-guard]").forEach(x=>x.addEventListener("change",()=>{S.guardrails[x.dataset.guard]=x.checked;scheduleSave()}));
  document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{S.guardrails.mode=b.dataset.mode;document.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("on",x===b));scheduleSave()}));
@@ -912,6 +912,7 @@ let musicApiRequested=false;function ensureMusicAPI(){if(musicApiRequested)retur
 $("musicToggle").onclick=()=>{const open=!$("musicDock").classList.contains("expanded");$("musicDock").classList.toggle("expanded",open);$("musicToggle").setAttribute("aria-label",open?"Thu gọn Inspiration":"Mở Inspiration");localStorage.setItem("HG_AI_MUSIC_EXPANDED",open?"1":"0");if(open)ensureMusicAPI();updateMusicUI()};
 const musicExpanded=localStorage.getItem("HG_AI_MUSIC_EXPANDED")==="1";$("musicDock").classList.toggle("expanded",musicExpanded);if(musicExpanded)ensureMusicAPI();
 
+renderImageIntel();
 boot();
 })();
 </script>
@@ -931,7 +932,6 @@ if("serviceWorker" in navigator){
  function drag(el,input){['dragenter','dragover'].forEach(e=>el.addEventListener(e,ev=>{ev.preventDefault();el.classList.add('dragover')}));['dragleave','drop'].forEach(e=>el.addEventListener(e,ev=>{ev.preventDefault();el.classList.remove('dragover')}));el.addEventListener('drop',ev=>{const f=ev.dataTransfer?.files?.[0];if(!f||!f.type.startsWith('image/'))return;try{const dt=new DataTransfer();dt.items.add(f);input.files=dt.files;input.dispatchEvent(new Event('change',{bubbles:true}));sync()}catch(e){}});input.addEventListener('change',sync)}
  drag(master,scene);drag(ref,refInput);scene.addEventListener('change',sync);refInput.addEventListener('change',sync);sync();
 })();
-</script>
 </script>
 </body>
 </html>
