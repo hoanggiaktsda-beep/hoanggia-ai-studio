@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HOANGGIA AI — Không gian Trí tuệ Kiến trúc & Nội thất</title>
+<title>HOANGGIA AI — Không gian Trí tuệ Kiến trúc & Nội thất</title><link rel="icon" type="image/svg+xml" href="./brand-mark.svg"><meta name="theme-color" content="#070807">
 <style>
 :root{--bg:#0a0b0c;--panel:#111315;--panel2:#17191c;--line:#292d31;--text:#f4f1ea;--muted:#858a91;--gold:#d7a65b;--gold2:#f0c77d;--danger:#a95b5b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:13px Inter,system-ui,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
-.app{display:grid;grid-template-columns:225px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;padding:22px 14px;border-right:1px solid var(--line);background:#0d0f10}.brand{font-weight:900;letter-spacing:.25em;font-size:17px}.tag{font-size:9px;color:#62666b;letter-spacing:.12em;margin:5px 0 28px}
+.app{display:grid;grid-template-columns:225px 1fr;min-height:100vh}.brand-logo{display:block;width:184px;height:auto;margin:0 0 8px;border:1px solid #22262a;border-radius:7px}.brand-mini{width:30px;height:30px;display:block;border-radius:5px;flex:0 0 auto}.top-brand{display:flex;align-items:center;gap:12px;margin-bottom:10px}.top-brand .ey{margin:0}.side{position:sticky;top:0;height:100vh;padding:22px 14px;border-right:1px solid var(--line);background:#0d0f10}.brand{font-weight:900;letter-spacing:.25em;font-size:17px}.tag{font-size:9px;color:#62666b;letter-spacing:.12em;margin:5px 0 28px}
 .nav button,.domain button{width:100%;padding:10px 11px;margin:4px 0;border:1px solid transparent;border-radius:9px;background:transparent;color:#92969c;text-align:left}.nav button:hover,.domain button:hover,.nav .on,.domain .on{background:#17191b;border-color:var(--line);color:#fff}.nav .on,.domain .on{box-shadow:inset 2px 0 var(--gold)}.sectionlabel{font-size:9px;letter-spacing:.18em;color:#5e6267;margin:26px 8px 8px}
 .main{width:100%;max-width:1500px;margin:auto;padding:24px 28px 60px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.ey{font-size:9px;letter-spacing:.2em;color:var(--gold)}h1{font:500 39px Georgia,serif;margin:7px 0}.intro{max-width:760px;color:var(--muted);line-height:1.6;margin:0}.badge{border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:#aaa;font-size:10px}
 .tabs{display:flex;gap:7px;border-bottom:1px solid var(--line);margin:25px 0 16px;overflow:auto}.tab{white-space:nowrap;padding:10px 13px;border:0;background:transparent;color:#777;border-bottom:2px solid transparent}.tab.on{color:#fff;border-color:var(--gold)}
@@ -19,7 +19,7 @@ textarea,select,input[type=text]{width:100%;background:#0c0e10;color:#eee;border
 .panel{display:none}.panel.on{display:block}.hidden{display:none}.status{font-size:10px;color:#72777d}.toast{position:fixed;right:18px;bottom:18px;background:#202327;border:1px solid #444;padding:10px 13px;border-radius:9px;display:none;z-index:10}
 @media(max-width:1000px){.app{grid-template-columns:1fr}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}.layout{grid-template-columns:1fr}.nav,.domain{display:flex;gap:5px;overflow:auto}.nav button,.domain button{white-space:nowrap;width:auto}.main{padding:20px}}
 @media(max-width:600px){.main{padding:15px}.top{display:block}.badge{display:inline-block;margin-top:12px}.uploadgrid,.fields,.checks{grid-template-columns:1fr}.camera{grid-template-columns:1fr 1fr}h1{font-size:32px}}
-</style><style id="hg-upgrade-css">
+@media(max-width:760px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px}.brand-logo{width:160px}.nav,.domain{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.domain{grid-template-columns:repeat(3,1fr)}.nav button,.domain button{margin:0}.domain-engine{display:none}}</style><style id="hg-upgrade-css">
 .hgx{border:1px solid #292d31;background:#0d0f10;margin-bottom:14px}
 .hgx-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 15px;border-bottom:1px solid #24282c}
 .hgx-head b{font-size:12px;letter-spacing:.04em}.hgx-head span{font-size:10px;color:#72777d}
@@ -236,7 +236,7 @@ textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{paddin
 @media(max-width:700px){.hg-material-grid{grid-template-columns:repeat(2,1fr)}.hg-camera-story{grid-template-columns:1fr}.hg-version-save{margin-left:0;width:100%}.hg-version-save input{flex:1}}
 </style></head>
 <body><div class="app">
-<aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
+<aside class="side"><img class="brand-logo" src="./brand.svg" alt="HOANGGIA AI"><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
 <div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
 <div class="sectionlabel">LĨNH VỰC</div><div class="domain"><button class="on" data-domain="Kiến trúc">⌂ Kiến trúc</button><button data-domain="Nội thất">▣ Nội thất</button><button data-domain="Quy hoạch">◫ Quy hoạch</button></div>
 <div id="domainContext" class="domain-context"><b>KIẾN TRÚC</b>Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh</div><div class="domain-engine" id="domainEngine">
@@ -244,7 +244,7 @@ textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{paddin
 <div class="thinking-flow" id="thinkingFlow"></div>
 <div class="engine-output" id="engineOutput"><b>Nguyên tắc:</b> AI không chỉ chọn phong cách; hệ thống sẽ suy luận theo đúng logic của lĩnh vực trước khi tạo Master Prompt.</div>
 </div><div class="sectionlabel">HOANGGIA AI</div><div class="status">Prompt Engine · Định hướng nghệ thuật<br>Kiến trúc / Nội thất / Visualization</div></aside>
-<main class="main"><div class="top"><div><div class="ey">HOANGGIA AI · BỘ MÁY TẠO PROMPT</div><h1>AI đồng hành. Kiến tạo ý tưởng.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — phát triển theo logic workflow của các AI studio chuyên kiến trúc, nhưng giữ tư duy thiết kế riêng của HOANGGIA AI.</p></div><div class="badge" id="domainBadge">KIẾN TRÚC</div></div>
+<main class="main"><div class="top"><div><div class="top-brand"><img class="brand-mini" src="./brand-mark.svg" alt="HOANGGIA AI"><div class="ey">BỘ MÁY TẠO PROMPT · HOANGGIA AI</div></div><h1>AI đồng hành. Kiến tạo ý tưởng.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — phát triển theo logic workflow của các AI studio chuyên kiến trúc, nhưng giữ tư duy thiết kế riêng của HOANGGIA AI.</p></div><div class="badge" id="domainBadge">KIẾN TRÚC</div></div>
 <div class="tabs"><button class="tab on" data-tab="render">Dựng hình</button><button class="tab" data-tab="edit">Chỉnh sửa</button><button class="tab" data-tab="camera">Góc máy</button><button class="tab" data-tab="tools">Công cụ</button></div>
 
 <section id="render" class="panel on"><div class="layout"><div>
