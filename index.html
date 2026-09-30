@@ -92,12 +92,27 @@ select option:disabled{
 .domain-context{margin:8px 0 0;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#111315;color:#777;font-size:9px;line-height:1.45}
 .domain-context b{display:block;color:#d7a65b;font-size:10px;margin-bottom:3px}
 .domain-hidden{display:none!important}
+</style><style id="hg-domain-engine-css">
+.domain-engine{margin-top:10px;border:1px solid #292d31;background:#0d0f11;border-radius:12px;padding:12px}
+.domain-engine-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}
+.domain-engine-head strong{font-size:11px;letter-spacing:.08em}
+.domain-engine-head span{font-size:9px;color:#858a91}
+.thinking-flow{display:flex;flex-wrap:wrap;gap:6px}
+.think-node{padding:7px 9px;border:1px solid #292d31;background:#111315;border-radius:7px;font-size:9px;color:#b8bdc3}
+.think-node.active{border-color:#d7a65b;color:#f0c77d;background:#171411}
+.think-arrow{color:#555b61;align-self:center;font-size:10px}
+.engine-output{margin-top:10px;padding:9px;border-top:1px solid #292d31;color:#858a91;font-size:9px;line-height:1.55}
+.engine-output b{color:#f4f1ea}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
 <div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
 <div class="sectionlabel">LĨNH VỰC</div><div class="domain"><button class="on" data-domain="Kiến trúc">⌂ Kiến trúc</button><button data-domain="Nội thất">▣ Nội thất</button><button data-domain="Quy hoạch">◫ Quy hoạch</button></div>
-<div id="domainContext" class="domain-context"><b>KIẾN TRÚC</b>Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh</div><div class="sectionlabel">HOANGGIA AI</div><div class="status">Prompt Engine · Định hướng nghệ thuật<br>Kiến trúc / Nội thất / Visualization</div></aside>
+<div id="domainContext" class="domain-context"><b>KIẾN TRÚC</b>Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh</div><div class="domain-engine" id="domainEngine">
+<div class="domain-engine-head"><strong>BỘ MÁY TƯ DUY · <span id="engineDomain">KIẾN TRÚC</span></strong><span id="engineLogic">Tỷ lệ → công năng → hình khối → vật liệu → ánh sáng → góc nhìn</span></div>
+<div class="thinking-flow" id="thinkingFlow"></div>
+<div class="engine-output" id="engineOutput"><b>Nguyên tắc:</b> AI không chỉ chọn phong cách; hệ thống sẽ suy luận theo đúng logic của lĩnh vực trước khi tạo Master Prompt.</div>
+</div><div class="sectionlabel">HOANGGIA AI</div><div class="status">Prompt Engine · Định hướng nghệ thuật<br>Kiến trúc / Nội thất / Visualization</div></aside>
 <main class="main"><div class="top"><div><div class="ey">HOANGGIA AI · BỘ MÁY TẠO PROMPT</div><h1>Nhìn không gian. Đạo diễn hình ảnh.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — phát triển theo logic workflow của các AI studio chuyên kiến trúc, nhưng giữ tư duy thiết kế riêng của HOANGGIA AI.</p></div><div class="badge" id="domainBadge">KIẾN TRÚC</div></div>
 <div class="tabs"><button class="tab on" data-tab="render">Dựng hình</button><button class="tab" data-tab="edit">Chỉnh sửa</button><button class="tab" data-tab="camera">Góc máy</button><button class="tab" data-tab="tools">Công cụ</button></div>
 
@@ -218,6 +233,23 @@ $('#clear').onclick=()=>{location.reload()};
 })();
 </script><script id="hg-domain-js">
 (function(){
+const engines={
+ 'Kiến trúc':{
+  logic:'Tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn',
+  nodes:['Tỷ lệ & quy mô','Công năng','Hình khối','Mặt đứng','Vật liệu','Ánh sáng','Góc nhìn'],
+  rules:['Kiểm tra tỷ lệ khối tích và nhịp điệu mặt đứng.','Xác định quan hệ công năng, tiếp cận và trục nhìn.','Ưu tiên hình khối, khoảng đặc/rỗng và ngôn ngữ kiến trúc.','Vật liệu phải phản hồi đúng quy mô và điều kiện ánh sáng.','Kiểm soát đường đứng, phối cảnh và điểm nhìn kiến trúc.']
+ },
+ 'Nội thất':{
+  logic:'Công năng → công thái học → furniture → vật liệu → ánh sáng → camera',
+  nodes:['Công năng','Công thái học','Furniture','Vật liệu','Ánh sáng','Camera'],
+  rules:['Xác định hoạt động chính và thứ tự ưu tiên trong không gian.','Kiểm tra kích thước người dùng, khoảng đi lại và vùng thao tác.','Phân bổ furniture theo tỷ lệ, hierarchy và điểm nhấn.','Phân tích vật liệu theo màu, vân, độ nhám, phản xạ và vi cấu trúc.','Xây dựng lớp sáng: tự nhiên → nền → nhấn → trang trí.','Chọn góc máy phù hợp hierarchy và kiểm soát phối cảnh.']
+ },
+ 'Quy hoạch':{
+  logic:'Mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn',
+  nodes:['Mật độ','Giao thông','Phân khu','Cảnh quan','Khối tích','Góc nhìn'],
+  rules:['Đánh giá mật độ xây dựng, hệ số sử dụng đất và khoảng mở ở mức ý tưởng.','Xác định trục chính, tiếp cận, phân cấp giao thông và dòng người/xe.','Tổ chức các khu chức năng theo quan hệ sử dụng và bán kính tiếp cận.','Tạo mạng xanh, mặt nước và không gian công cộng liên tục.','Điều chỉnh khối tích theo địa hình, trục nhìn, mật độ và điểm nhấn.','Chọn góc nhìn tổng thể, chim bay và cấp mắt để đọc được cấu trúc toàn khu.']
+ }
+};
 const profiles={
  'Kiến trúc':{
   desc:'Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh',
@@ -263,8 +295,16 @@ function setOptions(id,items,groups){
  });
  const found=[...el.options].find(o=>o.value===old);if(found)el.value=old;
 }
+function renderEngine(domain){
+ const e=engines[domain];if(!e)return;
+ const flow=document.getElementById('thinkingFlow'),out=document.getElementById('engineOutput');
+ document.getElementById('engineDomain').textContent=domain.toUpperCase();
+ document.getElementById('engineLogic').textContent=e.logic;
+ flow.innerHTML=e.nodes.map((n,i)=>'<span class="think-node active">'+String(i+1).padStart(2,'0')+' · '+n+'</span>'+ (i<e.nodes.length-1?'<span class="think-arrow">→</span>':'')).join('');
+ out.innerHTML='<b>AI sẽ suy luận:</b> '+e.rules.join(' ');
+}
 function applyDomain(domain){
- const p=profiles[domain];if(!p)return;
+ const p=profiles[domain];if(!p)return; renderEngine(domain);
  setOptions('room',p.room);setOptions('focus',p.focus);setOptions('style',p.style);setOptions('light',p.light);setOptions('mat',p.mat);setOptions('furnitureLens',p.furniture);setOptions('camera',p.camera);
  const dc=document.getElementById('domainContext');if(dc)dc.innerHTML='<b>'+domain.toUpperCase()+'</b>'+p.desc;
  const brief=document.getElementById('brief');if(brief)brief.placeholder=p.brief;
@@ -278,5 +318,47 @@ document.querySelectorAll('.domain button').forEach(b=>{
  b.addEventListener('click',()=>applyDomain(b.dataset.domain));
 });
 applyDomain('Kiến trúc');
+})();
+</script><script id="hg-domain-prompt-engine">
+(function(){
+function field(id){const e=document.getElementById(id);return e?e.value:''}
+function domainLogic(domain){
+ if(domain==='Quy hoạch') return [
+ 'DOMAIN THINKING: Mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn.',
+ 'Ưu tiên phân tích mật độ, hệ số sử dụng đất ở mức ý tưởng, khoảng mở và quan hệ xây dựng/cảnh quan.',
+ 'Phân tích trục tiếp cận, phân cấp giao thông, dòng người/xe và các điểm kết nối chính.',
+ 'Phân khu chức năng theo quan hệ sử dụng, bán kính tiếp cận, riêng tư/công cộng và khả năng vận hành.',
+ 'Tạo mạng cảnh quan liên tục gồm cây xanh, mặt nước, không gian công cộng và vùng đệm.',
+ 'Điều chỉnh khối tích theo địa hình, mật độ, hướng nhìn, chiều cao tương đối và điểm nhấn.',
+ 'Camera ưu tiên tổng thể, chim bay, trục chính và cấp mắt; phải đọc được cấu trúc toàn khu.'
+ ].join('\n');
+ if(domain==='Nội thất') return [
+ 'DOMAIN THINKING: Công năng → công thái học → furniture → vật liệu → ánh sáng → camera.',
+ 'Xác định hoạt động chính, hierarchy công năng và luồng sử dụng trước khi tạo hình.',
+ 'Kiểm tra nhân trắc học, khoảng đi lại, vùng thao tác, khoảng mở cửa và vùng tiếp cận.',
+ 'Phân bổ furniture theo tỷ lệ, điểm nhấn, khoảng thở và quan hệ giữa các sản phẩm.',
+ 'Phân tích vật liệu bằng màu, vân/thớ, độ nhám, phản xạ, vi cấu trúc, mép và mạch nối.',
+ 'Xếp lớp ánh sáng: daylight → ambient → accent → decorative; ánh sáng phải tác động đúng lên vật liệu.',
+ 'Chọn camera theo hierarchy, chiều cao mắt, tiêu cự và kiểm soát đường đứng.'
+ ].join('\n');
+ return [
+ 'DOMAIN THINKING: Tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn.',
+ 'Kiểm tra tỷ lệ tổng thể, quy mô và nhịp điệu trước khi định hình ngôn ngữ.',
+ 'Xác định công năng, tiếp cận, trục nhìn và quan hệ đặc/rỗng.',
+ 'Phát triển hình khối, mặt đứng và điểm nhấn theo logic kiến trúc.',
+ 'Chọn vật liệu theo quy mô, chi tiết cấu tạo và phản ứng với điều kiện ánh sáng.',
+ 'Tổ chức ánh sáng tự nhiên và nhân tạo theo khối tích và bề mặt.',
+ 'Camera ưu tiên đọc hình khối, mặt đứng, trục nhìn và tỷ lệ kiến trúc.'
+ ].join('\n');
+}
+const oldMagic=document.getElementById('magic');
+if(oldMagic) oldMagic.addEventListener('click',function(){
+ const domain=(document.getElementById('mDomain')||{}).textContent||'Kiến trúc';
+ const p=document.getElementById('prompt');
+ if(!p)return;
+ const base=p.textContent;
+ const block=domainLogic(domain);
+ if(!base.includes('DOMAIN THINKING:')) p.textContent=base+'\n\n[ BỘ MÁY TƯ DUY '+domain.toUpperCase()+' ]\n'+block;
+});
 })();
 </script></body></html>
