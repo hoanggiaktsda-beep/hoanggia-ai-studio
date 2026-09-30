@@ -330,6 +330,55 @@ option{background:#0d0f10;color:#f2f2f2}
 
 /* HOANGGIA AI · Image Intelligence */
 .image-intelligence{margin-top:9px;padding:10px;border:1px solid #24282a;border-radius:9px;background:#090a0a}.intel-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.intel-head b{display:block;font-size:8px;letter-spacing:.12em}.intel-head small{display:block;color:#5e6366;font-size:7px;margin-top:3px}.intel-head .btn{min-height:32px;padding:6px 10px;font-size:7px}.intel-status{margin:8px 0;padding:6px 8px;border-radius:5px;background:#0d0e0e;color:#666b6e;font-size:7px}.intel-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.intel-item{min-width:0;padding:7px;border:1px solid #1c2022;border-radius:6px;background:#0b0c0c}.intel-item span{display:block;color:#555a5c;font-size:6px;letter-spacing:.08em}.intel-item b{display:block;margin-top:4px;color:#bdbdbd;font-size:7px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.intel-contract{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:7px;color:#5c6063;font-size:6px}.intel-contract span{color:#88734f;letter-spacing:.08em}.intel-contract small{margin-right:8px;font-size:6px}@media(max-width:900px){.intel-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.intel-head{align-items:stretch;flex-direction:column}.intel-head .btn{width:100%}.intel-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* HOANGGIA AI · AI WORKSTATION UI */
+:root{--bg:#070808;--panel:#0d0f10;--panel2:#111315;--line:#25292b;--line2:#303438;--text:#f5f5f3;--muted:#747a7e;--accent:#d7a65b}
+body{background:#070808}
+.app{grid-template-columns:248px minmax(0,1fr)}
+.side{padding:18px 12px;background:#0a0b0c;border-right:1px solid #202326}
+.brand-logo{width:190px;margin:2px auto 10px}
+.tag{margin:4px 8px 22px;font-size:9px}
+.sectionlabel{margin:18px 8px 6px;font-size:9px;color:#555b5f}
+.nav button,.domain button{font-size:12px;padding:11px 12px;border-radius:7px;color:#8b9094}
+.nav button:before{content:'›';display:inline-block;width:16px;color:#4f5559}
+.nav .on:before{content:'✦';color:var(--accent)}
+.nav .on,.domain .on{background:#151719;border-color:#292d30;color:#fff}
+.domain{border-top:1px solid #1d2022;padding-top:5px}
+.domain button{font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.side-status{margin:18px 4px 0;background:#0d0f10;border-color:#202326}
+.main{max-width:1600px;padding:18px 24px 80px}
+.top{align-items:center;padding-bottom:13px;border-bottom:1px solid #1d2022}
+.top .ey{font-size:9px}
+.top h1{font-size:26px;margin:4px 0}
+.top .intro{display:none}
+.badge{font-size:9px;background:#0d0f10}
+.tabs{margin:12px 0 12px;border:1px solid #202326;border-radius:8px;padding:4px;background:#0c0e0f}
+.tab{font-size:10px;padding:8px 13px;border-radius:6px;border:0}
+.tab.on{background:#17191b;color:#fff;border-bottom:0}
+.workflow-strip{margin:0 0 0 4px;border:0;background:transparent;padding:6px 8px}
+#panel-render .layout{grid-template-columns:minmax(0,1fr) 300px;gap:10px}
+#panel-render .layout>div:first-child{max-width:none}
+#panel-render .workflow-spine{display:none}
+#panel-render .card{border-radius:8px;background:#0c0e0f;border-color:#202427;padding:12px}
+.step-intent .stage-label,.step-images .stage-label,.step-brief .stage-label,.step-final-prompt .stage-label{font-size:7px;color:#666b6f}
+.design-intent-card{background:#0e1011!important}
+.intent-grid{grid-template-columns:repeat(4,1fr)}
+.intent-option{padding:9px}
+.step-images .drop,.step-images .drop:first-child,.step-images .drop:last-child{min-height:300px}
+.step-images .uploadgrid{grid-template-columns:minmax(0,1.45fr) minmax(240px,.8fr)}
+.ai-cta-note{margin:8px 0}
+#panel-render .actions{display:flex}
+#panel-render .actions .primary{min-height:40px}
+.expert-controls{background:#0b0d0e}
+.expert-body{grid-template-columns:1fr 1fr}
+#panel-render>.layout>aside .card{padding:11px}
+#panel-render>.layout>aside .card h2{font-size:10px}
+.metrics{grid-template-columns:1fr 1fr}
+.result{min-height:170px}
+.creatorFooter{margin-top:35px}
+@media(min-width:1101px){.side{position:sticky}.main{padding-top:18px}}
+@media(max-width:1100px){.app{grid-template-columns:1fr}.side{padding:8px 10px}.brand-logo{width:145px;margin:0}.nav,.domain{display:flex}.main{padding:14px 16px 70px}#panel-render .layout{grid-template-columns:1fr}}
+@media(max-width:760px){.top h1{font-size:22px}.tabs{position:sticky;top:84px;z-index:12}.workflow-strip{display:none}.intent-grid{grid-template-columns:1fr 1fr}.step-images .uploadgrid{grid-template-columns:1fr}.step-images .drop,.step-images .drop:first-child,.step-images .drop:last-child{min-height:210px}.expert-body{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -344,7 +393,7 @@ option{background:#0d0f10;color:#f2f2f2}
 <button data-tab="camera">Góc máy</button>
 <button data-tab="tools">Công cụ</button>
 </div>
-<div class="sectionlabel">LĨNH VỰC</div>
+<div class="sectionlabel">LĨNH VỰC · DESIGN BRAIN</div>
 <div class="domain">
 <button class="on" data-domain="Kiến trúc">Kiến trúc</button>
 <button data-domain="Nội thất">Nội thất</button>
@@ -355,7 +404,7 @@ option{background:#0d0f10;color:#f2f2f2}
 
 <main class="main">
 <header class="top">
-<div><div class="ey">HOANGGIA AI · BỘ MÁY TẠO PROMPT</div><h1>AI đồng hành. Kiến tạo ý tưởng.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — suy luận theo tư duy kiến trúc, nhưng để kiến trúc sư giữ quyết định cuối cùng.</p></div>
+<div><div class="ey">HOANGGIA AI · AI DESIGN WORKSTATION</div><h1>AI đồng hành. Kiến tạo ý tưởng.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — suy luận theo tư duy kiến trúc, nhưng để kiến trúc sư giữ quyết định cuối cùng.</p></div>
 <div class="badge">DESIGN STATE · <span id="stateBadge">READY</span></div>
 </header>
 
