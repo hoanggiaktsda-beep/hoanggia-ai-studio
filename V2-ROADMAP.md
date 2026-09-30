@@ -1,0 +1,1 @@
+# HOANGGIA AI V2 ROADMAP\n\n- [x] Design Intelligence workspace\n- [x] Master / Reference workflow\n- [x] Preservation locks\n- [x] Master Prompt engine\n- [x] Render / Edit / Camera / Concept / Sync UI\n- [ ] Real image generation backend\n- [ ] Provider adapters\n- [ ] Cloud project history\n- [ ] Credits / authentication\n
