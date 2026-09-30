@@ -164,6 +164,12 @@ select option:disabled{
 .hg-decision-card p{font-size:8px;color:#858a91;line-height:1.4;margin:5px 0 0}
 .hg-decision-card em{font-style:normal;color:#d7a65b}
 @media(max-width:650px){.hg-decision-grid{grid-template-columns:1fr}}
+</style><style id="hg-prompt-compiler-css">
+.hg-compiler{margin:8px 0 12px;padding:12px;border:1px solid #292d31;border-radius:10px;background:#0d0f11}
+.hg-compiler-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.hg-compiler-head strong{font-size:10px}.hg-compiler-head span{font-size:8px;color:#d7a65b}
+.hg-prompt-tabs{display:flex;gap:5px;margin-bottom:7px}.hg-prompt-tabs button{border:1px solid #292d31;background:#111315;color:#a7adb3;border-radius:6px;padding:5px 8px;font-size:8px}.hg-prompt-tabs button.active{color:#f0c77d;border-color:#d7a65b}
+.hg-prompt-output{min-height:180px;width:100%;box-sizing:border-box;background:#090a0b;color:#ddd;border:1px solid #292d31;border-radius:7px;padding:10px;font-size:9px;line-height:1.55;resize:vertical}
+.hg-compiler-actions{display:flex;gap:6px;margin-top:7px}.hg-compiler-actions button{font-size:8px;padding:6px 9px;border-radius:6px;border:1px solid #292d31;background:#17191c;color:#f4f1ea}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -704,5 +710,63 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  ['decFurniture','decCirculation','decMaterial','decLight','decCamera','decPreserve'].forEach(id=>document.addEventListener('change',e=>{if(e.target.id===id){if(window.HG_DESIGN_STATE)window.HG_DESIGN_STATE.decisions[id.replace('dec','').toLowerCase()]=e.target.value;window.dispatchEvent(new CustomEvent('hg:design-decision',{detail:window.HG_DESIGN_STATE.decisions}))}}));
  window.addEventListener('hg:design-state',()=>setTimeout(update,30));
  window.addEventListener('load',()=>setTimeout(update,1300));
+})();
+</script><script id="hg-prompt-compiler-js">
+(function(){
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s||'').trim();
+ function compile(){
+  const s=window.HG_DESIGN_STATE||{},i=s.inputs||{},d=s.decisions||{},r=s.reasoning||{};
+  const domain=s.domain||'Nội thất',room=i.room||'không gian chưa xác định';
+  const prompt=[
+   'HOANGGIA AI — MASTER DESIGN PROMPT',
+   '',
+   '[01 · DESIGN INTENT]',
+   'Lĩnh vực: '+domain,
+   'Không gian: '+room,
+   'Phong cách: '+(i.style||'tự suy luận từ ngữ cảnh'),
+   'Yêu cầu thiết kế: '+(i.brief||i.description||'giữ nguyên kiến trúc hiện trạng nếu không có chỉ dẫn thay đổi'),
+   '',
+   '[02 · SPACE & FUNCTION]',
+   'Kích thước: '+(i.dimensions||'theo ảnh tham chiếu'),
+   'Chiều cao trần: '+(i.ceiling||'theo hiện trạng'),
+   'Lưu thông: '+(d.circulation||'AI suy luận theo công năng'),
+   'Công năng: '+(i.focus||room),
+   '',
+   '[03 · DESIGN DECISIONS]',
+   'Furniture: '+(d.furniture||'AI suy luận'),
+   'Hierarchy vật liệu: '+(d.material||i.mat||'AI phân cấp'),
+   'Ánh sáng: '+(d.lighting||i.light||'AI tổ chức'),
+   'Camera: '+(d.camera||i.camera||'AI chọn'),
+   'Bảo toàn: '+(d.preserve||'Bảo toàn kiến trúc và phối cảnh hiện trạng'),
+   '',
+   '[04 · MATERIAL & ATMOSPHERE]',
+   'Vật liệu: '+(i.mat||'phân tích từ ảnh tham chiếu'),
+   'Bảng màu: '+(i.palette||'AI cân bằng'),
+   'Bề mặt: '+(i.surfaces||'chân thực, đúng roughness và phản xạ'),
+   'Hoàn thiện: '+(i.finish||'cao cấp, thi công khả thi'),
+   '',
+   '[05 · REASONING]',
+   esc(r.analysis?.conclusion||r.analysis?.con||'Thiết kế theo chuỗi tư duy của HOANGGIA AI; ưu tiên công năng, tỷ lệ, vật liệu, ánh sáng và camera theo lĩnh vực.'),
+   '',
+   '[06 · RENDER DIRECTIVE]',
+   'Photorealistic architectural/interior visualization, physically plausible materials, realistic scale, contact shadows, natural reflections, controlled highlights, coherent lighting, no arbitrary redesign, no distortion, no duplicated furniture, preserve perspective and architectural proportions.'
+  ].join('\n');
+  const negative='NEGATIVE: distorted architecture, changed room proportions, incorrect scale, floating furniture, duplicated objects, warped verticals, plastic materials, excessive gloss, overexposure, artificial lighting, random decor, low detail, cartoon, CGI look, broken perspective.';
+  const logic='DESIGN LOGIC: '+domain+' → '+(domain==='Nội thất'?'công năng → công thái học → furniture → vật liệu → ánh sáng → camera':domain==='Kiến trúc'?'tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn':'mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn');
+  s.prompt={master:prompt,negative,logic,ready:true};window.HG_DESIGN_STATE=s;
+  render('master');$('hgCompilerStatus').textContent='Đã biên dịch từ Design State';
+ }
+ function render(tab){
+  const s=window.HG_DESIGN_STATE||{},p=s.prompt||{};
+  $('hgCompiledPrompt').value=tab==='negative'?p.negative||'':tab==='logic'?p.logic||'':p.master||'';
+  document.querySelectorAll('[data-prompt-tab]').forEach(b=>b.classList.toggle('active',b.dataset.promptTab===tab));
+ }
+ window.addEventListener('hg:design-decision',()=>setTimeout(compile,40));
+ window.addEventListener('hg:design-state',()=>setTimeout(compile,60));
+ $('hgCompileBtn')?.addEventListener('click',compile);
+ document.addEventListener('click',e=>{const b=e.target.closest('[data-prompt-tab]');if(b){if(!window.HG_DESIGN_STATE?.prompt?.ready)compile();render(b.dataset.promptTab)}});
+ $('hgCopyBtn')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('hgCompiledPrompt').value);$('hgCompilerStatus').textContent='Đã copy Prompt'}catch(e){$('hgCompilerStatus').textContent='Không thể copy tự động'}});
+ window.addEventListener('load',()=>setTimeout(compile,1500));
 })();
 </script></body></html>
