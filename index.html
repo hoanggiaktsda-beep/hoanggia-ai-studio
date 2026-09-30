@@ -262,7 +262,7 @@ textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{paddin
 <div class="field"><label>Thương hiệu tham chiếu</label><select id="brand"><option>Không khóa thương hiệu — tạo ngôn ngữ riêng</option><option>Poliform</option><option>Minotti</option><option>Molteni&C</option><option>B&B Italia</option><option>Poltrona Frau</option><option>Flexform</option><option>Giorgetti</option><option>Rimadesio</option><option>Cassina</option><option>Baxter</option><option>Vitra</option><option>GUBI</option><option>Fritz Hansen</option><option>Paola Lenti</option></select></div></div>
 <div class="advanced-grid"><div><label>Bảng màu</label><input id="palette" placeholder="warm ivory / walnut / cognac / champagne"></div><div><label>Sàn / tường / trần</label><input id="surfaces" placeholder="travertine / veneer / warm white plaster"></div><div><label>Chi tiết thi công / chi tiết thi công</label><input id="joinery" placeholder="shadow gap 10mm, mép đá 45°, khe âm"></div><div><label>Độ hoàn thiện</label><select id="finishLevel"><option>Cao cấp — vật liệu tuyển chọn</option><option>Ultra Cao cấp — bespoke / thủ công</option><option>Cao cấp — cân bằng chi phí và chất lượng</option><option>Ý tưởng — ưu tiên ngôn ngữ thiết kế</option></select></div></div></div><div class="card"><h2><span class="num">03</span>Đạo diễn góc máy</h2><div class="camera">
 <button class="cam on" data-c="Góc 3/4 hero shot">Góc 3/4</button><button class="cam" data-c="Chính diện architectural shot">Chính diện</button><button class="cam" data-c="Chéo perspective">Chéo</button><button class="cam" data-c="Cận cảnh / material close-up">Cận cảnh</button><button class="cam" data-c="Góc thấp kiến trúc view">Góc thấp</button><button class="cam" data-c="Tầm mắt tự nhiên interior view">Tầm mắt</button></div>
-<div class="fields"><div class="field"><label>Lens</label><select id="lens"><option>24mm</option><option>28mm</option><option>35mm</option><option>50mm</option></select></div><div class="field"><label>Góc máy</label><select id="camera"><option>Phối cảnh kiến trúc tự nhiên</option><option>Kiểm soát đường đứng</option><option>Nhiếp ảnh nội thất phong cách tạp chí</option></select></div></div></div>
+<div class="fields"><div class="field"><label>Lens</label><select id="lens"><option>24mm</option><option>28mm</option><option>35mm</option><option>50mm</option></select></div><div class="field"><label>Góc máy</label><select id="cameraStyle"><option>Phối cảnh kiến trúc tự nhiên</option><option>Kiểm soát đường đứng</option><option>Nhiếp ảnh nội thất phong cách tạp chí</option></select></div></div></div>
 <div class="card"><h2><span class="num">04</span>Bảo toàn / Bộ khóa thiết kế</h2><div class="checks">
 <label class="check"><input type="checkbox" checked data-lock="architecture">Khóa kiến trúc</label><label class="check"><input type="checkbox" checked data-lock="camera">Khóa camera</label><label class="check"><input type="checkbox" checked data-lock="furniture">Giữ furniture model</label><label class="check"><input type="checkbox" checked data-lock="proportion">Giữ tỷ lệ / scale</label><label class="check"><input type="checkbox" data-lock="ceiling">Khóa trần</label><label class="check"><input type="checkbox" data-lock="openings">Khóa cửa / cửa sổ</label></div></div>
 </div>
@@ -676,10 +676,10 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
 })();
 </script><script id="hg-design-state-core">
 (function(){
- const IDS=['domain','room','focus','dimensions','ceiling','circulation','existing','style','light','mat','furniture','brand','palette','surfaces','joinery','finish','camera','lens','aspect'];
+ const IDS=['domain','room','focus','spaceSize','ceilingHeight','circulation','existing','style','light','mat','furniture','brand','palette','surfaces','joinery','finish','cameraStyle','lens','ratio'];
  const $=id=>document.getElementById(id);
  const read=id=>{const e=$(id);return e?e.value.trim():''};
- const domain=()=>document.querySelector('.domain.active,.domain.selected,[data-domain].active,[data-domain].selected')?.textContent.trim()||'Nội thất';
+ const domain=()=>document.querySelector('[data-domain].on')?.dataset.domain||document.querySelector('[data-domain].active')?.dataset.domain||'Nội thất';
  const defaults={version:'1.0',updatedAt:null,domain:'Nội thất',inputs:{},reasoning:{},decisions:{},prompt:{master:'',magic:'',ready:false},camera:{},material:{},ui:{}};
  window.HG_DESIGN_STATE=window.HG_DESIGN_STATE||structuredClone(defaults);
  function sync(reason){
@@ -687,7 +687,7 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
   s.version='1.0';s.updatedAt=new Date().toISOString();s.domain=domain();
   IDS.forEach(id=>{const e=$(id);if(e)s.inputs[id]=e.value.trim()});
   s.reasoning=window.HG_REASONING_CONTEXT||window.HG_REASONING||{};
-  s.camera={type:s.inputs.camera||'',lens:s.inputs.lens||'',aspect:s.inputs.aspect||''};
+  s.camera={type:s.inputs.cameraStyle||'',lens:s.inputs.lens||'',aspect:s.inputs.ratio||''};
   s.material={base:s.inputs.mat||'',palette:s.inputs.palette||'',surfaces:s.inputs.surfaces||'',joinery:s.inputs.joinery||'',finish:s.inputs.finish||''};
   s.decisions=s.decisions||{};
   s.ui={activeDomain:s.domain,room:s.inputs.room||'',lastChange:reason||'init'};
@@ -717,7 +717,7 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  const v=id=>$(id)?.value||'';
  function update(){
   const s=window.HG_DESIGN_STATE||{},i=s.inputs||{},room=i.room||'',dim=i.dimensions||'',style=i.style||'',mat=i.mat||'',light=i.light||'',lens=i.lens||'';
-  const nums=(dim.match(/\d+(?:[.,]\d+)?/g)||[]).map(Number),area=nums.length>1?nums[0]*nums[1]:0;
+  const dim=i.spaceSize||''; const nums=(dim.match(/\d+(?:[.,]\d+)?/g)||[]).map(Number),area=nums.length>1?nums[0]*nums[1]:0;
   const d=s.domain||'Nội thất';
   let f=area>=30?'Cân bằng · ưu tiên khoảng thở':area&&area<18?'Gọn · ưu tiên khoảng thở':'Tự động theo không gian';
   let fc=area>=30?'Không gian đủ rộng để tạo sofa/bàn có hierarchy và khoảng thở.':area&&area<18?'Giảm mật độ đồ để tránh nặng không gian.':'Chưa đủ kích thước để quyết định chính xác.';
@@ -754,8 +754,8 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
    'Yêu cầu thiết kế: '+(i.brief||i.description||'giữ nguyên kiến trúc hiện trạng nếu không có chỉ dẫn thay đổi'),
    '',
    '[02 · SPACE & FUNCTION]',
-   'Kích thước: '+(i.dimensions||'theo ảnh tham chiếu'),
-   'Chiều cao trần: '+(i.ceiling||'theo hiện trạng'),
+   'Kích thước: '+(i.spaceSize||'theo ảnh tham chiếu'),
+   'Chiều cao trần: '+(i.ceilingHeight||'theo hiện trạng'),
    'Lưu thông: '+(d.circulation||'AI suy luận theo công năng'),
    'Công năng: '+(i.focus||room),
    '',
@@ -870,7 +870,7 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  }
  function boot(){
   ['change','input'].forEach(evt=>document.addEventListener(evt,e=>{
-   if(e.target?.id && ['brief','dimensions','ceiling','style','light','mat','camera','lens','room','focus'].includes(e.target.id)){
+   if(e.target?.id && ['brief','spaceSize','ceilingHeight','style','light','mat','cameraStyle','lens','room','focus'].includes(e.target.id)){
     clearTimeout(window.__hgBrainTimer);window.__hgBrainTimer=setTimeout(compile,80);
    }
   }));
