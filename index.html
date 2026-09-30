@@ -124,6 +124,17 @@ select option:disabled{
 .hg-compact-summary{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .hg-compact-summary span{font-size:8px;padding:4px 7px;border:1px solid #292d31;border-radius:999px;color:#a7adb3;background:#111315}
 .hg-compact-toggle{font-size:8px;color:#d7a65b;margin-left:8px}
+</style><style id="hg-accordion2-css">
+.hg-subaccordion{border:1px solid #292d31;border-radius:9px;background:#0d0f11;margin:7px 0;overflow:hidden}
+.hg-subhead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;cursor:pointer;min-height:34px}
+.hg-subhead strong{font-size:10px;color:#f4f1ea}
+.hg-subhead span{font-size:8px;color:#858a91}
+.hg-subhead:after{content:'⌄';color:#d7a65b;font-size:11px;transition:.2s}
+.hg-subaccordion.is-closed .hg-subhead:after{transform:rotate(-90deg)}
+.hg-subbody{padding:0 10px 10px}
+.hg-subaccordion.is-closed .hg-subbody{display:none}
+.hg-subsummary{display:flex;gap:5px;flex-wrap:wrap;margin:4px 10px 8px}
+.hg-subsummary i{font-style:normal;font-size:7px;color:#858a91;border:1px solid #292d31;border-radius:999px;padding:3px 6px}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -455,5 +466,46 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  }
  window.addEventListener('load',()=>setTimeout(compact,250));
  new MutationObserver(()=>compact()).observe(document.body,{childList:true,subtree:true});
+})();
+</script><script id="hg-accordion2-js">
+(function(){
+ const groups=[
+  {parent:'Trí tuệ thiết kế',heads:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Trạng thái thiết kế','Interior Canvas','Thay thế nội thất','Furniture Replacement'],defaults:[0]},
+  {parent:'Ảnh đầu vào & tham chiếu',heads:['Ảnh công trình','Ảnh tham chiếu','Nhân vật']},
+  {parent:'Ý tưởng / yêu cầu thiết kế',heads:['Phong cách','Ánh sáng','Vật liệu','Tỷ lệ','Camera Director']}
+ ];
+ const norm=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
+ function find(t){
+  return [...document.querySelectorAll('h1,h2,h3,h4,h5,strong,.section-title,.card-title')].find(e=>norm(e.textContent)===norm(t));
+ }
+ function wrap(parent,el){
+  let root=el.closest('.card,.section,.panel,section')||el.parentElement;
+  if(!root||root===parent||root.dataset.hgSub)return;
+  root.dataset.hgSub='1';root.classList.add('hg-subaccordion');
+  const head=el.closest('.section-head,.card-head')||el.parentElement;
+  if(!head)return;
+  head.classList.add('hg-subhead');
+  const body=document.createElement('div');body.className='hg-subbody';
+  [...root.children].forEach(ch=>{if(ch!==head)body.appendChild(ch)});
+  root.appendChild(body);
+  head.addEventListener('click',e=>{
+   if(e.target.closest('button,input,select,textarea,label,a'))return;
+   root.classList.toggle('is-closed');
+   localStorage.setItem('hg-sub-'+norm(el.textContent),' '+(root.classList.contains('is-closed')?'1':'0'));
+  });
+  if(localStorage.getItem('hg-sub-'+norm(el.textContent))?.trim()==='1')root.classList.add('is-closed');
+ }
+ function build(){
+  groups.forEach(g=>{
+   const parentTitle=find(g.parent); if(!parentTitle)return;
+   const parent=parentTitle.closest('.workflow-section,.card,.section,.panel,section')||parentTitle.parentElement;
+   g.heads.forEach((h,i)=>{
+    const el=find(h);if(!el||!parent.contains(el))return;
+    wrap(parent,el);
+   });
+  });
+ }
+ window.addEventListener('load',()=>setTimeout(build,450));
+ new MutationObserver(()=>setTimeout(build,50)).observe(document.body,{childList:true,subtree:true});
 })();
 </script></body></html>
