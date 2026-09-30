@@ -85,12 +85,19 @@ select option:disabled{
   color:#f4f1ea !important;
   background-color:#0c0e10 !important;
 }
+</style><style id="hg-domain-css">
+.domain button{position:relative}
+.domain button.on{color:#fff}
+.domain button .domain-count{float:right;color:#666;font-size:9px}
+.domain-context{margin:8px 0 0;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#111315;color:#777;font-size:9px;line-height:1.45}
+.domain-context b{display:block;color:#d7a65b;font-size:10px;margin-bottom:3px}
+.domain-hidden{display:none!important}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
 <div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
 <div class="sectionlabel">LĨNH VỰC</div><div class="domain"><button class="on" data-domain="Kiến trúc">⌂ Kiến trúc</button><button data-domain="Nội thất">▣ Nội thất</button><button data-domain="Quy hoạch">◫ Quy hoạch</button></div>
-<div class="sectionlabel">HOANGGIA AI</div><div class="status">Prompt Engine · Định hướng nghệ thuật<br>Kiến trúc / Nội thất / Visualization</div></aside>
+<div id="domainContext" class="domain-context"><b>KIẾN TRÚC</b>Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh</div><div class="sectionlabel">HOANGGIA AI</div><div class="status">Prompt Engine · Định hướng nghệ thuật<br>Kiến trúc / Nội thất / Visualization</div></aside>
 <main class="main"><div class="top"><div><div class="ey">HOANGGIA AI · BỘ MÁY TẠO PROMPT</div><h1>Nhìn không gian. Đạo diễn hình ảnh.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — phát triển theo logic workflow của các AI studio chuyên kiến trúc, nhưng giữ tư duy thiết kế riêng của HOANGGIA AI.</p></div><div class="badge" id="domainBadge">KIẾN TRÚC</div></div>
 <div class="tabs"><button class="tab on" data-tab="render">Dựng hình</button><button class="tab" data-tab="edit">Chỉnh sửa</button><button class="tab" data-tab="camera">Góc máy</button><button class="tab" data-tab="tools">Công cụ</button></div>
 
@@ -208,5 +215,68 @@ $('#clear').onclick=()=>{location.reload()};
  load('frTargetFile',document.getElementById('frTarget'));load('frRefFile',document.getElementById('frRef'));
  document.getElementById('frPrompt')?.addEventListener('click',()=>{const type=document.getElementById('frType').value,change=document.getElementById('frChange').value;const locks=[...document.querySelectorAll('.fr-locks input')].filter(x=>x.checked).map(x=>x.parentElement.textContent.trim()).join('; ');document.getElementById('frOutput').textContent='HOANGGIA AI — FURNITURE REPLACEMENT\n\nĐỐI TƯỢNG: '+type+'\nPHƯƠNG ÁN: '+change+'\n\nTHAO TÁC\nThay đúng đối tượng '+type+' bằng sản phẩm trong ảnh tham chiếu. Phân tích trước hình học, tỷ lệ, cấu trúc, vật liệu, đường may / mối nối và ngôn ngữ thiết kế. Đồng bộ sản phẩm mới với mặt sàn, tường, ánh sáng và phối cảnh hiện hữu.\n\nBẢO TOÀN\n'+locks+'\n\nQUY TẮC\nKhông thay đổi kiến trúc, camera, tiêu cự, phối cảnh hoặc các đồ vật không được yêu cầu. Không nhân bản sản phẩm. Không làm biến dạng chân, tay vịn, mặt bàn, đường may hoặc tỷ lệ. Bóng tiếp xúc, phản xạ và điểm chạm phải tự nhiên.\n\nKẾT QUẢ\nPhotorealistic architectural interior, vật liệu chân thực, tỷ lệ đúng, ánh sáng nhất quán, sản phẩm mới hòa nhập tự nhiên với không gian.';toast('Đã tạo Prompt thay thế nội thất')});
  document.getElementById('frReset')?.addEventListener('click',()=>{['frTarget','frRef'].forEach(id=>{const b=document.getElementById(id);b.classList.remove('has');b.querySelector('input').value='';b.querySelector('img').removeAttribute('src')});document.getElementById('frOutput').textContent='Chưa tạo Prompt.'});
+})();
+</script><script id="hg-domain-js">
+(function(){
+const profiles={
+ 'Kiến trúc':{
+  desc:'Hình khối · mặt đứng · không gian · vật liệu · ánh sáng · phối cảnh',
+  room:['Nhà ở','Biệt thự','Căn hộ','Nhà phố','Công trình công cộng','Văn phòng','Khách sạn / lưu trú','Nhà hàng','Showroom','Không gian ngoài trời'],
+  focus:['Kiến trúc + nội thất cân bằng','Hình khối + tỷ lệ kiến trúc','Mặt đứng + vật liệu','Công năng + công thái học','Ánh sáng kiến trúc','Thiết kế để thi công thực tế'],
+  style:['Kiến trúc hiện đại','Kiến trúc hữu cơ','Kiến trúc nhiệt đới','Kiến trúc Địa Trung Hải','Kiến trúc nghỉ dưỡng','Tối giản kiến trúc','Brutalism','Bauhaus','Đương đại','Tân cổ điển đương đại'],
+  light:['Ánh sáng ban mai','Ánh sáng giữa trưa','Nắng chiều ấm','Giờ vàng','Giờ xanh','Ánh sáng tán xạ','Nắng tương phản mạnh','Ánh sáng mặt đứng','Ngoại thất chạng vạng'],
+  mat:['AI phân tích ảnh tham chiếu','Đá tự nhiên','Đá travertine','Đá limestone','Đá granite','Đá onyx','Đá quartzite','Đá nung kết','Gỗ tự nhiên','Gạch / bê tông','Kính','Kim loại'],
+  furniture:['Tổng hợp cao cấp','Thiết kế riêng / may đo','Italian Đương đại','Tối giản','Bắc Âu','Nhật Bản','Contract / Lưu trú & dịch vụ'],
+  camera:['Phối cảnh kiến trúc tự nhiên','Kiểm soát đường đứng','Góc hero công trình','Góc mặt đứng','Góc thấp kiến trúc','Nhiếp ảnh kiến trúc'],
+  brief:'Ví dụ: Kiến trúc hiện đại, giữ nguyên khối nhà và cao độ, nhấn vật liệu mặt đứng, ánh sáng chiều ấm...'
+ },
+ 'Nội thất':{
+  desc:'Công năng · đồ nội thất · vật liệu · ánh sáng · công thái học · art direction',
+  room:['Phòng khách','Phòng ngủ chính','Phòng ăn','Bếp','Phòng làm việc','Phòng thay đồ','Phòng tắm','Sảnh / hành lang','Showroom','Nhà hàng / khách sạn','Biệt thự','Căn hộ','Nhà phố'],
+  focus:['Kiến trúc + nội thất cân bằng','Công năng + công thái học','Vật liệu cao cấp','Nội thất rời','Ánh sáng + không khí','Định hướng nghệ thuật','Thiết kế để thi công thực tế'],
+  style:['Luxury hiện đại','Luxury tối giản','Luxury tinh tế','Luxury đương đại','Tân cổ điển đương đại','Art Deco','Đương đại','Hiện đại hữu cơ','Tối giản','Japandi','Wabi-Sabi','Bắc Âu','Mid-Century Modern','Chiết trung','Bán lẻ cao cấp','Boutique thời trang','Phòng trưng bày','Văn phòng điều hành'],
+  light:['Ánh sáng ban mai','Ánh sáng giữa trưa','Nắng chiều ấm','Giờ vàng','Giờ xanh','Ánh sáng nền ấm','Đèn hắt khe trần','Đèn tuyến tính','Đèn âm trần','Đèn rửa tường','Đèn nhấn','Đèn trang trí','Ánh sáng gián tiếp','Ánh sáng mềm kiểu tạp chí','Ánh sáng điện ảnh định hướng'],
+  mat:['AI phân tích ảnh tham chiếu','Đá cẩm thạch','Đá travertine','Đá limestone','Đá onyx','Đá nung kết','Gỗ óc chó','Gỗ sồi','Gỗ teak','Veneer gỗ','Gỗ soi rãnh','Da nguyên tấm','Da aniline','Da semi-aniline','Da bò','Vải linen','Vải bouclé','Vải nhung','Vải len','Đồng thau xước','Bronze','Thép đen hóa','Thép không gỉ'],
+  furniture:['Tổng hợp cao cấp','Italian Đương đại','Italian Luxury tối giản','Đương đại Pháp','Nhật Bản','Bắc Âu','Thiết kế sưu tầm','Thiết kế riêng / may đo','Contract / Lưu trú & dịch vụ'],
+  camera:['Phối cảnh nội thất tự nhiên','Kiểm soát đường đứng','Nhiếp ảnh nội thất phong cách tạp chí','Góc 3/4 hero','Cận cảnh vật liệu','Cận cảnh nội thất'],
+  brief:'Ví dụ: Luxury hiện đại, giữ nguyên sofa, thay mảng TV bằng travertine, ánh sáng chiều ấm, vật liệu chân thực...'
+ },
+ 'Quy hoạch':{
+  desc:'Tổng mặt bằng · phân khu · giao thông · cảnh quan · khối tích · góc nhìn trên cao',
+  room:['Khu đô thị','Khu dân cư','Khu nghỉ dưỡng','Khu phức hợp','Khu thương mại','Khu công nghiệp','Khu campus','Công viên / không gian công cộng','Quảng trường','Khu ven biển'],
+  focus:['Tổ chức tổng mặt bằng','Phân khu chức năng','Giao thông + tiếp cận','Cảnh quan + sinh thái','Khối tích + mật độ','Trục cảnh quan + điểm nhấn','Khả thi triển khai'],
+  style:['Quy hoạch hiện đại','Đô thị sinh thái','Đô thị nén','Nghỉ dưỡng nhiệt đới','Địa Trung Hải','Cảnh quan đương đại','Sinh thái','Tối giản','Hữu cơ','Khu phức hợp cao cấp'],
+  light:['Ánh sáng ban mai','Nắng chiều ấm','Giờ vàng','Giờ xanh','Ánh sáng tán xạ','Nắng tương phản mạnh','Ngoại thất chạng vạng','Ánh sáng cảnh quan ban đêm'],
+  mat:['AI phân tích ảnh tham chiếu','Đá tự nhiên','Đá nung kết','Bê tông','Gạch','Gỗ ngoài trời','Kính','Kim loại','Cây xanh bản địa','Mặt nước','Vật liệu lát cảnh quan'],
+  furniture:['Thiết kế cảnh quan','Street furniture','Thiết kế công cộng','Nghỉ dưỡng','Đương đại','Tối giản','Sinh thái'],
+  camera:['Tổng mặt bằng trên cao','Góc nhìn chim bay','Phối cảnh quy hoạch tổng thể','Góc từ trục chính','Góc cảnh quan cấp mắt','Góc hoàng hôn toàn khu'],
+  brief:'Ví dụ: Quy hoạch khu nghỉ dưỡng nhiệt đới, giữ trục giao thông chính, tăng mảng xanh, tổ chức khối tích theo địa hình...'
+ }
+};
+function setOptions(id,items,groups){
+ const el=document.getElementById(id);if(!el)return;
+ const old=el.value;el.innerHTML='';
+ (groups?groups:[{label:'Lựa chọn',items}]).forEach(g=>{
+  const og=document.createElement('optgroup');og.label=g.label;
+  g.items.forEach(v=>{const o=document.createElement('option');o.textContent=v;o.value=v;og.appendChild(o)});
+  el.appendChild(og);
+ });
+ const found=[...el.options].find(o=>o.value===old);if(found)el.value=old;
+}
+function applyDomain(domain){
+ const p=profiles[domain];if(!p)return;
+ setOptions('room',p.room);setOptions('focus',p.focus);setOptions('style',p.style);setOptions('light',p.light);setOptions('mat',p.mat);setOptions('furnitureLens',p.furniture);setOptions('camera',p.camera);
+ const dc=document.getElementById('domainContext');if(dc)dc.innerHTML='<b>'+domain.toUpperCase()+'</b>'+p.desc;
+ const brief=document.getElementById('brief');if(brief)brief.placeholder=p.brief;
+ const m=document.getElementById('mDomain');if(m)m.textContent=domain;
+ const badge=document.getElementById('domainBadge');if(badge)badge.textContent=domain.toUpperCase();
+ document.documentElement.dataset.domain=domain;
+ toast('Đã chuyển bộ công cụ sang '+domain);
+}
+document.querySelectorAll('.domain button').forEach(b=>{
+ const count=document.createElement('span');count.className='domain-count';count.textContent=b.dataset.domain==='Kiến trúc'?'A':b.dataset.domain==='Nội thất'?'I':'Q';b.appendChild(count);
+ b.addEventListener('click',()=>applyDomain(b.dataset.domain));
+});
+applyDomain('Kiến trúc');
 })();
 </script></body></html>
