@@ -113,6 +113,17 @@ select option:disabled{
 .reason-status{font-size:9px;color:#d7a65b}
 @media(max-width:900px){.reasoning-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.reasoning-grid{grid-template-columns:1fr}}
+</style><style id="hg-compact-workflow">
+.workflow-section{margin-bottom:10px}
+.workflow-section>.section-head,.workflow-section>.card-head{cursor:pointer;user-select:none;min-height:38px;padding:9px 12px}
+.workflow-section>.section-head:after,.workflow-section>.card-head:after{content:'⌄';float:right;color:#858a91;transition:.2s}
+.workflow-section.is-collapsed>.section-head:after,.workflow-section.is-collapsed>.card-head:after{transform:rotate(-90deg)}
+.workflow-section.is-collapsed>.section-body,.workflow-section.is-collapsed>.section-content,.workflow-section.is-collapsed>.grid,.workflow-section.is-collapsed>.content,.workflow-section.is-collapsed>.section-inner{display:none!important}
+.workflow-section .section-head h2,.workflow-section .card-head h2{font-size:12px;margin:0}
+.workflow-section .section-head p{font-size:9px;margin:2px 0 0;color:#858a91}
+.hg-compact-summary{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.hg-compact-summary span{font-size:8px;padding:4px 7px;border:1px solid #292d31;border-radius:999px;color:#a7adb3;background:#111315}
+.hg-compact-toggle{font-size:8px;color:#d7a65b;margin-left:8px}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -409,5 +420,40 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  document.addEventListener('change',e=>{if(['room','style','light','mat','camera','lens','dimensions','ceiling','focus'].includes(e.target.id))setTimeout(infer,30)});
  document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(infer,80)});
  window.addEventListener('load',()=>setTimeout(infer,200));
+})();
+</script><script id="hg-compact-workflow-js">
+(function(){
+ const titles=['Ảnh đầu vào & tham chiếu','Ý tưởng / yêu cầu thiết kế','Trí tuệ thiết kế'];
+ function norm(s){return (s||'').replace(/\s+/g,' ').trim().toLowerCase()}
+ function findSection(title){
+  const all=[...document.querySelectorAll('h1,h2,h3,h4,.section-title,.card-title,.card-head strong,.section-head strong')];
+  const t=norm(title);
+  return all.find(x=>norm(x.textContent)===t||norm(x.textContent).includes(t));
+ }
+ function compact(){
+  titles.forEach((title,i)=>{
+   const h=findSection(title); if(!h)return;
+   let root=h.closest('.card,.section,.panel,section,.workflow-section')||h.parentElement;
+   if(!root)return;
+   root.classList.add('workflow-section');
+   if(root.dataset.hgCompact)return;
+   root.dataset.hgCompact='1';
+   const head=h.closest('.section-head,.card-head')||h.parentElement;
+   if(head)head.addEventListener('click',e=>{
+    if(e.target.closest('button,input,select,textarea,label,a'))return;
+    root.classList.toggle('is-collapsed');
+    localStorage.setItem('hg-collapse-'+i,root.classList.contains('is-collapsed')?'1':'0');
+   });
+   if(localStorage.getItem('hg-collapse-'+i)==='1')root.classList.add('is-collapsed');
+   if(!root.querySelector('.hg-compact-summary')){
+    const s=document.createElement('div');s.className='hg-compact-summary';
+    const labels=i===0?['Ảnh công trình','Ảnh tham chiếu']:i===1?['Phong cách','Ánh sáng','Vật liệu','Tỷ lệ','Camera']:['Công năng','Công thái học','Furniture','Vật liệu','Ánh sáng','Camera'];
+    labels.forEach(x=>{const p=document.createElement('span');p.textContent=x;s.appendChild(p)});
+    head.appendChild(s);
+   }
+  });
+ }
+ window.addEventListener('load',()=>setTimeout(compact,250));
+ new MutationObserver(()=>compact()).observe(document.body,{childList:true,subtree:true});
 })();
 </script></body></html>
