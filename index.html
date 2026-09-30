@@ -141,6 +141,11 @@ select option:disabled{
 .hg-contextual span{font-size:8px;color:#a7adb3}
 .hg-priority{border-color:#5b4a2f!important;box-shadow:inset 2px 0 0 #d7a65b}
 .hg-secondary{opacity:.72}
+</style><style id="hg-reasoning-control-css">
+.hg-reasoning-control{margin:8px 0 10px;padding:10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
+.hg-rc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.hg-rc-head strong{font-size:9px;color:#f4f1ea}.hg-rc-state{font-size:8px;color:#d7a65b}
+.hg-rc-list{display:flex;gap:5px;flex-wrap:wrap}.hg-rc-item{font-size:8px;padding:4px 7px;border-radius:999px;border:1px solid #292d31;color:#a7adb3}.hg-rc-item.open{border-color:#d7a65b;color:#f0c77d}.hg-rc-item.ask{border-color:#6f5b3c;color:#d7a65b}.hg-rc-item.hide{opacity:.5}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -566,5 +571,57 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(apply,180)});
  window.addEventListener('load',()=>setTimeout(apply,700));
  new MutationObserver(()=>setTimeout(apply,80)).observe(document.body,{childList:true,subtree:true});
+})();
+</script><script id="hg-reasoning-controller">
+(function(){
+ const $=s=>document.querySelector(s),$=s=>[...document.querySelectorAll(s)];
+ const norm=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
+ const find=t=>$('h1,h2,h3,h4,h5,strong,.section-title,.card-title').find(e=>norm(e.textContent)===norm(t));
+ const field=id=>{const e=document.getElementById(id);return e?e.value.trim():''};
+ const root=t=>{const e=find(t);return e?.closest('.hg-subaccordion')||null};
+ function state(){
+  const d=($('.domain.active,.domain.selected,[data-domain].active,[data-domain].selected')?.textContent||'Nội thất').trim();
+  const room=field('room'),dim=field('dimensions'),style=field('style'),mat=field('mat'),light=field('light'),cam=field('camera');
+  const R=[];
+  const add=(name,status,why)=>R.push({name,status,why});
+  add('Design Reasoning Engine','open','Bộ điều khiển trung tâm');
+  if(d==='Nội thất'){
+   add('Bàn làm việc tham chiếu',room==='Showroom'||room==='Phòng khách'?'open':'hide','Cần khi so sánh hiện trạng/phong cách');
+   add('Bảng vật liệu',mat?'open':'ask',mat?'Đã có vật liệu để phân tích':'Thiếu dữ liệu vật liệu');
+   add('Interior Canvas',room==='Showroom'||room==='Phòng khách'?'open':'hide','Chỉnh sửa cục bộ theo đối tượng');
+   add('Thay thế nội thất',room==='Phòng khách'||room==='Phòng ngủ'||room==='Showroom'?'open':'hide','Có furniture trọng tâm');
+  }else if(d==='Kiến trúc'){
+   add('Bàn làm việc tham chiếu','open','So sánh hình khối, mặt đứng, vật liệu');
+   add('Bảng vật liệu',mat?'open':'ask',mat?'Đã có vật liệu':'Thiếu vật liệu');
+   add('Interior Canvas','hide','Không phải công cụ ưu tiên');
+   add('Thay thế nội thất','hide','Không phải mục tiêu chính');
+  }else{
+   add('Bàn làm việc tham chiếu','open','Đọc tổng mặt bằng và ngữ cảnh');
+   add('Bảng vật liệu',mat?'open':'ask',mat?'Đã có vật liệu cảnh quan':'Thiếu vật liệu/cảnh quan');
+   add('Interior Canvas','hide','Không phải mục tiêu chính');
+   add('Thay thế nội thất','hide','Không áp dụng');
+  }
+  add('Tỷ lệ & kích thước',dim?'open':'ask',dim?'Đã có kích thước':'Cần kích thước để suy luận tỷ lệ');
+  add('Phong cách',style?'open':'ask',style?'Đã chọn ngôn ngữ thiết kế':'Cần phong cách');
+  add('Ánh sáng',light?'open':'ask',light?'Đã chọn ánh sáng':'Có thể để AI suy luận');
+  add('Camera',cam?'open':'ask',cam?'Đã chọn góc máy':'Cần góc nhìn trước khi tạo prompt');
+  return {d,room,R};
+ }
+ function apply(){
+  const s=state();
+  s.R.forEach(x=>{const r=root(x.name);if(!r)return;r.classList.remove('hg-priority','hg-secondary');if(x.status==='open'){r.classList.add('hg-priority');r.classList.remove('is-closed')}if(x.status==='hide'){r.classList.add('hg-secondary','is-closed')}});
+  let panel=document.getElementById('hg-reasoning-control');
+  if(!panel){
+   const target=document.getElementById('designReasoning')||document.getElementById('domainEngine');if(!target)return;
+   panel=document.createElement('div');panel.id='hg-reasoning-control';panel.className='hg-reasoning-control';target.parentNode.insertBefore(panel,target);
+  }
+  const open=s.R.filter(x=>x.status==='open').length,ask=s.R.filter(x=>x.status==='ask').length;
+  panel.innerHTML='<div class="hg-rc-head"><strong>REASONING CONTROLLER · '+s.d+(s.room?' · '+s.room:'')+'</strong><span class="hg-rc-state">'+open+' ưu tiên · '+ask+' cần dữ liệu</span></div><div class="hg-rc-list">'+s.R.map(x=>'<span class="hg-rc-item '+x.status+'" title="'+x.why+'">'+x.name+'</span>').join('')+'</div>';
+  window.HG_REASONING_CONTEXT=s;
+ }
+ document.addEventListener('change',e=>{if(['room','dimensions','style','mat','light','camera','lens','ceiling','focus'].includes(e.target.id))setTimeout(apply,50)});
+ document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(apply,150)});
+ window.addEventListener('load',()=>setTimeout(apply,900));
+ new MutationObserver(()=>setTimeout(apply,100)).observe(document.body,{childList:true,subtree:true});
 })();
 </script></body></html>
