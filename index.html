@@ -305,13 +305,15 @@ function onMusicReady(e){musicReady=true;e.target.setVolume(Number($("musicVolum
 function onMusicState(e){musicPlaying=e.data===YT.PlayerState.PLAYING;updateMusicUI();if(e.data===YT.PlayerState.ENDED)nextMusic()}
 function setMusicTrack(index,autoplay=true){musicIndex=(index+musicTracks.length)%musicTracks.length;const t=musicTracks[musicIndex];$("musicTitle").textContent=t.title;$("musicOpen").href=t.url;document.querySelectorAll("[data-music]").forEach(b=>b.classList.toggle("on",b.dataset.music===t.key));if(musicReady){musicPlayer.loadVideoById(t.id);if(!autoplay)musicPlayer.pauseVideo()}}
 function nextMusic(){setMusicTrack(musicIndex+1,true)} function prevMusic(){setMusicTrack(musicIndex-1,true)}
-function updateMusicUI(){const v=Number($("musicVolume").value);$("musicVolumeValue").textContent=v+"%";$("musicMute").textContent=musicMuted?"🔇":"🔊";$("musicPlay").textContent=musicPlaying?"❚❚ Tạm dừng":"▶ Phát"}
-$("musicPlay").onclick=()=>{if(!musicReady)return;if(musicPlaying)musicPlayer.pauseVideo();else musicPlayer.playVideo()};$("musicPrev").onclick=prevMusic;$("musicNext").onclick=nextMusic;
+function updateMusicUI(){const v=Number($("musicVolume").value);$("musicVolumeValue").textContent=v+"%";$("musicMiniVolume").value=v;$("musicMute").textContent=musicMuted?"🔇":"🔊";$("musicPlay").textContent=musicPlaying?"❚❚ Tạm dừng":"▶ Phát";$("musicState").textContent=musicPlaying?"Đang phát":"Sẵn sàng";$("musicToggle").textContent=$("musicDock").classList.contains("expanded")?"−":"＋"}
+$("musicPlay").onclick=()=>{if(!musicReady)return;if(musicPlaying)musicPlayer.pauseVideo();else musicPlayer.playVideo()};
+$("musicPrev").onclick=prevMusic;$("musicNext").onclick=nextMusic;
 $("musicMute").onclick=()=>{if(!musicReady)return;if(musicMuted){musicPlayer.unMute();musicMuted=false}else{musicPlayer.mute();musicMuted=true}updateMusicUI()};
-$("musicVolume").oninput=e=>{const v=Number(e.target.value);if(musicReady)musicPlayer.setVolume(v);if(v>0&&musicMuted){musicPlayer.unMute();musicMuted=false}updateMusicUI()};
+function setMusicVolume(v){v=Number(v);$("musicVolume").value=v;$("musicMiniVolume").value=v;if(musicReady)musicPlayer.setVolume(v);if(v>0&&musicMuted){musicPlayer.unMute();musicMuted=false}updateMusicUI()}
+$("musicVolume").oninput=e=>setMusicVolume(e.target.value);$("musicMiniVolume").oninput=e=>setMusicVolume(e.target.value);
 document.querySelectorAll("[data-music]").forEach(b=>b.onclick=()=>setMusicTrack(musicTracks.findIndex(t=>t.key===b.dataset.music),true));
-$("musicClose").onclick=()=>{$("musicDock").style.display="none";localStorage.setItem("HG_AI_MUSIC_OPEN","0")};
-if(localStorage.getItem("HG_AI_MUSIC_OPEN")!=="0")$("musicDock").style.display="grid";
+$("musicToggle").onclick=()=>{const open=!$("musicDock").classList.contains("expanded");$("musicDock").classList.toggle("expanded",open);$("musicToggle").setAttribute("aria-label",open?"Thu gọn trình phát":"Mở trình phát");localStorage.setItem("HG_AI_MUSIC_EXPANDED",open?"1":"0");updateMusicUI()};
+$("musicDock").classList.toggle("expanded",localStorage.getItem("HG_AI_MUSIC_EXPANDED")==="1");
 loadYouTubeAPI();
 boot();
 })();
