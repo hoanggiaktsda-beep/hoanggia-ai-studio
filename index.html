@@ -203,7 +203,29 @@ textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{paddin
 .hg-quick-prompt input{width:100%;background:#090a0b;color:#f4f1ea;border:1px solid #292d31;border-radius:7px;padding:8px;font-size:9px;outline:0}
 .hg-quick-prompt input:focus{border-color:#656a70}
 .hg-quick-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.hg-quick-actions .btn{font-size:9px;padding:6px 8px}
-</style></style></head>
+</style></style><style id="hg-architect-upgrade-css">
+.hg-brief-intel{margin-top:8px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
+.hg-bi-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.hg-bi-head strong{font-size:9px;letter-spacing:.07em}.hg-bi-head span{font-size:8px;color:#d7a65b}
+.hg-bi-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.hg-bi-cell{padding:7px 8px;border:1px solid #292d31;border-radius:7px;background:#111315}
+.hg-bi-cell small{display:block;color:#686e74;font-size:7px;margin-bottom:3px}.hg-bi-cell b{font-size:9px;color:#f4f1ea;font-weight:600}
+.hg-feasibility{margin-top:8px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
+.hg-feas-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.hg-feas-head strong{font-size:9px}.hg-feas-head span{font-size:8px;color:#d7a65b}
+.hg-feas-list{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.hg-feas-item{padding:7px;border:1px solid #292d31;border-radius:7px;background:#111315}
+.hg-feas-item b{display:block;font-size:8px}.hg-feas-item span{display:block;font-size:7px;color:#858a91;margin-top:3px;line-height:1.35}
+.hg-feas-item.ok{border-color:#3c4b40}.hg-feas-item.warn{border-color:#5b4a2f}
+.hg-lock-mode{margin-top:8px;padding:9px 10px;border-top:1px solid #292d31}
+.hg-lock-mode-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.hg-lock-mode-head strong{font-size:9px}.hg-lock-mode-head span{font-size:8px;color:#858a91}
+.hg-lock-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.hg-lock-mode button{border:1px solid #292d31;background:#111315;color:#9da2a8;border-radius:7px;padding:7px 5px;font-size:8px}
+.hg-lock-mode button.active{border-color:#d7a65b;color:#f0c77d;background:#171411}
+.hg-lock-note{margin-top:6px;font-size:7px;color:#858a91;line-height:1.4}
+@media(max-width:650px){.hg-bi-grid,.hg-feas-list,.hg-lock-modes{grid-template-columns:1fr 1fr}}
+</style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
 <div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
@@ -890,7 +912,110 @@ applyDomain('Kiến trúc');
   const labels={'ý tưởng':'Ý tưởng','phong cách':'Phong cách','kích thước':'Kích thước','trần':'Trần','chiều cao trần':'Trần','furniture':'Furniture','vật liệu':'Vật liệu','ánh sáng':'Ánh sáng','camera':'Camera','giao thông':'Giao thông','cảnh quan':'Cảnh quan','khối tích':'Khối tích'};
   if(fm){
    const label=labels[fm[1].toLowerCase()];
-   const re=new RegExp('^'+label.replace(/[.*+?^{}()|[\]\\]/g,'\\</body></html>')+'\\s*:\\s*.*,'mi');
+   const re=new RegExp('^'+label.replace(/[.*+?^{}()|[\]\\]/g,'\\<script id="hg-architect-intelligence">
+(function(){
+ const $=id=>document.getElementById(id);
+ const val=id=>String($(id)?.value||'').trim();
+ const state=()=>window.HG_DESIGN_STATE||(window.HG_DESIGN_STATE={inputs:{},decisions:{},prompt:{}});
+ const domain=()=>document.querySelector('[data-domain].on')?.dataset.domain||'Nội thất';
+ function infer(){
+  const s=state(),i=s.inputs||{};
+  const d=s.domain||domain(),room=i.room||'Chưa xác định',brief=i.brief||'';
+  const intent=brief?brief.replace(/\s+/g,' ').slice(0,110):'AI đọc từ ảnh + yêu cầu thiết kế';
+  const program=i.focus||room;
+  const priority=d==='Kiến trúc'?'Tỷ lệ · công năng · hình khối':d==='Quy hoạch'?'Mật độ · giao thông · phân khu':'Công năng · công thái học · furniture';
+  const material=i.mat||'AI phân tích reference';
+  s.designBrief={intent,program,priority,material,confidence:Math.round(([brief,room,i.style,i.spaceSize,i.mat,i.light].filter(Boolean).length/6)*100)};
+  s.feasibility=check(s);
+  s.guardrails=s.guardrails||{architecture:true,camera:true,furniture:true,proportion:true,ceiling:false,openings:false,mode:'LOCK'};
+  window.HG_DESIGN_STATE=s;
+  renderBrief(s);renderFeas(s);renderLocks(s);
+ }
+ function check(s){
+  const i=s.inputs||{},d=s.domain||domain(),room=i.room||'',dim=i.spaceSize||'';
+  const nums=(dim.match(/\d+(?:[.,]\d+)?/g)||[]).map(Number),area=nums.length>1?nums[0]*nums[1]:0;
+  const out=[];
+  out.push({k:'Công năng',ok:!!room,t:room?'Đã có loại không gian':'Cần xác định không gian'});
+  if(d==='Nội thất'){
+   out.push({k:'Tỷ lệ',ok:!!area,t:area?area.toFixed(1)+' m² · AI kiểm tra mật độ':'Cần kích thước để kiểm tra'});
+   out.push({k:'Lưu thông',ok:!!i.circulation,t:i.circulation?'Đã có chỉ dẫn':'AI kiểm soát theo công năng'});
+  }else if(d==='Kiến trúc'){
+   out.push({k:'Hình khối',ok:!!i.focus,t:i.focus?'Có trọng tâm kiến trúc':'AI suy luận theo đề bài'});
+   out.push({k:'Cao độ',ok:!!i.ceilingHeight,t:i.ceilingHeight?'Đã khóa thông số':'Theo hiện trạng'});
+  }else{
+   out.push({k:'Giao thông',ok:!!i.circulation,t:i.circulation?'Có chỉ dẫn':'AI tổ chức theo phân khu'});
+   out.push({k:'Khối tích',ok:!!i.spaceSize,t:i.spaceSize?'Có quy mô đầu vào':'Cần quy mô / khu đất'});
+  }
+  return out;
+ }
+ function renderBrief(s){
+  let host=document.getElementById('hgBriefIntel');if(!host)return;
+  const b=s.designBrief||{};
+  host.querySelector('[data-bi="intent"]').textContent=b.intent||'—';
+  host.querySelector('[data-bi="program"]').textContent=b.program||'—';
+  host.querySelector('[data-bi="priority"]').textContent=b.priority||'—';
+  host.querySelector('[data-bi="material"]').textContent=b.material||'—';
+  host.querySelector('[data-bi-status]').textContent='Độ rõ đề bài · '+(b.confidence||0)+'%';
+ }
+ function renderFeas(s){
+  const host=document.getElementById('hgFeasibility');if(!host)return;
+  host.querySelector('.hg-feas-list').innerHTML=(s.feasibility||[]).map(x=>'<div class="hg-feas-item '+(x.ok?'ok':'warn')+'"><b>'+(x.ok?'✓ ':'⚠ ')+x.k+'</b><span>'+x.t+'</span></div>').join('');
+  host.querySelector('[data-feas-status]').textContent=(s.feasibility||[]).filter(x=>x.ok).length+'/'+(s.feasibility||[]).length+' kiểm tra đạt';
+ }
+ function renderLocks(s){
+  const g=s.guardrails||{};document.querySelectorAll('[data-hg-guard]').forEach(e=>{e.checked=!!g[e.dataset.hgGuard]});
+  const mode=g.mode||'LOCK';document.querySelectorAll('[data-lock-mode]').forEach(b=>b.classList.toggle('active',b.dataset.lockMode===mode));
+ }
+ function syncGuards(){
+  const s=state(),g=s.guardrails||{};
+  document.querySelectorAll('[data-hg-guard]').forEach(e=>g[e.dataset.hgGuard]=e.checked);
+  s.guardrails=g;s.decisions=s.decisions||{};
+  s.decisions.preserve=(Object.entries(g).filter(([k,v])=>['architecture','camera','furniture','proportion','ceiling','openings'].includes(k)&&v).map(([k])=>({architecture:'kiến trúc',camera:'camera',furniture:'furniture model',proportion:'tỷ lệ / scale',ceiling:'trần',openings:'cửa / cửa sổ'}[k]))).join(', ')||'Không khóa thêm');
+  window.HG_DESIGN_STATE=s;
+  window.dispatchEvent(new CustomEvent('hg:design-decision',{detail:s.decisions}));
+  infer();
+ }
+ function mount(){
+  if($('hgBriefIntel')||!$('brief'))return;
+  const bi=document.createElement('div');bi.id='hgBriefIntel';bi.className='hg-brief-intel';
+  bi.innerHTML='<div class="hg-bi-head"><strong>DESIGN BRIEF INTELLIGENCE</strong><span data-bi-status>Đang đọc đề bài</span></div><div class="hg-bi-grid"><div class="hg-bi-cell"><small>Ý ĐỒ THIẾT KẾ</small><b data-bi="intent">—</b></div><div class="hg-bi-cell"><small>CHƯƠNG TRÌNH</small><b data-bi="program">—</b></div><div class="hg-bi-cell"><small>ƯU TIÊN SUY LUẬN</small><b data-bi="priority">—</b></div><div class="hg-bi-cell"><small>VẬT LIỆU NỀN</small><b data-bi="material">—</b></div></div>';
+  $('brief').parentNode.appendChild(bi);
+  const di=document.getElementById('design-intelligence');
+  if(di&&!document.getElementById('hgFeasibility')){
+   const f=document.createElement('div');f.id='hgFeasibility';f.className='hg-feasibility';
+   f.innerHTML='<div class="hg-feas-head"><strong>ARCHITECTURAL FEASIBILITY CHECK</strong><span data-feas-status>Đang kiểm tra</span></div><div class="hg-feas-list"></div>';
+   di.appendChild(f);
+  }
+  const lockCard=[...document.querySelectorAll('.card')].find(x=>x.querySelector('[data-lock="architecture"]'));
+  if(lockCard&&!document.getElementById('hgLockMode')){
+   const m=document.createElement('div');m.id='hgLockMode';m.className='hg-lock-mode';
+   m.innerHTML='<div class="hg-lock-mode-head"><strong>QUYỀN CAN THIỆP AI</strong><span>LOCK · EDIT · FREE</span></div><div class="hg-lock-modes"><button type="button" data-lock-mode="LOCK" class="active">LOCK<br><small>Giữ nguyên</small></button><button type="button" data-lock-mode="EDIT">EDIT<br><small>Chỉ sửa vùng yêu cầu</small></button><button type="button" data-lock-mode="FREE">FREE<br><small>Cho phép sáng tạo</small></button></div><div class="hg-lock-note">LOCK = không tự thay đổi · EDIT = chỉ can thiệp phần được yêu cầu · FREE = AI được phép đề xuất lại trong phạm vi lĩnh vực.</div>';
+   lockCard.querySelector('.checks').after(m);
+   document.querySelectorAll('[data-lock]').forEach(e=>{e.dataset.hgGuard=e.dataset.lock});
+   document.querySelectorAll('[data-hg-guard]').forEach(e=>e.addEventListener('change',syncGuards));
+   m.addEventListener('click',e=>{const b=e.target.closest('[data-lock-mode]');if(!b)return;const s=state();s.guardrails=s.guardrails||{};s.guardrails.mode=b.dataset.lockMode;window.HG_DESIGN_STATE=s;renderLocks(s);syncGuards()});
+  }
+  infer();
+ }
+ function enrichPrompt(){
+  const s=state(),p=s.prompt?.master;if(!p)return;
+  const g=s.guardrails||{},b=s.designBrief||{},f=(s.feasibility||[]).filter(x=>!x.ok).map(x=>x.k+': '+x.t);
+  const guard=(g.mode||'LOCK')+' · '+(Object.entries(g).filter(([k,v])=>['architecture','camera','furniture','proportion','ceiling','openings'].includes(k)&&v).map(([k])=>({architecture:'kiến trúc',camera:'camera',furniture:'furniture',proportion:'scale',ceiling:'trần',openings:'cửa/cửa sổ'}[k])).join(', ')||'không khóa thêm');
+  const lines=['Ý đồ: '+(b.intent||'AI suy luận từ đề bài')+' · Ưu tiên: '+(b.priority||'theo lĩnh vực'), 'Can thiệp: '+guard];
+  if(f.length)lines.push('Cần kiểm tra thêm: '+f.join(' · '));
+  const clean=p.split('\n').filter(x=>!x.startsWith('Ý đồ: ')&&!x.startsWith('Can thiệp: ')&&!x.startsWith('Cần kiểm tra thêm: '));
+  const idx=Math.max(1,clean.length-1);clean.splice(idx,0,...lines);s.prompt.master=clean.join('\n');s.prompt.lastUpgrade='architect-intelligence-v1';window.HG_DESIGN_STATE=s;
+  if($('prompt'))$('prompt').textContent=s.prompt.master;
+ }
+ ['input','change'].forEach(evt=>document.addEventListener(evt,e=>{
+  if(['brief','room','focus','spaceSize','ceilingHeight','circulation','existing','style','light','mat','furnitureLens','palette','surfaces','joinery','finishLevel','cameraStyle','lens','ratio'].includes(e.target?.id)){clearTimeout(window.__hgIntelTimer);window.__hgIntelTimer=setTimeout(()=>{infer();enrichPrompt()},240)}
+ }));
+ window.addEventListener('hg:design-state',()=>setTimeout(()=>{infer();enrichPrompt()},260));
+ window.addEventListener('hg:design-decision',()=>setTimeout(()=>{infer();enrichPrompt()},260));
+ window.addEventListener('load',()=>setTimeout(mount,600));
+ window.addEventListener('load',()=>setTimeout(()=>{mount();infer();enrichPrompt()},1900));
+})();
+</script></body></html>')+'\\s*:\\s*.*,'mi');
    if(re.test(p)){p=p.replace(re,label+': '+fm[2].trim());changed=true}
   }
   if(!changed){
