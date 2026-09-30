@@ -19,7 +19,18 @@ textarea,select,input[type=text]{width:100%;background:#0c0e10;color:#eee;border
 .panel{display:none}.panel.on{display:block}.hidden{display:none}.status{font-size:10px;color:#72777d}.toast{position:fixed;right:18px;bottom:18px;background:#202327;border:1px solid #444;padding:10px 13px;border-radius:9px;display:none;z-index:10}
 @media(max-width:1000px){.app{grid-template-columns:1fr}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}.layout{grid-template-columns:1fr}.nav,.domain{display:flex;gap:5px;overflow:auto}.nav button,.domain button{white-space:nowrap;width:auto}.main{padding:20px}}
 @media(max-width:600px){.main{padding:15px}.top{display:block}.badge{display:inline-block;margin-top:12px}.uploadgrid,.fields,.checks{grid-template-columns:1fr}.camera{grid-template-columns:1fr 1fr}h1{font-size:32px}}
-@media(max-width:760px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px}.brand-logo{width:160px}.nav,.domain{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.domain{grid-template-columns:repeat(3,1fr)}.nav button,.domain button{margin:0}.domain-engine{display:none}}</style><style id="hg-upgrade-css">
+@media(max-width:760px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px}.brand-logo{width:160px}.nav,.domain{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.domain{grid-template-columns:repeat(3,1fr)}.nav button,.domain button{margin:0}.domain-engine{display:none}}<style id="creator-footer-sync">
+.creatorFooter{margin-top:70px;padding:34px 0 8px;border-top:1px solid #252923;text-align:left;display:flex;justify-content:space-between;gap:30px;align-items:end;position:relative}
+.creatorFooter:before{content:"";width:44px;height:44px;display:block;position:absolute;left:0;top:26px;background:url("./brand-mark.svg") center/cover no-repeat;border:1px solid #55472f;opacity:.9}
+.creatorFooter>div:first-child{padding-left:58px}
+.creatorFooter h2{margin:0 0 7px;color:#eeeae0;font:800 24px/1 system-ui,sans-serif;letter-spacing:.08em}
+.creatorFooter p{margin:0;color:#8b928b;font-size:11px;line-height:1.7}
+.creatorFooter .creatorRole{color:#cdb47d;letter-spacing:.06em}
+.creatorLinks{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.creatorLinks a{color:#c9b17b;text-decoration:none;border:1px solid #403a2d;padding:9px 12px;border-radius:2px;font-size:10px;letter-spacing:.04em}
+.creatorLinks a:hover{border-color:#75603b;color:#e2c98f}
+@media(max-width:760px){.creatorFooter{margin-top:38px;padding-top:24px;display:block}.creatorFooter:before{position:relative;left:auto;top:auto;margin-bottom:-48px}.creatorFooter>div:first-child{padding-left:58px}.creatorFooter h2{font-size:20px}.creatorLinks{justify-content:flex-start;margin-top:14px}.creatorLinks a{min-height:42px;display:flex;align-items:center}}
+</style></style><style id="hg-upgrade-css">
 .hgx{border:1px solid #292d31;background:#0d0f10;margin-bottom:14px}
 .hgx-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 15px;border-bottom:1px solid #24282c}
 .hgx-head b{font-size:12px;letter-spacing:.04em}.hgx-head span{font-size:10px;color:#72777d}
@@ -1117,7 +1128,7 @@ applyDomain('Kiến trúc');
  window.addEventListener('load',()=>setTimeout(mount,750));
  window.addEventListener('load',()=>setTimeout(()=>{mount();material();camera();version()},2000));
 })();
-</script></body></html>')+'\\s*:\\s*.*,'mi');
+<footer class="creatorFooter" aria-label="Giới thiệu Hoàng Gia"><div><h2>HOÀNG GIA</h2><p class="creatorRole">Architect · Interior Designer · Founder · Art Direction · AI Design</p><p>☎ 0368.250.848</p></div><div class="creatorLinks"><a href="tel:0368250848">☎ 0368.250.848</a><a href="https://www.facebook.com/share/1Dw7UVryGH/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook cá nhân</a><a href="https://www.tiktok.com/@kts.hoanggia.da?_r=1&_t=ZS-9A94K57E0yg" target="_blank" rel="noopener noreferrer">TikTok cá nhân</a></div></footer></script></body></html>')+'\\s*:\\s*.*,'mi');
    if(re.test(p)){p=p.replace(re,label+': '+fm[2].trim());changed=true}
   }
   if(!changed){
