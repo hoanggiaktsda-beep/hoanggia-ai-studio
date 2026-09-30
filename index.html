@@ -225,6 +225,15 @@ textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{paddin
 .hg-lock-mode button.active{border-color:#d7a65b;color:#f0c77d;background:#171411}
 .hg-lock-note{margin-top:6px;font-size:7px;color:#858a91;line-height:1.4}
 @media(max-width:650px){.hg-bi-grid,.hg-feas-list,.hg-lock-modes{grid-template-columns:1fr 1fr}}
+</style><style id="hg-material-camera-version-css">
+.hg-pro-layer{margin-top:8px;padding:9px 10px;border:1px solid #292d31;border-radius:9px;background:#0d0f11}
+.hg-pro-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.hg-pro-head strong{font-size:9px;letter-spacing:.06em}.hg-pro-head span{font-size:8px;color:#d7a65b}
+.hg-material-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.hg-material-cell{padding:7px;border:1px solid #292d31;border-radius:7px;background:#111315}.hg-material-cell small{display:block;font-size:7px;color:#686e74;margin-bottom:3px}.hg-material-cell b{font-size:8px;line-height:1.35}
+.hg-camera-story{display:grid;grid-template-columns:1.1fr 1fr;gap:6px}.hg-camera-story .story{padding:7px;border:1px solid #292d31;border-radius:7px;background:#111315}.hg-camera-story small{display:block;color:#686e74;font-size:7px;margin-bottom:3px}.hg-camera-story b{font-size:8px;line-height:1.4}
+.hg-version-bar{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.hg-version-list{display:flex;gap:5px;flex-wrap:wrap}.hg-version-list button{border:1px solid #292d31;background:#111315;color:#a7adb3;border-radius:6px;padding:5px 8px;font-size:8px}.hg-version-list button.active{border-color:#d7a65b;color:#f0c77d}.hg-version-save{margin-left:auto;display:flex;gap:5px}.hg-version-save input{width:125px;background:#090a0b;color:#f4f1ea;border:1px solid #292d31;border-radius:6px;padding:6px;font-size:8px}.hg-version-save button{font-size:8px;padding:6px 8px}
+.hg-version-diff{margin-top:6px;padding:7px;border-top:1px solid #292d31;font-size:7px;color:#858a91;line-height:1.45}
+@media(max-width:700px){.hg-material-grid{grid-template-columns:repeat(2,1fr)}.hg-camera-story{grid-template-columns:1fr}.hg-version-save{margin-left:0;width:100%}.hg-version-save input{flex:1}}
 </style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -1014,6 +1023,99 @@ applyDomain('Kiến trúc');
  window.addEventListener('hg:design-decision',()=>setTimeout(()=>{infer();enrichPrompt()},260));
  window.addEventListener('load',()=>setTimeout(mount,600));
  window.addEventListener('load',()=>setTimeout(()=>{mount();infer();enrichPrompt()},1900));
+})();
+</script><script id="hg-material-camera-version">
+(function(){
+ const $=id=>document.getElementById(id);
+ const get=()=>window.HG_DESIGN_STATE||(window.HG_DESIGN_STATE={inputs:{},decisions:{},prompt:{}});
+ const domain=()=>document.querySelector('[data-domain].on')?.dataset.domain||'Nội thất';
+ const text=id=>String($(id)?.value||'').trim();
+ function material(){
+  const s=get(),i=s.inputs||{},base=text('mat')||'AI phân tích reference',palette=text('palette')||'AI cân bằng',surface=text('surfaces')||'theo reference',finish=text('finishLevel')||'cao cấp';
+  const d=domain();
+  const profile=d==='Nội thất'
+   ?{scale:'Ưu tiên khổ vật liệu lớn, mạch gọn',rough:'Roughness chân thực, tránh bóng nhựa',reflect:'Phản xạ vừa đủ theo nguồn sáng',detail:'Vân / pore / cạnh / mối nối có scale'}
+   :d==='Kiến trúc'
+   ?{scale:'Tỷ lệ module theo quy mô công trình',rough:'Đúng đặc tính ngoài trời',reflect:'Kiểm soát phản xạ mặt đứng',detail:'Mạch, joint và cạnh thể hiện đúng tỷ lệ'}
+   :{scale:'Module theo quy mô cảnh quan',rough:'Bền vững với điều kiện ngoài trời',reflect:'Kiểm soát phản xạ trên mặt nước / kính',detail:'Paving, planting và texture đúng scale'};
+  s.materialIntel={base,palette,surface,finish,...profile};
+  window.HG_DESIGN_STATE=s;
+  ['base','palette','surface','rough','reflect','detail'].forEach(k=>{const e=document.querySelector('[data-mi="'+k+'"]');if(e)e.textContent=s.materialIntel[k]||'—'});
+ }
+ function camera(){
+  const s=get(),i=s.inputs||{},d=s.decisions||{},room=i.room||'không gian',dom=domain();
+  const lens=i.lens||'35mm',style=i.cameraStyle||'Phối cảnh kiến trúc tự nhiên';
+  let story=dom==='Quy hoạch'?'Đọc toàn khu, trục chính và quan hệ cảnh quan':dom==='Kiến trúc'?'Tôn hình khối, mặt đứng và tỷ lệ công trình':'Đọc công năng, hierarchy furniture và vật liệu';
+  let shot=lens.includes('28')?'Spatial wide':lens.includes('50')?'Detail / focused':'Balanced hero';
+  let reason=dom==='Nội thất'?'camera ở tầm mắt tự nhiên, vertical control, tránh méo phối cảnh':'giữ tỷ lệ hình học, kiểm soát đường đứng và chiều sâu';
+  s.cameraStory={story,shot,reason,lens,style,room};
+  window.HG_DESIGN_STATE=s;
+  ['story','shot','reason','lens'].forEach(k=>{const e=document.querySelector('[data-cs="'+k+'"]');if(e)e.textContent=s.cameraStory[k]||'—'});
+ }
+ function snapshotLabel(){
+  const s=get(),i=s.inputs||{},d=s.decisions||{};
+  return [s.domain||domain(),i.room||'',i.style||'',i.mat||'',i.light||'',i.lens||'',d.furniture||''].filter(Boolean).join(' · ');
+ }
+ function version(){
+  const s=get();s.versions=s.versions||{};s.versions.current=s.versions.current||'V01';s.versions.items=s.versions.items||{};
+  if(!s.versions.items[s.versions.current])s.versions.items[s.versions.current]={label:s.versions.current,summary:snapshotLabel(),prompt:s.prompt?.master||'',state:JSON.parse(JSON.stringify({inputs:s.inputs,decisions:s.decisions,material:s.materialIntel,camera:s.cameraStory,guardrails:s.guardrails}))};
+  renderVersions(s);
+ }
+ function renderVersions(s){
+  const box=document.getElementById('hgVersionList');if(!box)return;
+  box.innerHTML=Object.values(s.versions.items).map(v=>'<button type="button" data-version="'+v.label+'" class="'+(v.label===s.versions.current?'active':'')+'">'+v.label+'</button>').join('');
+  const cur=s.versions.items[s.versions.current];const diff=document.getElementById('hgVersionDiff');if(diff)diff.textContent=cur?'Hiện tại: '+(cur.summary||'Phương án thiết kế'):'Chưa có phiên bản.';
+ }
+ function saveVersion(label){
+  const s=get();label=(label||'').trim().toUpperCase()||('V0'+(Object.keys(s.versions?.items||{}).length+1));
+  s.versions=s.versions||{current:label,items:{}};s.versions.items=s.versions.items||{};
+  s.versions.items[label]={label,summary:snapshotLabel(),prompt:s.prompt?.master||'',state:JSON.parse(JSON.stringify({inputs:s.inputs,decisions:s.decisions,material:s.materialIntel,camera:s.cameraStory,guardrails:s.guardrails}))};
+  s.versions.current=label;window.HG_DESIGN_STATE=s;renderVersions(s);
+  const inp=$('hgVersionName');if(inp)inp.value='';const st=$('hgVersionStatus');if(st)st.textContent='Đã lưu '+label;
+ }
+ function switchVersion(label){
+  const s=get(),v=s.versions?.items?.[label];if(!v)return;
+  s.versions.current=label;
+  if(v.state){s.inputs=v.state.inputs||s.inputs;s.decisions=v.state.decisions||s.decisions;s.materialIntel=v.state.material||s.materialIntel;s.cameraStory=v.state.camera||s.cameraStory;s.guardrails=v.state.guardrails||s.guardrails}
+  s.prompt=s.prompt||{};s.prompt.master=v.prompt||s.prompt.master;window.HG_DESIGN_STATE=s;
+  renderVersions(s);material();camera();
+  if($('prompt'))$('prompt').textContent=s.prompt.master||'';
+  if(window.HG_SYNC_DESIGN_STATE)window.HG_SYNC_DESIGN_STATE('version');
+  const st=$('hgVersionStatus');if(st)st.textContent='Đã chuyển '+label;
+ }
+ function mount(){
+  if(document.getElementById('hgMaterialIntel'))return;
+  const mat=document.querySelector('.hgx:nth-of-type(3) .hgx-body')||document.getElementById('materialBoard')?.parentElement;
+  const mb=document.getElementById('materialBoard')?.closest('.hgx');
+  if(mb){
+   const x=document.createElement('div');x.id='hgMaterialIntel';x.className='hg-pro-layer';
+   x.innerHTML='<div class="hg-pro-head"><strong>MATERIAL INTELLIGENCE</strong><span>Vật liệu → scale · roughness · reflection · detail</span></div><div class="hg-material-grid"><div class="hg-material-cell"><small>BASE</small><b data-mi="base">—</b></div><div class="hg-material-cell"><small>PALETTE</small><b data-mi="palette">—</b></div><div class="hg-material-cell"><small>SURFACE</small><b data-mi="surface">—</b></div><div class="hg-material-cell"><small>ROUGHNESS / SCALE</small><b data-mi="rough">—</b></div><div class="hg-material-cell"><small>REFLECTION / DETAIL</small><b data-mi="reflect">—</b><span data-mi="detail" style="display:block;margin-top:3px;font-size:7px;color:#858a91">—</span></div></div>';
+   mb.appendChild(x);
+  }
+  const cam=document.querySelector('.camera')?.closest('.card');
+  if(cam&&!document.getElementById('hgCameraStory')){
+   const x=document.createElement('div');x.id='hgCameraStory';x.className='hg-pro-layer';
+   x.innerHTML='<div class="hg-pro-head"><strong>CAMERA STORYTELLING</strong><span>What → Where → Why</span></div><div class="hg-camera-story"><div class="story"><small>CÂU CHUYỆN KHUNG HÌNH</small><b data-cs="story">—</b></div><div class="story"><small>KIỂU SHOT</small><b data-cs="shot">—</b></div><div class="story"><small>NGUYÊN TẮC</small><b data-cs="reason">—</b></div><div class="story"><small>LENS</small><b data-cs="lens">—</b></div></div>';
+   cam.appendChild(x);
+  }
+  const promptCard=[...document.querySelectorAll('.card')].find(x=>x.querySelector('#prompt'));
+  if(promptCard&&!document.getElementById('hgVersion')){
+   const x=document.createElement('div');x.id='hgVersion';x.className='hg-pro-layer';
+   x.innerHTML='<div class="hg-pro-head"><strong>DESIGN VERSION</strong><span id="hgVersionStatus">V01 · phương án hiện tại</span></div><div class="hg-version-bar"><div class="hg-version-list" id="hgVersionList"></div><div class="hg-version-save"><input id="hgVersionName" placeholder="Tên phiên bản · V02"><button class="btn" id="hgVersionSave">Lưu phiên bản</button></div></div><div class="hg-version-diff" id="hgVersionDiff">—</div>';
+   promptCard.appendChild(x);
+  }
+  material();camera();version();
+ }
+ document.addEventListener('input',e=>{if(['mat','palette','surfaces','finishLevel','lens','cameraStyle','brief','room','style','light','spaceSize'].includes(e.target?.id)){clearTimeout(window.__hgMCV);window.__hgMCV=setTimeout(()=>{material();camera();version()},180)}});
+ document.addEventListener('change',e=>{if(['mat','palette','surfaces','finishLevel','lens','cameraStyle','room','style','light','spaceSize'].includes(e.target?.id)){material();camera();}});
+ document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-version]');if(b)switchVersion(b.dataset.version);
+  if(e.target.closest('#hgVersionSave'))saveVersion($('hgVersionName')?.value);
+ });
+ window.addEventListener('hg:design-state',()=>setTimeout(()=>{material();camera()},120));
+ window.addEventListener('hg:design-decision',()=>setTimeout(()=>{material();camera()},120));
+ window.addEventListener('load',()=>setTimeout(mount,750));
+ window.addEventListener('load',()=>setTimeout(()=>{mount();material();camera();version()},2000));
 })();
 </script></body></html>')+'\\s*:\\s*.*,'mi');
    if(re.test(p)){p=p.replace(re,label+': '+fm[2].trim());changed=true}
