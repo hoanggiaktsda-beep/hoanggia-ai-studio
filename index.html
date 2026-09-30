@@ -632,7 +632,7 @@ applyDomain('Kiến trúc');
   IDS.forEach(id=>{const e=$(id);if(e)e.addEventListener('change',()=>setTimeout(()=>sync(id),20))});
   document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(()=>sync('domain'),120)});
   window.addEventListener('load',()=>setTimeout(()=>sync('init'),1100));
-  new MutationObserver(()=>setTimeout(()=>{if(window.HG_REASONING_CONTEXT)sync('reasoning')},120)).observe(document.body,{childList:true,subtree:true});
+  window.addEventListener('hg:reasoning-update',()=>setTimeout(()=>sync('reasoning'),20));
  }
  boot();
  window.HG_SYNC_DESIGN_STATE=sync;
