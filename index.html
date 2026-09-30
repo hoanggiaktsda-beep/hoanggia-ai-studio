@@ -102,7 +102,46 @@ const PROMPT_ENGINES={
 "Nội thất":{id:"interior",version:"V1",label:"INTERIOR ENGINE",reasoning:"công năng → công thái học → lưu thông → furniture → tỷ lệ → vật liệu → ánh sáng → camera → art direction",focus:"program, zoning, human scale, circulation, furniture composition, joinery, material palette, lighting layers, ceiling/floor/wall interfaces, styling",output:"interior visualization prompt with ergonomic clearances, furniture hierarchy, joinery, material realism, layered lighting and controlled camera",preserve:"walls, openings, ceiling height, floor, room proportions, circulation logic, original furniture model/form and camera unless explicitly requested",negative:"room geometry drift, resized or replaced furniture, broken circulation, wrong human scale, extra openings, plastic materials, clutter, excessive HDR"},
 "Quy hoạch":{id:"planning",version:"V1",label:"PLANNING ENGINE",reasoning:"bối cảnh → sử dụng đất → mật độ → phân khu → giao thông → tiếp cận → cảnh quan → khối tích → góc nhìn",focus:"land use, density, zoning, public/private hierarchy, vehicular/pedestrian circulation, access, landscape, massing, skyline and urban context",output:"planning visualization prompt with land-use hierarchy, circulation networks, landscape structure, massing relationships and contextual scale",preserve:"site boundary, orientation, existing road network, major land-use structure, topography cues and requested camera unless explicitly requested",negative:"land-use drift, road relocation, impossible access, random towers, broken scale, duplicated buildings, invented infrastructure"}
 };
-function promptEngine(){return PROMPT_ENGINES[S.domain]||PROMPT_ENGINES["Kiến trúc"]}
+const OUTPUT_TEMPLATES={
+"Kiến trúc":{name:"ARCHITECTURE PROMPT",sections:["PROJECT / CONTEXT","EXISTING CONDITIONS","ARCHITECTURAL INTENT","MASSING & PROPORTION","FACADE / OPENINGS","STRUCTURE & CONSTRUCTABILITY","MATERIAL & DETAIL","DAYLIGHT / ATMOSPHERE","CAMERA / COMPOSITION","OUTPUT / NEGATIVE"]},
+"Nội thất":{name:"INTERIOR PROMPT",sections:["PROJECT / FUNCTION","EXISTING SPACE","ERGONOMICS & CIRCULATION","FURNITURE COMPOSITION","MATERIAL / JOINERY","LIGHTING LAYERS","CAMERA / ART DIRECTION","PRESERVATION LOCKS","OUTPUT / NEGATIVE"]},
+"Quy hoạch":{name:"MASTERPLAN PROMPT",sections:["SITE / CONTEXT","LAND USE & ZONING","DENSITY / MASSING","PEDESTRIAN & VEHICULAR CIRCULATION","LANDSCAPE / PUBLIC-PRIVATE","URBAN SCALE / SKYLINE","CAMERA / REPRESENTATION","PRESERVATION LOCKS","OUTPUT / NEGATIVE"]}
+};
+function outputTemplate(){return OUTPUT_TEMPLATES[S.domain]||OUTPUT_TEMPLATES["Kiến trúc"]}
+function buildHGBrainPrompt(){const x=designState(),e=promptEngine(),o=outputTemplate(),brief=$("brief").value.trim(),space=x.space||"theo ảnh gốc",materials=x.materials||"vật liệu chân thực, có khả năng thi công",light=x.lighting||$("light").value,furniture=x.furniture||"giữ nguyên hiện trạng nội thất trừ khi được yêu cầu",camera=x.camera||$("cam").value,style=x.style||"phù hợp dữ liệu ảnh gốc";const ergo=ergonomicsBrain(S.domain,space,brief);const common=[
+"HOANGGIA AI — "+o.name+" · DESIGN INTELLIGENCE CORE",
+"ENGINE: "+e.id+" · ENGINE VERSION: "+e.version+" · OUTPUT TEMPLATE: "+o.name,
+"DOMAIN: "+S.domain+" · INTENT: "+S.intent,
+"DESIGN STATE VERSION: "+(x.version_label||"V01"),
+"SOURCE OF TRUTH: MASTER image + current Design State. REFERENCE only informs requested style/material/form.",
+"USER BRIEF: "+(brief||"phát triển theo Design State và bằng chứng nhìn thấy trong MASTER")
+];let sections;if(S.domain==="Kiến trúc")sections=[
+"PROJECT / CONTEXT: "+space+". Analyze visible site relationship, orientation cues, surrounding context and architectural role.",
+"EXISTING CONDITIONS: preserve existing massing, floor count, structural cues, slabs, columns, walls, openings and roofline unless explicitly changed.",
+"ARCHITECTURAL INTENT: "+style+"; establish clear hierarchy, proportion and architectural character without inventing unsupported geometry.",
+"MASSING & PROPORTION: "+(x.proportion||"giữ tỷ lệ theo MASTER")+". Evaluate solids/voids, vertical-horizontal rhythm and scale.",
+"FACADE / OPENINGS: "+(x.constraints||"giữ nguyên hệ cửa và các mảng mở hiện hữu")+". Preserve facade rhythm and opening logic.",
+"STRUCTURE & CONSTRUCTABILITY: "+(x.recommendations||"ưu tiên cấu tạo hợp lý, trọng lực, liên kết và vật liệu có thể thi công")+".",
+"MATERIAL & DETAIL: "+materials+". Specify realistic texture scale, joints, edges, reflectance and weathering where visible.",
+"DAYLIGHT / ATMOSPHERE: "+light+". Preserve believable sun direction, shadow logic and environmental response.",
+"CAMERA / COMPOSITION: "+camera+". Natural perspective, architectural hierarchy and controlled verticals."
+];else if(S.domain==="Nội thất")sections=[
+"PROJECT / FUNCTION: "+space+". "+(x.function||"xác định công năng từ bằng chứng nhìn thấy")+".",
+"EXISTING SPACE: preserve walls, openings, ceiling height, floor and room proportions.",
+"ERGONOMICS & CIRCULATION: "+ergo+" "+(x.circulation||"giữ logic lưu thông hiện hữu")+".",
+"FURNITURE COMPOSITION: "+furniture+". Preserve the exact original furniture model/form, silhouette, proportions and placement unless explicitly requested.",
+"MATERIAL / JOINERY: "+materials+". Realistic grain, stone veining, leather behavior, seams, reveals and junctions.",
+"LIGHTING LAYERS: "+light+". Balance ambient, architectural and decorative light with physically plausible intensity and color.",
+"CAMERA / ART DIRECTION: "+camera+". "+style+"; clear focal hierarchy, depth, negative space and editorial composition."
+];else sections=[
+"SITE / CONTEXT: "+space+". Preserve visible site boundary, orientation, topography cues and urban context.",
+"LAND USE & ZONING: "+(x.function||"infer only visible program relationships")+". Establish coherent public, semi-public and private hierarchy.",
+"DENSITY / MASSING: "+(x.proportion||"giữ scale và quan hệ khối theo MASTER")+". Control building height, spacing, frontage and skyline without inventing unsupported structures.",
+"PEDESTRIAN & VEHICULAR CIRCULATION: "+(x.circulation||"giữ mạng giao thông hiện hữu và kiểm tra tiếp cận")+".",
+"LANDSCAPE / PUBLIC-PRIVATE: integrate landscape structure, open space and public/private transitions with realistic access.",
+"URBAN SCALE / SKYLINE: maintain contextual scale, massing hierarchy and visual corridors.",
+"CAMERA / REPRESENTATION: "+camera+". Use an appropriate aerial, eye-level or contextual view without distorting site geometry."
+];return common.concat(sections,["DESIGN STATE CONTEXT: "+JSON.stringify(x),"ART DIRECTION: hierarchy rõ, tỷ lệ chính xác, texture đúng scale, roughness và phản xạ tự nhiên, ánh sáng có chiều sâu, không stylize quá mức.","OUTPUT: "+e.output+"; photorealistic, physically plausible, professional visualization.","PRESERVATION LOCKS: "+e.preserve+". Change only explicitly requested decisions.","NEGATIVE / AVOID: "+e.negative+"; geometry drift; distorted proportions; duplicate objects; text; logo; watermark."]).join("\\n")}
 function buildHGBrainPrompt(){const x=designState(),e=promptEngine(),brief=$("brief").value.trim(),space=x.space||"theo ảnh gốc",materials=x.materials||"vật liệu chân thực, có khả năng thi công",light=x.lighting||$("light").value,furniture=x.furniture||"giữ nguyên hiện trạng nội thất trừ khi được yêu cầu",camera=x.camera||$("cam").value,style=x.style||"phù hợp dữ liệu ảnh gốc";const ergo=ergonomicsBrain(S.domain,space,brief);return [
 "HOANGGIA AI — "+e.label+" · DESIGN INTELLIGENCE CORE",
 "ENGINE: "+e.id+" · VERSION: "+e.version,
