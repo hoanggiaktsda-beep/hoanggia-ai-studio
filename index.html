@@ -42,7 +42,28 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 @media(max-width:480px){.grid5,.grid4,.metrics{grid-template-columns:1fr}.main{padding:12px 10px 30px}.card{padding:11px;margin-bottom:9px}.drop{min-height:125px}.prompt{font-size:9px;min-height:150px;max-height:330px}.prompt-actions{grid-template-columns:1fr}.prompt-actions input{grid-column:auto}.prompt-actions .btn{width:100%}.actions .btn{flex:1 1 auto}.creatorFooter h2{font-size:18px}.tabs{top:104px;margin-left:-10px;margin-right:-10px;padding-left:10px;padding-right:10px}}
 @media(min-width:1101px) and (max-width:1350px){.layout{grid-template-columns:minmax(0,1fr) 300px}.main{padding-left:20px;padding-right:20px}.side{width:220px}.grid5{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1101px){.main{padding-top:28px}}
-.music-inspiration{margin-bottom:8px;padding:8px 9px;border:1px solid #2a2e31;border-radius:8px;background:#0b0d0e}.music-inspiration-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.music-inspiration-title{font-size:8px;color:#ddd;letter-spacing:.08em}.music-inspiration-mood{font-size:7px;color:var(--gold);white-space:nowrap}.music-mood-actions{display:flex;gap:5px;align-items:center;margin-top:5px}.music-mood-actions span{font-size:7px;color:#73797e;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.music-mood-btn{border:1px solid #403a2d;background:#17130e;color:var(--gold2);border-radius:6px;padding:5px 7px;font-size:7px;white-space:nowrap}.music-category-note{font-size:7px;color:#666c71;margin:4px 0 0}.music-preset[data-music-category]{font-weight:650}</style>
+.music-inspiration{margin-bottom:8px;padding:8px 9px;border:1px solid #2a2e31;border-radius:8px;background:#0b0d0e}.music-inspiration-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.music-inspiration-title{font-size:8px;color:#ddd;letter-spacing:.08em}.music-inspiration-mood{font-size:7px;color:var(--gold);white-space:nowrap}.music-mood-actions{display:flex;gap:5px;align-items:center;margin-top:5px}.music-mood-actions span{font-size:7px;color:#73797e;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.music-mood-btn{border:1px solid #403a2d;background:#17130e;color:var(--gold2);border-radius:6px;padding:5px 7px;font-size:7px;white-space:nowrap}.music-category-note{font-size:7px;color:#666c71;margin:4px 0 0}.music-preset[data-music-category]{font-weight:650}
+.camera-intel{display:grid;grid-template-columns:1.35fr 1fr;gap:10px}
+.camera-control{border:1px solid #292d30;background:#0d0f10;border-radius:8px;padding:10px}
+.camera-control h3{font-size:10px;letter-spacing:.08em;margin:0 0 8px;color:#ddd}
+.camera-control .sub{margin:0 0 8px;font-size:9px}
+.camera-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.camera-grid .field label{font-size:8px}
+.camera-grid select,.camera-grid input{min-height:34px}
+.camera-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.camera-metric{border:1px solid #24282a;border-radius:7px;padding:8px;background:#111314}
+.camera-metric small{display:block;font-size:7px;color:#73797e;letter-spacing:.08em}
+.camera-metric b{display:block;margin-top:4px;font-size:9px;line-height:1.35}
+.camera-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.view-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
+.view-chip{border:1px solid #292d30;background:#111314;border-radius:7px;padding:8px;cursor:pointer}
+.view-chip.on{border-color:#80653c;box-shadow:inset 0 0 0 1px #3b3122}
+.view-chip small{display:block;color:#73797e;font-size:7px}
+.view-chip b{display:block;font-size:9px;margin-top:3px}
+.camera-prompt{margin-top:9px;border:1px solid #292d30;border-radius:8px;background:#090a0b;padding:10px;font-size:10px;line-height:1.55;color:#e8e4dc}
+.camera-note{font-size:8px;color:#73797e;margin-top:7px;line-height:1.4}
+@media(max-width:760px){.camera-intel{grid-template-columns:1fr}.camera-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.view-list{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -189,7 +210,56 @@ textarea,input[type=text],select{width:100%;background:#0b0d0e;color:#f3f0e8;bor
 </section>
 
 <section class="panel" id="panel-edit"><div class="card"><h2>CHỈNH SỬA CÓ KIỂM SOÁT</h2><p class="sub">Dùng Prompt cuối ở tab Dựng hình. HOANGGIA AI giữ nguyên kiến trúc, camera và các vùng đã khóa; chỉ thay đổi phần được yêu cầu.</p><button class="btn primary" data-jump="render">Quay về Prompt Compiler</button></div></section>
-<section class="panel" id="panel-camera"><div class="card"><h2>CAMERA DIRECTOR</h2><div class="grid4"><div class="story"><small>STYLE</small><b id="camStyleOut">Phối cảnh tự nhiên</b></div><div class="story"><small>LENS</small><b id="camLensOut">35mm</b></div><div class="story"><small>SHOT</small><b id="camShotOut">Balanced hero</b></div><div class="story"><small>RULE</small><b>Không méo · giữ tỷ lệ</b></div></div></div></section>
+<section class="panel" id="panel-camera">
+<div class="card">
+<h2><span class="num">03</span>CAMERA INTELLIGENCE · AI PHOTOGRAPHER</h2>
+<p class="sub">Camera Brain chọn góc nhìn như một nhiếp ảnh gia kiến trúc chuyên nghiệp: ưu tiên hình học, tỷ lệ, chiều sâu, ánh sáng và khả năng đọc thiết kế. Với bộ view, camera được giữ nhất quán để các ảnh có thể kể cùng một không gian.</p>
+<div class="camera-intel">
+<div class="camera-control">
+<h3>01 · Ý ĐỒ HÌNH ẢNH</h3>
+<div class="camera-grid">
+<div class="field"><label>Góc ảnh</label><select id="camShot"><option>Hero perspective</option><option>Balanced interior</option><option>Wide spatial</option><option>Two-point elevation</option><option>Corner perspective</option><option>Detail / material</option><option>Low angle</option><option>High angle</option><option>Bird's-eye</option></select></div>
+<div class="field"><label>Tiêu cự</label><select id="camLensAI"><option>24mm</option><option>28mm</option><option selected>35mm</option><option>50mm</option><option>85mm</option></select></div>
+<div class="field"><label>Khẩu độ</label><select id="camAperture"><option>f/2.8</option><option>f/4</option><option selected>f/5.6</option><option>f/8</option><option>f/11</option></select></div>
+<div class="field"><label>Chiều cao máy</label><select id="camHeight"><option>1.2m · thấp</option><option selected>1.6m · tầm mắt</option><option>1.8m · cao</option><option>2.4m · elevated</option><option>Bird's-eye</option></select></div>
+<div class="field"><label>Pitch / góc ngẩng</label><select id="camPitch"><option>-8° · low angle</option><option selected>0° · level</option><option>+5° · elevated</option><option>+12° · high angle</option></select></div>
+<div class="field"><label>Perspective</label><select id="camPerspective"><option selected>Two-point · vertical lock</option><option>Natural perspective</option><option>One-point · centered</option><option>Three-point · dramatic</option></select></div>
+<div class="field"><label>Tỷ lệ khung</label><select id="camRatio"><option>4:3 · architecture</option><option selected>3:2 · photography</option><option>16:9 · cinematic</option><option>1:1 · editorial</option><option>9:16 · social</option></select></div>
+<div class="field"><label>Độ sâu trường ảnh</label><select id="camDOF"><option selected>Deep · toàn không gian rõ</option><option>Balanced · foreground ưu tiên</option><option>Shallow · cinematic</option></select></div>
+<div class="field"><label>Output</label><select id="camQuality"><option selected>Photoreal · high detail · 4K+</option><option>Photoreal · editorial</option><option>Photoreal · print-ready</option></select></div>
+</div>
+<div class="camera-actions"><button class="btn primary" id="cameraSuggest">✦ AI đề xuất camera</button><button class="btn" id="cameraUse">Dùng cấu hình này</button></div>
+<div class="camera-note">AI ưu tiên lens thực tế, camera ngang tầm mắt, vertical control và perspective ổn định. Không ép khẩu độ nông khi mục tiêu là đọc toàn bộ không gian.</div>
+</div>
+<div class="camera-control">
+<h3>02 · CAMERA BRAIN</h3>
+<div class="camera-metrics">
+<div class="camera-metric"><small>SHOT</small><b id="camMetricShot">Hero perspective</b></div>
+<div class="camera-metric"><small>LENS</small><b id="camMetricLens">35mm</b></div>
+<div class="camera-metric"><small>APERTURE</small><b id="camMetricAperture">f/5.6</b></div>
+<div class="camera-metric"><small>HEIGHT</small><b id="camMetricHeight">1.6m</b></div>
+<div class="camera-metric"><small>PERSPECTIVE</small><b id="camMetricPerspective">Two-point · vertical lock</b></div>
+<div class="camera-metric"><small>QUALITY</small><b id="camMetricQuality">Photoreal · high detail · 4K+</b></div>
+</div>
+<div class="camera-prompt" id="cameraPrompt">Camera prompt sẽ được biên dịch tại đây.</div>
+</div>
+</div>
+</div>
+<div class="card">
+<h2><span class="num">04</span>MULTI-VIEW SYNC · MỘT ẢNH → MỘT BỘ GÓC MÁY</h2>
+<p class="sub">Giữ cùng một không gian, vật liệu, tỷ lệ, thời điểm ánh sáng và logic camera; chỉ thay đổi vị trí nhìn có chủ đích.</p>
+<div class="view-list" id="syncViews">
+<div class="view-chip on" data-view="hero"><small>VIEW 01</small><b>Hero · 3/4</b></div>
+<div class="view-chip" data-view="wide"><small>VIEW 02</small><b>Wide · spatial</b></div>
+<div class="view-chip" data-view="detail"><small>VIEW 03</small><b>Detail · material</b></div>
+<div class="view-chip" data-view="reverse"><small>VIEW 04</small><b>Reverse · đối diện</b></div>
+<div class="view-chip" data-view="low"><small>VIEW 05</small><b>Low · dramatic</b></div>
+<div class="view-chip" data-view="high"><small>VIEW 06</small><b>High · elevated</b></div>
+</div>
+<div class="camera-actions"><button class="btn primary" id="syncMultiView">✦ Đồng bộ bộ view</button><button class="btn" id="creativeView">＋ Sáng tạo góc view mới</button></div>
+<div class="camera-note" id="viewStatus">Chưa tạo bộ view. Khi đồng bộ, HOANGGIA AI khóa các thuộc tính nền và chỉ thay đổi viewpoint.</div>
+</div>
+</section>
 <section class="panel" id="panel-tools"><div class="card"><h2>CÔNG CỤ</h2><div class="actions"><button class="btn" data-jump="render">Prompt Compiler</button><button class="btn" id="exportState">Xuất Design State</button><button class="btn" id="resetState">Reset workspace</button></div><p class="sub" style="margin-top:10px">Design State được lưu cục bộ trên trình duyệt để có thể tiếp tục làm việc.</p></div></section>
 
 <footer class="creatorFooter" aria-label="Giới thiệu Hoàng Gia"><div><h2>HOÀNG GIA</h2><p class="role">Architect · Interior Designer · Founder · Art Direction · AI Design</p><p>☎ 0368.250.848</p></div><div class="creatorLinks"><a href="tel:0368250848">☎ 0368.250.848</a><a href="https://www.facebook.com/share/1Dw7UVryGH/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook cá nhân</a><a href="https://www.tiktok.com/@kts.hoanggia.da?_r=1&_t=ZS-9A94K57E0yg" target="_blank" rel="noopener noreferrer">TikTok cá nhân</a></div></footer>
@@ -234,7 +304,7 @@ const profiles={
  chain:["mật độ","giao thông","phân khu","cảnh quan","khối tích","góc nhìn"]
 }};
 let S=JSON.parse(localStorage.getItem("HG_AI_STATE")||"null")||{domain:"Kiến trúc",inputs:{},furnitureRefs:[],guardrails:{architecture:true,camera:true,furniture:true,proportion:true,ceiling:false,openings:false,mode:"LOCK"},versions:{current:"V01",items:{}},prompt:{master:"",ready:false}};
-S.furnitureRefs=Array.isArray(S.furnitureRefs)?S.furnitureRefs:[];
+S.furnitureRefs=Array.isArray(S.furnitureRefs)?S.furnitureRefs:[];S.camera=S.camera||{shot:"Hero perspective",lens:"35mm",aperture:"f/5.6",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn không gian rõ",quality:"Photoreal · high detail · 4K+",viewMode:"hero",creativeViews:[]};
 let furnitureRefUrls=[];
 const ids=["brief","room","focus","style","light","mat","ratio","spaceSize","ceilingHeight","circulation","existing","furnitureLens","cameraStyle","lens","palette","surfaces","finishLevel"];
 function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",1800)}
@@ -254,12 +324,12 @@ function renderIntel(){
  $("miBase").textContent=S.inputs.mat||"AI phân tích reference";$("miPalette").textContent=S.inputs.palette||"AI cân bằng";$("miSurface").textContent=S.inputs.surfaces||"Theo reference";
  const p=d==="Nội thất"?["Khổ lớn, mạch gọn","Phản xạ vừa đủ theo nguồn sáng"]:d==="Kiến trúc"?["Module theo quy mô công trình","Kiểm soát phản xạ mặt đứng"]:["Module theo quy mô cảnh quan","Kiểm soát phản xạ mặt nước / kính"];
  $("miRough").textContent=p[0]+" · roughness chân thực";$("miReflect").textContent=p[1]+" · vân / cạnh đúng scale";
- const lens=S.inputs.lens||"35mm";$("csLens").textContent=lens;$("camLensOut").textContent=lens;$("camStyleOut").textContent=S.inputs.cameraStyle||"Phối cảnh tự nhiên";
+ const lens=S.camera?.lens||S.inputs.lens||"35mm";$("csLens").textContent=lens;$("camLensOut").textContent=lens;$("camStyleOut").textContent=S.inputs.cameraStyle||"Phối cảnh tự nhiên";if($("cameraPrompt"))renderCameraIntel();
  const story=d==="Quy hoạch"?"Đọc toàn khu, trục chính và quan hệ cảnh quan":d==="Kiến trúc"?"Tôn hình khối, mặt đứng và tỷ lệ công trình":"Đọc công năng, hierarchy furniture và vật liệu";
  $("csStory").textContent=story;$("csShot").textContent=lens==="28mm"?"Spatial wide":lens==="50mm"?"Detail / focused":"Balanced hero";$("csReason").textContent=d==="Nội thất"?"Tầm mắt tự nhiên, vertical control, tránh méo":"Giữ tỷ lệ hình học, kiểm soát đường đứng và chiều sâu";
 }
 function renderState(){ $("mDomain").textContent=S.domain;$("mRoom").textContent=S.inputs.room||profiles[S.domain].rooms[0];$("mMat").textContent=S.inputs.mat||"AI phân tích";$("mCamera").textContent=(S.inputs.cameraStyle||"Tự nhiên")+" · "+(S.inputs.lens||"35mm");$("sideDomain").textContent=S.domain.toUpperCase();$("sideStatus").textContent=S.prompt.ready?"Design State · Prompt sẵn sàng":"Design State · đang đồng bộ";$("stateBadge").textContent=S.prompt.ready?"READY":"SYNC"}
-function renderBrain(){const c=profiles[S.domain].chain.join(" → ");$("brainSummary").textContent="Một bộ não suy luận: "+c+". Design Brain giữ logic nội bộ; Prompt Compiler chỉ xuất Prompt ngắn.";$("feasibility").innerHTML="<b>✓ Công năng</b> "+(S.inputs.room?"đã xác định":"AI suy luận theo ảnh")+"<br><b>✓ Tỷ lệ</b> "+(S.inputs.spaceSize||"theo ảnh tham chiếu")+"<br><b>✓ Camera</b> "+(S.inputs.lens||"35mm")+" · giữ phối cảnh"}
+function renderBrain(){const c=profiles[S.domain].chain.join(" → ");$("brainSummary").textContent="Một bộ não suy luận: "+c+". Design Brain giữ logic nội bộ; Prompt Compiler chỉ xuất Prompt ngắn.";$("feasibility").innerHTML="<b>✓ Công năng</b> "+(S.inputs.room?"đã xác định":"AI suy luận theo ảnh")+"<br><b>✓ Tỷ lệ</b> "+(S.inputs.spaceSize||"theo ảnh tham chiếu")+"<br><b>✓ Camera</b> "+(S.camera?.lens||S.inputs.lens||"35mm")+" · "+(S.camera?.perspective||"vertical lock")}
 function materialAndCamera(){syncInputs();renderIntel();renderState();renderBrain();save()}
 const furnitureTypes=["Sofa","Bàn trà","Armchair","Ghế lounge","Bàn ăn","Ghế ăn","Giường","Tab đầu giường","Bàn bên / Side table","Tủ / Sideboard","Kệ / Console","Đèn","Thảm","Gương / Art","Decor","Khác"];
 const furniturePlacements=["Giữ vị trí tương ứng trong ảnh","Khu sofa","Trung tâm không gian","Cạnh sofa / armchair","Cạnh cửa sổ","Sát tường","Khu ăn","Khu ngủ","Khu sảnh / lối vào","Vị trí theo yêu cầu"];
@@ -312,13 +382,22 @@ function furnitureReferenceInstruction(){
  const lines=S.furnitureRefs.map((item,i)=>{item=normalizeFurnitureRef(item,i);let material=item.material&&item.material!=="Giữ theo ảnh tham chiếu"?"; "+item.materialAction+": "+item.material:"";return "SP "+(i+1)+" — "+item.type+"; định vị: "+item.placement+"; xử lý: "+item.action+"; "+(item.instruction||"giữ đúng nhận diện sản phẩm")+"; giữ tỷ lệ, perspective, ánh sáng và bóng đổ theo ảnh hiện trạng"+material+"."});
  return " FURNITURE REFERENCE INTELLIGENCE: Có "+S.furnitureRefs.length+" sản phẩm đồ rời tham chiếu. "+lines.join(" ");
 }
+function cameraProfile(){const d=S.domain;if(d==="Nội thất")return{lens:"35mm",aperture:"f/5.6",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn không gian rõ",quality:"Photoreal · high detail · 4K+"};if(d==="Kiến trúc")return{lens:"35mm",aperture:"f/8",height:"1.6m · tầm mắt",pitch:"0° · level",perspective:"Two-point · vertical lock",ratio:"3:2 · photography",dof:"Deep · toàn công trình rõ",quality:"Photoreal · high detail · 4K+"};return{lens:"28mm",aperture:"f/8",height:"2.4m · elevated",pitch:"+5° · elevated",perspective:"Natural perspective",ratio:"16:9 · cinematic",dof:"Deep · toàn khu rõ",quality:"Photoreal · high detail · 4K+"}}
+function cameraPromptText(){const c=S.camera||cameraProfile();const d=S.domain;const story=d==="Nội thất"?"đọc công năng, hierarchy furniture và chiều sâu không gian":d==="Kiến trúc"?"tôn hình khối, mặt đứng và tỷ lệ công trình":"đọc mật độ, trục giao thông, phân khu và cảnh quan";return "Camera "+c.shot+"; "+c.lens+" equivalent; aperture "+c.aperture+"; camera height "+c.height+"; pitch "+c.pitch+"; "+c.perspective+"; "+c.dof+"; aspect ratio "+c.ratio+"; "+story+"; natural exposure, realistic perspective, controlled verticals, physically plausible depth and scale, no wide-angle stretching, no perspective drift; "+c.quality+"."}
+function renderCameraIntel(){const c=S.camera||cameraProfile();["camShot","camLensAI","camAperture","camHeight","camPitch","camPerspective","camRatio","camDOF","camQuality"].forEach(id=>{const map={camShot:"shot",camLensAI:"lens",camAperture:"aperture",camHeight:"height",camPitch:"pitch",camPerspective:"perspective",camRatio:"ratio",camDOF:"dof",camQuality:"quality"};if($(id)&&c[map[id]])$(id).value=c[map[id]]});$("camMetricShot").textContent=c.shot;$("camMetricLens").textContent=c.lens;$("camMetricAperture").textContent=c.aperture;$("camMetricHeight").textContent=c.height;$("camMetricPerspective").textContent=c.perspective;$("camMetricQuality").textContent=c.quality;$("cameraPrompt").textContent=cameraPromptText();$("camLensOut").textContent=c.lens;$("camStyleOut").textContent=c.shot;$("csLens").textContent=c.lens}
+function readCameraUI(){S.camera=S.camera||cameraProfile();const map={camShot:"shot",camLensAI:"lens",camAperture:"aperture",camHeight:"height",camPitch:"pitch",camPerspective:"perspective",camRatio:"ratio",camDOF:"dof",camQuality:"quality"};Object.entries(map).forEach(([id,key])=>{if($(id))S.camera[key]=$(id).value});syncInputs();S.inputs.lens=S.camera.lens;S.inputs.cameraStyle=S.camera.shot;renderCameraIntel();renderIntel();renderState();save()}
+function suggestCamera(){S.camera=Object.assign(S.camera||{},cameraProfile());if(S.domain==="Nội thất"){S.camera.shot="Balanced interior";S.camera.lens="35mm";S.camera.aperture="f/5.6"}else if(S.domain==="Kiến trúc"){S.camera.shot="Two-point elevation";S.camera.lens="35mm";S.camera.aperture="f/8"}else{S.camera.shot="Wide spatial";S.camera.lens="28mm";S.camera.aperture="f/8"}renderCameraIntel();save();toast("Camera Brain đã đề xuất cấu hình")}
+function useCamera(){readCameraUI();if(S.prompt.ready)compile();toast("Đã đồng bộ Camera vào Prompt")}
+function multiViewPrompt(){const c=S.camera||cameraProfile();const views={hero:"hero 3/4",wide:"wide spatial",detail:"material detail",reverse:"reverse view from the opposite side",low:"low-angle controlled view",high:"elevated view"};const v=views[S.camera.viewMode]||views.hero;return "MULTI-VIEW SYNC: derive "+v+" from the same reference scene; preserve identical architecture, geometry, furniture identity, materials, scale, lighting direction, time of day and visual language; keep lens behavior and perspective physically consistent; change viewpoint only, no redesign, no invented openings or objects."}
+function syncMultiView(){S.camera=S.camera||cameraProfile();S.camera.multiView=true;S.camera.viewSet=["hero","wide","detail","reverse","low","high"];$("viewStatus").textContent="✓ Đã khóa bộ 6 view · cùng không gian, khác viewpoint có kiểm soát.";renderCameraIntel();if(S.prompt.ready)compile();save();toast("Đã đồng bộ 6 view")}
+function creativeView(){S.camera=S.camera||cameraProfile();const options=["diagonal corner reveal","compressed axial view","foreground framing view","asymmetrical editorial view","low eye-level furniture-led view"];const next=options[S.camera.creativeViews?.length%options.length||0];S.camera.creativeViews=S.camera.creativeViews||[];S.camera.creativeViews.push(next);S.camera.viewMode="creative";$("viewStatus").textContent="✦ Creative View: "+next+" · giữ nguyên hình học và vật liệu nền.";renderCameraIntel();if(S.prompt.ready)compile();save();toast("Đã tạo góc view sáng tạo")}
 function compile(){
  syncInputs();const i=S.inputs,d=S.domain;let p="";
- const idea=i.brief||"Phân tích ảnh và yêu cầu trước khi thiết kế.";
- if(d==="Kiến trúc")p="Nhà ở theo ảnh tham chiếu, giữ nguyên hiện trạng và tỷ lệ kiến trúc. Phát triển thiết kế theo tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn. Phân tích vật liệu từ ảnh, đảm bảo đúng scale, vân, roughness và reflection. "+(i.light||"Ánh sáng ban mai tự nhiên")+". Camera "+(i.cameraStyle||"phối cảnh kiến trúc tự nhiên")+", không méo, giữ nguyên quan hệ không gian. Không thay đổi kiến trúc, cửa, cửa sổ, cao độ, kích thước hoặc camera nếu không được yêu cầu. Không thêm decor/furniture ngẫu nhiên. Photorealistic architectural visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows.";
- else if(d==="Nội thất")p="Không gian nội thất theo ảnh tham chiếu, giữ nguyên kiến trúc và tỷ lệ hiện trạng. Phát triển thiết kế theo công năng → công thái học → furniture → vật liệu → ánh sáng → camera. Phân tích vật liệu và furniture từ ảnh, đảm bảo đúng tỷ lệ, scale, vân, texture, roughness và reflection. "+(i.light||"Ánh sáng ban mai tự nhiên")+", cân bằng ambient và accent light. Camera "+(i.cameraStyle||"nội thất tự nhiên")+", không méo, giữ nguyên phối cảnh và quan hệ không gian. Không thay đổi tường, trần, sàn, cửa, cửa sổ, kích thước hoặc camera nếu không được yêu cầu. Không thêm hoặc loại bỏ furniture/decor ngoài phạm vi yêu cầu. Photorealistic interior visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows." + furnitureReferenceInstruction();
- else p="Khu quy hoạch theo ảnh tham chiếu, giữ nguyên hiện trạng và quan hệ tổng thể. Phát triển thiết kế theo mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn. Phân tích địa hình, tỷ lệ không gian, mạng giao thông, cây xanh, mặt nước và vật liệu cảnh quan theo đúng scale. "+(i.light||"Ánh sáng ban mai tự nhiên")+", thể hiện rõ khối tích và cảnh quan. Camera "+(i.cameraStyle||"tổng thể hoặc bird’s-eye")+" tự nhiên, giữ đúng tỷ lệ, trục nhìn và quan hệ giữa các khu vực. Không tự ý thay đổi ranh giới, giao thông, khối tích hoặc các thành phần hiện hữu nếu không được yêu cầu. Không thêm công trình hoặc cảnh quan ngẫu nhiên. Photorealistic architectural planning visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows.";
- S.prompt={master:p,ready:true,version:"COMPACT-1.0",updatedAt:new Date().toISOString()};$("prompt").textContent=p;$("promptStatus").textContent="Prompt đã biên dịch · "+d+(d==="Nội thất"&&S.furnitureRefs.length?" · "+S.furnitureRefs.length+" ảnh đồ rời":"");renderState();save();toast("Đã tạo Prompt tổng thể");return p
+ const idea=i.brief||"Phân tích ảnh và yêu cầu trước khi thiết kế.";const cameraDirective=cameraPromptText();
+ if(d==="Kiến trúc")p="Nhà ở theo ảnh tham chiếu, giữ nguyên hiện trạng và tỷ lệ kiến trúc. Phát triển thiết kế theo tỷ lệ → công năng → hình khối → mặt đứng → vật liệu → ánh sáng → góc nhìn. Phân tích vật liệu từ ảnh, đảm bảo đúng scale, vân, roughness và reflection. "+(i.light||"Ánh sáng ban mai tự nhiên")+". Camera "+cameraDirective+", không méo, giữ nguyên quan hệ không gian. Không thay đổi kiến trúc, cửa, cửa sổ, cao độ, kích thước hoặc camera nếu không được yêu cầu. Không thêm decor/furniture ngẫu nhiên. Photorealistic architectural visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows.";
+ else if(d==="Nội thất")p="Không gian nội thất theo ảnh tham chiếu, giữ nguyên kiến trúc và tỷ lệ hiện trạng. Phát triển thiết kế theo công năng → công thái học → furniture → vật liệu → ánh sáng → camera. Phân tích vật liệu và furniture từ ảnh, đảm bảo đúng tỷ lệ, scale, vân, texture, roughness và reflection. "+(i.light||"Ánh sáng ban mai tự nhiên")+", cân bằng ambient và accent light. Camera "+cameraDirective+", không méo, giữ nguyên phối cảnh và quan hệ không gian. Không thay đổi tường, trần, sàn, cửa, cửa sổ, kích thước hoặc camera nếu không được yêu cầu. Không thêm hoặc loại bỏ furniture/decor ngoài phạm vi yêu cầu. Photorealistic interior visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows." + furnitureReferenceInstruction();
+ else p="Khu quy hoạch theo ảnh tham chiếu, giữ nguyên hiện trạng và quan hệ tổng thể. Phát triển thiết kế theo mật độ → giao thông → phân khu → cảnh quan → khối tích → góc nhìn. Phân tích địa hình, tỷ lệ không gian, mạng giao thông, cây xanh, mặt nước và vật liệu cảnh quan theo đúng scale. "+(i.light||"Ánh sáng ban mai tự nhiên")+", thể hiện rõ khối tích và cảnh quan. Camera "+cameraDirective+" tự nhiên, giữ đúng tỷ lệ, trục nhìn và quan hệ giữa các khu vực. Không tự ý thay đổi ranh giới, giao thông, khối tích hoặc các thành phần hiện hữu nếu không được yêu cầu. Không thêm công trình hoặc cảnh quan ngẫu nhiên. Photorealistic architectural planning visualization, realistic materials, natural perspective, physically plausible lighting, realistic shadows.";
+ if(S.camera?.multiView)p+=" "+multiViewPrompt();if(S.camera?.creativeViews?.length)p+=" CREATIVE VIEW: "+S.camera.creativeViews[S.camera.creativeViews.length-1]+"; preserve reference geometry, scale and design identity.";S.prompt={master:p,ready:true,version:"COMPACT-1.0",updatedAt:new Date().toISOString()};$("prompt").textContent=p;$("promptStatus").textContent="Prompt đã biên dịch · "+d+(d==="Nội thất"&&S.furnitureRefs.length?" · "+S.furnitureRefs.length+" ảnh đồ rời":"");renderState();save();toast("Đã tạo Prompt tổng thể");return p
 }
 function applyEdit(){
  const input=$("promptEdit"),edit=input.value.trim();if(!edit){return}
