@@ -135,6 +135,12 @@ select option:disabled{
 .hg-subaccordion.is-closed .hg-subbody{display:none}
 .hg-subsummary{display:flex;gap:5px;flex-wrap:wrap;margin:4px 10px 8px}
 .hg-subsummary i{font-style:normal;font-size:7px;color:#858a91;border:1px solid #292d31;border-radius:999px;padding:3px 6px}
+</style><style id="hg-contextual-css">
+.hg-contextual{display:flex;align-items:center;gap:7px;margin:8px 0 10px;padding:7px 9px;border:1px solid #292d31;border-radius:8px;background:#111315}
+.hg-contextual b{font-size:8px;color:#d7a65b;letter-spacing:.06em}
+.hg-contextual span{font-size:8px;color:#a7adb3}
+.hg-priority{border-color:#5b4a2f!important;box-shadow:inset 2px 0 0 #d7a65b}
+.hg-secondary{opacity:.72}
 </style></style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
@@ -507,5 +513,58 @@ if(oldMagic) oldMagic.addEventListener('click',function(){
  }
  window.addEventListener('load',()=>setTimeout(build,450));
  new MutationObserver(()=>setTimeout(build,50)).observe(document.body,{childList:true,subtree:true});
+})();
+</script><script id="hg-contextual-ui">
+(function(){
+ const $=s=>document.querySelector(s), $=s=>[...document.querySelectorAll(s)];
+ const norm=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
+ const find=t=>$('h1,h2,h3,h4,h5,strong,.section-title,.card-title').find(e=>norm(e.textContent)===norm(t));
+ const field=id=>{const e=document.getElementById(id);return e?e.value.trim():''};
+ const configs={
+  'Nội thất':{
+   default:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Interior Canvas','Thay thế nội thất'],
+   room:{
+    'Phòng khách':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
+    'Phòng ngủ':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
+    'Bếp':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
+    'Phòng ăn':['Design Reasoning Engine','Bảng vật liệu','Thay thế nội thất'],
+    'Showroom':['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Interior Canvas','Thay thế nội thất'],
+    'Phòng tắm':['Design Reasoning Engine','Bảng vật liệu','Interior Canvas']
+   }
+  },
+  'Kiến trúc':{default:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu','Interior Canvas']},
+  'Quy hoạch':{default:['Design Reasoning Engine','Bàn làm việc tham chiếu','Bảng vật liệu']}
+ };
+ function rootFor(title){
+  const el=find(title);if(!el)return null;
+  return el.closest('.hg-subaccordion')||el.closest('.card,.section,.panel,section');
+ }
+ function domain(){
+  const e=$('.domain.active,.domain.selected,[data-domain].active,[data-domain].selected');
+  return e?.textContent.trim()||'Nội thất';
+ }
+ function apply(){
+  const d=domain(),room=field('room'),cfg=configs[d]||configs['Nội thất'];
+  const wanted=(cfg.room&&cfg.room[room])||cfg.default;
+  $('.hg-subaccordion').forEach(x=>{x.classList.remove('hg-priority','hg-secondary')});
+  wanted.forEach(t=>{const r=rootFor(t);if(r){r.classList.add('hg-priority');r.classList.remove('is-closed')}});
+  $('.hg-subaccordion').forEach(r=>{
+   const title=r.querySelector('.hg-subhead strong')?.textContent.trim();
+   if(title&&!wanted.includes(title)){r.classList.add('hg-secondary');r.classList.add('is-closed')}
+  });
+  let host=document.getElementById('hg-contextual');
+  if(!host){
+   const target=document.getElementById('domainEngine')||document.getElementById('designReasoning');
+   if(!target)return;
+   host=document.createElement('div');host.id='hg-contextual';host.className='hg-contextual';
+   host.innerHTML='<b>GIAO DIỆN THÍCH NGHI</b><span></span>';
+   target.parentNode.insertBefore(host,target);
+  }
+  host.querySelector('span').textContent=d+(room?' · '+room:'')+' → đang ưu tiên '+wanted.slice(0,5).join(' · ');
+ }
+ document.addEventListener('change',e=>{if(e.target.id==='room'||e.target.id==='domain'||e.target.closest('.domain'))setTimeout(apply,100)});
+ document.addEventListener('click',e=>{if(e.target.closest('.domain'))setTimeout(apply,180)});
+ window.addEventListener('load',()=>setTimeout(apply,700));
+ new MutationObserver(()=>setTimeout(apply,80)).observe(document.body,{childList:true,subtree:true});
 })();
 </script></body></html>
