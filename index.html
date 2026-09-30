@@ -170,7 +170,33 @@ select option:disabled{
 .hg-prompt-tabs{display:flex;gap:5px;margin-bottom:7px}.hg-prompt-tabs button{border:1px solid #292d31;background:#111315;color:#a7adb3;border-radius:6px;padding:5px 8px;font-size:8px}.hg-prompt-tabs button.active{color:#f0c77d;border-color:#d7a65b}
 .hg-prompt-output{min-height:180px;width:100%;box-sizing:border-box;background:#090a0b;color:#ddd;border:1px solid #292d31;border-radius:7px;padding:10px;font-size:9px;line-height:1.55;resize:vertical}
 .hg-compiler-actions{display:flex;gap:6px;margin-top:7px}.hg-compiler-actions button{font-size:8px;padding:6px 9px;border-radius:6px;border:1px solid #292d31;background:#17191c;color:#f4f1ea}
-</style></style></head>
+</style></style><style id="hg-compact-v2">
+/* HOANGGIA AI — Compact workspace */
+.side{width:200px;padding:16px 11px}.app{grid-template-columns:200px 1fr}
+.brand{font-size:15px}.tag{margin-bottom:18px}.sectionlabel{margin:17px 6px 6px}
+.nav button,.domain button{padding:7px 9px;margin:2px 0;font-size:11px}
+.main{padding:18px 22px 42px;max-width:1400px}
+.top{gap:12px}h1{font-size:31px;margin:4px 0}.intro{font-size:11px;line-height:1.45;max-width:680px}
+.tabs{margin:17px 0 11px}.tab{padding:7px 10px;font-size:11px}
+.layout{grid-template-columns:minmax(0,1fr) 315px;gap:11px}
+.card,.hgx{padding:11px;border-radius:10px;margin-bottom:9px}.card h2{font-size:11px;margin-bottom:8px}
+.uploadgrid{gap:7px}.drop{min-height:105px;padding:10px}
+.fields{gap:6px;margin-top:6px}.field{padding:6px}.field label{font-size:8px;margin-bottom:3px}.field select{font-size:11px}
+textarea{min-height:78px;padding:8px}.actions{margin-top:7px;gap:5px}.btn{padding:7px 9px;font-size:10px}
+.metrics,.tools,.checks{gap:5px}.metric,.tool,.check{padding:7px}
+.prompt{min-height:220px;max-height:400px;padding:9px;font-size:10px}
+.result{min-height:190px}
+.hgx-head{padding:10px 11px}.hgx-body{padding:10px}
+.ref-roles,.material-board{gap:5px}.ref-role{min-height:82px;padding:7px}.mat-chip{padding:7px}
+.workflow-state{gap:5px}.state-box{padding:7px}
+.canvas-stage{min-height:300px;padding:12px}.canvas-empty{min-height:250px}
+.canvas-side{gap:6px}.canvas-inspector{padding:8px}
+.fr-grid{gap:7px}.fr-box{padding:9px}.fr-upload{height:120px}
+.hg-compiler{padding:9px;margin:6px 0 9px}.hg-prompt-output{min-height:145px;padding:8px}
+.hg-compiler-actions{margin-top:5px}.hg-compiler-actions button{padding:5px 8px}
+@media(max-width:1000px){.app{grid-template-columns:1fr}.side{width:auto;padding:12px}.main{padding:15px}.layout{grid-template-columns:1fr}}
+@media(max-width:600px){h1{font-size:27px}}
+</style></head>
 <body><div class="app">
 <aside class="side"><div class="brand">HOANGGIA</div><div class="tag">XƯỞNG AI KIẾN TRÚC & NỘI THẤT</div>
 <div class="nav"><button class="on" data-tab="render">◈ Dựng hình</button><button data-tab="edit">✎ Chỉnh sửa</button><button data-tab="camera">⌁ Góc máy</button><button data-tab="tools">▦ Công cụ</button></div>
@@ -180,7 +206,7 @@ select option:disabled{
 <div class="thinking-flow" id="thinkingFlow"></div>
 <div class="engine-output" id="engineOutput"><b>Nguyên tắc:</b> AI không chỉ chọn phong cách; hệ thống sẽ suy luận theo đúng logic của lĩnh vực trước khi tạo Master Prompt.</div>
 </div><div class="sectionlabel">HOANGGIA AI</div><div class="status">Prompt Engine · Định hướng nghệ thuật<br>Kiến trúc / Nội thất / Visualization</div></aside>
-<main class="main"><div class="top"><div><div class="ey">HOANGGIA AI · BỘ MÁY TẠO PROMPT</div><h1>Nhìn không gian. Đạo diễn hình ảnh.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — phát triển theo logic workflow của các AI studio chuyên kiến trúc, nhưng giữ tư duy thiết kế riêng của HOANGGIA AI.</p></div><div class="badge" id="domainBadge">KIẾN TRÚC</div></div>
+<main class="main"><div class="top"><div><div class="ey">HOANGGIA AI · BỘ MÁY TẠO PROMPT</div><h1>AI đồng hành. Kiến tạo ý tưởng.</h1><p class="intro">Một workspace tập trung cho render, edit, camera direction và prompt engineering — phát triển theo logic workflow của các AI studio chuyên kiến trúc, nhưng giữ tư duy thiết kế riêng của HOANGGIA AI.</p></div><div class="badge" id="domainBadge">KIẾN TRÚC</div></div>
 <div class="tabs"><button class="tab on" data-tab="render">Dựng hình</button><button class="tab" data-tab="edit">Chỉnh sửa</button><button class="tab" data-tab="camera">Góc máy</button><button class="tab" data-tab="tools">Công cụ</button></div>
 
 <section id="render" class="panel on"><div class="layout"><div>
