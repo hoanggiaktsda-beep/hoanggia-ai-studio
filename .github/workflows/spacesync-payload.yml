@@ -23,5 +23,6 @@ jobs:
           assert(html.includes('if(id!==loadId)return'), 'Missing stale upload guard');
           assert(html.includes('if(activeUrl)URL.revokeObjectURL(activeUrl)'), 'Missing URL cleanup');
           assert(html.includes('if(f.size>12*1024*1024)'), 'Missing upload limit');
-          console.log('SpaceSync and upload checks passed');
+          assert(html.includes('if(!j.image||typeof j.image!=="string")'), 'Missing render response validation');
+          console.log('SpaceSync, upload and render checks passed');
           NODE
